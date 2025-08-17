@@ -307,6 +307,15 @@ const researchActivities = [
         { src: "https://placehold.co/800x600.png", alt: "শ্রোতারা প্রশ্ন করছেন", hint: "audience asking question" },
     ],
   },
+  {
+    icon: Users,
+    title: "ইয়ুথ কনফারেন্স আয়োজন",
+    description: "সিয়াম ফেরদৌস ইমন তরুণদের মেধা ও সম্ভাবনা বিকাশে একটি ইয়ুথ কনফারেন্স আয়োজনের পরিকল্পনা করছেন। এই কনফারেন্সে দেশের বিভিন্ন প্রান্তের তরুণরা একত্রিত হয়ে তাদের ধারণা, উদ্ভাবন এবং অভিজ্ঞতা বিনিময় করার সুযোগ পাবে, যা একটি সমৃদ্ধशाली ভবিষ্যতের পথ দেখাবে।",
+    images: [
+        { src: "https://placehold.co/800x600.png", alt: "তরুণ অংশগ্রহণকারীরা কনফারেন্সে অংশ নিচ্ছেন", hint: "youth conference" },
+        { src: "https://placehold.co/800x600.png", alt: "মঞ্চে বক্তা বক্তব্য রাখছেন", hint: "youth speaker" },
+    ],
+  },
 ];
 
 function ResearchSection() {
