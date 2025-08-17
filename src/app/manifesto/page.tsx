@@ -4,32 +4,32 @@ import { CheckCircle2, ListTodo, Target } from "lucide-react";
 
 const manifestoPledges = [
   {
-    category: "Economic Development",
+    category: "অর্থনৈতিক উন্নয়ন",
     pledges: [
-      { title: "Create 50,000 New Tech Jobs", status: "In Progress", progress: 40, description: "Partnering with tech firms and establishing innovation hubs." },
-      { title: "Support for Small & Medium Enterprises", status: "In Progress", progress: 60, description: "Launched low-interest loan programs and reduced bureaucratic hurdles." },
+      { title: "৫০,০০০ নতুন প্রযুক্তি চাকরি তৈরি", status: "চলছে", progress: 40, description: "প্রযুক্তি সংস্থাগুলির সাথে অংশীদারিত্ব এবং উদ্ভাবন কেন্দ্র স্থাপন।" },
+      { title: "ক্ষুদ্র ও মাঝারি উদ্যোগের জন্য সমর্থন", status: "চলছে", progress: 60, description: "স্বল্প সুদে ঋণ কর্মসূচি চালু করা হয়েছে এবং আমলাতান্ত্রিক বাধা হ্রাস করা হয়েছে।" },
     ]
   },
   {
-    category: "Education",
+    category: "শিক্ষা",
     pledges: [
-      { title: "Build 100 New 'Smart' Schools", status: "Completed", progress: 100, description: "All 100 schools are now operational with digital classrooms." },
-      { title: "Free University Education for Top 10% Students", status: "In Progress", progress: 75, description: "Scholarship fund established and processing applications." },
-      { title: "Introduce Vocational Training in High Schools", status: "Not Started", progress: 0, description: "Curriculum development is underway." },
+      { title: "১০০টি নতুন 'স্মার্ট' স্কুল নির্মাণ", status: "সম্পন্ন", progress: 100, description: "সব ১০০টি স্কুল এখন ডিজিটাল ক্লাসরুম সহ চালু আছে।" },
+      { title: "সেরা ১০% ছাত্রদের জন্য বিনামূল্যে বিশ্ববিদ্যালয় শিক্ষা", status: "চলছে", progress: 75, description: "বৃত্তি তহবিল প্রতিষ্ঠিত হয়েছে এবং আবেদনপত্র প্রক্রিয়া করা হচ্ছে।" },
+      { title: "উচ্চ বিদ্যালয়ে বৃত্তিমূলক প্রশিক্ষণ চালু", status: "শুরু হয়নি", progress: 0, description: "পাঠ্যক্রম উন্নয়ন চলছে।" },
     ]
   },
   {
-    category: "Healthcare",
+    category: "স্বাস্থ্যসেবা",
     pledges: [
-      { title: "Modernize All District Hospitals", status: "In Progress", progress: 50, description: "Upgrades completed in half of the districts, with ongoing work in the rest." },
-      { title: "Ensure Clean Drinking Water for Every Village", status: "In Progress", progress: 85, description: "New water treatment plants are operational in most regions." },
+      { title: "সমস্ত জেলা হাসপাতাল আধুনিকীকরণ", status: "চলছে", progress: 50, description: "অর্ধেক জেলায় আপগ্রেড সম্পন্ন হয়েছে, বাকিগুলিতে কাজ চলছে।" },
+      { title: "প্রতিটি গ্রামে বিশুদ্ধ পানীয় জল নিশ্চিত করা", status: "চলছে", progress: 85, description: "অধিকাংশ অঞ্চলে নতুন জল শোধনাগার চালু আছে।" },
     ]
   },
   {
-    category: "Infrastructure & Environment",
+    category: "অবকাঠামো ও পরিবেশ",
     pledges: [
-      { title: "Repair 1,000 km of Rural Roads", status: "Completed", progress: 100, description: "The project was finished ahead of schedule, improving connectivity." },
-      { title: "Plant 1 Million Trees", status: "In Progress", progress: 90, description: "A massive public-private partnership has resulted in nearly 900,000 trees planted." },
+      { title: "১,০০০ কিমি গ্রামীণ রাস্তা মেরামত", status: "সম্পন্ন", progress: 100, description: "প্রকল্পটি নির্ধারিত সময়ের আগে শেষ হয়েছে, সংযোগ উন্নত হয়েছে।" },
+      { title: "১ মিলিয়ন গাছ লাগানো", status: "চলছে", progress: 90, description: "একটি বিশাল সরকারি-বেসরকারি অংশীদারিত্বের ফলে প্রায় ৯০০,০০০ গাছ লাগানো হয়েছে।" },
     ]
   },
 ];
@@ -40,9 +40,9 @@ export default function ManifestoPage() {
       <div className="container mx-auto px-4 py-16 md:py-24">
         <div className="text-center max-w-4xl mx-auto">
           <ListTodo className="mx-auto h-12 w-12 text-primary" />
-          <h1 className="font-headline text-5xl md:text-6xl font-bold mt-4 text-foreground">Our Plan & Our Progress</h1>
+          <h1 className="font-headline text-5xl md:text-6xl font-bold mt-4 text-foreground">আমাদের পরিকল্পনা ও অগ্রগতি</h1>
           <p className="font-body text-lg mt-4 text-muted-foreground">
-            We believe in transparency and accountability. Here is our detailed plan for a better Bengal and a live tracker of our progress on key promises. This section is a placeholder to show our commitment to post-election responsibilities.
+            আমরা স্বচ্ছতা এবং জবাবদিহিতায় বিশ্বাস করি। এখানে একটি উন্নত বাংলার জন্য আমাদের বিস্তারিত পরিকল্পনা এবং মূল প্রতিশ্রুতিগুলির উপর আমাদের অগ্রগতির একটি লাইভ ট্র্যাকার রয়েছে। এই বিভাগটি নির্বাচন-পরবর্তী দায়িত্বের প্রতি আমাদের প্রতিশ্রুতি দেখানোর জন্য একটি স্থানধারক।
           </p>
         </div>
 

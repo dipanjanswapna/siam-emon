@@ -9,12 +9,12 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/manifesto", label: "Manifesto" },
-  { href: "/gallery", label: "Gallery" },
-  { href: "/transparency", label: "Transparency" },
-  { href: "/get-involved", label: "Get Involved" },
+  { href: "/", label: "হোম" },
+  { href: "/about", label: "সম্পর্কে" },
+  { href: "/manifesto", label: "ইশতেহার" },
+  { href: "/gallery", label: "গ্যালারি" },
+  { href: "/transparency", label: "স্বচ্ছতা" },
+  { href: "/get-involved", label: "যুক্ত হোন" },
 ];
 
 export function Header() {
@@ -26,7 +26,7 @@ export function Header() {
         <Link href="/" className="flex items-center gap-2">
           <Vote className="h-8 w-8 text-primary" />
           <span className="text-xl font-headline font-bold text-primary">
-            Sonar Bangla Vision
+            SIAM EMON
           </span>
         </Link>
         <nav className="hidden md:flex items-center gap-6">
@@ -48,7 +48,7 @@ export function Header() {
             <SheetTrigger asChild>
               <Button variant="outline" size="icon">
                 <Menu className="h-6 w-6" />
-                <span className="sr-only">Open navigation menu</span>
+                <span className="sr-only">নেভিগেশন মেনু খুলুন</span>
               </Button>
             </SheetTrigger>
             <SheetContent side="right">
@@ -56,7 +56,7 @@ export function Header() {
                 <Link href="/" className="flex items-center gap-2 mb-4">
                   <Vote className="h-8 w-8 text-primary" />
                   <span className="text-xl font-headline font-bold text-primary">
-                    Sonar Bangla Vision
+                    SIAM EMON
                   </span>
                 </Link>
                 {navLinks.map((link) => (

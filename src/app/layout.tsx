@@ -7,34 +7,34 @@ import { Toaster } from '@/components/ui/toaster';
 
 export const metadata: Metadata = {
   title: {
-    default: 'Sonar Bangla Vision - A New Dawn for a Golden Bengal',
-    template: '%s | Sonar Bangla Vision',
+    default: 'SIAM EMON - ঢাকা বিশ্ববিদ্যালয়',
+    template: '%s | SIAM EMON',
   },
-  description: 'Join the movement to build a future of progress, prosperity, and unity for Bengal. Learn about our candidate, our vision, and how you can get involved.',
-  keywords: ['Sonar Bangla', 'Bengal politics', 'election campaign', 'political candidate', 'West Bengal', 'progress', 'development'],
-  authors: [{ name: 'Sonar Bangla Vision Campaign' }],
-  creator: 'Sonar Bangla Vision Campaign',
-  publisher: 'Sonar Bangla Vision Campaign',
+  description: 'সিয়াম ইমন, ঢাকা বিশ্ববিদ্যালয়। ডাকসু নির্বাচন ২০২৫। প্রাণী জেনেটিক্স এবং মলিকিউলার বায়োলজি ক্লাবের সভাপতি। প্রাণবন্ত ক্যাম্পাসের মুখপাত্র।',
+  keywords: ['SIAM emon', 'dhaka university', 'du', 'Zoology Debating Club', 'University of Dhaka', 'Biology Instructor at Bigbang Academy', 'President 2024-25 at Animal Genetics & Molecular Biology Club- AGMBC', 'ডাকসু নির্বাচন ২০২৫','siam' , 'du daksu' , 'du', 'prangon ecosystem' , 'dipanjan swapna prangon'],
+  authors: [{ name: 'SIAM EMON' }],
+  creator: 'SIAM EMON',
+  publisher: 'SIAM EMON',
   openGraph: {
-    title: 'Sonar Bangla Vision - A New Dawn for a Golden Bengal',
-    description: 'Join the movement to build a future of progress, prosperity, and unity for Bengal.',
-    url: 'https://sonar-bangla-vision.firebaseapp.com', // Replace with actual domain
-    siteName: 'Sonar Bangla Vision',
+    title: 'SIAM EMON - ঢাকা বিশ্ববিদ্যালয়',
+    description: 'সিয়াম ইমন, ঢাকা বিশ্ববিদ্যালয়। ডাকসু নির্বাচন ২০২৫। প্রাণবন্ত ক্যাম্পাসের মুখপাত্র।',
+    url: 'https://siam-emon-du.firebaseapp.com', // Replace with actual domain
+    siteName: 'SIAM EMON',
     images: [
       {
         url: 'https://placehold.co/1200x630.png', // Replace with a representative image
         width: 1200,
         height: 630,
-        alt: 'A hopeful image for Sonar Bangla Vision campaign',
+        alt: 'A hopeful image for SIAM EMON campaign',
       },
     ],
-    locale: 'en_US',
+    locale: 'bn_BD',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Sonar Bangla Vision - A New Dawn for a Golden Bengal',
-    description: 'Join the movement to build a future of progress, prosperity, and unity for Bengal.',
+    title: 'SIAM EMON - ঢাকা বিশ্ববিদ্যালয়',
+    description: 'সিয়াম ইমন, ঢাকা বিশ্ববিদ্যালয়। ডাকসু নির্বাচন ২০২৫। প্রাণবন্ত ক্যাম্পাসের মুখপাত্র।',
     images: ['https://placehold.co/1200x630.png'], // Replace with a representative image
   },
   robots: {
@@ -62,7 +62,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="bn" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

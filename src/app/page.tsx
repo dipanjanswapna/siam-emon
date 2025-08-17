@@ -7,23 +7,23 @@ import { ArrowRight, Landmark, GraduationCap, HeartHandshake, Briefcase, Lightbu
 // Placeholder data
 const newsItems = [
   {
-    title: "Successful Town Hall Meeting in North District",
-    description: "Our candidate connected with hundreds of residents, listening to their concerns and sharing our vision.",
-    date: "October 26, 2024",
+    title: "উত্তর জেলায় সফল টাউন হল মিটিং",
+    description: "আমাদের প্রার্থী শত শত বাসিন্দাদের সাথে সংযোগ স্থাপন করেছেন, তাদের উদ্বেগ শুনেছেন এবং আমাদের দৃষ্টিভঙ্গি শেয়ার করেছেন।",
+    date: "অক্টোবর ২৬, ২০২৪",
     image: "https://placehold.co/600x400.png",
     imageHint: "town hall meeting"
   },
   {
-    title: "New Education Initiative Announced",
-    description: "A comprehensive plan to modernize schools and support teachers was unveiled today.",
-    date: "October 24, 2024",
+    title: "নতুন শিক্ষা উদ্যোগ ঘোষণা করা হয়েছে",
+    description: "স্কুল আধুনিকীকরণ এবং শিক্ষকদের সহায়তার জন্য একটি ব্যাপক পরিকল্পনা আজ উন্মোচন করা হয়েছে।",
+    date: "অক্টোবর ২৪, ২০২৪",
     image: "https://placehold.co/600x400.png",
     imageHint: "classroom students"
   },
   {
-    title: "Volunteer Drive Kicks Off with Great Enthusiasm",
-    description: "Over 200 new volunteers joined our campaign this weekend to help spread the word.",
-    date: "October 22, 2024",
+    title: "স্বেচ্ছাসেবক অভিযান büyük উৎসাহের সাথে শুরু হয়েছে",
+    description: "এই সপ্তাহান্তে ২০০ জনেরও বেশি নতুন স্বেচ্ছাসেবক আমাদের প্রচারাভিযানে যোগ দিয়েছেন।",
+    date: "অক্টোবর ২২, ২০২৪",
     image: "https://placehold.co/600x400.png",
     imageHint: "community volunteers"
   },
@@ -32,23 +32,23 @@ const newsItems = [
 const manifestoHighlights = [
   {
     icon: GraduationCap,
-    title: "Education Reform",
-    description: "Investing in modern schools, teacher training, and student scholarships."
+    title: "শিক্ষা সংস্কার",
+    description: "আধুনিক স্কুল, শিক্ষক প্রশিক্ষণ এবং ছাত্র বৃত্তি প্রকল্পে বিনিয়োগ।"
   },
   {
     icon: HeartHandshake,
-    title: "Healthcare for All",
-    description: "Expanding access to quality healthcare facilities and affordable services."
+    title: "সকলের জন্য স্বাস্থ্যসেবা",
+    description: "মানসম্মত স্বাস্থ্যসেবা সুবিধা এবং সাশ্রয়ী মূল্যের পরিষেবাগুলিতে অ্যাক্সেস প্রসারিত করা।"
   },
   {
     icon: Briefcase,
-    title: "Job Creation",
-    description: "Fostering economic growth and creating sustainable employment opportunities."
+    title: "কর্মসংস্থান সৃষ্টি",
+    description: "অর্থনৈতিক প্রবৃদ্ধি বাড়ানো এবং টেকসই কর্মসংস্থানের সুযোগ সৃষ্টি করা।"
   },
   {
     icon: Landmark,
-    title: "Infrastructure Development",
-    description: "Building and upgrading roads, bridges, and public transport systems."
+    title: "অবকাঠামো উন্নয়ন",
+    description: "রাস্তা, সেতু এবং গণপরিবহন ব্যবস্থা নির্মাণ ও আপগ্রেড করা।"
   },
 ];
 
@@ -69,7 +69,7 @@ function HeroSection() {
     <section className="relative w-full h-[60vh] md:h-[80vh] bg-background">
       <Image
         src="https://placehold.co/1600x900.png"
-        alt="Candidate Portrait"
+        alt="প্রার্থীর প্রতিকৃতি"
         fill
         className="object-cover opacity-20"
         data-ai-hint="political candidate portrait"
@@ -77,17 +77,17 @@ function HeroSection() {
       />
       <div className="relative container mx-auto flex flex-col items-center justify-center h-full text-center px-4">
         <h1 className="font-headline text-5xl md:text-7xl font-bold text-foreground leading-tight">
-          A New Dawn for a Golden Bengal
+          ঢাকা বিশ্ববিদ্যালয়: একটি নতুন দিগন্ত
         </h1>
         <p className="font-body text-xl md:text-2xl mt-4 max-w-3xl text-muted-foreground">
-          Join us in building a future of progress, prosperity, and unity for everyone.
+          সবার জন্য উন্নতি, সমৃদ্ধি এবং ঐক্যের ভবিষ্যৎ গড়তে আমাদের সাথে যোগ দিন।
         </p>
         <div className="mt-8 flex flex-col sm:flex-row gap-4">
           <Button asChild size="lg" className="font-headline text-lg">
-            <Link href="/manifesto">Our Vision</Link>
+            <Link href="/manifesto">আমাদের লক্ষ্য</Link>
           </Button>
           <Button asChild size="lg" variant="secondary" className="font-headline text-lg">
-            <Link href="/get-involved">Get Involved</Link>
+            <Link href="/get-involved">যুক্ত হোন</Link>
           </Button>
         </div>
       </div>
@@ -102,7 +102,7 @@ function AboutSection() {
         <div className="rounded-lg overflow-hidden shadow-2xl">
           <Image
             src="https://placehold.co/600x750.png"
-            alt="Candidate speaking"
+            alt="প্রার্থী বক্তৃতা দিচ্ছেন"
             width={600}
             height={750}
             className="w-full h-auto"
@@ -110,16 +110,16 @@ function AboutSection() {
           />
         </div>
         <div>
-          <h2 className="font-headline text-4xl md:text-5xl font-bold text-foreground">Meet Your Candidate</h2>
+          <h2 className="font-headline text-4xl md:text-5xl font-bold text-foreground">আপনার প্রার্থীকে জানুন</h2>
           <p className="font-body text-lg mt-4 text-muted-foreground">
-            A dedicated public servant with a lifelong commitment to our community. With a proven track record of fighting for the people, our candidate brings the experience, passion, and integrity needed to lead us forward.
+            আমাদের সম্প্রদায়ের প্রতি আজীবন প্রতিশ্রুতিবদ্ধ একজন নিবেদিতপ্রাণ জনপ্রতিনিধি। জনগণের জন্য লড়াই করার প্রমাণিত ট্র্যাক রেকর্ড সহ, আমাদের প্রার্থী আমাদের এগিয়ে নিয়ে যাওয়ার জন্য প্রয়োজনীয় অভিজ্ঞতা, আবেগ এবং সততা নিয়ে এসেছেন।
           </p>
           <p className="font-body text-lg mt-4 text-muted-foreground">
-            From improving local schools to championing small businesses, their work has always been about creating opportunities and improving lives.
+            স্থানীয় স্কুলের উন্নতি থেকে শুরু করে ছোট ব্যবসার পক্ষে কথা বলা পর্যন্ত, তাদের কাজ সবসময় সুযোগ তৈরি করা এবং জীবনযাত্রার মান উন্নত করা।
           </p>
           <Button asChild className="mt-6 font-headline text-lg">
             <Link href="/about">
-              Read Full Biography <ArrowRight className="ml-2 h-5 w-5" />
+              সম্পূর্ণ জীবনী পড়ুন <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
           </Button>
         </div>
@@ -133,9 +133,9 @@ function ManifestoSection() {
     <section className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto">
-          <h2 className="font-headline text-4xl md:text-5xl font-bold text-foreground">Our Commitment to You</h2>
+          <h2 className="font-headline text-4xl md:text-5xl font-bold text-foreground">আপনার প্রতি আমাদের প্রতিশ্রুতি</h2>
           <p className="font-body text-lg mt-4 text-muted-foreground">
-            Our manifesto is a promise. A promise to work tirelessly on the issues that matter most to you and your family.
+            আমাদের ইশতেহার একটি প্রতিশ্রুতি। আপনার এবং আপনার পরিবারের জন্য সবচেয়ে গুরুত্বপূর্ণ বিষয়গুলিতে অক্লান্তভাবে কাজ করার প্রতিশ্রুতি।
           </p>
         </div>
         <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -155,7 +155,7 @@ function ManifestoSection() {
         </div>
         <div className="text-center mt-12">
             <Button asChild className="font-headline text-lg">
-                <Link href="/manifesto">Explore the Full Manifesto <ArrowRight className="ml-2 h-5 w-5" /></Link>
+                <Link href="/manifesto">সম্পূর্ণ ইশতেহার দেখুন <ArrowRight className="ml-2 h-5 w-5" /></Link>
             </Button>
         </div>
       </div>
@@ -168,9 +168,9 @@ function NewsSection() {
     <section className="py-16 md:py-24 bg-card">
       <div className="container mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto">
-          <h2 className="font-headline text-4xl md:text-5xl font-bold text-foreground">Campaign Trail Updates</h2>
+          <h2 className="font-headline text-4xl md:text-5xl font-bold text-foreground">প্রচারণার সর্বশেষ খবর</h2>
           <p className="font-body text-lg mt-4 text-muted-foreground">
-            Stay up-to-date with our latest activities, announcements, and events.
+            আমাদের সর্বশেষ কার্যক্রম, ঘোষণা এবং ইভেন্টগুলির সাথে আপ-টু-ডেট থাকুন।
           </p>
         </div>
         <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -205,12 +205,12 @@ function WhyVoteSection() {
       <div className="container mx-auto text-center px-4">
         <div className="max-w-3xl mx-auto">
           <Lightbulb className="mx-auto h-12 w-12 text-primary" />
-          <h2 className="mt-4 font-headline text-4xl md:text-5xl font-bold text-foreground">Your Voice, Your Vote, Our Future</h2>
+          <h2 className="mt-4 font-headline text-4xl md:text-5xl font-bold text-foreground">আপনার কণ্ঠ, আপনার ভোট, আমাদের ভবিষ্যৎ</h2>
           <p className="font-body text-lg mt-4 text-muted-foreground">
-            Every single vote is a powerful voice for change. It's your opportunity to shape our community and ensure a government that represents your values and fights for your needs. Don't be silent. Your participation in this election is crucial for building a stronger democracy and a better tomorrow for all.
+            প্রতিটি ভোট পরিবর্তনের জন্য একটি শক্তিশালী কণ্ঠস্বর। এটি আপনার সম্প্রদায়কে গঠন করার এবং আপনার মূল্যবোধের প্রতিনিধিত্বকারী এবং আপনার প্রয়োজনের জন্য লড়াই করে এমন একটি সরকার নিশ্চিত করার সুযোগ। নীরব থাকবেন না। একটি শক্তিশালী গণতন্ত্র এবং সকলের জন্য একটি উন্নত আগামীকাল গড়ার জন্য এই নির্বাচনে আপনার অংশগ্রহণ অত্যন্ত গুরুত্বপূর্ণ।
           </p>
           <Button asChild className="mt-8 font-headline text-lg" variant="accent">
-            <Link href="/get-involved#register-to-vote">Learn How to Register</Link>
+            <Link href="/get-involved#register-to-vote">নিবন্ধন করতে শিখুন</Link>
           </Button>
         </div>
       </div>

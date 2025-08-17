@@ -15,7 +15,7 @@ import { useToast } from "@/hooks/use-toast";
 
 const formSchema = z.object({
   financialAssets: z.string().min(50, {
-    message: "Please enter a more detailed description of the financial assets (at least 50 characters).",
+    message: "অনুগ্রহ করে আর্থিক সম্পদের আরও বিস্তারিত বিবরণ লিখুন (কমপক্ষে ৫০ অক্ষর)।",
   }),
 });
 
@@ -40,7 +40,7 @@ export default function FinancialSummaryForm() {
       } else {
         toast({
           variant: "destructive",
-          title: "An error occurred",
+          title: "একটি ত্রুটি ঘটেছে",
           description: result.error,
         });
       }
@@ -56,10 +56,10 @@ export default function FinancialSummaryForm() {
             name="financialAssets"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="font-headline text-lg">Declared Financial Assets</FormLabel>
+                <FormLabel className="font-headline text-lg">ঘোষিত আর্থিক সম্পদ</FormLabel>
                 <FormControl>
                   <Textarea
-                    placeholder="Paste the full text of the candidate's declared financial assets here..."
+                    placeholder="প্রার্থীর ঘোষিত আর্থিক সম্পদের সম্পূর্ণ লেখাটি এখানে পেস্ট করুন..."
                     rows={10}
                     {...field}
                   />
@@ -72,12 +72,12 @@ export default function FinancialSummaryForm() {
             {isPending ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Analyzing...
+                বিশ্লেষণ করা হচ্ছে...
               </>
             ) : (
                 <>
                  <Sparkles className="mr-2 h-4 w-4" />
-                 Generate Summary
+                 সারসংক্ষেপ তৈরি করুন
                 </>
             )}
           </Button>
@@ -87,8 +87,8 @@ export default function FinancialSummaryForm() {
       {isPending && (
          <Card className="bg-primary/5 animate-pulse">
             <CardHeader>
-                <CardTitle className="font-headline">Generating Summary...</CardTitle>
-                <CardDescription>Our AI is analyzing the document. This may take a moment.</CardDescription>
+                <CardTitle className="font-headline">সারসংক্ষেপ তৈরি করা হচ্ছে...</CardTitle>
+                <CardDescription>আমাদের AI ডকুমেন্ট বিশ্লেষণ করছে। এতে কিছুক্ষণ সময় লাগতে পারে।</CardDescription>
             </CardHeader>
             <CardContent className="space-y-3">
                 <div className="h-4 bg-muted rounded-full w-full"></div>
@@ -101,8 +101,8 @@ export default function FinancialSummaryForm() {
       {summary && (
         <Card className="bg-primary/5">
           <CardHeader>
-            <CardTitle className="font-headline flex items-center gap-2"><Sparkles className="w-6 h-6 text-accent"/> AI-Generated Summary</CardTitle>
-            <CardDescription className="font-body">This is a concise overview of the provided financial assets.</CardDescription>
+            <CardTitle className="font-headline flex items-center gap-2"><Sparkles className="w-6 h-6 text-accent"/> AI দ্বারা তৈরি সারসংক্ষেপ</CardTitle>
+            <CardDescription className="font-body">এটি প্রদত্ত আর্থিক সম্পদের একটি সংক্ষিপ্ত বিবরণ।</CardDescription>
           </CardHeader>
           <CardContent>
             <p className="font-body whitespace-pre-wrap">{summary}</p>

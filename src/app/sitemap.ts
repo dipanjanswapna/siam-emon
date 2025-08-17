@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://sonar-bangla-vision.firebaseapp.com'; // Replace with your actual domain
+  const baseUrl = 'https://siam-emon-du.firebaseapp.com'; // Replace with your actual domain
 
   return [
     {
