@@ -11,12 +11,26 @@ import { ArrowRight, Landmark, GraduationCap, HeartHandshake, Briefcase, Lightbu
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 
 const carouselItems = [
-    {
+  {
     title: "শিক্ষার্থীদের জন্য গবেষণার সুযোগ",
     subtitle: "গবেষণাগারে জ্ঞানের আলো",
     description: "একটি গবেষণামুখী ছাত্র সংসদ গঠনের অঙ্গীকার নিয়ে সিয়াম ইমন শিক্ষার্থীদের জন্য গবেষণাগারে প্রয়োজনীয় সুযোগ-সুবিধা নিশ্চিত করতে কাজ করবেন।",
     image: "https://i.postimg.cc/9XZXtkTj/photo-2025-08-18-01-30-06.jpg",
     imageHint: "research opportunity"
+  },
+  {
+    title: "জাতীয় সম্মেলনে সিয়াম ইমন",
+    subtitle: "গবেষণা ও প্রকাশনার প্রতি প্রতিশ্রুতি",
+    description: "২৪তম জাতীয় সম্মেলন এবং বাংলাদেশ জুওলজিক্যাল সোসাইটির বার্ষিক সাধারণ সভায় উপস্থিত থেকে সিয়াম ইমন দেশের সেরা গবেষক ও শিক্ষাবিদদের সাথে গবেষণা ও প্রকাশনা খাতের ভবিষ্যৎ নিয়ে আলোচনা করেন।",
+    image: "https://i.postimg.cc/26MQRS7y/Screenshot-2025-08-18-015837.png",
+    imageHint: "national conference"
+  },
+  {
+    title: "শিক্ষায় অবদানের জন্য সম্মাননা",
+    subtitle: "Dean's Award 2025 , জীব বিজ্ঞান অনুষদ",
+    description: "ছাত্র-শিক্ষক সম্পর্ক উন্নয়ন, গবেষণা ও প্রকাশনায় অবদান এবং সার্বিক একাডেমিক উৎকর্ষতা সাধনের জন্য সিয়াম ইমন-কে এই সম্মাননায় ভূষিত করা হয়েছে।",
+    image: "https://i.postimg.cc/7LwWCm7D/Screenshot-2025-08-18-014212.png",
+    imageHint: "receiving award"
   },
   {
     title: "গবেষণাগারে সিয়াম: জ্ঞানের সন্ধানে",
@@ -31,20 +45,6 @@ const carouselItems = [
     description: "বাংলাদেশ জুওলজিক্যাল সোসাইটির বার্ষিক সাধারণ সভায় (২০২৪) উপস্থিত হয়ে সিয়াম ইমন গবেষণা ও প্রকাশনা খাতে তার অঙ্গীকার ব্যক্ত করেছেন।",
     image: "https://i.postimg.cc/PJqYGk1N/photo-2025-08-18-01-08-52.jpg",
     imageHint: "research participation"
-  },
-    {
-    title: "শিক্ষায় অবদানের জন্য সম্মাননা",
-    subtitle: "Dean's Award 2025 , জীব বিজ্ঞান অনুষদ",
-    description: "ছাত্র-শিক্ষক সম্পর্ক উন্নয়ন, গবেষণা ও প্রকাশনায় অবদান এবং সার্বিক একাডেমিক উৎকর্ষতা সাধনের জন্য সিয়াম ইমন-কে এই সম্মাননায় ভূষিত করা হয়েছে।",
-    image: "https://i.postimg.cc/7LwWCm7D/Screenshot-2025-08-18-014212.png",
-    imageHint: "receiving award"
-  },
-  {
-    title: "শিক্ষা সংস্কার উদ্যোগ",
-    subtitle: "একটি নতুন দিগন্ত",
-    description: "শিক্ষা ব্যবস্থায় আধুনিকায়ন আনতে নতুন নতুন পরিকল্পনা গ্রহণ করা হচ্ছে।",
-    image: "https://placehold.co/1200x600.png",
-    imageHint: "education reform"
   },
   {
     title: "পরিবেশ সুরক্ষা অভিযান",
@@ -326,4 +326,5 @@ function WhyVoteSection() {
     
 
     
+
 
