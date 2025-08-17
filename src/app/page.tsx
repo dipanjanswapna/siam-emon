@@ -29,7 +29,7 @@ const carouselItems = [
     title: "পরিবেশ সুরক্ষা অভিযান",
     subtitle: "সবুজ বাঁচাও",
     description: "পরিবেশ রক্ষায় বৃক্ষরোপণ এবং সচেতনতামূলক কার্যক্রম চলমান রয়েছে।",
-    image: "https://placehold.co/1200x600.png",
+    image: "https://i.postimg.cc/7hPr1K0g/photo-2025-08-18-00-47-45.jpg",
     imageHint: "environment protection campaign"
   }
 ];
@@ -299,3 +299,5 @@ function WhyVoteSection() {
     </section>
   )
 }
+
+    
