@@ -121,7 +121,7 @@ function NewHeroSection() {
     const [count, setCount] = React.useState(0)
 
     const plugin = React.useRef(
-        Autoplay({ delay: 3000, stopOnInteraction: true })
+        Autoplay({ delay: 5000, stopOnInteraction: true })
     );
 
     React.useEffect(() => {
@@ -326,3 +326,4 @@ function WhyVoteSection() {
     
 
     
+
