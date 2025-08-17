@@ -19,6 +19,20 @@ const carouselItems = [
     imageHint: "research opportunity"
   },
   {
+    title: "গবেষণাগারে সিয়াম: জ্ঞানের সন্ধানে",
+    subtitle: "ল্যাবরেটরি থেকে নতুন উদ্ভাবন",
+    description: "একটি উন্নত গবেষণামূলক পরিবেশ নিশ্চিত করার মাধ্যমে শিক্ষার্থীদের মাঝে নতুন উদ্ভাবনী ধারণার জন্ম দিতে সিয়াম ইমন নিরলসভাবে কাজ করে যাচ্ছেন।",
+    image: "https://i.postimg.cc/wxPZWxXt/photo-2025-08-18-01-23-31.jpg",
+    imageHint: "siam in laboratory"
+  },
+  {
+    title: "গবেষণায় সিয়াম ইমন-এর সক্রিয় অংশগ্রহণ",
+    subtitle: "ঢাকা বিশ্ববিদ্যালয় প্রাণিবিজ্ঞান বিভাগ কর্তৃক আয়োজিত",
+    description: "বাংলাদেশ জুওলজিক্যাল সোসাইটির বার্ষিক সাধারণ সভায় (২০২৪) উপস্থিত হয়ে সিয়াম ইমন গবেষণা ও প্রকাশনা খাতে তার অঙ্গীকার ব্যক্ত করেছেন।",
+    image: "https://i.postimg.cc/PJqYGk1N/photo-2025-08-18-01-08-52.jpg",
+    imageHint: "research participation"
+  },
+    {
     title: "শিক্ষায় অবদানের জন্য সম্মাননা",
     subtitle: "Dean's Award 2025 , জীব বিজ্ঞান অনুষদ",
     description: "ছাত্র-শিক্ষক সম্পর্ক উন্নয়ন, গবেষণা ও প্রকাশনায় অবদান এবং সার্বিক একাডেমিক উৎকর্ষতা সাধনের জন্য সিয়াম ইমন-কে এই সম্মাননায় ভূষিত করা হয়েছে।",
@@ -39,20 +53,6 @@ const carouselItems = [
     image: "https://i.postimg.cc/7hPr1K0g/photo-2025-08-18-00-47-45.jpg",
     imageHint: "environment protection campaign"
   },
-  {
-    title: "গবেষণায় সিয়াম ইমন-এর সক্রিয় অংশগ্রহণ",
-    subtitle: "ঢাকা বিশ্ববিদ্যালয় প্রাণিবিজ্ঞান বিভাগ কর্তৃক আয়োজিত",
-    description: "বাংলাদেশ জুওলজিক্যাল সোসাইটির বার্ষিক সাধারণ সভায় (২০২৪) উপস্থিত হয়ে সিয়াম ইমন গবেষণা ও প্রকাশনা খাতে তার অঙ্গীকার ব্যক্ত করেছেন।",
-    image: "https://i.postimg.cc/PJqYGk1N/photo-2025-08-18-01-08-52.jpg",
-    imageHint: "research participation"
-  },
-  {
-    title: "গবেষণাগারে সিয়াম: জ্ঞানের সন্ধানে",
-    subtitle: "ল্যাবরেটরি থেকে নতুন উদ্ভাবন",
-    description: "একটি উন্নত গবেষণামূলক পরিবেশ নিশ্চিত করার মাধ্যমে শিক্ষার্থীদের মাঝে নতুন উদ্ভাবনী ধারণার জন্ম দিতে সিয়াম ইমন নিরলসভাবে কাজ করে যাচ্ছেন।",
-    image: "https://i.postimg.cc/wxPZWxXt/photo-2025-08-18-01-23-31.jpg",
-    imageHint: "siam in laboratory"
-  }
 ];
 
 // Placeholder data
@@ -326,3 +326,4 @@ function WhyVoteSection() {
     
 
     
+
