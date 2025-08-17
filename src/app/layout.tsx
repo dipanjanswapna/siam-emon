@@ -7,25 +7,25 @@ import { Toaster } from '@/components/ui/toaster';
 
 export const metadata: Metadata = {
   title: {
-    default: 'SIAM EMON - ঢাকা বিশ্ববিদ্যালয়',
-    template: '%s | SIAM EMON',
+    default: 'Seam Ferdous Emon - ঢাকা বিশ্ববিদ্যালয়',
+    template: '%s | Seam Ferdous Emon',
   },
-  description: 'সিয়াম ইমন, ঢাকা বিশ্ববিদ্যালয়। ডাকসু নির্বাচন ২০২৫। প্রাণী জেনেটিক্স এবং মলিকিউলার বায়োলজি ক্লাবের সভাপতি। প্রাণবন্ত ক্যাম্পাসের মুখপাত্র।',
-  keywords: ['SIAM emon', 'dhaka university', 'du', 'Zoology Debating Club', 'University of Dhaka', 'Biology Instructor at Bigbang Academy', 'President 2024-25 at Animal Genetics & Molecular Biology Club- AGMBC', 'ডাকসু নির্বাচন ২০২৫','siam' , 'du daksu' , 'du', 'prangon ecosystem' , 'dipanjan swapna prangon'],
-  authors: [{ name: 'SIAM EMON' }],
-  creator: 'SIAM EMON',
-  publisher: 'SIAM EMON',
+  description: 'সিয়াম ফেরদৌস ইমন, ঢাকা বিশ্ববিদ্যালয়। ডাকসু নির্বাচন ২০২৫। প্রাণী জেনেটিক্স এবং মলিকিউলার বায়োলজি ক্লাবের সভাপতি। প্রাণবন্ত ক্যাম্পাসের মুখপাত্র।',
+  keywords: ['Seam Ferdous Emon', 'SIAM emon', 'dhaka university', 'du', 'Zoology Debating Club', 'University of Dhaka', 'Biology Instructor at Bigbang Academy', 'President 2024-25 at Animal Genetics & Molecular Biology Club- AGMBC', 'ডাকসু নির্বাচন ২০২৫','siam' , 'du daksu' , 'du', 'prangon ecosystem' , 'dipanjan swapna prangon'],
+  authors: [{ name: 'Seam Ferdous Emon' }],
+  creator: 'Seam Ferdous Emon',
+  publisher: 'Seam Ferdous Emon',
   openGraph: {
-    title: 'SIAM EMON - ঢাকা বিশ্ববিদ্যালয়',
-    description: 'সিয়াম ইমন, ঢাকা বিশ্ববিদ্যালয়। ডাকসু নির্বাচন ২০২৫। প্রাণবন্ত ক্যাম্পাসের মুখপাত্র।',
+    title: 'Seam Ferdous Emon - ঢাকা বিশ্ববিদ্যালয়',
+    description: 'সিয়াম ফেরদৌস ইমন, ঢাকা বিশ্ববিদ্যালয়। ডাকসু নির্বাচন ২০২৫। প্রাণবন্ত ক্যাম্পাসের মুখপাত্র।',
     url: 'https://siam-emon-du.firebaseapp.com', // Replace with actual domain
-    siteName: 'SIAM EMON',
+    siteName: 'Seam Ferdous Emon',
     images: [
       {
         url: 'https://placehold.co/1200x630.png', // Replace with a representative image
         width: 1200,
         height: 630,
-        alt: 'A hopeful image for SIAM EMON campaign',
+        alt: 'A hopeful image for Seam Ferdous Emon campaign',
       },
     ],
     locale: 'bn_BD',
@@ -33,8 +33,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'SIAM EMON - ঢাকা বিশ্ববিদ্যালয়',
-    description: 'সিয়াম ইমন, ঢাকা বিশ্ববিদ্যালয়। ডাকসু নির্বাচন ২০২৫। প্রাণবন্ত ক্যাম্পাসের মুখপাত্র।',
+    title: 'Seam Ferdous Emon - ঢাকা বিশ্ববিদ্যালয়',
+    description: 'সিয়াম ফেরদৌস ইমন, ঢাকা বিশ্ববিদ্যালয়। ডাকসু নির্বাচন ২০২৫। প্রাণবন্ত ক্যাম্পাসের মুখপাত্র।',
     images: ['https://placehold.co/1200x630.png'], // Replace with a representative image
   },
   robots: {

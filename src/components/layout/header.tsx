@@ -26,7 +26,7 @@ export function Header() {
         <Link href="/" className="flex items-center gap-2">
           <Vote className="h-8 w-8 text-primary" />
           <span className="text-xl font-headline font-bold text-primary">
-            SIAM EMON
+            Seam Ferdous Emon
           </span>
         </Link>
         <nav className="hidden md:flex items-center gap-6">
@@ -56,7 +56,7 @@ export function Header() {
                 <Link href="/" className="flex items-center gap-2 mb-4">
                   <Vote className="h-8 w-8 text-primary" />
                   <span className="text-xl font-headline font-bold text-primary">
-                    SIAM EMON
+                    Seam Ferdous Emon
                   </span>
                 </Link>
                 {navLinks.map((link) => (

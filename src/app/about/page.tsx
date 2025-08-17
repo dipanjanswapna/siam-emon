@@ -19,7 +19,7 @@ export default function AboutPage() {
                   data-ai-hint="politician portrait"
                 />
                 <div className="p-6">
-                  <h2 className="font-headline text-3xl font-bold">সিয়াম ইমন</h2>
+                  <h2 className="font-headline text-3xl font-bold">সিয়াম ফেরদৌস ইমন</h2>
                   <p className="font-body text-primary mt-1">একটি উন্নত ভবিষ্যতের জন্য</p>
                 </div>
               </CardContent>

@@ -10,7 +10,7 @@ export function Footer() {
             <Link href="/" className="flex items-center gap-2 mb-4">
               <Vote className="h-8 w-8 text-primary" />
               <span className="text-xl font-headline font-bold text-primary">
-                SIAM EMON
+                Seam Ferdous Emon
               </span>
             </Link>
             <p className="text-muted-foreground font-body text-sm">
@@ -42,7 +42,7 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-8 border-t pt-4 text-center text-sm text-muted-foreground font-body">
-          <p>&copy; {new Date().getFullYear()} SIAM EMON. সর্বস্বত্ব সংরক্ষিত।</p>
+          <p>&copy; {new Date().getFullYear()} Seam Ferdous Emon. সর্বস্বত্ব সংরক্ষিত।</p>
           <p className="mt-1">Paid for by the Committee to Elect Our Candidate.</p>
         </div>
       </div>
