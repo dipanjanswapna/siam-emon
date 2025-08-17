@@ -7,7 +7,7 @@ import React from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { ArrowRight, Landmark, GraduationCap, HeartHandshake, Briefcase, Lightbulb } from "lucide-react";
+import { ArrowRight, BookOpenCheck, BrainCircuit, Library, MicVocal, Users } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 
 const carouselItems = [
@@ -25,19 +25,12 @@ const carouselItems = [
     image: "https://i.postimg.cc/26MQRS7y/Screenshot-2025-08-18-015837.png",
     imageHint: "national conference"
   },
-   {
+  {
     title: "গবেষণামূলক উপস্থাপনা",
     subtitle: "নতুন ধারণা, নতুন পথ",
     description: "একটি শিক্ষাবান্ধব পরিবেশ তৈরিতে সিয়াম ইমন তার গবেষণামূলক কাজগুলো শিক্ষার্থীদের সামনে তুলে ধরছেন, যা তাদের মধ্যে নতুন ধারণা ও গবেষণার প্রতি আগ্রহ সৃষ্টি করবে।",
     image: "https://i.postimg.cc/763HDBgz/Screenshot-2025-08-18-020259.png",
     imageHint: "research presentation"
-  },
-    {
-    title: "গবেষণাগারে নিরলস কাজ",
-    subtitle: "গবেষণায় আধুনিক প্রযুক্তি",
-    description: "একটি উন্নত গবেষণামুখী ছাত্র সংসদ গঠনের অঙ্গীকার নিয়ে সিয়াম ইমন শিক্ষার্থীদের জন্য গবেষণাগারে প্রয়োজনীয় আধুনিক সুযোগ-সুবিধা নিশ্চিত করতে কাজ করছেন।",
-    image: "https://i.postimg.cc/vHRK5YwG/photo-2025-08-18-02-08-33.jpg",
-    imageHint: "working in lab"
   },
   {
     title: "শিক্ষায় অবদানের জন্য সম্মাননা",
@@ -45,6 +38,13 @@ const carouselItems = [
     description: "একটি শিক্ষাবান্ধব পরিবেশ তৈরিতে সিয়াম ইমন-এর অবদানের জন্য অ্যানিমাল জেনেটিক্স এবং মলিকিউলার বায়োলজি বিভাগ কর্তৃক তাকে এই বিশেষ সম্মাননা প্রদান করা হয়।",
     image: "https://i.postimg.cc/FRpK3W74/photo-2025-08-18-02-08-11.jpg",
     imageHint: "receiving award biology"
+  },
+  {
+    title: "গবেষণাগারে নিরলস কাজ",
+    subtitle: "গবেষণায় আধুনিক প্রযুক্তি",
+    description: "একটি উন্নত গবেষণামুখী ছাত্র সংসদ গঠনের অঙ্গীকার নিয়ে সিয়াম ইমন শিক্ষার্থীদের জন্য গবেষণাগারে প্রয়োজনীয় আধুনিক সুযোগ-সুবিধা নিশ্চিত করতে কাজ করছেন।",
+    image: "https://i.postimg.cc/vHRK5YwG/photo-2025-08-18-02-08-33.jpg",
+    imageHint: "working in lab"
   },
   {
     title: "শিক্ষায় অবদানের জন্য সম্মাননা",
@@ -82,6 +82,7 @@ export default function Home() {
     <div className="flex flex-col">
       <NewHeroSection />
       <AboutSection />
+      <CommitmentSection />
       <VoteBannerSection />
     </div>
   );
@@ -207,6 +208,68 @@ function AboutSection() {
     </section>
   );
 }
+
+const commitments = [
+  {
+    icon: BrainCircuit,
+    title: "গবেষণায় সহযোগিতা ও সুযোগ বৃদ্ধি",
+    description: "শিক্ষার্থীদের গবেষণামূলক কাজে সার্বিক সহযোগিতা প্রদান, বিভিন্ন সেমিনার ও ওয়ার্কশপের আয়োজন এবং গবেষণাগারে প্রয়োজনীয় আধুনিক সরঞ্জাম নিশ্চিত করা হবে।",
+  },
+  {
+    icon: BookOpenCheck,
+    title: "প্রকাশনা সহজীকরণ",
+    description: "আন্তর্জাতিক মানের জার্নালে শিক্ষার্থীদের গবেষণা প্রবন্ধ, বই ও সৃজনশীল লেখা প্রকাশে সার্বিক সহায়তা দেওয়া হবে এবং বিশ্ববিদ্যালয়ের নিজস্ব প্রকাশনা প্ল্যাটফর্ম তৈরির উদ্যোগ নেওয়া হবে।",
+  },
+  {
+    icon: Library,
+    title: "ডিজিটাল লাইব্রেরি ও রিসোর্স অ্যাক্সেস",
+    description: "একটি উন্নত এবং আধুনিক ডিজিটাল লাইব্রেরি স্থাপন করা হবে, যেখানে শিক্ষার্থীরা সহজে দেশ-বিদেশের সেরা গবেষণা পেপার, বই এবং জার্নালে প্রবেশাধিকার পাবে।",
+  },
+  {
+    icon: Users,
+    title: "ছাত্র-শিক্ষক সম্পর্ক উন্নয়ন",
+    description: "শিক্ষার্থীদের যেকোনো সমস্যা সমাধানে ছাত্র সংসদ এবং শিক্ষকদের মধ্যে একটি শক্তিশালী ও কার্যকর সেতুবন্ধন তৈরি করা হবে।",
+  },
+  {
+    icon: MicVocal,
+    title: "নিয়মিত একাডেমিক ও সামাজিক উদ্যোগ",
+    description: "বিতর্ক প্রতিযোগিতা, পাবলিক স্পিকিং সেশন, ক্যারিয়ার কাউন্সেলিং এবং বিভিন্ন সামাজিক ও সাংস্কৃতিক অনুষ্ঠানের আয়োজন করা হবে।",
+  },
+];
+
+function CommitmentSection() {
+  return (
+    <section className="py-16 md:py-24 bg-primary/10">
+      <div className="container mx-auto px-4">
+        <div className="text-center max-w-4xl mx-auto">
+          <h2 className="font-headline text-4xl md:text-5xl font-bold text-foreground">আপনার প্রতি আমাদের প্রতিশ্রুতি</h2>
+          <p className="mt-4 font-body text-lg text-muted-foreground">
+            ঢাকা বিশ্ববিদ্যালয়ের ছাত্রসমাজকে একটি উন্নত, শিক্ষাবান্ধব পরিবেশ উপহার দিতে এবং গবেষণার সংস্কৃতিকে বেগবান করতে সিয়াম ফেরদৌস ইমন নিরলসভাবে কাজ করে চলেছেন। তাঁর প্রধান লক্ষ্য হলো শিক্ষার্থীদের সম্ভাবনাকে উন্মোচন করা এবং একটি উজ্জ্বল ভবিষ্যৎ নিশ্চিত করা। আপনার ভালোবাসা ও আস্থাই তাঁর পথচলার মূল শক্তি।
+          </p>
+          <p className="mt-6 font-headline text-xl text-primary font-semibold">
+            তাঁর কিছু প্রধান প্রতিশ্রুতি নিচে তুলে ধরা হলো:
+          </p>
+        </div>
+        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {commitments.map((commitment, index) => (
+            <Card key={index} className="text-center shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 bg-card">
+              <CardHeader className="items-center">
+                <div className="bg-primary/20 p-4 rounded-full">
+                  <commitment.icon className="h-10 w-10 text-primary" />
+                </div>
+                <CardTitle className="font-headline text-2xl mt-4">{commitment.title}</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="font-body text-muted-foreground">{commitment.description}</p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 
 function VoteBannerSection() {
   return (

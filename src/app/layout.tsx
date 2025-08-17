@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     template: '%s | Seam Ferdous Emon',
   },
   description: 'সিয়াম ফেরদৌস ইমন, ঢাকা বিশ্ববিদ্যালয়। ডাকসু নির্বাচন ২০২৫। প্রাণবন্ত ক্যাম্পাসের মুখপাত্র।',
-  keywords: ['ঢাকা বিশ্ববিদ্যালয়', 'ডাকসু নির্বাচন', 'সিয়াম ফেরদৌস ইমন', 'গবেষণা ও প্রকাশনা সম্পাদক', 'শিক্ষার্থী নির্বাচন', 'ফজলুল হক মুসলিম হল', 'DUCSU election', 'SIam Ferdous Emon', 'Research and Publication Secretary', 'Dhaka University', 'student leader', 'campus election', 'DU', 'student welfare'],
+  keywords: ['ঢাকা বিশ্ববিদ্যালয়', 'ডাকসু নির্বাচন', 'সিয়াম ফেরদৌস ইমন', 'গবেষণা ও প্রকাশনা সম্পাদক', 'শিক্ষার্থী নির্বাচন', 'ফজলুল হক মুসলিম হল', 'DUCSU election', 'SIam Ferdous Emon', 'Research and Publication Secretary', 'Dhaka University', 'student leader', 'campus election', 'DU', 'student welfare', 'Bangladesh student politics', 'ঢাকা বিশ্ববিদ্যালয় গবেষণা সুযোগ', 'ডাকসু নির্বাচনে সিয়াম ইমন', 'সিয়াম ফেরদৌস ইমন এর প্রতিশ্রুতি', 'গবেষণামুখী ছাত্র সংসদ', 'ঢাকা বিশ্ববিদ্যালয়ের ছাত্র নেতা', 'শিক্ষার্থীদের প্রকাশনা সহায়তা'],
   authors: [{ name: 'Seam Ferdous Emon' }],
   creator: 'Seam Ferdous Emon',
   publisher: 'Seam Ferdous Emon',
