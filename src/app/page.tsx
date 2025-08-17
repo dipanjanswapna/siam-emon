@@ -31,6 +31,13 @@ const carouselItems = [
     description: "পরিবেশ রক্ষায় বৃক্ষরোপণ এবং সচেতনতামূলক কার্যক্রম চলমান রয়েছে।",
     image: "https://i.postimg.cc/7hPr1K0g/photo-2025-08-18-00-47-45.jpg",
     imageHint: "environment protection campaign"
+  },
+  {
+    title: "গবেষণায় সিয়াম ইমন-এর সক্রিয় অংশগ্রহণ",
+    subtitle: "ঢাকা বিশ্ববিদ্যালয় প্রাণিবিজ্ঞান বিভাগ কর্তৃক আয়োজিত",
+    description: "বাংলাদেশ জুওলজিক্যাল সোসাইটির বার্ষিক সাধারণ সভায় (২০২৪) উপস্থিত হয়ে সিয়াম ইমন গবেষণা ও প্রকাশনা খাতে তার অঙ্গীকার ব্যক্ত করেছেন।",
+    image: "https://i.postimg.cc/PJqYGk1N/photo-2025-08-18-01-08-52.jpg",
+    imageHint: "research participation"
   }
 ];
 
@@ -299,5 +306,7 @@ function WhyVoteSection() {
     </section>
   )
 }
+
+    
 
     
