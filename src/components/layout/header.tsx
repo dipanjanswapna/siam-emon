@@ -21,8 +21,8 @@ export function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="bg-primary/95 text-primary-foreground sticky top-0 z-50 shadow-lg backdrop-blur-sm">
-      <div className="container mx-auto flex h-20 items-center justify-between px-4 md:px-6">
+    <header className="sticky top-0 z-50 p-2 md:p-4">
+      <div className="container mx-auto flex h-20 items-center justify-between rounded-full bg-primary/95 px-4 text-primary-foreground shadow-lg backdrop-blur-sm md:px-6">
         <Link href="/" className="flex items-center gap-2">
           <Vote className="h-8 w-8" />
           <span className="text-xl font-headline font-bold">
@@ -31,7 +31,7 @@ export function Header() {
         </Link>
         
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center justify-center bg-primary/80 rounded-full p-1">
+        <nav className="hidden md:flex items-center justify-center">
           {navLinks.map((link) => (
             <Link
               key={link.href}
