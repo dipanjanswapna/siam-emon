@@ -67,6 +67,13 @@ const carouselItems = [
     image: "https://i.postimg.cc/vHRK5YwG/photo-2025-08-18-02-08-33.jpg",
     imageHint: "working in lab"
   },
+  {
+    title: "শিক্ষায় অবদানের জন্য সম্মাননা",
+    subtitle: "অ্যানিমাল জেনেটিক্স এবং মলিকিউলার বায়োলজি",
+    description: "একটি শিক্ষাবান্ধব পরিবেশ তৈরিতে সিয়াম ইমন-এর অবদানের জন্য অ্যানিমাল জেনেটিক্স এবং মলিকিউলার বায়োলজি বিভাগ কর্তৃক তাকে এই বিশেষ সম্মাননা প্রদান করা হয়।",
+    image: "https://i.postimg.cc/FRpK3W74/photo-2025-08-18-02-08-11.jpg",
+    imageHint: "receiving award biology"
+  },
 ];
 
 // Placeholder data
@@ -344,3 +351,6 @@ function WhyVoteSection() {
 
 
 
+
+
+    
