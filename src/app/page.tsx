@@ -3,6 +3,31 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { ArrowRight, Landmark, GraduationCap, HeartHandshake, Briefcase, Lightbulb } from "lucide-react";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+
+const carouselItems = [
+  {
+    title: "স্বাস্থ্য বিষয়ক কেন্দ্রীয়",
+    subtitle: "উপসাহিত্যিক পক্ষ",
+    description: "স্বাস্থ্য বিষয়ক কেন্দ্রীয় উপসাহিত্যিক পক্ষ নিয়ে আমাদের প্রার্থীর কার্যক্রম চলছে।",
+    image: "https://placehold.co/1200x600.png",
+    imageHint: "health committee meeting"
+  },
+  {
+    title: "শিক্ষা সংস্কার উদ্যোগ",
+    subtitle: "একটি নতুন দিগন্ত",
+    description: "শিক্ষা ব্যবস্থায় আধুনিকায়ন আনতে নতুন নতুন পরিকল্পনা গ্রহণ করা হচ্ছে।",
+    image: "https://placehold.co/1200x600.png",
+    imageHint: "education reform"
+  },
+  {
+    title: "পরিবেশ সুরক্ষা অভিযান",
+    subtitle: "সবুজ বাঁচাও",
+    description: "পরিবেশ রক্ষায় বৃক্ষরোপণ এবং সচেতনতামূলক কার্যক্রম চলমান রয়েছে।",
+    image: "https://placehold.co/1200x600.png",
+    imageHint: "environment protection campaign"
+  }
+];
 
 // Placeholder data
 const newsItems = [
@@ -55,7 +80,7 @@ const manifestoHighlights = [
 export default function Home() {
   return (
     <div className="flex flex-col">
-      <HeroSection />
+      <NewHeroSection />
       <AboutSection />
       <ManifestoSection />
       <NewsSection />
@@ -64,40 +89,58 @@ export default function Home() {
   );
 }
 
-function HeroSection() {
+function NewHeroSection() {
   return (
-    <section className="relative w-full h-[60vh] md:h-[80vh] bg-background">
-      <Image
-        src="https://placehold.co/1600x900.png"
-        alt="প্রার্থীর প্রতিকৃতি"
-        fill
-        className="object-cover opacity-20"
-        data-ai-hint="political candidate portrait"
-        priority
-      />
-      <div className="relative container mx-auto flex flex-col items-center justify-center h-full text-center px-4">
-        <h1 className="font-headline text-5xl md:text-7xl font-bold text-foreground leading-tight">
-          ঢাকা বিশ্ববিদ্যালয়: একটি নতুন দিগন্ত
-        </h1>
-        <p className="font-body text-xl md:text-2xl mt-4 max-w-3xl text-muted-foreground">
-          সবার জন্য উন্নতি, সমৃদ্ধি এবং ঐক্যের ভবিষ্যৎ গড়তে আমাদের সাথে যোগ দিন।
-        </p>
-        <div className="mt-8 flex flex-col sm:flex-row gap-4">
-          <Button asChild size="lg" className="font-headline text-lg">
-            <Link href="/manifesto">আমাদের লক্ষ্য</Link>
-          </Button>
-          <Button asChild size="lg" variant="secondary" className="font-headline text-lg">
-            <Link href="/get-involved">যুক্ত হোন</Link>
-          </Button>
-        </div>
+    <section className="w-full bg-card py-8 md:py-12">
+      <div className="container mx-auto">
+        <Carousel
+          opts={{
+            align: "start",
+            loop: true,
+          }}
+          className="w-full"
+        >
+          <CarouselContent>
+            {carouselItems.map((item, index) => (
+              <CarouselItem key={index}>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                  <div className="flex flex-col justify-center text-left p-4 md:p-8">
+                    <h2 className="text-4xl md:text-5xl font-bold font-headline text-foreground">{item.title}</h2>
+                    <p className="text-3xl md:text-4xl font-headline text-primary mt-2">{item.subtitle}</p>
+                    <p className="mt-4 text-lg text-muted-foreground font-body">{item.description}</p>
+                    <div className="mt-6 flex gap-4">
+                       <Button asChild size="lg" className="font-headline text-lg">
+                         <Link href="/manifesto">আমাদের লক্ষ্য</Link>
+                       </Button>
+                       <Button asChild size="lg" variant="secondary" className="font-headline text-lg">
+                         <Link href="/get-involved">যুক্ত হোন</Link>
+                       </Button>
+                    </div>
+                  </div>
+                  <div className="relative h-64 md:h-[450px] rounded-lg overflow-hidden">
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      fill
+                      className="object-cover"
+                      data-ai-hint={item.imageHint}
+                    />
+                  </div>
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none" />
+          <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none" />
+        </Carousel>
       </div>
     </section>
-  );
+  )
 }
 
 function AboutSection() {
   return (
-    <section className="py-16 md:py-24 bg-card">
+    <section className="py-16 md:py-24 bg-background">
       <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center px-4">
         <div className="rounded-lg overflow-hidden shadow-2xl">
           <Image
@@ -130,7 +173,7 @@ function AboutSection() {
 
 function ManifestoSection() {
   return (
-    <section className="py-16 md:py-24 bg-background">
+    <section className="py-16 md:py-24 bg-card">
       <div className="container mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto">
           <h2 className="font-headline text-4xl md:text-5xl font-bold text-foreground">আপনার প্রতি আমাদের প্রতিশ্রুতি</h2>
@@ -165,7 +208,7 @@ function ManifestoSection() {
 
 function NewsSection() {
   return (
-    <section className="py-16 md:py-24 bg-card">
+    <section className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto">
           <h2 className="font-headline text-4xl md:text-5xl font-bold text-foreground">প্রচারণার সর্বশেষ খবর</h2>
