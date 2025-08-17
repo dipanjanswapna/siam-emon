@@ -26,32 +26,11 @@ const carouselItems = [
     imageHint: "national conference"
   },
   {
-    title: "শিক্ষায় অবদানের জন্য সম্মাননা",
-    subtitle: "Dean's Award 2025 , জীব বিজ্ঞান অনুষদ",
-    description: "ছাত্র-শিক্ষক সম্পর্ক উন্নয়ন, গবেষণা ও প্রকাশনায় অবদান এবং সার্বিক একাডেমিক উৎকর্ষতা সাধনের জন্য সিয়াম ইমন-কে এই সম্মাননায় ভূষিত করা হয়েছে।",
-    image: "https://i.postimg.cc/7LwWCm7D/Screenshot-2025-08-18-014212.png",
-    imageHint: "receiving award"
-  },
-  {
     title: "গবেষণাগারে সিয়াম: জ্ঞানের সন্ধানে",
     subtitle: "ল্যাবরেটরি থেকে নতুন উদ্ভাবন",
     description: "একটি উন্নত গবেষণামূলক পরিবেশ নিশ্চিত করার মাধ্যমে শিক্ষার্থীদের মাঝে নতুন উদ্ভাবনী ধারণার জন্ম দিতে সিয়াম ইমন নিরলসভাবে কাজ করে যাচ্ছেন।",
     image: "https://i.postimg.cc/wxPZWxXt/photo-2025-08-18-01-23-31.jpg",
     imageHint: "siam in laboratory"
-  },
-  {
-    title: "গবেষণায় সিয়াম ইমন-এর সক্রিয় অংশগ্রহণ",
-    subtitle: "ঢাকা বিশ্ববিদ্যালয় প্রাণিবিজ্ঞান বিভাগ কর্তৃক আয়োজিত",
-    description: "বাংলাদেশ জুওলজিক্যাল সোসাইটির বার্ষিক সাধারণ সভায় (২০২৪) উপস্থিত হয়ে সিয়াম ইমন গবেষণা ও প্রকাশনা খাতে তার অঙ্গীকার ব্যক্ত করেছেন।",
-    image: "https://i.postimg.cc/PJqYGk1N/photo-2025-08-18-01-08-52.jpg",
-    imageHint: "research participation"
-  },
-  {
-    title: "পরিবেশ সুরক্ষা অভিযান",
-    subtitle: "সবুজ বাঁচাও",
-    description: "পরিবেশ রক্ষায় বৃক্ষরোপণ এবং সচেতনতামূলক কার্যক্রম চলমান রয়েছে।",
-    image: "https://i.postimg.cc/7hPr1K0g/photo-2025-08-18-00-47-45.jpg",
-    imageHint: "environment protection campaign"
   },
   {
     title: "গবেষণামূলক উপস্থাপনা",
@@ -66,6 +45,27 @@ const carouselItems = [
     description: "একটি উন্নত গবেষণামুখী ছাত্র সংসদ গঠনের অঙ্গীকার নিয়ে সিয়াম ইমন শিক্ষার্থীদের জন্য গবেষণাগারে প্রয়োজনীয় আধুনিক সুযোগ-সুবিধা নিশ্চিত করতে কাজ করছেন।",
     image: "https://i.postimg.cc/vHRK5YwG/photo-2025-08-18-02-08-33.jpg",
     imageHint: "working in lab"
+  },
+  {
+    title: "শিক্ষায় অবদানের জন্য সম্মাননা",
+    subtitle: "Dean's Award 2025 , জীব বিজ্ঞান অনুষদ",
+    description: "ছাত্র-শিক্ষক সম্পর্ক উন্নয়ন, গবেষণা ও প্রকাশনায় অবদান এবং সার্বিক একাডেমিক উৎকর্ষতা সাধনের জন্য সিয়াম ইমন-কে এই সম্মাননায় ভূষিত করা হয়েছে।",
+    image: "https://i.postimg.cc/7LwWCm7D/Screenshot-2025-08-18-014212.png",
+    imageHint: "receiving award"
+  },
+  {
+    title: "গবেষণায় সিয়াম ইমন-এর সক্রিয় অংশগ্রহণ",
+    subtitle: "ঢাকা বিশ্ববিদ্যালয় প্রাণিবিজ্ঞান বিভাগ কর্তৃক আয়োজিত",
+    description: "বাংলাদেশ জুওলজিক্যাল সোসাইটির বার্ষিক সাধারণ সভায় (২০২৪) উপস্থিত হয়ে সিয়াম ইমন গবেষণা ও প্রকাশনা খাতে তার অঙ্গীকার ব্যক্ত করেছেন।",
+    image: "https://i.postimg.cc/PJqYGk1N/photo-2025-08-18-01-08-52.jpg",
+    imageHint: "research participation"
+  },
+  {
+    title: "পরিবেশ সুরক্ষা অভিযান",
+    subtitle: "সবুজ বাঁচাও",
+    description: "পরিবেশ রক্ষায় বৃক্ষরোপণ এবং সচেতনতামূলক কার্যক্রম চলমান রয়েছে।",
+    image: "https://i.postimg.cc/7hPr1K0g/photo-2025-08-18-00-47-45.jpg",
+    imageHint: "environment protection campaign"
   },
   {
     title: "শিক্ষায় অবদানের জন্য সম্মাননা",
