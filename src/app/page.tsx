@@ -1,10 +1,14 @@
 
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import React from "react";
+import Autoplay from "embla-carousel-autoplay";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { ArrowRight, Landmark, GraduationCap, HeartHandshake, Briefcase, Lightbulb } from "lucide-react";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 
 const carouselItems = [
   {
@@ -91,10 +95,34 @@ export default function Home() {
 }
 
 function NewHeroSection() {
+    const [api, setApi] = React.useState<CarouselApi>()
+    const [current, setCurrent] = React.useState(0)
+    const [count, setCount] = React.useState(0)
+
+    const plugin = React.useRef(
+        Autoplay({ delay: 3000, stopOnInteraction: true })
+    );
+
+    React.useEffect(() => {
+        if (!api) {
+            return
+        }
+
+        setCount(api.scrollSnapList().length)
+        setCurrent(api.selectedScrollSnap() + 1)
+
+        api.on("select", () => {
+            setCurrent(api.selectedScrollSnap() + 1)
+        })
+    }, [api])
+
+
   return (
     <section className="w-full bg-card py-8 md:py-12">
       <div className="container mx-auto">
         <Carousel
+          setApi={setApi}
+          plugins={[plugin.current]}
           opts={{
             align: "start",
             loop: true,
@@ -134,6 +162,16 @@ function NewHeroSection() {
           <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none" />
           <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none" />
         </Carousel>
+         <div className="flex justify-center gap-2 mt-4">
+            {Array.from({ length: count }).map((_, i) => (
+              <button
+                key={i}
+                onClick={() => api?.scrollTo(i)}
+                className={`h-2 w-2 rounded-full ${current === i + 1 ? 'bg-primary' : 'bg-muted'}`}
+                aria-label={`Go to slide ${i + 1}`}
+              />
+            ))}
+          </div>
       </div>
     </section>
   )
