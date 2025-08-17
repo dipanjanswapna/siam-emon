@@ -1,3 +1,4 @@
+
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -122,7 +123,7 @@ function NewHeroSection() {
                       src={item.image}
                       alt={item.title}
                       fill
-                      className="object-cover"
+                      className="object-contain"
                       data-ai-hint={item.imageHint}
                     />
                   </div>
