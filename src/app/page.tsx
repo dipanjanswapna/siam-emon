@@ -21,39 +21,11 @@ const carouselItems = [
     imageHint: "research opportunity"
   },
   {
-    title: "জাতীয় সম্মেলনে সিয়াম ইমন",
-    subtitle: "গবেষণা ও প্রকাশনার প্রতি প্রতিশ্রুতি",
-    description: "২৪তম জাতীয় সম্মেলন এবং বাংলাদেশ জুওলজিক্যাল সোসাইটির বার্ষিক সাধারণ সভায় উপস্থিত থেকে সিয়াম ইমন দেশের সেরা গবেষক ও শিক্ষাবিদদের সাথে গবেষণা ও প্রকাশনা খাতের ভবিষ্যৎ নিয়ে আলোচনা করেন।",
-    image: "https://i.postimg.cc/26MQRS7y/Screenshot-2025-08-18-015837.png",
-    imageHint: "national conference"
-  },
-  {
-    title: "শিক্ষায় অবদানের জন্য সম্মাননা",
-    subtitle: "অ্যানিমাল জেনেটিক্স এবং মলিকিউলার বায়োলজি",
-    description: "একটি শিক্ষাবান্ধব পরিবেশ তৈরিতে সিয়াম ইমন-এর অবদানের জন্য অ্যানিমাল জেনেটিক্স এবং মলিকিউলার বায়োলজি বিভাগ কর্তৃক তাকে এই বিশেষ সম্মাননা প্রদান করা হয়।",
-    image: "https://i.postimg.cc/FRpK3W74/photo-2025-08-18-02-08-11.jpg",
-    imageHint: "receiving award biology"
-  },
-  {
-    title: "শিক্ষায় অবদানের জন্য সম্মাননা",
-    subtitle: "Dean's Award 2025 , জীব বিজ্ঞান অনুষদ",
+    title: "Dean's Award 2025 , জীব বিজ্ঞান অনুষদ",
+    subtitle: "শিক্ষায় অবদানের জন্য সম্মাননা",
     description: "ছাত্র-শিক্ষক সম্পর্ক উন্নয়ন, গবেষণা ও প্রকাশনায় অবদান এবং সার্বিক একাডেমিক উৎকর্ষতা সাধনের জন্য সিয়াম ইমন-কে এই সম্মাননায় ভূষিত করা হয়েছে।",
     image: "https://i.postimg.cc/7LwWCm7D/Screenshot-2025-08-18-014212.png",
     imageHint: "receiving award"
-  },
-    {
-    title: "গবেষণায় সিয়াম ইমন-এর সক্রিয় অংশগ্রহণ",
-    subtitle: "ঢাকা বিশ্ববিদ্যালয় প্রাণিবিজ্ঞান বিভাগ কর্তৃক আয়োজিত",
-    description: "বাংলাদেশ জুওলজিক্যাল সোসাইটির বার্ষিক সাধারণ সভায় (২০২৪) উপস্থিত হয়ে সিয়াম ইমন গবেষণা ও প্রকাশনা খাতে তার অঙ্গীকার ব্যক্ত করেছেন।",
-    image: "https://i.postimg.cc/PJqYGk1N/photo-2025-08-18-01-08-52.jpg",
-    imageHint: "research participation"
-  },
-  {
-    title: "পরিবেশ সুরক্ষা অভিযান",
-    subtitle: "সবুজ বাঁচাও",
-    description: "পরিবেশ রক্ষায় বৃক্ষরোপণ এবং সচেতনতামূলক কার্যক্রম চলমান রয়েছে।",
-    image: "https://i.postimg.cc/7hPr1K0g/photo-2025-08-18-00-47-45.jpg",
-    imageHint: "environment protection campaign"
   },
   {
     title: "গবেষণামূলক উপস্থাপনা",
@@ -75,6 +47,34 @@ const carouselItems = [
     description: "একটি উন্নত গবেষণামূলক পরিবেশ নিশ্চিত করার মাধ্যমে শিক্ষার্থীদের মাঝে নতুন উদ্ভাবনী ধারণার জন্ম দিতে সিয়াম ইমন নিরলসভাবে কাজ করে যাচ্ছেন।",
     image: "https://i.postimg.cc/wxPZWxXt/photo-2025-08-18-01-23-31.jpg",
     imageHint: "siam in laboratory"
+  },
+  {
+    title: "জাতীয় সম্মেলনে সিয়াম ইমন",
+    subtitle: "গবেষণা ও প্রকাশনার প্রতি প্রতিশ্রুতি",
+    description: "২৪তম জাতীয় সম্মেলন এবং বাংলাদেশ জুওলজিক্যাল সোসাইটির বার্ষিক সাধারণ সভায় উপস্থিত থেকে সিয়াম ইমন দেশের সেরা গবেষক ও শিক্ষাবিদদের সাথে গবেষণা ও প্রকাশনা খাতের ভবিষ্যৎ নিয়ে আলোচনা করেন।",
+    image: "https://i.postimg.cc/26MQRS7y/Screenshot-2025-08-18-015837.png",
+    imageHint: "national conference"
+  },
+  {
+    title: "পরিবেশ সুরক্ষা অভিযান",
+    subtitle: "সবুজ বাঁচাও",
+    description: "পরিবেশ রক্ষায় বৃক্ষরোপণ এবং সচেতনতামূলক কার্যক্রম চলমান রয়েছে।",
+    image: "https://i.postimg.cc/7hPr1K0g/photo-2025-08-18-00-47-45.jpg",
+    imageHint: "environment protection campaign"
+  },
+  {
+    title: "শিক্ষায় অবদানের জন্য সম্মাননা",
+    subtitle: "অ্যানিমাল জেনেটিক্স এবং মলিকিউলার বায়োলজি",
+    description: "একটি শিক্ষাবান্ধব পরিবেশ তৈরিতে সিয়াম ইমন-এর অবদানের জন্য অ্যানিমাল জেনেটিক্স এবং মলিকিউলার বায়োলজি বিভাগ কর্তৃক তাকে এই বিশেষ সম্মাননা প্রদান করা হয়।",
+    image: "https://i.postimg.cc/FRpK3W74/photo-2025-08-18-02-08-11.jpg",
+    imageHint: "receiving award biology"
+  },
+    {
+    title: "গবেষণায় সিয়াম ইমন-এর সক্রিয় অংশগ্রহণ",
+    subtitle: "ঢাকা বিশ্ববিদ্যালয় প্রাণিবিজ্ঞান বিভাগ কর্তৃক আয়োজিত",
+    description: "বাংলাদেশ জুওলজিক্যাল সোসাইটির বার্ষিক সাধারণ সভায় (২০২৪) উপস্থিত হয়ে সিয়াম ইমন গবেষণা ও প্রকাশনা খাতে তার অঙ্গীকার ব্যক্ত করেছেন।",
+    image: "https://i.postimg.cc/PJqYGk1N/photo-2025-08-18-01-08-52.jpg",
+    imageHint: "research participation"
   },
 ];
 
@@ -195,7 +195,7 @@ function AboutSection() {
               আমি <span className="text-primary font-bold">সিয়াম ফেরদৌস ইমন</span>, ঢাকা বিশ্ববিদ্যালয়ের ২০১৮-১৯ সেশনের প্রাণিবিদ্যা বিভাগের মাস্টার্সে (Genetics and Molecular Biology Branch) অধ্যয়নরত এবং ফজলুল হক মুসলিম হলের নিয়মিত আবাসিক শিক্ষার্থী। আমি বিগত ৬ বছর ধরে বিশ্ববিদ্যালয় জীবনে বিভিন্ন <span className="text-accent font-semibold">ছাত্রকল্যাণমূলক কার্যক্রম</span>, যোক্তিক ও ন্যায্য দাবি আদায়ের পাশাপাশি <span className="text-accent font-semibold">গবেষণা ও একাডেমিক কর্মকাণ্ডের</span> সাথে শুরু থেকে সক্রিয় আছি।
             </p>
             <p>
-              আপনাদের ভালোবাসা, সহযোগিতা ও আস্থার জোরেই আমি আসন্ন ঢাকা বিশ্ববিদ্যালয়ের কেন্দ্রীয় ছাত্র সংসদ (ডাকসু) নির্বাচনে <span className="bg-primary/20 text-destructive font-bold p-1 rounded">গবেষণা ও প্রকাশনা সম্পাদক পদে</span> প্রার্থী হওয়ার সিদ্ধান্ত নিয়েছি।
+              আপনাদের ভালোবাসা, সহযোগিতা ও আস্থার জোরেই আমি আসন্ন ঢাকা বিশ্ববিদ্যালয়ের কেন্দ্রীয় ছাত্র সংসদ (ডাকসু) নির্বাচনে <span className="bg-primary/20 text-red-600 font-bold p-1 rounded">গবেষণা ও প্রকাশনা সম্পাদক পদে</span> প্রার্থী হওয়ার সিদ্ধান্ত নিয়েছি।
             </p>
             <p>
               আমি বিশ্বাস করি, ডাকসুর গবেষণা ও প্রকাশনা সম্পাদক পদ শুধু গবেষণামুখী ছাত্রছাত্রীদের জন্য নয়, বরং পুরো বিশ্ববিদ্যালয়ের <span className="font-semibold text-foreground">জ্ঞানচর্চা, গবেষণা সংস্কৃতি, আন্তর্জাতিক প্রকাশনা ও বৈশ্বিক স্বীকৃতি</span> বৃদ্ধির জন্যও অত্যন্ত গুরুত্বপূর্ণ।
@@ -340,31 +340,33 @@ function ResearchSection() {
       </section>
 
       <Dialog open={!!selectedActivity} onOpenChange={(isOpen) => !isOpen && closeDialog()}>
-        <DialogContent className="max-w-3xl p-4 sm:p-6 md:p-8 bg-card border-none shadow-2xl rounded-2xl">
+        <DialogContent className="max-w-4xl w-[95vw] h-[90vh] p-0 bg-card border-none shadow-2xl rounded-2xl flex flex-col">
           {selectedActivity && (
-            <div className="relative">
-               <Button variant="ghost" size="icon" onClick={closeDialog} className="absolute -top-2 -right-2 sm:-top-4 sm:-right-4 z-10 bg-destructive text-destructive-foreground rounded-full h-8 w-8 hover:bg-destructive/80">
-                 <X className="h-5 w-5" />
-                 <span className="sr-only">বন্ধ করুন</span>
-               </Button>
-              <Carousel className="w-full">
-                <CarouselContent>
-                  {selectedActivity.images.map((image, index) => (
-                    <CarouselItem key={index}>
-                      <div className="aspect-video w-full relative rounded-lg overflow-hidden">
-                        <Image src={image.src} alt={image.alt} fill className="object-contain" data-ai-hint={image.hint}/>
-                      </div>
-                    </CarouselItem>
-                  ))}
-                </CarouselContent>
-                <CarouselPrevious className="absolute left-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none h-10 w-10" />
-                <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none h-10 w-10" />
-              </Carousel>
-              <div className="text-center mt-6">
-                <h3 className="font-headline text-2xl md:text-3xl font-bold">{selectedActivity.title}</h3>
-                <p className="font-body text-base md:text-lg text-muted-foreground mt-2 max-w-2xl mx-auto">{selectedActivity.description}</p>
+            <>
+              <div className="relative flex-grow w-full h-[70%]">
+                <Button variant="ghost" size="icon" onClick={closeDialog} className="absolute top-2 right-2 z-10 bg-destructive text-destructive-foreground rounded-full h-8 w-8 hover:bg-destructive/80">
+                  <X className="h-5 w-5" />
+                  <span className="sr-only">বন্ধ করুন</span>
+                </Button>
+                <Carousel className="w-full h-full">
+                  <CarouselContent className="h-full">
+                    {selectedActivity.images.map((image, index) => (
+                      <CarouselItem key={index} className="h-full">
+                        <div className="w-full h-full relative rounded-t-lg overflow-hidden">
+                          <Image src={image.src} alt={image.alt} fill className="object-contain" data-ai-hint={image.hint}/>
+                        </div>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                  <CarouselPrevious className="absolute left-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none h-10 w-10" />
+                  <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none h-10 w-10" />
+                </Carousel>
               </div>
-            </div>
+              <div className="flex-shrink-0 text-center p-4 md:p-6 bg-card rounded-b-2xl">
+                <h3 className="font-headline text-xl md:text-3xl font-bold">{selectedActivity.title}</h3>
+                <p className="font-body text-sm md:text-lg text-muted-foreground mt-2 max-w-3xl mx-auto">{selectedActivity.description}</p>
+              </div>
+            </>
           )}
         </DialogContent>
       </Dialog>
@@ -372,3 +374,4 @@ function ResearchSection() {
   );
 }
 
+    
