@@ -7,7 +7,7 @@ import React, { useState } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { ArrowRight, BookOpenCheck, BrainCircuit, Library, Users, Camera, X } from "lucide-react";
+import { ArrowRight, BookOpenCheck, BrainCircuit, Library, Users, Camera, X, Heart, Megaphone } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 
@@ -277,6 +277,7 @@ function VoteBannerSection() {
 
 const researchActivities = [
   {
+    icon: Heart,
     title: "গবেষণা",
     description: "গবেষণায় সক্রিয় অংশগ্রহণ: সিয়াম ইমন কেবল একজন প্রার্থী নন, বরং একজন সক্রিয় গবেষকও। তিনি বাংলাদেশ জুওলজিক্যাল সোসাইটির বার্ষিক সাধারণ সভায় নিয়মিত উপস্থিত থেকে দেশের সেরা গবেষক ও শিক্ষাবিদদের সাথে জ্ঞান আদান-প্রদান করেন। তাঁর নিজস্ব গবেষণাগারে নিরলস কাজ করার অভিজ্ঞতা তাকে শিক্ষার্থীদের বাস্তব সমস্যাগুলো বুঝতে সাহায্য করে।",
     images: [
@@ -286,6 +287,7 @@ const researchActivities = [
     ],
   },
   {
+    icon: Megaphone,
     title: "সেমিনার ও আলোচনা সভা",
     description: "গবেষণা ও উচ্চশিক্ষায় শিক্ষার্থীদের নিয়ে সেমিনার:\n\nসিয়াম ফেরদৌস ইমন শিক্ষার্থীদের গবেষণায় উৎসাহিত করতে এবং তাদের উচ্চশিক্ষার পথ দেখাতে একটি সেমিনার আয়োজনের পরিকল্পনা করেছেন। এই সেমিনারে গবেষণার গুরুত্ব, বিদেশে উচ্চশিক্ষার সুযোগ এবং অভিজ্ঞ গবেষকদের সাথে সরাসরি আলোচনার ব্যবস্থা থাকবে। এর লক্ষ্য হলো শিক্ষার্থীদের ভবিষ্যতের জন্য প্রস্তুত করা এবং তাদের মধ্যে নতুন কিছু শেখার আগ্রহ তৈরি করা।",
     images: [
@@ -308,7 +310,7 @@ function ResearchSection() {
 
   return (
     <>
-      <section className="bg-background py-16 md:py-24">
+      <section className="bg-primary/5 py-16 md:py-24">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-4xl mx-auto">
             <Camera className="mx-auto h-12 w-12 text-primary" />
@@ -317,23 +319,29 @@ function ResearchSection() {
               জ্ঞানভিত্তিক সমাজ গঠনে আমাদের গবেষণা, ওয়ার্কশপ এবং বিভিন্ন কার্যক্রমের ঝলক।
             </p>
           </div>
-          <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="mt-16 space-y-8">
             {researchActivities.map((activity, index) => (
-              <Card key={index} className="overflow-hidden group shadow-lg cursor-pointer" onClick={() => openDialog(activity)}>
-                <div className="relative w-full aspect-video">
-                  <Image
-                    src={activity.images[0].src}
-                    alt={activity.images[0].alt}
-                    fill
-                    className="object-cover transform group-hover:scale-105 transition-transform duration-300"
-                    data-ai-hint={activity.images[0].hint}
-                  />
+              <div key={index} className="grid md:grid-cols-2 gap-8 items-center bg-card p-6 rounded-lg shadow-md cursor-pointer" onClick={() => openDialog(activity)}>
+                <div className="order-2 md:order-1">
+                  <div className="flex items-center gap-3 mb-4">
+                     <activity.icon className="w-8 h-8 text-primary" />
+                     <h3 className="font-headline text-3xl font-bold text-foreground">{activity.title}</h3>
+                  </div>
+                  <p className="font-body text-muted-foreground whitespace-pre-line">{activity.description}</p>
                 </div>
-                <CardContent className="p-6">
-                  <h3 className="font-headline text-2xl font-bold">{activity.title}</h3>
-                  <p className="font-body text-muted-foreground mt-2 whitespace-pre-line">{activity.description}</p>
-                </CardContent>
-              </Card>
+                <div className="relative w-full aspect-video rounded-lg overflow-hidden group order-1 md:order-2">
+                    <Image
+                      src={activity.images[0].src}
+                      alt={activity.images[0].alt}
+                      fill
+                      className="object-cover transform group-hover:scale-105 transition-transform duration-300"
+                      data-ai-hint={activity.images[0].hint}
+                    />
+                    <div className="absolute bottom-2 right-2 bg-black/50 text-white text-xs font-bold px-2 py-1 rounded">
+                       {activity.images.length} ছবি
+                    </div>
+                </div>
+              </div>
             ))}
           </div>
         </div>
