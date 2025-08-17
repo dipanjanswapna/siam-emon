@@ -19,11 +19,11 @@ const carouselItems = [
     imageHint: "research opportunity"
   },
   {
-    title: "স্বাস্থ্য বিষয়ক কেন্দ্রীয়",
-    subtitle: "উপসাহিত্যিক পক্ষ",
-    description: "স্বাস্থ্য বিষয়ক কেন্দ্রীয় উপসাহিত্যিক পক্ষ নিয়ে আমাদের প্রার্থীর কার্যক্রম চলছে।",
-    image: "https://placehold.co/1200x600.png",
-    imageHint: "health committee meeting"
+    title: "শিক্ষায় অবদানের জন্য সম্মাননা",
+    subtitle: "Dean's Award 2025 , জীব বিজ্ঞান অনুষদ",
+    description: "ছাত্র-শিক্ষক সম্পর্ক উন্নয়ন, গবেষণা ও প্রকাশনায় অবদান এবং সার্বিক একাডেমিক উৎকর্ষতা সাধনের জন্য সিয়াম ইমন-কে এই সম্মাননায় ভূষিত করা হয়েছে।",
+    image: "https://i.postimg.cc/7LwWCm7D/Screenshot-2025-08-18-014212.png",
+    imageHint: "receiving award"
   },
   {
     title: "শিক্ষা সংস্কার উদ্যোগ",
@@ -326,4 +326,3 @@ function WhyVoteSection() {
     
 
     
-
