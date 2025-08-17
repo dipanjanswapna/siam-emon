@@ -287,7 +287,7 @@ const researchActivities = [
   },
   {
     title: "সেমিনার ও আলোচনা সভা",
-    description: "গবেষণার নতুন দিক এবং প্রকাশনার গুরুত্ব নিয়ে আয়োজিত সেমিনারে দেশের খ্যাতনামা গবেষক ও শিক্ষাবিদরা উপস্থিত ছিলেন।",
+    description: "গবেষণা ও উচ্চশিক্ষায় শিক্ষার্থীদের নিয়ে সেমিনার:\n\nসিয়াম ফেরদৌস ইমন শিক্ষার্থীদের গবেষণায় উৎসাহিত করতে এবং তাদের উচ্চশিক্ষার পথ দেখাতে একটি সেমিনার আয়োজনের পরিকল্পনা করেছেন। এই সেমিনারে গবেষণার গুরুত্ব, বিদেশে উচ্চশিক্ষার সুযোগ এবং অভিজ্ঞ গবেষকদের সাথে সরাসরি আলোচনার ব্যবস্থা থাকবে। এর লক্ষ্য হলো শিক্ষার্থীদের ভবিষ্যতের জন্য প্রস্তুত করা এবং তাদের মধ্যে নতুন কিছু শেখার আগ্রহ তৈরি করা।",
     images: [
         { src: "https://placehold.co/800x600.png", alt: "সেমিনারে বক্তা বক্তব্য রাখছেন", hint: "seminar speaker" },
         { src: "https://placehold.co/800x600.png", alt: "শ্রোতারা প্রশ্ন করছেন", hint: "audience asking question" },
@@ -331,7 +331,7 @@ function ResearchSection() {
                 </div>
                 <CardContent className="p-6">
                   <h3 className="font-headline text-2xl font-bold">{activity.title}</h3>
-                  <p className="font-body text-muted-foreground mt-2">{activity.description}</p>
+                  <p className="font-body text-muted-foreground mt-2 whitespace-pre-line">{activity.description}</p>
                 </CardContent>
               </Card>
             ))}
@@ -364,7 +364,7 @@ function ResearchSection() {
               </div>
               <div className="flex-shrink-0 text-center p-4 md:p-6 bg-card rounded-b-2xl">
                 <h3 className="font-headline text-xl md:text-3xl font-bold">{selectedActivity.title}</h3>
-                <p className="font-body text-sm md:text-lg text-muted-foreground mt-2 max-w-3xl mx-auto">{selectedActivity.description}</p>
+                <p className="font-body text-sm md:text-lg text-muted-foreground mt-2 max-w-3xl mx-auto whitespace-pre-line">{selectedActivity.description}</p>
               </div>
             </>
           )}
@@ -373,6 +373,8 @@ function ResearchSection() {
     </>
   );
 }
+
+    
 
     
 
