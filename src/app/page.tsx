@@ -53,6 +53,13 @@ const carouselItems = [
     image: "https://i.postimg.cc/7hPr1K0g/photo-2025-08-18-00-47-45.jpg",
     imageHint: "environment protection campaign"
   },
+  {
+    title: "গবেষণামূলক উপস্থাপনা",
+    subtitle: "নতুন ধারণা, নতুন পথ",
+    description: "একটি শিক্ষাবান্ধব পরিবেশ তৈরিতে সিয়াম ইমন তার গবেষণামূলক কাজগুলো শিক্ষার্থীদের সামনে তুলে ধরছেন, যা তাদের মধ্যে নতুন ধারণা ও গবেষণার প্রতি আগ্রহ সৃষ্টি করবে।",
+    image: "https://i.postimg.cc/763HDBgz/Screenshot-2025-08-18-020259.png",
+    imageHint: "research presentation"
+  },
 ];
 
 // Placeholder data
@@ -326,5 +333,6 @@ function WhyVoteSection() {
     
 
     
+
 
 
