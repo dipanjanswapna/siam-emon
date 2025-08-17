@@ -60,6 +60,13 @@ const carouselItems = [
     image: "https://i.postimg.cc/763HDBgz/Screenshot-2025-08-18-020259.png",
     imageHint: "research presentation"
   },
+  {
+    title: "গবেষণাগারে নিরলস কাজ",
+    subtitle: "গবেষণায় আধুনিক প্রযুক্তি",
+    description: "একটি উন্নত গবেষণামুখী ছাত্র সংসদ গঠনের অঙ্গীকার নিয়ে সিয়াম ইমন শিক্ষার্থীদের জন্য গবেষণাগারে প্রয়োজনীয় আধুনিক সুযোগ-সুবিধা নিশ্চিত করতে কাজ করছেন।",
+    image: "https://i.postimg.cc/vHRK5YwG/photo-2025-08-18-02-08-33.jpg",
+    imageHint: "working in lab"
+  },
 ];
 
 // Placeholder data
@@ -333,6 +340,7 @@ function WhyVoteSection() {
     
 
     
+
 
 
 
