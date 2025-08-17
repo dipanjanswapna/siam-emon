@@ -7,7 +7,7 @@ import React from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { ArrowRight, BookOpenCheck, BrainCircuit, Library, MicVocal, Users } from "lucide-react";
+import { ArrowRight, BookOpenCheck, BrainCircuit, Library, Users } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 
 const carouselItems = [
@@ -26,25 +26,11 @@ const carouselItems = [
     imageHint: "national conference"
   },
   {
-    title: "গবেষণামূলক উপস্থাপনা",
-    subtitle: "নতুন ধারণা, নতুন পথ",
-    description: "একটি শিক্ষাবান্ধব পরিবেশ তৈরিতে সিয়াম ইমন তার গবেষণামূলক কাজগুলো শিক্ষার্থীদের সামনে তুলে ধরছেন, যা তাদের মধ্যে নতুন ধারণা ও গবেষণার প্রতি আগ্রহ সৃষ্টি করবে।",
-    image: "https://i.postimg.cc/763HDBgz/Screenshot-2025-08-18-020259.png",
-    imageHint: "research presentation"
-  },
-  {
     title: "শিক্ষায় অবদানের জন্য সম্মাননা",
     subtitle: "অ্যানিমাল জেনেটিক্স এবং মলিকিউলার বায়োলজি",
     description: "একটি শিক্ষাবান্ধব পরিবেশ তৈরিতে সিয়াম ইমন-এর অবদানের জন্য অ্যানিমাল জেনেটিক্স এবং মলিকিউলার বায়োলজি বিভাগ কর্তৃক তাকে এই বিশেষ সম্মাননা প্রদান করা হয়।",
     image: "https://i.postimg.cc/FRpK3W74/photo-2025-08-18-02-08-11.jpg",
     imageHint: "receiving award biology"
-  },
-  {
-    title: "গবেষণাগারে নিরলস কাজ",
-    subtitle: "গবেষণায় আধুনিক প্রযুক্তি",
-    description: "একটি উন্নত গবেষণামুখী ছাত্র সংসদ গঠনের অঙ্গীকার নিয়ে সিয়াম ইমন শিক্ষার্থীদের জন্য গবেষণাগারে প্রয়োজনীয় আধুনিক সুযোগ-সুবিধা নিশ্চিত করতে কাজ করছেন।",
-    image: "https://i.postimg.cc/vHRK5YwG/photo-2025-08-18-02-08-33.jpg",
-    imageHint: "working in lab"
   },
   {
     title: "শিক্ষায় অবদানের জন্য সম্মাননা",
@@ -53,7 +39,7 @@ const carouselItems = [
     image: "https://i.postimg.cc/7LwWCm7D/Screenshot-2025-08-18-014212.png",
     imageHint: "receiving award"
   },
-  {
+    {
     title: "গবেষণায় সিয়াম ইমন-এর সক্রিয় অংশগ্রহণ",
     subtitle: "ঢাকা বিশ্ববিদ্যালয় প্রাণিবিজ্ঞান বিভাগ কর্তৃক আয়োজিত",
     description: "বাংলাদেশ জুওলজিক্যাল সোসাইটির বার্ষিক সাধারণ সভায় (২০২৪) উপস্থিত হয়ে সিয়াম ইমন গবেষণা ও প্রকাশনা খাতে তার অঙ্গীকার ব্যক্ত করেছেন।",
@@ -66,6 +52,20 @@ const carouselItems = [
     description: "পরিবেশ রক্ষায় বৃক্ষরোপণ এবং সচেতনতামূলক কার্যক্রম চলমান রয়েছে।",
     image: "https://i.postimg.cc/7hPr1K0g/photo-2025-08-18-00-47-45.jpg",
     imageHint: "environment protection campaign"
+  },
+  {
+    title: "গবেষণামূলক উপস্থাপনা",
+    subtitle: "নতুন ধারণা, নতুন পথ",
+    description: "একটি শিক্ষাবান্ধব পরিবেশ তৈরিতে সিয়াম ইমন তার গবেষণামূলক কাজগুলো শিক্ষার্থীদের সামনে তুলে ধরছেন, যা তাদের মধ্যে নতুন ধারণা ও গবেষণার প্রতি আগ্রহ সৃষ্টি করবে।",
+    image: "https://i.postimg.cc/763HDBgz/Screenshot-2025-08-18-020259.png",
+    imageHint: "research presentation"
+  },
+  {
+    title: "গবেষণাগারে নিরলস কাজ",
+    subtitle: "গবেষণায় আধুনিক প্রযুক্তি",
+    description: "একটি উন্নত গবেষণামুখী ছাত্র সংসদ গঠনের অঙ্গীকার নিয়ে সিয়াম ইমন শিক্ষার্থীদের জন্য গবেষণাগারে প্রয়োজনীয় আধুনিক সুযোগ-সুবিধা নিশ্চিত করতে কাজ করছেন।",
+    image: "https://i.postimg.cc/vHRK5YwG/photo-2025-08-18-02-08-33.jpg",
+    imageHint: "working in lab"
   },
   {
     title: "গবেষণাগারে সিয়াম: জ্ঞানের সন্ধানে",
@@ -224,16 +224,6 @@ const commitments = [
     icon: Library,
     title: "ডিজিটাল লাইব্রেরি ও রিসোর্স অ্যাক্সেস",
     description: "একটি উন্নত এবং আধুনিক ডিজিটাল লাইব্রেরি স্থাপন করা হবে, যেখানে শিক্ষার্থীরা সহজে দেশ-বিদেশের সেরা গবেষণা পেপার, বই এবং জার্নালে প্রবেশাধিকার পাবে।",
-  },
-  {
-    icon: Users,
-    title: "ছাত্র-শিক্ষক সম্পর্ক উন্নয়ন",
-    description: "শিক্ষার্থীদের যেকোনো সমস্যা সমাধানে ছাত্র সংসদ এবং শিক্ষকদের মধ্যে একটি শক্তিশালী ও কার্যকর সেতুবন্ধন তৈরি করা হবে।",
-  },
-  {
-    icon: MicVocal,
-    title: "নিয়মিত একাডেমিক ও সামাজিক উদ্যোগ",
-    description: "বিতর্ক প্রতিযোগিতা, পাবলিক স্পিকিং সেশন, ক্যারিয়ার কাউন্সেলিং এবং বিভিন্ন সামাজিক ও সাংস্কৃতিক অনুষ্ঠানের আয়োজন করা হবে।",
   },
 ];
 
