@@ -225,12 +225,12 @@ function AboutSection() {
       <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center px-4">
         <div className="rounded-lg overflow-hidden shadow-2xl">
           <Image
-            src="https://placehold.co/600x750.png"
-            alt="প্রার্থী বক্তৃতা দিচ্ছেন"
+            src="https://i.postimg.cc/LXCLpBjm/532463080-3680875555553854-4475665250768894271-n.jpg"
+            alt="প্রার্থী সিয়াম ফেরদৌস ইমন"
             width={600}
             height={750}
             className="w-full h-auto"
-            data-ai-hint="politician speaking"
+            data-ai-hint="candidate portrait"
           />
         </div>
         <div>
@@ -344,16 +344,3 @@ function WhyVoteSection() {
     </section>
   )
 }
-
-    
-
-    
-
-    
-
-
-
-
-
-
-    
