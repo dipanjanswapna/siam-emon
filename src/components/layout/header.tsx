@@ -61,8 +61,8 @@ export function Header() {
                 <span className="sr-only">নেভিগেশন মেনু খুলুন</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="bg-primary text-primary-foreground">
-              <div className="flex flex-col gap-6 p-6">
+            <SheetContent side="bottom" className="bg-primary text-primary-foreground rounded-t-2xl h-auto">
+              <div className="flex flex-col items-center gap-6 p-6 text-center">
                 <Link href="/" className="flex items-center gap-2 mb-4">
                   <Vote className="h-8 w-8" />
                   <span className="text-xl font-headline font-bold">
