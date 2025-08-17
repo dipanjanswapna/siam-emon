@@ -11,6 +11,13 @@ import { ArrowRight, Landmark, GraduationCap, HeartHandshake, Briefcase, Lightbu
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 
 const carouselItems = [
+    {
+    title: "শিক্ষার্থীদের জন্য গবেষণার সুযোগ",
+    subtitle: "গবেষণাগারে জ্ঞানের আলো",
+    description: "একটি গবেষণামুখী ছাত্র সংসদ গঠনের অঙ্গীকার নিয়ে সিয়াম ইমন শিক্ষার্থীদের জন্য গবেষণাগারে প্রয়োজনীয় সুযোগ-সুবিধা নিশ্চিত করতে কাজ করবেন।",
+    image: "https://i.postimg.cc/9XZXtkTj/photo-2025-08-18-01-30-06.jpg",
+    imageHint: "research opportunity"
+  },
   {
     title: "স্বাস্থ্য বিষয়ক কেন্দ্রীয়",
     subtitle: "উপসাহিত্যিক পক্ষ",
