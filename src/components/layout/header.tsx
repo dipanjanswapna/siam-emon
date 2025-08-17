@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from "next/link";
@@ -12,6 +13,7 @@ const navLinks = [
   { href: "/", label: "হোম" },
   { href: "/about", label: "সম্পর্কে" },
   { href: "/manifesto", label: "ইশতেহার" },
+  { href: "/research", label: "গবেষণা" },
   { href: "/gallery", label: "গ্যালারি" },
   { href: "/transparency", label: "স্বচ্ছতা" },
 ];
