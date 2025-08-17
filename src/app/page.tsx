@@ -7,7 +7,7 @@ import React, { useState } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { ArrowRight, BookOpenCheck, BrainCircuit, Library, Users, Camera, X, Heart, Megaphone } from "lucide-react";
+import { ArrowRight, BookOpenCheck, BrainCircuit, Library, Users, Camera, X, Heart, Megaphone, Flag } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 
@@ -87,6 +87,7 @@ export default function Home() {
       <VoteBannerSection />
       <CommitmentSection />
       <ResearchSection />
+      <LogicalMovementSection />
     </div>
   );
 }
@@ -392,3 +393,103 @@ function ResearchSection() {
     </>
   );
 }
+
+
+const logicalMovementActivities = [
+  {
+    icon: Flag,
+    title: "যৌক্তিক আন্দোলনে অংশগ্রহণ",
+    description: "শিক্ষার্থীদের ন্যায্য অধিকার আদায়ে এবং বিভিন্ন সামাজিক অসঙ্গতির বিরুদ্ধে আয়োজিত যৌক্তিক আন্দোলনে আমাদের সক্রিয় অংশগ্রহণ সর্বদা ছিল এবং থাকবে।",
+    images: [
+      { src: "https://placehold.co/800x600.png", alt: "আন্দোলনে অংশগ্রহণ", hint: "protest movement" },
+      { src: "https://placehold.co/800x600.png", alt: "ছাত্রদের সমাবেশ", hint: "student gathering" },
+    ],
+  },
+];
+
+function LogicalMovementSection() {
+  const [selectedActivity, setSelectedActivity] = useState<{ title: string; description: string; images: { src: string; alt: string; hint: string }[] } | null>(null);
+
+  const openDialog = (activity: typeof logicalMovementActivities[0]) => {
+    setSelectedActivity(activity);
+  };
+
+  const closeDialog = () => {
+    setSelectedActivity(null);
+  };
+
+  return (
+    <>
+      <section className="bg-primary/5 py-16 md:py-24">
+        <div className="container mx-auto px-4">
+          <div className="text-center max-w-4xl mx-auto">
+            <Flag className="mx-auto h-12 w-12 text-primary" />
+            <h1 className="font-headline text-5xl md:text-6xl font-bold mt-4 text-foreground">যৌক্তিক আন্দোলনে অংশগ্রহণ</h1>
+            <p className="font-body text-lg mt-4 text-muted-foreground">
+              শিক্ষার্থীদের অধিকার এবং বিভিন্ন সামাজিক ন্যায্যতার দাবিতে আমাদের অংশগ্রহণের ঝলক।
+            </p>
+          </div>
+          <div className="mt-16 space-y-8">
+            {logicalMovementActivities.map((activity, index) => (
+              <div key={index} className="grid md:grid-cols-2 gap-8 items-center bg-card p-6 rounded-lg shadow-md cursor-pointer" onClick={() => openDialog(activity)}>
+                <div className="order-2 md:order-1">
+                  <div className="flex items-center gap-3 mb-4">
+                     <activity.icon className="w-8 h-8 text-primary" />
+                     <h3 className="font-headline text-3xl font-bold text-foreground">{activity.title}</h3>
+                  </div>
+                  <p className="font-body text-muted-foreground whitespace-pre-line">{activity.description}</p>
+                </div>
+                <div className="relative w-full aspect-video rounded-lg overflow-hidden group order-1 md:order-2">
+                    <Image
+                      src={activity.images[0].src}
+                      alt={activity.images[0].alt}
+                      fill
+                      className="object-cover transform group-hover:scale-105 transition-transform duration-300"
+                      data-ai-hint={activity.images[0].hint}
+                    />
+                    <div className="absolute bottom-2 right-2 bg-black/50 text-white text-xs font-bold px-2 py-1 rounded">
+                       {activity.images.length} ছবি
+                    </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <Dialog open={!!selectedActivity} onOpenChange={(isOpen) => !isOpen && closeDialog()}>
+        <DialogContent className="max-w-4xl w-[95vw] h-[90vh] p-0 bg-card border-none shadow-2xl rounded-2xl flex flex-col">
+          {selectedActivity && (
+            <>
+              <div className="relative flex-grow w-full h-[70%]">
+                <Button variant="ghost" size="icon" onClick={closeDialog} className="absolute top-2 right-2 z-10 bg-destructive text-destructive-foreground rounded-full h-8 w-8 hover:bg-destructive/80">
+                  <X className="h-5 w-5" />
+                  <span className="sr-only">বন্ধ করুন</span>
+                </Button>
+                <Carousel className="w-full h-full">
+                  <CarouselContent className="h-full">
+                    {selectedActivity.images.map((image, index) => (
+                      <CarouselItem key={index} className="h-full">
+                        <div className="w-full h-full relative rounded-t-lg overflow-hidden">
+                          <Image src={image.src} alt={image.alt} fill className="object-contain" data-ai-hint={image.hint}/>
+                        </div>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                  <CarouselPrevious className="absolute left-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none h-10 w-10" />
+                  <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none h-10 w-10" />
+                </Carousel>
+              </div>
+              <div className="flex-shrink-0 text-center p-4 md:p-6 bg-card rounded-b-2xl">
+                <h3 className="font-headline text-xl md:text-3xl font-bold">{selectedActivity.title}</h3>
+                <p className="font-body text-sm md:text-lg text-muted-foreground mt-2 max-w-3xl mx-auto whitespace-pre-line">{selectedActivity.description}</p>
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
+    </>
+  );
+}
+
+    
