@@ -209,16 +209,6 @@ function AboutSection() {
             </Button>
           </div>
         </div>
-        <div className="mt-20 text-center">
-             <Image
-              src="https://i.postimg.cc/tCR7PNM5/327318719-5779035648880628-3615984642921003463-n.jpg"
-              alt="Banner"
-              width={1200}
-              height={400}
-              className="w-full h-auto rounded-lg shadow-xl"
-              data-ai-hint="political banner"
-            />
-        </div>
       </div>
     </section>
   );
