@@ -21,8 +21,8 @@ export function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-50 p-2 md:p-4">
-      <div className="container mx-auto flex h-20 items-center justify-between rounded-full bg-primary/95 px-4 text-primary-foreground shadow-lg backdrop-blur-sm md:px-6">
+    <header className="sticky top-0 z-50 p-2 md:p-3">
+      <div className="container mx-auto flex h-16 items-center justify-between rounded-full bg-primary/95 px-4 text-primary-foreground shadow-lg backdrop-blur-sm md:px-6">
         <Link href="/" className="flex items-center gap-2">
           <Vote className="h-8 w-8" />
           <span className="text-xl font-headline font-bold">
