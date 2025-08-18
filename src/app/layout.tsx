@@ -5,6 +5,7 @@ import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
 import { Toaster } from '@/components/ui/toaster';
 import { FloatingFeedbackButton } from '@/components/layout/FloatingFeedbackButton';
+import Image from 'next/image';
 
 export const metadata: Metadata = {
   title: {
@@ -72,6 +73,17 @@ export default function RootLayout({
       <body className={cn("font-body antialiased min-h-screen flex flex-col")}>
         <Header />
         <main className="flex-grow">{children}</main>
+        <section className="w-full">
+            <div className="relative w-full h-auto aspect-[16/9]">
+                 <Image 
+                    src="https://i.postimg.cc/CLsswhQ1/Screenshot-2025-08-18-035352-removebg-preview.png"
+                    alt="Campaign Banner"
+                    fill
+                    className="object-contain"
+                    data-ai-hint="campaign banner"
+                 />
+            </div>
+        </section>
         <Footer />
         <Toaster />
         <FloatingFeedbackButton />
