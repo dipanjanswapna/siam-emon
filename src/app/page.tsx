@@ -3,17 +3,19 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { ArrowRight, BookOpenCheck, BrainCircuit, Library, Users, Camera, X, Heart, Megaphone, Flag, Award, FileText, Mic, GraduationCap, HandHeart, BookText, ShieldCheck, MessageSquare, Mail } from "lucide-react";
+import { ArrowRight, BookOpenCheck, BrainCircuit, Library, Users, Camera, X, Heart, Megaphone, Flag, Award, FileText, Mic, GraduationCap, HandHeart, BookText, ShieldCheck, MessageSquare, Mail, Icon } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "@/lib/firebase";
 
 
 const carouselItems = [
@@ -81,6 +83,12 @@ const carouselItems = [
     imageHint: "research participation"
   },
 ];
+
+const icons: { [key: string]: React.ElementType } = {
+    BrainCircuit,
+    BookOpenCheck,
+    Library
+};
 
 
 export default function Home() {
@@ -223,55 +231,60 @@ function AboutSection() {
   );
 }
 
-const commitments = [
-  {
-    icon: BrainCircuit,
-    title: "গবেষণায় সহযোগিতা ও সুযোগ বৃদ্ধি",
-    description: "শিক্ষার্থীদের গবেষণামূলক কাজে সার্বিক সহযোগিতা প্রদান, বিভিন্ন সেমিনার ও ওয়ার্কশপের আয়োজন এবং গবেষণাগারে প্রয়োজনীয় আধুনিক সরঞ্জাম নিশ্চিত করা হবে।",
-  },
-  {
-    icon: BookOpenCheck,
-    title: "প্রকাশনা সহজীকরণ",
-    description: "আন্তর্জাতিক মানের জার্নালে শিক্ষার্থীদের গবেষণা প্রবন্ধ, বই ও সৃজনশীল লেখা প্রকাশে সার্বিক সহায়তা দেওয়া হবে এবং বিশ্ববিদ্যালয়ের নিজস্ব প্রকাশনা প্ল্যাটফর্ম তৈরির উদ্যোগ নেওয়া হবে।",
-  },
-  {
-    icon: Library,
-    title: "ডিজিটাল লাইব্রেরি ও রিসোর্স অ্যাক্সেস",
-    description: "একটি উন্নত এবং আধুনিক ডিজিটাল লাইব্রেরি স্থাপন করা হবে, যেখানে শিক্ষার্থীরা সহজে দেশ-বিদেশের সেরা গবেষণা পেপার, বই এবং জার্নালে প্রবেশাধিকার পাবে।",
-  },
-];
+type Commitment = {
+    id: string;
+    icon: string;
+    title: string;
+    description: string;
+};
 
 function CommitmentSection() {
-  return (
-    <section className="py-16 md:py-24 bg-primary/10">
-      <div className="container mx-auto px-4">
-        <div className="text-center max-w-4xl mx-auto">
-          <h2 className="font-headline text-4xl md:text-5xl font-bold text-foreground">আপনার প্রতি আমাদের প্রতিশ্রুতি</h2>
-          <p className="mt-4 font-body text-lg text-muted-foreground">
-            ঢাকা বিশ্ববিদ্যালয়ের ছাত্রসমাজকে একটি উন্নত, শিক্ষাবান্ধব পরিবেশ উপহার দিতে এবং গবেষণার সংস্কৃতিকে বেগবান করতে সিয়াম ফেরদৌস ইমন নিরলসভাবে কাজ করে চলেছেন। তাঁর প্রধান লক্ষ্য হলো শিক্ষার্থীদের সম্ভাবনাকে উন্মোচন করা এবং একটি উজ্জ্বল ভবিষ্যৎ নিশ্চিত করা। আপনার ভালোবাসা ও আস্থাই তাঁর পথচলার মূল শক্তি।
-          </p>
-          <p className="mt-6 font-headline text-xl text-primary font-semibold">
-            তাঁর কিছু প্রধান প্রতিশ্রুতি নিচে তুলে ধরা হলো:
-          </p>
-        </div>
-        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {commitments.map((commitment, index) => (
-            <Card key={index} className="text-center shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 bg-card">
-              <CardHeader className="items-center">
-                <div className="bg-primary/20 p-4 rounded-full">
-                  <commitment.icon className="h-10 w-10 text-primary" />
+    const [commitments, setCommitments] = useState<Commitment[]>([]);
+
+    useEffect(() => {
+        const fetchCommitments = async () => {
+            const commitmentsCollection = collection(db, "commitments");
+            const commitmentsSnapshot = await getDocs(commitmentsCollection);
+            const commitmentsList = commitmentsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Commitment));
+            setCommitments(commitmentsList);
+        };
+
+        fetchCommitments();
+    }, []);
+
+    return (
+        <section className="py-16 md:py-24 bg-primary/10">
+            <div className="container mx-auto px-4">
+                <div className="text-center max-w-4xl mx-auto">
+                    <h2 className="font-headline text-4xl md:text-5xl font-bold text-foreground">আপনার প্রতি আমাদের প্রতিশ্রুতি</h2>
+                    <p className="mt-4 font-body text-lg text-muted-foreground">
+                        ঢাকা বিশ্ববিদ্যালয়ের ছাত্রসমাজকে একটি উন্নত, শিক্ষাবান্ধব পরিবেশ উপহার দিতে এবং গবেষণার সংস্কৃতিকে বেগবান করতে সিয়াম ফেরদৌস ইমন নিরলসভাবে কাজ করে চলেছেন। তাঁর প্রধান লক্ষ্য হলো শিক্ষার্থীদের সম্ভাবনাকে উন্মোচন করা এবং একটি উজ্জ্বল ভবিষ্যৎ নিশ্চিত করা। আপনার ভালোবাসা ও আস্থাই তাঁর পথচলার মূল শক্তি।
+                    </p>
+                    <p className="mt-6 font-headline text-xl text-primary font-semibold">
+                        তাঁর কিছু প্রধান প্রতিশ্রুতি নিচে তুলে ধরা হলো:
+                    </p>
                 </div>
-                <CardTitle className="font-headline text-2xl mt-4">{commitment.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="font-body text-muted-foreground">{commitment.description}</p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
+                <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {commitments.map((commitment) => {
+                        const IconComponent = icons[commitment.icon];
+                        return (
+                            <Card key={commitment.id} className="text-center shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 bg-card">
+                                <CardHeader className="items-center">
+                                    <div className="bg-primary/20 p-4 rounded-full">
+                                        {IconComponent ? <IconComponent className="h-10 w-10 text-primary" /> : null}
+                                    </div>
+                                    <CardTitle className="font-headline text-2xl mt-4">{commitment.title}</CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <p className="font-body text-muted-foreground">{commitment.description}</p>
+                                </CardContent>
+                            </Card>
+                        );
+                    })}
+                </div>
+            </div>
+        </section>
+    );
 }
 
 
