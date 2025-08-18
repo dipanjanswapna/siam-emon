@@ -10,7 +10,6 @@ const firebaseConfig = {
   storageBucket: "sonar-bangla-vision.firebasestorage.app",
   apiKey: "AIzaSyCzI7gZ057us7u0xaNaYgT1u-6n9BagVms",
   authDomain: "sonar-bangla-vision.firebaseapp.com",
-  measurementId: "",
   messagingSenderId: "731465679461",
 };
 
