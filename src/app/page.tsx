@@ -773,9 +773,9 @@ function LeadershipSection() {
         <section className="py-16 md:py-24 bg-card">
             <div className="container mx-auto px-4">
                 <div className="text-center max-w-4xl mx-auto">
-                    <h1 className="font-headline text-4xl md:text-5xl font-bold text-foreground">নেতৃত্ব মানে শুধু অবস্থান নয়, <span className="text-primary">নেতৃত্ব মানে দায়িত্ব</span></h1>
+                    <h1 className="font-headline text-4xl md:text-5xl font-bold text-foreground">পদ নয়, দায়িত্বই একজন নেতার আসল পরিচয়।</h1>
                     <p className="font-body text-lg mt-4 text-muted-foreground">
-                       প্রযুক্তি, শিক্ষা, গবেষণা ও আন্দোলনের অভিজ্ঞতা থেকে আমি সেই দায়িত্ব পালনের প্রস্তুতি নিয়েছি।
+                       প্রযুক্তি, শিক্ষা, গবেষণা ও আন্দোলন—এই চারটি স্তম্ভের ওপর দাঁড়িয়ে আমি আমার নেতৃত্বের প্রস্তুতি সম্পন্ন করেছি।
                     </p>
                 </div>
                 <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -791,8 +791,8 @@ function LeadershipSection() {
                 <hr className="my-12 border-border" />
                 <div className="text-center max-w-3xl mx-auto">
                      <p className="font-headline text-xl text-foreground">আসুন, আমরা সবাই মিলে গড়ে তুলি আমাদের কাঙ্ক্ষিত ঢাকা বিশ্ববিদ্যালয়।</p>
-                     <p className="mt-2 font-headline text-2xl font-bold text-primary">ভোট দিন একজন প্রগতিশীল, প্রযুক্তি-নির্ভর, সংগ্রামী ছাত্রনেতাকে।</p>
-                     <p className="mt-4 font-body text-muted-foreground">আপনার সমর্থনই আমার শক্তি। সবার দোয়া ও সমর্থন প্রার্থনা করছি।</p>
+                     <p className="mt-2 font-headline text-2xl font-bold text-primary">প্রগতিশীল চিন্তাধারা, প্রযুক্তিগত দক্ষতা এবং সংগ্রামী মনোভাবের জন্য সিয়ামকে ভোট দিন।</p>
+                     <p className="mt-4 font-body text-muted-foreground">তোমাদের প্রত্যক্ষ ও পরোক্ষ সমর্থন, সহযোগিতা, মতামত, পরামর্শ ও ভালোবাসাই আমার একমাত্র শক্তি ও সাহস❤️</p>
                 </div>
             </div>
         </section>
