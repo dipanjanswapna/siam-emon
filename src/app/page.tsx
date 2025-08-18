@@ -183,7 +183,7 @@ function AboutSection() {
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="relative w-full aspect-[4/5] rounded-lg overflow-hidden shadow-lg group">
             <Image
-              src="https://placehold.co/600x750.png"
+              src="https://i.postimg.cc/LXCLpBjm/532463080-3680875555553854-4475665250768894271-n.jpg"
               alt="সিয়াম ফেরদৌস ইমন"
               fill
               className="object-cover transform group-hover:scale-105 transition-transform duration-300"
@@ -547,5 +547,3 @@ function AcademicAchievementSection() {
     </section>
   );
 }
-
-    

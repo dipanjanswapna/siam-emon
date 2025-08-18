@@ -8,25 +8,25 @@ import { FloatingFeedbackButton } from '@/components/layout/FloatingFeedbackButt
 
 export const metadata: Metadata = {
   title: {
-    default: 'Seam Ferdous Emon - ঢাকা বিশ্ববিদ্যালয়',
-    template: '%s | Seam Ferdous Emon',
+    default: 'সিয়াম ফেরদৌস ইমন - গবেষণা ও প্রকাশনা সম্পাদক পদপ্রার্থী | ডাকসু নির্বাচন ২০২৫',
+    template: '%s | সিয়াম ফেরদৌস ইমন',
   },
-  description: 'সিয়াম ফেরদৌস ইমন, ঢাকা বিশ্ববিদ্যালয়। ডাকসু নির্বাচন ২০২৫। প্রাণবন্ত ক্যাম্পাসের মুখপাত্র।',
-  keywords: ['ঢাকা বিশ্ববিদ্যালয়', 'ডাকসু নির্বাচন', 'সিয়াম ফেরদৌস ইমন', 'গবেষণা ও প্রকাশনা সম্পাদক', 'শিক্ষার্থী নির্বাচন', 'ফজলুল হক মুসলিম হল', 'DUCSU election', 'SIam Ferdous Emon', 'Research and Publication Secretary', 'Dhaka University', 'student leader', 'campus election', 'DU', 'student welfare', 'Bangladesh student politics', 'ঢাকা বিশ্ববিদ্যালয় গবেষণা সুযোগ', 'ডাকসু নির্বাচনে সিয়াম ইমন', 'সিয়াম ফেরদৌস ইমন এর প্রতিশ্রুতি', 'গবেষণামুখী ছাত্র সংসদ', 'ঢাকা বিশ্ববিদ্যালয়ের ছাত্র নেতা', 'শিক্ষার্থীদের প্রকাশনা সহায়তা'],
-  authors: [{ name: 'Seam Ferdous Emon' }],
-  creator: 'Seam Ferdous Emon',
-  publisher: 'Seam Ferdous Emon',
+  description: 'সিয়াম ফেরদৌস ইমন, গবেষণা ও প্রকাশনা সম্পাদক পদপ্রার্থী, ডাকসু নির্বাচন ২০২৫। ঢাকা বিশ্ববিদ্যালয় ও ফজলুল হক মুসলিম হলের একজন নিবেদিতপ্রাণ শিক্ষার্থী নেতা।',
+  keywords: ['ঢাকা বিশ্ববিদ্যালয়', 'ডাকসু নির্বাচন', 'সিয়াম ফেরদৌস ইমন', 'গবেষণা ও প্রকাশনা সম্পাদক', 'শিক্ষার্থী নির্বাচন', 'ফজলুল হক মুসলিম হল', 'DUCSU election', 'Siam Ferdous Emon', 'Research and Publication Secretary', 'Dhaka University', 'student leader', 'campus election', 'DU', 'student welfare'],
+  authors: [{ name: 'Siam Ferdous Emon' }],
+  creator: 'Siam Ferdous Emon',
+  publisher: 'Siam Ferdous Emon',
   openGraph: {
-    title: 'Seam Ferdous Emon - ঢাকা বিশ্ববিদ্যালয়',
-    description: 'সিয়াম ফেরদৌস ইমন, ঢাকা বিশ্ববিদ্যালয়। ডাকসু নির্বাচন ২০২৫। প্রাণবন্ত ক্যাম্পাসের মুখপাত্র।',
+    title: 'সিয়াম ফেরদৌস ইমন - গবেষণা ও প্রকাশনা সম্পাদক পদপ্রার্থী | ডাকসু নির্বাচন ২০২৫',
+    description: 'সিয়াম ফেরদৌস ইমন, ডাকসু নির্বাচনে গবেষণা ও প্রকাশনা সম্পাদক পদপ্রার্থী। ঢাকা বিশ্ববিদ্যালয় ও ফজলুল হক মুসলিম হলের একজন নিবেদিতপ্রাণ শিক্ষার্থী নেতা।',
     url: 'https://siam-emon-du.firebaseapp.com', // Replace with actual domain
-    siteName: 'Seam Ferdous Emon',
+    siteName: 'সিয়াম ফেরদৌস ইমন',
     images: [
       {
-        url: 'https://placehold.co/1200x630.png', // Replace with a representative image
+        url: 'https://i.postimg.cc/LXCLpBjm/532463080-3680875555553854-4475665250768894271-n.jpg', // Replace with a representative image
         width: 1200,
         height: 630,
-        alt: 'A hopeful image for Seam Ferdous Emon campaign',
+        alt: 'সিয়াম ফেরদৌস ইমন এর একটি প্রচারণামূলক ছবি',
       },
     ],
     locale: 'bn_BD',
@@ -34,9 +34,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Seam Ferdous Emon - ঢাকা বিশ্ববিদ্যালয়',
-    description: 'সিয়াম ফেরদৌস ইমন, ঢাকা বিশ্ববিদ্যালয়। ডাকসু নির্বাচন ২০২৫। প্রাণবন্ত ক্যাম্পাসের মুখপাত্র।',
-    images: ['https://placehold.co/1200x630.png'], // Replace with a representative image
+    title: 'সিয়াম ফেরদৌস ইমন - গবেষণা ও প্রকাশনা সম্পাদক পদপ্রার্থী | ডাকসু নির্বাচন ২০২৫',
+    description: 'সিয়াম ফেরদৌস ইমন, ডাকসু নির্বাচনে গবেষণা ও প্রকাশনা সম্পাদক পদপ্রার্থী। ঢাকা বিশ্ববিদ্যালয় ও ফজলুল হক মুসলিম হলের একজন নিবেদিতপ্রাণ শিক্ষার্থী নেতা।',
+    images: ['https://i.postimg.cc/LXCLpBjm/532463080-3680875555553854-4475665250768894271-n.jpg'], // Replace with a representative image
   },
   robots: {
     index: true,
