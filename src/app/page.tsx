@@ -369,8 +369,8 @@ function ResearchSection() {
         <DialogContent className="max-w-4xl w-[95vw] h-[90vh] p-0 bg-card border-none shadow-2xl rounded-2xl flex flex-col">
           {selectedActivity && (
             <>
-               <DialogHeader className="sr-only">
-                <DialogTitle>{selectedActivity.title}</DialogTitle>
+               <DialogHeader className="p-4 border-b">
+                <DialogTitle className="sr-only">{selectedActivity.title}</DialogTitle>
               </DialogHeader>
               <div className="relative flex-grow w-full h-[70%]">
                 <Button variant="ghost" size="icon" onClick={closeDialog} className="absolute top-2 right-2 z-10 bg-destructive text-destructive-foreground rounded-full h-8 w-8 hover:bg-destructive/80">
@@ -478,8 +478,8 @@ function PublicationSection() {
         <DialogContent className="max-w-4xl w-[95vw] h-[90vh] p-0 bg-card border-none shadow-2xl rounded-2xl flex flex-col">
           {selectedActivity && (
             <>
-              <DialogHeader className="sr-only">
-                <DialogTitle>{selectedActivity.title}</DialogTitle>
+              <DialogHeader className="p-4 border-b">
+                <DialogTitle className="sr-only">{selectedActivity.title}</DialogTitle>
               </DialogHeader>
               <div className="relative flex-grow w-full h-[70%]">
                 <Button variant="ghost" size="icon" onClick={closeDialog} className="absolute top-2 right-2 z-10 bg-destructive text-destructive-foreground rounded-full h-8 w-8 hover:bg-destructive/80">
@@ -579,8 +579,8 @@ function LogicalMovementSection() {
         <DialogContent className="max-w-4xl w-[95vw] h-[90vh] p-0 bg-card border-none shadow-2xl rounded-2xl flex flex-col">
           {selectedActivity && (
             <>
-              <DialogHeader className="sr-only">
-                <DialogTitle>{selectedActivity.title}</DialogTitle>
+              <DialogHeader className="p-4 border-b">
+                <DialogTitle className="sr-only">{selectedActivity.title}</DialogTitle>
               </DialogHeader>
               <div className="relative flex-grow w-full h-[70%]">
                 <Button variant="ghost" size="icon" onClick={closeDialog} className="absolute top-2 right-2 z-10 bg-destructive text-destructive-foreground rounded-full h-8 w-8 hover:bg-destructive/80">
@@ -696,8 +696,8 @@ function AcademicAchievementSection() {
         <DialogContent className="max-w-4xl w-[95vw] h-[90vh] p-0 bg-card border-none shadow-2xl rounded-2xl flex flex-col">
           {selectedAchievement && (
             <>
-               <DialogHeader className="sr-only">
-                <DialogTitle>{selectedAchievement.title}</DialogTitle>
+               <DialogHeader className="p-4 border-b">
+                <DialogTitle className="sr-only">{selectedAchievement.title}</DialogTitle>
               </DialogHeader>
               <div className="relative flex-grow w-full h-full">
                  <Button variant="ghost" size="icon" onClick={closeDialog} className="absolute top-2 right-2 z-10 bg-destructive text-destructive-foreground rounded-full h-8 w-8 hover:bg-destructive/80">
@@ -804,3 +804,4 @@ function LeadershipSection() {
 
     
 
+    
