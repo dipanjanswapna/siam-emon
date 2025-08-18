@@ -8,7 +8,7 @@ export function Footer() {
   return (
     <footer className="bg-primary text-primary-foreground rounded-t-2xl">
       <div className="container mx-auto px-4 py-12 md:px-6">
-        <div className="grid gap-8 md:grid-cols-3 items-center">
+        <div className="grid gap-8 md:grid-cols-2 items-center">
           
           {/* Logo and Subscribe */}
           <div className="md:col-span-1">
@@ -21,17 +21,6 @@ export function Footer() {
             <p className="font-body text-sm text-primary-foreground/80 mb-6">
               একটি উন্নত, সমৃদ্ধ এবং অন্তর্ভুক্তিমূলক ভবিষ্যতের জন্য আমাদের সাথে যোগ দিন।
             </p>
-          </div>
-
-          {/* Center Image */}
-          <div className="md:col-span-1 flex justify-center">
-              <Image 
-                src="https://i.postimg.cc/KvkZtjtq/Screenshot-2025-08-18-191039-removebg-preview.png" 
-                alt="Footer Logo"
-                width={150}
-                height={150}
-                className="object-contain"
-                />
           </div>
 
           {/* Links */}
@@ -67,7 +56,17 @@ export function Footer() {
         </div>
         
         <div className="mt-12 border-t border-primary-foreground/20 pt-6 flex flex-col md:flex-row justify-between items-center text-sm font-body">
-           <p className="text-primary-foreground/80 text-center md:text-left">© ২০২৪ সর্বস্বত্ব সংরক্ষিত | <Link href="/admin" className="hover:underline">সিয়াম ফেরদৌস ইমন ক্যাম্পেইন</Link></p>
+           <div className="flex items-center gap-4 text-primary-foreground/80 text-center md:text-left">
+              <span>© ২০২৪ সর্বস্বত্ব সংরক্ষিত</span>
+              <Image 
+                src="https://i.postimg.cc/KvkZtjtq/Screenshot-2025-08-18-191039-removebg-preview.png" 
+                alt="Footer Logo"
+                width={40}
+                height={40}
+                className="object-contain"
+                />
+              <Link href="/admin" className="hover:underline">সিয়াম ফেরদৌস ইমন ক্যাম্পেইন</Link>
+           </div>
           <div className="flex gap-4 mt-4 md:mt-0">
             <Link href="#" className="text-primary-foreground/80 hover:text-primary-foreground">
               <Facebook className="h-5 w-5" />
