@@ -1,7 +1,47 @@
 
 import Image from "next/image";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { GraduationCap, Briefcase, Award, CheckCircle, ShipWheel } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { GraduationCap, Briefcase, Award, CheckCircle, ShipWheel, Users } from "lucide-react";
+
+const teamMembers = [
+  {
+    name: "Rhythm Munshi",
+    role: "Founder & CEO",
+    image: "https://placehold.co/400x400.png",
+    hint: "man portrait"
+  },
+  {
+    name: "Arnab Datta",
+    role: "CTO",
+    image: "https://placehold.co/400x400.png",
+    hint: "man sunglasses"
+  },
+  {
+    name: "Ashekin Sneha",
+    role: "COO",
+    image: "https://placehold.co/400x400.png",
+    hint: "woman portrait"
+  },
+    {
+    name: "Placeholder Name",
+    role: "Placeholder Role",
+    image: "https://placehold.co/400x400.png",
+    hint: "person portrait"
+  },
+    {
+    name: "Placeholder Name",
+    role: "Placeholder Role",
+    image: "https://placehold.co/400x400.png",
+    hint: "person portrait"
+  },
+    {
+    name: "Placeholder Name",
+    role: "Placeholder Role",
+    image: "https://placehold.co/400x400.png",
+    hint: "person portrait"
+  }
+];
+
 
 export default function AboutPage() {
   return (
@@ -82,7 +122,7 @@ export default function AboutPage() {
                     <li className="flex items-start gap-3">
                       <CheckCircle className="w-5 h-5 text-green-500 mt-1 flex-shrink-0" />
                       <span>
-                        <span className="font-bold text-foreground">প্রযুক্তি ও শিক্ষার মেলবন্ধন:</span> বর্তমান বিশ্বে প্রযুক্তি ছাড়া উন্নয়ন অসম্ভব। সিয়াম ইমন শিক্ষাব্যবস্থায় প্রযুক্তিগত আধুনিকায়ন আনতে আগ্রহী। তিনি অনলাইন রিসোর্স অ্যাক্সেস, ডিজিটাল লাইব্রেরি এবং প্রোগ্রামিং ও ডেটা অ্যানালাইসিসের মতো কর্মশালা আয়োজনের মাধ্যমে শিক্ষার্থীদের প্রযুক্তিগত দক্ষতা বাড়াতে চান।
+                        <span className="font-bold text-foreground">প্রযুক্তি ও শিক্ষার মেলবন্ধন:</span> বর্তমান বিশ্বে প্রযুক্তি ছাড়া উন্নয়ন অসম্ভব। সিয়াম ইমন শিক্ষাব্যস্থায় প্রযুক্তিগত আধুনিকায়ন আনতে আগ্রহী। তিনি অনলাইন রিসোর্স অ্যাক্সেস, ডিজিটাল লাইব্রেরি এবং প্রোগ্রামিং ও ডেটা অ্যানালাইসিসের মতো কর্মশালা আয়োজনের মাধ্যমে শিক্ষার্থীদের প্রযুক্তিগত দক্ষতা বাড়াতে চান।
                       </span>
                     </li>
                     <li className="flex items-start gap-3">
@@ -131,6 +171,34 @@ export default function AboutPage() {
                     </div>
                 </div>
               </section>
+            </div>
+        </section>
+
+        <section className="py-16 md:py-24">
+            <div className="text-center max-w-4xl mx-auto">
+                <Users className="mx-auto h-12 w-12 text-primary" />
+                <h1 className="font-headline text-5xl md:text-6xl font-bold mt-4 text-foreground">আড়ালের মানুষগুলো</h1>
+            </div>
+            <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
+                {teamMembers.map((member, index) => (
+                    <Card key={index} className="text-center shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
+                        <CardContent className="p-0">
+                            <div className="relative w-full aspect-square rounded-t-lg overflow-hidden border-4 border-transparent group-hover:border-primary transition-all duration-300">
+                                <Image
+                                    src={member.image}
+                                    alt={member.name}
+                                    fill
+                                    className="object-cover"
+                                    data-ai-hint={member.hint}
+                                />
+                            </div>
+                            <div className="p-4">
+                                <CardTitle className="font-headline text-xl">{member.name}</CardTitle>
+                                <CardDescription className="font-body text-primary">{member.role}</CardDescription>
+                            </div>
+                        </CardContent>
+                    </Card>
+                ))}
             </div>
         </section>
 
