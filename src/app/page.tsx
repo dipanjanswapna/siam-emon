@@ -14,7 +14,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
-import { collection, getDocs, addDoc, serverTimestamp } from "firebase/firestore";
+import { collection, getDocs, addDoc, serverTimestamp, doc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { useToast } from "@/hooks/use-toast";
 
@@ -304,19 +304,49 @@ function CommitmentSection() {
 }
 
 function NoticeSection() {
-  const noticeText = "কেমন লেগেছে আমাদের নতুন ওয়েবসাইট? আমরা সম্পূর্ণ নতুন আঙ্গিকে ডেভেলপমেন্ট শুরু করেছি। খুব শীঘ্রই আমরা পূর্ণাঙ্গ ওয়েবসাইট নিয়ে আসছি।";
-  return (
-    <section className="bg-gradient-to-r from-red-500 to-pink-500 py-3 text-white overflow-hidden">
-        <div className="relative flex items-center whitespace-nowrap">
-            <p className="animate-scroll text-lg font-headline">
-                {noticeText}
-            </p>
-             <p className="animate-scroll text-lg font-headline" aria-hidden="true">
-                {noticeText}
-            </p>
-        </div>
-    </section>
-  );
+    const [noticeText, setNoticeText] = useState("কেমন লেগেছে আমাদের নতুন ওয়েবসাইট? আমরা সম্পূর্ণ নতুন আঙ্গিকে ডেভেলপমেন্ট শুরু করেছি। খুব শীঘ্রই আমরা পূর্ণাঙ্গ ওয়েবসাইট নিয়ে আসছি।");
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchNotice = async () => {
+            setIsLoading(true);
+            try {
+                const noticeSnapshot = await getDocs(collection(db, "notices"));
+                if (!noticeSnapshot.empty) {
+                    const noticeDoc = noticeSnapshot.docs[0];
+                    setNoticeText(noticeDoc.data().text);
+                }
+            } catch (error) {
+                console.error("Error fetching notice:", error);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+        fetchNotice();
+    }, []);
+
+    if (isLoading) {
+        return (
+            <section className="bg-gradient-to-r from-red-500 to-pink-500 py-3 text-white overflow-hidden">
+                <div className="relative flex items-center whitespace-nowrap">
+                    <p className="text-lg font-headline">নোটিশ লোড হচ্ছে...</p>
+                </div>
+            </section>
+        );
+    }
+
+    return (
+        <section className="bg-gradient-to-r from-red-500 to-pink-500 py-3 text-white overflow-hidden">
+            <div className="relative flex items-center whitespace-nowrap">
+                <p className="animate-scroll text-lg font-headline">
+                    {noticeText}
+                </p>
+                 <p className="animate-scroll text-lg font-headline" aria-hidden="true">
+                    {noticeText}
+                </p>
+            </div>
+        </section>
+    );
 }
 
 

@@ -7,9 +7,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Shield, PlusCircle, Edit, Trash2, BrainCircuit, BookOpenCheck, Library, Award, FileText, Mic, GraduationCap, ImagePlus, LogOut, MessageSquare, Users } from "lucide-react";
+import { Shield, PlusCircle, Edit, Trash2, BrainCircuit, BookOpenCheck, Library, Award, FileText, Mic, GraduationCap, ImagePlus, LogOut, MessageSquare, Users, Bell } from "lucide-react";
 import { useState, useEffect } from "react";
-import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc, orderBy, query, serverTimestamp } from "firebase/firestore";
+import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc, orderBy, query, serverTimestamp, setDoc } from "firebase/firestore";
 import { db, auth } from "@/lib/firebase";
 import {
   Dialog,
@@ -82,6 +82,11 @@ type TeamMember = {
     hint: string;
 };
 
+type Notice = {
+    id: string;
+    text: string;
+};
+
 
 const iconMap = {
     BrainCircuit: <BrainCircuit />,
@@ -99,6 +104,7 @@ function AdminPage() {
     const [socialWorks, setSocialWorks] = useState<SocialWork[]>([]);
     const [feedbacks, setFeedbacks] = useState<Feedback[]>([]);
     const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
+    const [notice, setNotice] = useState<Notice>({ id: "live-notice", text: "" });
     const [isLoading, setIsLoading] = useState(true);
     
     const [isCommitmentFormOpen, setIsCommitmentFormOpen] = useState(false);
@@ -156,6 +162,15 @@ function AdminPage() {
         setTeamMembers(teamMembersList);
     };
 
+    const fetchNotice = async () => {
+        const noticeDocRef = doc(db, "notices", "live-notice");
+        const noticeSnapshot = await getDocs(collection(db, "notices"));
+        if (!noticeSnapshot.empty) {
+            const noticeDoc = noticeSnapshot.docs[0];
+            setNotice({ id: noticeDoc.id, ...noticeDoc.data() } as Notice);
+        }
+    };
+
 
     const loadAllData = async () => {
         setIsLoading(true);
@@ -165,7 +180,8 @@ function AdminPage() {
                 fetchAcademicAchievements(), 
                 fetchSocialWorks(), 
                 fetchFeedbacks(), 
-                fetchTeamMembers()
+                fetchTeamMembers(),
+                fetchNotice()
             ]);
         } catch (error) {
             console.error("Error loading data: ", error);
@@ -448,6 +464,23 @@ function AdminPage() {
         }
     };
 
+    const handleNoticeFormSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        try {
+            const noticeDoc = doc(db, "notices", "live-notice");
+            await setDoc(noticeDoc, { text: notice.text });
+            fetchNotice();
+            toast({
+                title: 'নোটিশ সফলভাবে আপডেট হয়েছে',
+            });
+        } catch (error) {
+            toast({
+                variant: 'destructive',
+                title: 'নোটিশ আপডেট করতে সমস্যা হয়েছে',
+                description: (error as Error).message,
+            });
+        }
+    };
 
     const handleSignOut = async () => {
         const success = await signOut();
@@ -479,6 +512,30 @@ function AdminPage() {
 
         <main className="mt-16">
             <Accordion type="multiple" className="w-full space-y-4">
+                <AccordionItem value="notice-bar">
+                    <Card>
+                        <AccordionTrigger className="p-6">
+                            <CardTitle>নোটিশ বার ব্যবস্থাপনা</CardTitle>
+                        </AccordionTrigger>
+                        <AccordionContent className="p-6 pt-0">
+                             <form onSubmit={handleNoticeFormSubmit} className="space-y-4">
+                                <div className="space-y-2">
+                                    <Label htmlFor="notice-text">নোটিশের লেখা</Label>
+                                    <Textarea
+                                        id="notice-text"
+                                        value={notice.text}
+                                        onChange={(e) => setNotice({ ...notice, text: e.target.value })}
+                                        placeholder="ওয়েবসাইটের জন্য নতুন নোটিশ লিখুন..."
+                                        required
+                                    />
+                                </div>
+                                <Button type="submit">
+                                    <Bell className="mr-2 h-4 w-4" /> আপডেট করুন
+                                </Button>
+                            </form>
+                        </AccordionContent>
+                    </Card>
+                </AccordionItem>
                 <AccordionItem value="commitments">
                     <Card>
                         <AccordionTrigger className="p-6">
