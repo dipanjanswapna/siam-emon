@@ -375,7 +375,7 @@ function ResearchSection() {
           {selectedActivity && (
             <>
                <DialogHeader className="p-4 border-b">
-                <DialogTitle className="sr-only">{selectedActivity.title}</DialogTitle>
+                 <DialogTitle className="sr-only">{selectedActivity.title}</DialogTitle>
               </DialogHeader>
               <div className="relative flex-grow w-full h-[70%]">
                 <Button variant="ghost" size="icon" onClick={closeDialog} className="absolute top-2 right-2 z-10 bg-destructive text-destructive-foreground rounded-full h-8 w-8 hover:bg-destructive/80">
@@ -807,6 +807,8 @@ function LeadershipSection() {
 }
 
 function FeedbackSection() {
+  const [isAnonymous, setIsAnonymous] = useState(false);
+
   return (
     <section id="feedback-form" className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-4">
@@ -822,35 +824,41 @@ function FeedbackSection() {
             <CardContent>
               <form className="space-y-6">
                 <div className="flex items-center space-x-2">
-                  <Switch id="anonymous-mode" />
+                  <Switch 
+                    id="anonymous-mode" 
+                    checked={isAnonymous}
+                    onCheckedChange={setIsAnonymous}
+                  />
                   <Label htmlFor="anonymous-mode" className="font-headline">পরিচয় গোপন রাখতে চাই</Label>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <Label htmlFor="name" className="font-headline">আপনার নাম</Label>
-                    <Input id="name" placeholder="আপনার সম্পূর্ণ নাম" />
+                {!isAnonymous && (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <Label htmlFor="name" className="font-headline">আপনার নাম</Label>
+                      <Input id="name" placeholder="আপনার সম্পূর্ণ নাম" />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="mobile" className="font-headline">মোবাইল</Label>
+                      <Input id="mobile" placeholder="আপনার মোবাইল নম্বর" />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="hall" className="font-headline">আপনার হল</Label>
+                      <Input id="hall" placeholder="আপনার হলের নাম" />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="department" className="font-headline">বিভাগ</Label>
+                      <Input id="department" placeholder="আপনার বিভাগ" />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="email" className="font-headline">আপনার ইমেইল</Label>
+                      <Input id="email" type="email" placeholder="your@email.com" />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="session" className="font-headline">শিক্ষাবর্ষ</Label>
+                      <Input id="session" placeholder="যেমন: ২০১৮-১৯" />
+                    </div>
                   </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="mobile" className="font-headline">মোবাইল</Label>
-                    <Input id="mobile" placeholder="আপনার মোবাইল নম্বর" />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="hall" className="font-headline">আপনার হল</Label>
-                    <Input id="hall" placeholder="আপনার হলের নাম" />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="department" className="font-headline">বিভাগ</Label>
-                    <Input id="department" placeholder="আপনার বিভাগ" />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="email" className="font-headline">আপনার ইমেইল</Label>
-                    <Input id="email" type="email" placeholder="your@email.com" />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="session" className="font-headline">শিক্ষাবর্ষ</Label>
-                    <Input id="session" placeholder="যেমন: ২০১৮-১৯" />
-                  </div>
-                </div>
+                )}
                  <div className="space-y-2">
                     <Label htmlFor="subject" className="font-headline">আপনার সমস্যা/মতামতের বিষয়</Label>
                     <Input id="subject" placeholder="যেমন: লাইব্রেরী সুবিধা, হলের সমস্যা" />
@@ -880,6 +888,8 @@ function FeedbackSection() {
 
 
 
+
+    
 
     
 
