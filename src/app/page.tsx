@@ -7,7 +7,7 @@ import React, { useState } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { ArrowRight, BookOpenCheck, BrainCircuit, Library, Users, Camera, X, Heart, Megaphone, Flag, Award, FileText, Mic, GraduationCap, HandHeart, BookText } from "lucide-react";
+import { ArrowRight, BookOpenCheck, BrainCircuit, Library, Users, Camera, X, Heart, Megaphone, Flag, Award, FileText, Mic, GraduationCap, HandHeart, BookText, ShieldCheck, User, MessageSquare } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
@@ -91,6 +91,7 @@ export default function Home() {
       <LogicalMovementSection />
       <AcademicAchievementSection />
       <SocialWorkSection />
+      <LeadershipSection />
     </div>
   );
 }
@@ -760,8 +761,46 @@ function SocialWorkSection() {
     );
 }
 
+const leadershipPoints = [
+    { icon: ShieldCheck, text: "বাংলাদেশের পরিবর্তনের জন্য আমাদেরই এগিয়ে আসতে হবে। শুধু নিজের ক্যারিয়ার নিয়ে ব্যস্ত থাকলে, জাতির অগ্রগতি থেমে যাবে।" },
+    { icon: Users, text: "আমাদের মাঠে নামতে হবে, নেতৃত্ব দিতে হবে, পাশে দাঁড়াতে হবে সাধারণ শিক্ষার্থীদের।" },
+    { icon: GraduationCap, text: "গত চার-পাঁচ বছর ঢাকা বিশ্ববিদ্যালয়ে পড়ার অভিজ্ঞতায়, আমি নিজেকে প্রমাণ করার চেষ্টা করেছি- কাজ, নেতৃত্ব ও সংগ্রামের মাধ্যমে।" },
+    { icon: Megaphone, text: "আপনাদের বিশ্বাস আর ভালোবাসা থাকলে, যদি আপনারা আমাকে যোগ্য মনে করেন- আমি কথা দিচ্ছি, সুযোগ পেলে আরও ভালো কিছু করে দেখাব।" },
+];
+
+function LeadershipSection() {
+    return (
+        <section className="py-16 md:py-24 bg-card">
+            <div className="container mx-auto px-4">
+                <div className="text-center max-w-4xl mx-auto">
+                    <h1 className="font-headline text-4xl md:text-5xl font-bold text-foreground">নেতৃত্ব মানে শুধু অবস্থান নয়, <span className="text-primary">নেতৃত্ব মানে দায়িত্ব</span></h1>
+                    <p className="font-body text-lg mt-4 text-muted-foreground">
+                       প্রযুক্তি, শিক্ষা, গবেষণা ও আন্দোলনের অভিজ্ঞতা থেকে আমি সেই দায়িত্ব পালনের প্রস্তুতি নিয়েছি।
+                    </p>
+                </div>
+                <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+                    {leadershipPoints.map((point, index) => (
+                        <div key={index} className="flex items-start gap-4">
+                            <div className="flex-shrink-0 bg-primary/10 text-primary p-3 rounded-full">
+                                <point.icon className="w-6 h-6" />
+                            </div>
+                            <p className="font-body text-muted-foreground">{point.text}</p>
+                        </div>
+                    ))}
+                </div>
+                <hr className="my-12 border-border" />
+                <div className="text-center max-w-3xl mx-auto">
+                     <p className="font-headline text-xl text-foreground">আসুন, আমরা সবাই মিলে গড়ে তুলি আমাদের কাঙ্ক্ষিত ঢাকা বিশ্ববিদ্যালয়।</p>
+                     <p className="mt-2 font-headline text-2xl font-bold text-primary">ভোট দিন একজন প্রগতিশীল, প্রযুক্তি-নির্ভর, সংগ্রামী ছাত্রনেতাকে।</p>
+                     <p className="mt-4 font-body text-muted-foreground">আপনার সমর্থনই আমার শক্তি। সবার দোয়া ও সমর্থন প্রার্থনা করছি।</p>
+                </div>
+            </div>
+        </section>
+    );
+}
     
 
     
 
     
+
