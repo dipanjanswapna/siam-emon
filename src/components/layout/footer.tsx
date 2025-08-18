@@ -61,8 +61,8 @@ export function Footer() {
               <Image 
                 src="https://i.postimg.cc/KvkZtjtq/Screenshot-2025-08-18-191039-removebg-preview.png" 
                 alt="Footer Logo"
-                width={40}
-                height={40}
+                width={80}
+                height={80}
                 className="object-contain"
                 />
               <Link href="/admin" className="hover:underline">সিয়াম ফেরদৌস ইমন ক্যাম্পেইন</Link>
