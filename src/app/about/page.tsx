@@ -1,3 +1,4 @@
+
 import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { GraduationCap, Briefcase, Award } from "lucide-react";
@@ -11,11 +12,11 @@ export default function AboutPage() {
             <Card className="shadow-lg sticky top-24">
               <CardContent className="p-0">
                 <Image
-                  src="https://placehold.co/600x800.png"
-                  alt="প্রার্থীর সম্পূর্ণ প্রতিকৃতি"
+                  src="https://i.postimg.cc/LXCLpBjm/532463080-3680875555553854-4475665250768894271-n.jpg"
+                  alt="সিয়াম ফেরদৌস ইমন"
                   width={600}
                   height={800}
-                  className="rounded-t-lg"
+                  className="rounded-t-lg object-contain"
                   data-ai-hint="politician portrait"
                 />
                 <div className="p-6">
