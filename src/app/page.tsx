@@ -773,7 +773,9 @@ function LeadershipSection() {
         <section className="py-16 md:py-24 bg-card">
             <div className="container mx-auto px-4">
                 <div className="text-center max-w-4xl mx-auto">
-                    <h1 className="font-headline text-4xl md:text-5xl font-bold text-foreground">পদ নয়, দায়িত্বই একজন নেতার আসল পরিচয়।</h1>
+                    <h1 className="font-headline text-4xl md:text-5xl font-bold text-foreground">
+                        পদ নয়, <span className="text-red-600">দায়িত্বই একজন নেতার আসল পরিচয়।</span>
+                    </h1>
                     <p className="font-body text-lg mt-4 text-muted-foreground">
                        প্রযুক্তি, শিক্ষা, গবেষণা ও আন্দোলন—এই চারটি স্তম্ভের ওপর দাঁড়িয়ে আমি আমার নেতৃত্বের প্রস্তুতি সম্পন্ন করেছি।
                     </p>
@@ -805,4 +807,5 @@ function LeadershipSection() {
     
 
     
+
 
