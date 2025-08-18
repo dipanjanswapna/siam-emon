@@ -105,7 +105,7 @@ export default function AboutPage() {
                 <div className="mt-4 grid md:grid-cols-5 gap-8 items-center">
                     <div className="md:col-span-2 relative w-full aspect-square rounded-lg overflow-hidden shadow-lg group">
                         <Image
-                        src="https://i.postimg.cc/9M4d22G6/journey-image.jpg"
+                        src="https://i.postimg.cc/GtNj8Tzk/500230099-3604313253210085-5495573021943078961-n.jpg"
                         alt="আমাদের যাত্রা"
                         fill
                         className="object-cover transform group-hover:scale-105 transition-transform duration-300"
