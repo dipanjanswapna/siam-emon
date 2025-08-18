@@ -1,7 +1,7 @@
 
 import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { GraduationCap, Briefcase, Award } from "lucide-react";
+import { GraduationCap, Briefcase, Award, CheckCircle } from "lucide-react";
 
 export default function AboutPage() {
   return (
@@ -59,11 +59,42 @@ export default function AboutPage() {
               <section>
                 <h3 className="font-headline text-3xl font-bold text-foreground flex items-center gap-3">
                   <Award className="w-8 h-8 text-primary" />
-                  ভবিষ্যতের জন্য আমাদের লক্ষ্য
+                  ভবিষ্যতের জন্য আমাদের লক্ষ্য: একটি উন্নত ছাত্রসমাজ ও প্রগতিশীল দেশ
                 </h3>
-                <p className="font-body text-lg mt-4 text-muted-foreground border-l-4 border-primary pl-4">
-                  আমাদের প্রার্থীর লক্ষ্য সহজ কিন্তু গভীর: একটি "সোনার বাংলা" গড়া যেখানে প্রতিটি শিশু একটি சிறந்த শিক্ষা পাবে, প্রতিটি পরিবার মানসম্মত স্বাস্থ্যসেবা পাবে, এবং প্রতিটি ব্যক্তির স্বপ্ন পূরণের সুযোগ থাকবে। এই প্রচারণা আরও অন্তর্ভুক্তিমূলক, সমৃদ্ধ এবং স্থিতিস্থাপক ভবিষ্যতের জন্য একটি আন্দোলন। ডাকসু নির্বাচন ২০২৫ আমাদের লক্ষ্য অর্জনের একটি গুরুত্বপূর্ণ ধাপ।
-                </p>
+                <div className="font-body text-lg mt-4 text-muted-foreground space-y-4">
+                  <p>
+                    সিয়াম ফেরদৌস ইমন কেবল বর্তমানের সমস্যা সমাধানে আগ্রহী নন, বরং ভবিষ্যতের জন্য একটি সুদূরপ্রসারী লক্ষ্য নিয়ে কাজ করতে চান। তাঁর লক্ষ্য হলো এমন একটি ছাত্রসমাজ গড়ে তোলা, যা দেশের অগ্রযাত্রায় সক্রিয় ভূমিকা রাখবে। তাঁর ভবিষ্যতের কিছু প্রধান লক্ষ্য নিচে দেওয়া হলো:
+                  </p>
+                  <ul className="space-y-3">
+                    <li className="flex items-start gap-3">
+                      <CheckCircle className="w-5 h-5 text-green-500 mt-1 flex-shrink-0" />
+                      <span>
+                        <span className="font-bold text-foreground">একটি গবেষণামুখী সংস্কৃতি তৈরি:</span> ঢাকা বিশ্ববিদ্যালয়ে গবেষণার সংস্কৃতিকে আরও বেগবান করা তার অন্যতম প্রধান লক্ষ্য। তিনি চান শিক্ষার্থীরা কেবল ডিগ্রি অর্জনের জন্য নয়, বরং নতুন জ্ঞান ও উদ্ভাবনের নেশায় গবেষণা করবে। এর জন্য তিনি গবেষণাগারে আধুনিক সরঞ্জাম নিশ্চিত করা, প্রকাশনা সহজ করা এবং আন্তর্জাতিক সেমিনারে অংশগ্রহণের সুযোগ তৈরি করতে চান।
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <CheckCircle className="w-5 h-5 text-green-500 mt-1 flex-shrink-0" />
+                      <span>
+                        <span className="font-bold text-foreground">প্রযুক্তি ও শিক্ষার মেলবন্ধন:</span> বর্তমান বিশ্বে প্রযুক্তি ছাড়া উন্নয়ন অসম্ভব। সিয়াম ইমন শিক্ষাব্যবস্থায় প্রযুক্তিগত আধুনিকায়ন আনতে আগ্রহী। তিনি অনলাইন রিসোর্স অ্যাক্সেস, ডিজিটাল লাইব্রেরি এবং প্রোগ্রামিং ও ডেটা অ্যানালাইসিসের মতো কর্মশালা আয়োজনের মাধ্যমে শিক্ষার্থীদের প্রযুক্তিগত দক্ষতা বাড়াতে চান।
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <CheckCircle className="w-5 h-5 text-green-500 mt-1 flex-shrink-0" />
+                      <span>
+                        <span className="font-bold text-foreground">ছাত্র-শিক্ষক সম্পর্ক উন্নয়ন:</span> একটি উন্নত শিক্ষাব্যবস্থার জন্য শিক্ষক ও শিক্ষার্থীদের মধ্যে সুসম্পর্ক অপরিহার্য। সিয়াম ইমন নিয়মিত আলোচনার মাধ্যমে উভয়ের মধ্যে একটি শক্তিশালী সেতুবন্ধন তৈরি করতে চান, যাতে শিক্ষার্থীরা তাদের সমস্যাগুলো সহজে শিক্ষকদের কাছে তুলে ধরতে পারে।
+                      </span>
+                    </li>
+                     <li className="flex items-start gap-3">
+                      <CheckCircle className="w-5 h-5 text-green-500 mt-1 flex-shrink-0" />
+                      <span>
+                        <span className="font-bold text-foreground">একটি দায়িত্বশীল নেতৃত্ব:</span> সিয়াম ইমন বিশ্বাস করেন, নেতৃত্ব মানে কেবল ক্ষমতা নয়, এটি একটি গুরুদায়িত্ব। তিনি এমন একটি ছাত্র সংসদ গড়ে তুলতে চান যা স্বচ্ছ, দায়বদ্ধ এবং শিক্ষার্থীদের প্রতি সর্বদা প্রতিশ্রুতিবদ্ধ থাকবে।
+                      </span>
+                    </li>
+                  </ul>
+                  <p className="border-t border-border pt-4">
+                    সিয়াম ইমনের এই লক্ষ্যগুলো কেবল কথার কথা নয়, বরং তার কাজের প্রতিফলন। তার এই ভিশন ঢাকা বিশ্ববিদ্যালয়ের শিক্ষার্থীদের জন্য একটি উজ্জ্বল ভবিষ্যৎ নিশ্চিত করবে।
+                  </p>
+                </div>
               </section>
             </div>
           </div>
