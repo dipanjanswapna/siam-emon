@@ -180,16 +180,6 @@ function AboutSection() {
     <section className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div className="rounded-lg overflow-hidden shadow-2xl">
-            <Image
-              src="https://i.postimg.cc/LXCLpBjm/532463080-3680875555553854-4475665250768894271-n.jpg"
-              alt="প্রার্থী সিয়াম ফেরদৌস ইমন"
-              width={600}
-              height={750}
-              className="w-full h-auto"
-              data-ai-hint="candidate portrait"
-            />
-          </div>
           <div className="text-center md:text-left">
             <h2 className="font-headline text-4xl md:text-5xl font-bold text-foreground mb-6">আসসালামু আলাইকুম।</h2>
             <div className="font-body text-lg md:text-xl space-y-4 text-muted-foreground">
@@ -401,8 +391,8 @@ function ResearchSection() {
 const logicalMovementActivities = [
   {
     icon: Flag,
-    title: "যৌক্তিক আন্দোলনে অংশগ্রহণ",
-    description: "শিক্ষার্থীদের ন্যায্য অধিকার আদায়ে এবং বিভিন্ন সামাজিক অসঙ্গতির বিরুদ্ধে আয়োজিত যৌক্তিক আন্দোলনে আমাদের সক্রিয় অংশগ্রহণ সর্বদা ছিল এবং থাকবে।",
+    title: "জুলাই ২৪",
+    description: "শহীদুল্লাহ হল ও ফজলুল হক হল মুক্ত করতে সাধারণ ছাত্রদের সাথে সক্রিয় ছিলাম, ১৭ জুলাই শেষ মুহূর্ত পর্যন্ত হল থেকে বের হইনি। ঢাকা বিশ্ববিদ্যালয়ের নিয়মিত ছাত্র হিসেবে ক্যাম্পাস জীবনের শুরু থেকে সব ধরণের যৌক্তিক আন্দোলনে সক্রিয়ভাবে রাজপথে ছিলাম ।",
     images: [
       { src: "https://placehold.co/800x600.png", alt: "আন্দোলনে অংশগ্রহণ", hint: "protest movement" },
       { src: "https://placehold.co/800x600.png", alt: "ছাত্রদের সমাবেশ", hint: "student gathering" },
@@ -494,4 +484,5 @@ function LogicalMovementSection() {
     </>
   );
 }
+
 
