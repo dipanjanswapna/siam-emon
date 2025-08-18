@@ -28,7 +28,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import Image from "next/image";
-import { useAuth } from "@/hooks/use-auth";
+import { useAuth } from "@/hooks/use-auth.tsx";
 import { useSignOut } from "react-firebase-hooks/auth";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
@@ -121,22 +121,34 @@ function AdminPage() {
 
     const handleCommitmentFormSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (isEditingCommitment && currentCommitment.id) {
-            const commitmentDoc = doc(db, "commitments", currentCommitment.id);
-            await updateDoc(commitmentDoc, {
-                title: currentCommitment.title,
-                description: currentCommitment.description,
-                icon: currentCommitment.icon,
+        const action = isEditingCommitment ? 'আপডেট' : 'যোগ';
+        try {
+            if (isEditingCommitment && currentCommitment.id) {
+                const commitmentDoc = doc(db, "commitments", currentCommitment.id);
+                await updateDoc(commitmentDoc, {
+                    title: currentCommitment.title,
+                    description: currentCommitment.description,
+                    icon: currentCommitment.icon,
+                });
+            } else {
+                await addDoc(collection(db, "commitments"), {
+                    title: currentCommitment.title,
+                    description: currentCommitment.description,
+                    icon: currentCommitment.icon,
+                });
+            }
+            closeCommitmentForm();
+            fetchCommitments();
+            toast({
+                title: `প্রতিশ্রুতি সফলভাবে ${action} হয়েছে`,
             });
-        } else {
-            await addDoc(collection(db, "commitments"), {
-                title: currentCommitment.title,
-                description: currentCommitment.description,
-                icon: currentCommitment.icon,
+        } catch (error) {
+            toast({
+                variant: 'destructive',
+                title: `প্রতিশ্রুতি ${action} করতে সমস্যা হয়েছে`,
+                description: (error as Error).message,
             });
         }
-        closeCommitmentForm();
-        fetchCommitments();
     };
 
     const openCommitmentForm = (commitment?: Commitment) => {
@@ -157,32 +169,55 @@ function AdminPage() {
     };
 
     const handleDeleteCommitment = async (id: string) => {
-        await deleteDoc(doc(db, "commitments", id));
-        fetchCommitments();
+        try {
+            await deleteDoc(doc(db, "commitments", id));
+            fetchCommitments();
+             toast({
+                title: "প্রতিশ্রুতি সফলভাবে মুছে ফেলা হয়েছে",
+             });
+        } catch(error) {
+             toast({
+                variant: 'destructive',
+                title: "প্রতিশ্রুতি মুছে ফেলতে সমস্যা হয়েছে",
+                description: (error as Error).message,
+             });
+        }
     };
 
     const handleAchievementFormSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (isEditingAchievement && currentAchievement.id) {
-            const achievementDoc = doc(db, "academicAchievements", currentAchievement.id);
-            await updateDoc(achievementDoc, {
-                title: currentAchievement.title,
-                description: currentAchievement.description,
-                icon: currentAchievement.icon,
-                image: currentAchievement.image,
-                imageHint: currentAchievement.imageHint,
+        const action = isEditingAchievement ? 'আপডেট' : 'যোগ';
+        try {
+            if (isEditingAchievement && currentAchievement.id) {
+                const achievementDoc = doc(db, "academicAchievements", currentAchievement.id);
+                await updateDoc(achievementDoc, {
+                    title: currentAchievement.title,
+                    description: currentAchievement.description,
+                    icon: currentAchievement.icon,
+                    image: currentAchievement.image,
+                    imageHint: currentAchievement.imageHint,
+                });
+            } else {
+                await addDoc(collection(db, "academicAchievements"), {
+                    title: currentAchievement.title,
+                    description: currentAchievement.description,
+                    icon: currentAchievement.icon,
+                    image: currentAchievement.image,
+                    imageHint: currentAchievement.imageHint,
+                });
+            }
+            closeAchievementForm();
+            fetchAcademicAchievements();
+            toast({
+                title: `অর্জন সফলভাবে ${action} হয়েছে`,
             });
-        } else {
-            await addDoc(collection(db, "academicAchievements"), {
-                title: currentAchievement.title,
-                description: currentAchievement.description,
-                icon: currentAchievement.icon,
-                image: currentAchievement.image,
-                imageHint: currentAchievement.imageHint,
+        } catch(error) {
+            toast({
+                variant: 'destructive',
+                title: `অর্জন ${action} করতে সমস্যা হয়েছে`,
+                description: (error as Error).message,
             });
         }
-        closeAchievementForm();
-        fetchAcademicAchievements();
     };
 
     const openAchievementForm = (achievement?: AcademicAchievement) => {
@@ -203,19 +238,41 @@ function AdminPage() {
     };
 
     const handleDeleteAchievement = async (id: string) => {
-        await deleteDoc(doc(db, "academicAchievements", id));
-        fetchAcademicAchievements();
+        try {
+            await deleteDoc(doc(db, "academicAchievements", id));
+            fetchAcademicAchievements();
+            toast({
+                title: "অর্জন সফলভাবে মুছে ফেলা হয়েছে",
+            });
+        } catch(error) {
+            toast({
+                variant: 'destructive',
+                title: "অর্জন মুছে ফেলতে সমস্যা হয়েছে",
+                description: (error as Error).message,
+            });
+        }
     };
 
     const handleSocialWorkFormSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        await addDoc(collection(db, "socialWorks"), {
-            image: currentSocialWork.image,
-            alt: currentSocialWork.alt,
-            imageHint: currentSocialWork.imageHint,
-        });
-        closeSocialWorkForm();
-        fetchSocialWorks();
+        try {
+            await addDoc(collection(db, "socialWorks"), {
+                image: currentSocialWork.image,
+                alt: currentSocialWork.alt,
+                imageHint: currentSocialWork.imageHint,
+            });
+            closeSocialWorkForm();
+            fetchSocialWorks();
+            toast({
+                title: "সামাজিক কাজের ছবি সফলভাবে যোগ হয়েছে",
+            });
+        } catch(error) {
+            toast({
+                variant: 'destructive',
+                title: "ছবি যোগ করতে সমস্যা হয়েছে",
+                description: (error as Error).message,
+            });
+        }
     };
 
     const openSocialWorkForm = () => {
@@ -229,8 +286,19 @@ function AdminPage() {
     };
 
     const handleDeleteSocialWork = async (id: string) => {
-        await deleteDoc(doc(db, "socialWorks", id));
-        fetchSocialWorks();
+        try {
+            await deleteDoc(doc(db, "socialWorks", id));
+            fetchSocialWorks();
+            toast({
+                title: "ছবি সফলভাবে মুছে ফেলা হয়েছে",
+            });
+        } catch(error) {
+            toast({
+                variant: 'destructive',
+                title: "ছবি মুছে ফেলতে সমস্যা হয়েছে",
+                description: (error as Error).message,
+            });
+        }
     };
 
     const handleSignOut = async () => {
