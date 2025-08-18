@@ -14,8 +14,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, addDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "@/lib/firebase";
+import { useToast } from "@/hooks/use-toast";
 
 
 const carouselItems = [
@@ -859,8 +860,78 @@ function LeadershipSection() {
     );
 }
 
+const initialFeedbackState = {
+    name: '',
+    mobile: '',
+    hall: '',
+    department: '',
+    email: '',
+    session: '',
+    subject: '',
+    message: '',
+};
+
 function FeedbackSection() {
-  const [isAnonymous, setIsAnonymous] = useState(false);
+    const [isAnonymous, setIsAnonymous] = useState(false);
+    const [formData, setFormData] = useState(initialFeedbackState);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const { toast } = useToast();
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { id, value } = e.target;
+        setFormData(prev => ({ ...prev, [id]: value }));
+    };
+
+    const handleFormSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        
+        if (!formData.subject || !formData.message) {
+             toast({
+                variant: "destructive",
+                title: "ফর্ম পূরণ করুন",
+                description: "অনুগ্রহ করে মতামতের বিষয় এবং বিস্তারিত বিবরণ লিখুন।",
+            });
+            return;
+        }
+
+        setIsSubmitting(true);
+        try {
+            const feedbackData: any = {
+                subject: formData.subject,
+                message: formData.message,
+                isAnonymous: isAnonymous,
+                createdAt: serverTimestamp(),
+            };
+
+            if (!isAnonymous) {
+                feedbackData.name = formData.name;
+                feedbackData.mobile = formData.mobile;
+                feedbackData.hall = formData.hall;
+                feedbackData.department = formData.department;
+                feedbackData.email = formData.email;
+                feedbackData.session = formData.session;
+            }
+
+            await addDoc(collection(db, "feedback"), feedbackData);
+
+            toast({
+                title: "মতামত সফলভাবে জমা হয়েছে!",
+                description: "আপনার মূল্যবান মতামতের জন্য ধন্যবাদ।",
+            });
+            setFormData(initialFeedbackState);
+            setIsAnonymous(false);
+
+        } catch (error) {
+             toast({
+                variant: "destructive",
+                title: "একটি ত্রুটি ঘটেছে",
+                description: "আপনার মতামত জমা দেওয়া যায়নি। অনুগ্রহ করে আবার চেষ্টা করুন।",
+            });
+            console.error("Error adding document: ", error);
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
 
   return (
     <section id="feedback-form" className="py-16 md:py-24 bg-background">
@@ -875,7 +946,7 @@ function FeedbackSection() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <form className="space-y-6">
+              <form onSubmit={handleFormSubmit} className="space-y-6">
                 <div className="flex items-center space-x-2">
                   <Switch 
                     id="anonymous-mode" 
@@ -888,40 +959,40 @@ function FeedbackSection() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <Label htmlFor="name" className="font-headline">আপনার নাম</Label>
-                      <Input id="name" placeholder="আপনার সম্পূর্ণ নাম" />
+                      <Input id="name" placeholder="আপনার সম্পূর্ণ নাম" value={formData.name} onChange={handleInputChange}/>
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="mobile" className="font-headline">মোবাইল</Label>
-                      <Input id="mobile" placeholder="আপনার মোবাইল নম্বর" />
+                      <Input id="mobile" placeholder="আপনার মোবাইল নম্বর" value={formData.mobile} onChange={handleInputChange} />
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="hall" className="font-headline">আপনার হল</Label>
-                      <Input id="hall" placeholder="আপনার হলের নাম" />
+                      <Input id="hall" placeholder="আপনার হলের নাম" value={formData.hall} onChange={handleInputChange} />
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="department" className="font-headline">বিভাগ</Label>
-                      <Input id="department" placeholder="আপনার বিভাগ" />
+                      <Input id="department" placeholder="আপনার বিভাগ" value={formData.department} onChange={handleInputChange} />
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="email" className="font-headline">আপনার ইমেইল</Label>
-                      <Input id="email" type="email" placeholder="your@email.com" />
+                      <Input id="email" type="email" placeholder="your@email.com" value={formData.email} onChange={handleInputChange} />
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="session" className="font-headline">শিক্ষাবর্ষ</Label>
-                      <Input id="session" placeholder="যেমন: ২০১৮-১৯" />
+                      <Input id="session" placeholder="যেমন: ২০১৮-১৯" value={formData.session} onChange={handleInputChange} />
                     </div>
                   </div>
                 )}
                  <div className="space-y-2">
                     <Label htmlFor="subject" className="font-headline">আপনার সমস্যা/মতামতের বিষয়</Label>
-                    <Input id="subject" placeholder="যেমন: লাইব্রেরী সুবিধা, হলের সমস্যা" />
+                    <Input id="subject" placeholder="যেমন: লাইব্রেরী সুবিধা, হলের সমস্যা" value={formData.subject} onChange={handleInputChange} required />
                   </div>
                 <div className="space-y-2">
                   <Label htmlFor="message" className="font-headline">আপনার সমস্যার বিস্তারিত বিবরণ...</Label>
-                  <Textarea id="message" placeholder="আপনার মতামত বা সমস্যার বিস্তারিত এখানে লিখুন..." rows={6} />
+                  <Textarea id="message" placeholder="আপনার মতামত বা সমস্যার বিস্তারিত এখানে লিখুন..." rows={6} value={formData.message} onChange={handleInputChange} required />
                 </div>
-                <Button type="submit" size="lg" className="w-full font-headline text-xl bg-green-600 hover:bg-green-700">
-                  জমা দিন
+                <Button type="submit" size="lg" className="w-full font-headline text-xl bg-green-600 hover:bg-green-700" disabled={isSubmitting}>
+                  {isSubmitting ? 'জমা হচ্ছে...' : 'জমা দিন'}
                 </Button>
               </form>
             </CardContent>

@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Shield, PlusCircle, Edit, Trash2, BrainCircuit, BookOpenCheck, Library, Award, FileText, Mic, GraduationCap, ImagePlus, LogOut } from "lucide-react";
+import { Shield, PlusCircle, Edit, Trash2, BrainCircuit, BookOpenCheck, Library, Award, FileText, Mic, GraduationCap, ImagePlus, LogOut, MessageSquare } from "lucide-react";
 import { useState, useEffect } from "react";
 import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc } from "firebase/firestore";
 import { db, auth } from "@/lib/firebase";
@@ -58,6 +58,21 @@ type SocialWork = {
     imageHint: string;
 };
 
+type Feedback = {
+    id: string;
+    name?: string;
+    mobile?: string;
+    hall?: string;
+    department?: string;
+    email?: string;
+    session?: string;
+    subject: string;
+    message: string;
+    isAnonymous: boolean;
+    createdAt: any;
+};
+
+
 const iconMap = {
     BrainCircuit: <BrainCircuit />,
     BookOpenCheck: <BookOpenCheck />,
@@ -72,6 +87,7 @@ function AdminPage() {
     const [commitments, setCommitments] = useState<Commitment[]>([]);
     const [academicAchievements, setAcademicAchievements] = useState<AcademicAchievement[]>([]);
     const [socialWorks, setSocialWorks] = useState<SocialWork[]>([]);
+    const [feedbacks, setFeedbacks] = useState<Feedback[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     
     const [isCommitmentFormOpen, setIsCommitmentFormOpen] = useState(false);
@@ -110,9 +126,17 @@ function AdminPage() {
         setSocialWorks(socialWorksList);
     };
 
+    const fetchFeedbacks = async () => {
+        const feedbacksCollection = collection(db, "feedback");
+        const feedbacksSnapshot = await getDocs(feedbacksCollection);
+        const feedbacksList = feedbacksSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Feedback));
+        setFeedbacks(feedbacksList.sort((a, b) => b.createdAt.toDate() - a.createdAt.toDate()));
+    };
+
+
     const loadAllData = async () => {
         setIsLoading(true);
-        await Promise.all([fetchCommitments(), fetchAcademicAchievements(), fetchSocialWorks()]);
+        await Promise.all([fetchCommitments(), fetchAcademicAchievements(), fetchSocialWorks(), fetchFeedbacks()]);
         setIsLoading(false);
     }
 
@@ -302,6 +326,23 @@ function AdminPage() {
         }
     };
 
+     const handleDeleteFeedback = async (id: string) => {
+        try {
+            await deleteDoc(doc(db, "feedback", id));
+            fetchFeedbacks();
+            toast({
+                title: "মতামত সফলভাবে মুছে ফেলা হয়েছে",
+            });
+        } catch (error) {
+            toast({
+                variant: 'destructive',
+                title: "মতামত মুছে ফেলতে সমস্যা হয়েছে",
+                description: (error as Error).message,
+            });
+        }
+    };
+
+
     const handleSignOut = async () => {
         const success = await signOut();
         if (success) {
@@ -441,6 +482,52 @@ function AdminPage() {
                         </AccordionContent>
                     </Card>
                 </AccordionItem>
+                 <AccordionItem value="feedback">
+                    <Card>
+                        <AccordionTrigger className="p-6">
+                            <CardTitle>মতামত ব্যবস্থাপনা</CardTitle>
+                        </AccordionTrigger>
+                        <AccordionContent className="p-6 pt-0">
+                             <ScrollArea className="h-96 pr-4">
+                                <div className="space-y-4">
+                                    {isLoading ? (
+                                        <p>মতামত লোড হচ্ছে...</p>
+                                    ) : feedbacks.length > 0 ? (
+                                        feedbacks.map(f => (
+                                            <Card key={f.id} className="bg-primary/5 p-4">
+                                                <div className="flex justify-between items-start">
+                                                    <div>
+                                                        <p className="font-bold text-lg">{f.subject}</p>
+                                                        <p className="text-muted-foreground mt-2">{f.message}</p>
+                                                    </div>
+                                                    <Button variant="destructive" size="icon" onClick={() => handleDeleteFeedback(f.id)}>
+                                                        <Trash2 className="h-4 w-4" />
+                                                    </Button>
+                                                </div>
+                                                <div className="mt-4 border-t pt-4 text-sm text-muted-foreground">
+                                                    {f.isAnonymous ? (
+                                                        <p className="italic">পরিচয় গোপন রাখা হয়েছে</p>
+                                                    ) : (
+                                                        <div className="grid grid-cols-2 gap-x-4 gap-y-1">
+                                                            <p><strong>নাম:</strong> {f.name}</p>
+                                                            <p><strong>মোবাইল:</strong> {f.mobile}</p>
+                                                            <p><strong>হল:</strong> {f.hall}</p>
+                                                            <p><strong>বিভাগ:</strong> {f.department}</p>
+                                                            <p><strong>ইমেইল:</strong> {f.email}</p>
+                                                            <p><strong>শিক্ষাবর্ষ:</strong> {f.session}</p>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            </Card>
+                                        ))
+                                    ) : (
+                                        <p>এখনও কোনো মতামত জমা পড়েনি।</p>
+                                    )}
+                                </div>
+                            </ScrollArea>
+                        </AccordionContent>
+                    </Card>
+                </AccordionItem>
             </Accordion>
         </main>
       </div>
@@ -500,83 +587,84 @@ function AdminPage() {
         </Dialog>
         
         {/* Academic Achievement Form Dialog */}
-        <Dialog open={isAchievementFormOpen} onOpenChange={setIsAchievementFormOpen}>
-          <DialogContent className="max-h-[90vh] flex flex-col p-0">
-            <DialogHeader className="p-6 pb-0 flex-shrink-0">
-              <DialogTitle>{isEditingAchievement ? 'অর্জন সম্পাদনা করুন' : 'নতুন অর্জন যোগ করুন'}</DialogTitle>
-              <DialogDescription>
-                  এখানে একাডেমিক অর্জনের শিরোনাম, বর্ণনা, আইকন এবং ছবি যোগ বা পরিবর্তন করুন।
-              </DialogDescription>
-            </DialogHeader>
-            <form onSubmit={handleAchievementFormSubmit} className="flex-grow flex flex-col overflow-hidden">
-                <ScrollArea className="flex-grow overflow-auto p-6">
-                    <div className="space-y-4">
-                        <div className="space-y-2">
-                            <Label htmlFor="ach-title">শিরোনাম</Label>
-                            <Input
-                                id="ach-title"
-                                value={currentAchievement.title || ''}
-                                onChange={(e) => setCurrentAchievement({ ...currentAchievement, title: e.target.value })}
-                                required
-                            />
+         <Dialog open={isAchievementFormOpen} onOpenChange={setIsAchievementFormOpen}>
+            <form onSubmit={handleAchievementFormSubmit}>
+                <DialogContent className="max-h-[90vh] flex flex-col p-0">
+                    <DialogHeader className="p-6 pb-0 flex-shrink-0">
+                        <DialogTitle>{isEditingAchievement ? 'অর্জন সম্পাদনা করুন' : 'নতুন অর্জন যোগ করুন'}</DialogTitle>
+                        <DialogDescription>
+                            এখানে একাডেমিক অর্জনের শিরোনাম, বর্ণনা, আইকন এবং ছবি যোগ বা পরিবর্তন করুন।
+                        </DialogDescription>
+                    </DialogHeader>
+                    <ScrollArea className="flex-grow p-6 pr-4">
+                        <div className="space-y-4 pr-2">
+                            <div className="space-y-2">
+                                <Label htmlFor="ach-title">শিরোনাম</Label>
+                                <Input
+                                    id="ach-title"
+                                    value={currentAchievement.title || ''}
+                                    onChange={(e) => setCurrentAchievement({ ...currentAchievement, title: e.target.value })}
+                                    required
+                                />
+                            </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="ach-description">বর্ণনা</Label>
+                                <Textarea
+                                    id="ach-description"
+                                    value={currentAchievement.description || ''}
+                                    onChange={(e) => setCurrentAchievement({ ...currentAchievement, description: e.target.value })}
+                                    required
+                                />
+                            </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="ach-icon">আইকন</Label>
+                                <Select
+                                    value={currentAchievement.icon}
+                                    onValueChange={(value) => setCurrentAchievement({ ...currentAchievement, icon: value })}
+                                >
+                                    <SelectTrigger>
+                                        <SelectValue placeholder="আইকন নির্বাচন করুন" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectItem value="Award">ডিন'স অ্যাওয়ার্ড (Award)</SelectItem>
+                                        <SelectItem value="FileText">গবেষণা প্রকাশনা (FileText)</SelectItem>
+                                        <SelectItem value="Mic">জাতীয় সম্মেলনে অংশগ্রহণ (Mic)</SelectItem>
+                                        <SelectItem value="GraduationCap">মেধা বৃত্তি (GraduationCap)</SelectItem>
+                                    </SelectContent>
+                                </Select>
+                            </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="ach-image">ছবির URL</Label>
+                                <Input
+                                    id="ach-image"
+                                    value={currentAchievement.image || ''}
+                                    onChange={(e) => setCurrentAchievement({ ...currentAchievement, image: e.target.value })}
+                                    placeholder="https://placehold.co/600x400.png"
+                                    required
+                                />
+                            </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="ach-image-hint">ছবির Hint (for AI)</Label>
+                                <Input
+                                    id="ach-image-hint"
+                                    value={currentAchievement.imageHint || ''}
+                                    onChange={(e) => setCurrentAchievement({ ...currentAchievement, imageHint: e.target.value })}
+                                    placeholder="e.g. award ceremony"
+                                    required
+                                />
+                            </div>
                         </div>
-                        <div className="space-y-2">
-                            <Label htmlFor="ach-description">বর্ণনা</Label>
-                            <Textarea
-                                id="ach-description"
-                                value={currentAchievement.description || ''}
-                                onChange={(e) => setCurrentAchievement({ ...currentAchievement, description: e.target.value })}
-                                required
-                            />
-                        </div>
-                        <div className="space-y-2">
-                            <Label htmlFor="ach-icon">আইকন</Label>
-                            <Select
-                                value={currentAchievement.icon}
-                                onValueChange={(value) => setCurrentAchievement({ ...currentAchievement, icon: value })}
-                            >
-                                <SelectTrigger>
-                                    <SelectValue placeholder="আইকন নির্বাচন করুন" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectItem value="Award">ডিন'স অ্যাওয়ার্ড (Award)</SelectItem>
-                                    <SelectItem value="FileText">গবেষণা প্রকাশনা (FileText)</SelectItem>
-                                    <SelectItem value="Mic">জাতীয় সম্মেলনে অংশগ্রহণ (Mic)</SelectItem>
-                                    <SelectItem value="GraduationCap">মেধা বৃত্তি (GraduationCap)</SelectItem>
-                                </SelectContent>
-                            </Select>
-                        </div>
-                        <div className="space-y-2">
-                            <Label htmlFor="ach-image">ছবির URL</Label>
-                            <Input
-                                id="ach-image"
-                                value={currentAchievement.image || ''}
-                                onChange={(e) => setCurrentAchievement({ ...currentAchievement, image: e.target.value })}
-                                placeholder="https://placehold.co/600x400.png"
-                                required
-                            />
-                        </div>
-                        <div className="space-y-2">
-                            <Label htmlFor="ach-image-hint">ছবির Hint (for AI)</Label>
-                            <Input
-                                id="ach-image-hint"
-                                value={currentAchievement.imageHint || ''}
-                                onChange={(e) => setCurrentAchievement({ ...currentAchievement, imageHint: e.target.value })}
-                                placeholder="e.g. award ceremony"
-                                required
-                            />
-                        </div>
-                    </div>
-                </ScrollArea>
-              <DialogFooter className="p-6 pt-4 border-t flex-shrink-0">
-                  <Button type="submit">{isEditingAchievement ? 'সংরক্ষণ করুন' : 'যোগ করুন'}</Button>
-                  <DialogClose asChild>
-                      <Button type="button" variant="secondary" onClick={closeAchievementForm}>বাতিল</Button>
-                  </DialogClose>
-              </DialogFooter>
+                    </ScrollArea>
+                    <DialogFooter className="p-6 pt-4 border-t flex-shrink-0">
+                        <Button type="submit">{isEditingAchievement ? 'সংরক্ষণ করুন' : 'যোগ করুন'}</Button>
+                        <DialogClose asChild>
+                            <Button type="button" variant="secondary" onClick={closeAchievementForm}>বাতিল</Button>
+                        </DialogClose>
+                    </DialogFooter>
+                </DialogContent>
             </form>
-          </DialogContent>
         </Dialog>
+
 
         {/* Social Work Form Dialog */}
         <Dialog open={isSocialWorkFormOpen} onOpenChange={setIsSocialWorkFormOpen}>
