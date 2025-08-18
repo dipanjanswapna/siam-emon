@@ -7,7 +7,7 @@ import React, { useState, useEffect } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { ArrowRight, BookOpenCheck, BrainCircuit, Library, Users, Camera, X, Heart, Megaphone, Flag, Award, FileText, Mic, GraduationCap, HandHeart, BookText, ShieldCheck, MessageSquare, Mail, Icon, ImagePlus } from "lucide-react";
+import { ArrowRight, BookOpenCheck, BrainCircuit, Library, Users, Camera, X, Heart, Megaphone, Flag, Award, FileText, Mic, GraduationCap, HandHeart, BookText, ShieldCheck, MessageSquare, Mail, Icon, ImagePlus, Annoyed } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -101,6 +101,7 @@ export default function Home() {
     <div className="flex flex-col">
       <NewHeroSection />
       <AboutSection />
+      <NoticeSection />
       <VoteBannerSection />
       <CommitmentSection />
       <ResearchSection />
@@ -300,6 +301,22 @@ function CommitmentSection() {
             </div>
         </section>
     );
+}
+
+function NoticeSection() {
+  const noticeText = "কেমন লেগেছে আমাদের নতুন ওয়েবসাইট? আমরা সম্পূর্ণ নতুন আঙ্গিকে ডেভেলপমেন্ট শুরু করেছি। খুব শীঘ্রই আমরা পূর্ণাঙ্গ ওয়েবসাইট নিয়ে আসছি।";
+  return (
+    <section className="bg-gradient-to-r from-red-500 to-pink-500 py-3 text-white overflow-hidden">
+        <div className="relative flex items-center whitespace-nowrap">
+            <p className="animate-scroll text-lg font-headline">
+                {noticeText}
+            </p>
+             <p className="animate-scroll text-lg font-headline" aria-hidden="true">
+                {noticeText}
+            </p>
+        </div>
+    </section>
+  );
 }
 
 
