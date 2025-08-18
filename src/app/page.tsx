@@ -273,6 +273,7 @@ function VoteBannerSection() {
       <div className="container mx-auto px-4 text-center">
         <h2 className="text-4xl md:text-5xl font-bold font-headline text-green-700">ভোট দিন সিয়ামকে!</h2>
         <p className="mt-2 text-lg md:text-xl font-body text-foreground">আপনার প্রতিনিধি, আপনার কন্ঠস্বর | ডাকসু ২০২৫</p>
+        <p className="mt-2 text-lg md:text-xl font-body text-foreground">আপনাদের প্রত্যাশাই আমার ইশতেহার</p>
       </div>
     </section>
   );
@@ -491,5 +492,3 @@ function LogicalMovementSection() {
     </>
   );
 }
-
-    
