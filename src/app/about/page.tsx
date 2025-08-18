@@ -108,7 +108,7 @@ export default function AboutPage() {
                         src="https://i.postimg.cc/GtNj8Tzk/500230099-3604313253210085-5495573021943078961-n.jpg"
                         alt="আমাদের যাত্রা"
                         fill
-                        className="object-cover transform group-hover:scale-105 transition-transform duration-300"
+                        className="object-contain transform group-hover:scale-105 transition-transform duration-300"
                         data-ai-hint="team students"
                         />
                     </div>
