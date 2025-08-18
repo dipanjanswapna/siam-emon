@@ -87,7 +87,11 @@ const carouselItems = [
 const icons: { [key: string]: React.ElementType } = {
     BrainCircuit,
     BookOpenCheck,
-    Library
+    Library,
+    Award,
+    FileText,
+    Mic,
+    GraduationCap
 };
 
 
@@ -240,13 +244,16 @@ type Commitment = {
 
 function CommitmentSection() {
     const [commitments, setCommitments] = useState<Commitment[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const fetchCommitments = async () => {
+            setIsLoading(true);
             const commitmentsCollection = collection(db, "commitments");
             const commitmentsSnapshot = await getDocs(commitmentsCollection);
             const commitmentsList = commitmentsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Commitment));
             setCommitments(commitmentsList);
+            setIsLoading(false);
         };
 
         fetchCommitments();
@@ -265,7 +272,14 @@ function CommitmentSection() {
                     </p>
                 </div>
                 <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {commitments.map((commitment) => {
+                    {isLoading ? Array.from({ length: 3 }).map((_, i) => (
+                        <Card key={i} className="text-center shadow-lg bg-card p-6">
+                            <div className="bg-muted/50 p-4 rounded-full w-20 h-20 mx-auto animate-pulse"></div>
+                             <div className="h-6 w-3/4 bg-muted/50 rounded mt-4 mx-auto animate-pulse"></div>
+                             <div className="h-4 w-full bg-muted/50 rounded mt-4 mx-auto animate-pulse"></div>
+                             <div className="h-4 w-5/6 bg-muted/50 rounded mt-2 mx-auto animate-pulse"></div>
+                        </Card>
+                    )) : commitments.map((commitment) => {
                         const IconComponent = icons[commitment.icon];
                         return (
                             <Card key={commitment.id} className="text-center shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 bg-card">
@@ -631,41 +645,35 @@ function LogicalMovementSection() {
   );
 }
 
-const academicAchievements = [
-  {
-    icon: Award,
-    title: "ডিন'স অ্যাওয়ার্ড",
-    description: "শিক্ষায় অসামান্য সাফল্যের জন্য জীব বিজ্ঞান অনুষদ থেকে ডিন'স অ্যাওয়ার্ড প্রাপ্তি।",
-    image: "https://placehold.co/600x400.png",
-    imageHint: "award ceremony",
-  },
-  {
-    icon: FileText,
-    title: "গবেষণা প্রকাশনা",
-    description: "আন্তর্জাতিক জার্নালে মলিকুলার বায়োলজি বিষয়ে গবেষণা প্রবন্ধ প্রকাশিত হয়েছে।",
-    image: "https://placehold.co/600x400.png",
-    imageHint: "research paper",
-  },
-  {
-    icon: Mic,
-    title: "জাতীয় সম্মেলনে অংশগ্রহণ",
-    description: "২৪তম জাতীয় প্রাণীবিজ্ঞান সম্মেলনে গবেষণা পোস্টার উপস্থাপন এবং অংশগ্রহণ।",
-    image: "https://placehold.co/600x400.png",
-    imageHint: "conference presentation",
-  },
-  {
-    icon: GraduationCap,
-    title: "মেধা বৃত্তি",
-    description: "একাডেমিক ফলাফলের উপর ভিত্তি করে বিশ্ববিদ্যালয় থেকে মেধা বৃত্তি অর্জন।",
-    image: "https://placehold.co/600x400.png",
-    imageHint: "scholarship certificate",
-  },
-];
+type AcademicAchievement = {
+    id: string;
+    icon: string;
+    title: string;
+    description: string;
+    image: string;
+    imageHint: string;
+};
+
 
 function AcademicAchievementSection() {
-    const [selectedAchievement, setSelectedAchievement] = useState<(typeof academicAchievements)[0] | null>(null);
+    const [achievements, setAchievements] = useState<AcademicAchievement[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [selectedAchievement, setSelectedAchievement] = useState<AcademicAchievement | null>(null);
 
-    const openDialog = (achievement: (typeof academicAchievements)[0]) => {
+     useEffect(() => {
+        const fetchAchievements = async () => {
+            setIsLoading(true);
+            const achievementsCollection = collection(db, "academicAchievements");
+            const achievementsSnapshot = await getDocs(achievementsCollection);
+            const achievementsList = achievementsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as AcademicAchievement));
+            setAchievements(achievementsList);
+            setIsLoading(false);
+        };
+
+        fetchAchievements();
+    }, []);
+
+    const openDialog = (achievement: AcademicAchievement) => {
       setSelectedAchievement(achievement);
     };
 
@@ -684,8 +692,22 @@ function AcademicAchievementSection() {
             </p>
           </div>
           <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {academicAchievements.map((achievement, index) => (
-               <Card key={index} className="flex flex-col shadow-lg hover:shadow-primary/20 hover:-translate-y-2 transition-all duration-300 bg-background overflow-hidden cursor-pointer" onClick={() => openDialog(achievement)}>
+            {isLoading ? Array.from({length: 4}).map((_, i) => (
+                <Card key={i} className="flex flex-col shadow-lg bg-background overflow-hidden">
+                    <div className="relative w-full aspect-video bg-muted/50 animate-pulse"></div>
+                    <CardHeader className="items-center text-center">
+                        <div className="bg-muted/50 p-3 rounded-full -mt-10 mb-2 border-4 border-background z-10 w-16 h-16 animate-pulse"></div>
+                        <div className="h-6 w-3/4 bg-muted/50 rounded animate-pulse"></div>
+                    </CardHeader>
+                    <CardContent className="text-center flex-grow">
+                        <div className="h-4 w-full bg-muted/50 rounded animate-pulse"></div>
+                        <div className="h-4 w-5/6 bg-muted/50 rounded mt-2 animate-pulse"></div>
+                    </CardContent>
+                </Card>
+            )) : achievements.map((achievement) => {
+               const IconComponent = icons[achievement.icon];
+               return (
+               <Card key={achievement.id} className="flex flex-col shadow-lg hover:shadow-primary/20 hover:-translate-y-2 transition-all duration-300 bg-background overflow-hidden cursor-pointer" onClick={() => openDialog(achievement)}>
                  <div className="relative w-full aspect-video">
                    <Image 
                      src={achievement.image}
@@ -697,7 +719,7 @@ function AcademicAchievementSection() {
                  </div>
                 <CardHeader className="items-center text-center">
                   <div className="bg-primary/10 p-3 rounded-full -mt-10 mb-2 border-4 border-background z-10">
-                    <achievement.icon className="h-8 w-8 text-primary" />
+                    {IconComponent && <IconComponent className="h-8 w-8 text-primary" />}
                   </div>
                   <CardTitle className="font-headline text-xl mt-2">{achievement.title}</CardTitle>
                 </CardHeader>
@@ -705,7 +727,7 @@ function AcademicAchievementSection() {
                   <p className="font-body text-muted-foreground">{achievement.description}</p>
                 </CardContent>
               </Card>
-            ))}
+            )})}
           </div>
         </div>
       </section>
@@ -891,19 +913,5 @@ function FeedbackSection() {
     </section>
   );
 }
-    
-
-    
-
-    
-
-    
-
-
-
-
-    
-
-    
 
     
