@@ -7,9 +7,11 @@ export default function AboutPage() {
   return (
     <div className="bg-background">
       <div className="container mx-auto px-4 py-16 md:py-24">
-        <div className="grid md:grid-cols-3 gap-8 items-start">
-          <div className="md:col-span-1">
-            <Card className="shadow-lg sticky top-24">
+        
+        {/* Profile Card Section */}
+        <section className="mb-16">
+          <div className="max-w-sm mx-auto">
+            <Card className="shadow-lg">
               <CardContent className="p-0">
                 <Image
                   src="https://i.postimg.cc/LXCLpBjm/532463080-3680875555553854-4475665250768894271-n.jpg"
@@ -19,23 +21,28 @@ export default function AboutPage() {
                   className="rounded-t-lg object-contain"
                   data-ai-hint="politician portrait"
                 />
-                <div className="p-6">
+                <div className="p-6 text-center">
                   <h2 className="font-headline text-3xl font-bold">সিয়াম ফেরদৌস ইমন</h2>
                   <p className="font-body text-primary mt-1">একটি উন্নত ভবিষ্যতের জন্য</p>
                 </div>
               </CardContent>
             </Card>
           </div>
-          <div className="md:col-span-2">
-            <h1 className="font-headline text-5xl md:text-6xl font-bold text-foreground">সেবার এক জীবন: একনিষ্ঠ অঙ্গীকার</h1>
-            <p className="font-body text-lg mt-6 text-muted-foreground">
-              নেতৃত্বকে অনেকেই ক্ষমতার কেন্দ্রবিন্দু মনে করেন, কিন্তু সিয়াম ফেরদৌস ইমনের কাছে এটি একটি আজীবন সেবার ব্রত। তিনি বিশ্বাস করেন, সত্যিকার নেতৃত্ব জন্ম নেয় মানুষের পাশে দাঁড়ানোর এবং তাদের জন্য নিঃস্বার্থভাবে কাজ করার মধ্য দিয়ে। তারুণ্যের এই প্রতীক মনে করেন, কোনো পদ বা সম্মান নয়, বরং সেবাই একজন নেতার আসল পরিচয়।
-            </p>
-            <p className="font-body text-lg mt-4 text-muted-foreground">
-              তাঁর ছাত্রজীবন থেকে শুরু করে আজ পর্যন্ত প্রতিটি পদক্ষেপে তার এই সেবার মানসিকতাই প্রতিফলিত হয়েছে। তিনি শুধু একজন পদপ্রার্থী নন, বরং একজন স্বপ্নদ্রষ্টা যিনি শিক্ষার্থীদের জন্য একটি উন্নত ভবিষ্যৎ গড়তে প্রতিশ্রুতিবদ্ধ। তাঁর কাছে সেবা কোনো নির্দিষ্ট পদের জন্য বা সময়ের জন্য সীমাবদ্ধ নয়। এটি তার জীবনের একটি অবিচ্ছেদ্য অংশ। তিনি গবেষণার ক্ষেত্রে, প্রকাশনার জগতে এবং সামাজিক কর্মকাণ্ডে যে ভূমিকা রেখেছেন, তা এই সেবারই প্রমাণ।
-            </p>
+        </section>
 
-            <div className="mt-12 space-y-12">
+        {/* Main Content Section */}
+        <section className="max-w-5xl mx-auto">
+            <div className="text-center">
+                <h1 className="font-headline text-5xl md:text-6xl font-bold text-foreground">সেবার এক জীবন: একনিষ্ঠ অঙ্গীকার</h1>
+                <p className="font-body text-lg mt-6 text-muted-foreground">
+                নেতৃত্বকে অনেকেই ক্ষমতার কেন্দ্রবিন্দু মনে করেন, কিন্তু সিয়াম ফেরদৌস ইমনের কাছে এটি একটি আজীবন সেবার ব্রত। তিনি বিশ্বাস করেন, সত্যিকার নেতৃত্ব জন্ম নেয় মানুষের পাশে দাঁড়ানোর এবং তাদের জন্য নিঃস্বার্থভাবে কাজ করার মধ্য দিয়ে। তারুণ্যের এই প্রতীক মনে করেন, কোনো পদ বা সম্মান নয়, বরং সেবাই একজন নেতার আসল পরিচয়।
+                </p>
+                <p className="font-body text-lg mt-4 text-muted-foreground">
+                তাঁর ছাত্রজীবন থেকে শুরু করে আজ পর্যন্ত প্রতিটি পদক্ষেপে তার এই সেবার মানসিকতাই প্রতিফলিত হয়েছে। তিনি শুধু একজন পদপ্রার্থী নন, বরং একজন স্বপ্নদ্রষ্টা যিনি শিক্ষার্থীদের জন্য একটি উন্নত ভবিষ্যৎ গড়তে প্রতিশ্রুতিবদ্ধ। তাঁর কাছে সেবা কোনো নির্দিষ্ট পদের জন্য বা সময়ের জন্য সীমাবদ্ধ নয়। এটি তার জীবনের একটি অবিচ্ছেদ্য অংশ। তিনি গবেষণার ক্ষেত্রে, প্রকাশনার জগতে এবং সামাজিক কর্মকাণ্ডে যে ভূমিকা রেখেছেন, তা এই সেবারই প্রমাণ।
+                </p>
+            </div>
+
+            <div className="mt-16 space-y-12">
               <section>
                 <h3 className="font-headline text-3xl font-bold text-foreground flex items-center gap-3">
                   <GraduationCap className="w-8 h-8 text-primary" />
@@ -55,8 +62,8 @@ export default function AboutPage() {
                   সিয়াম ফেরদৌস ইমন একজন তরুণ নেতা যিনি তার পেশাগত জীবনকে জনসেবার সাথে একীভূত করেছেন। তিনি বিশ্বাস করেন, অর্জিত জ্ঞান কেবল ব্যক্তিগত উন্নতির জন্য নয়, বরং তা সমাজের বৃহত্তর কল্যাণে ব্যবহৃত হওয়া উচিত। তার পেশাগত এবং জনসেবামূলক কাজগুলো এই বিশ্বাসের প্রতিফলন। শিক্ষক হিসেবে ভূমিকা: সিয়াম ইমন বিগব্যাং একাডেমি এবং ইউসিসি কোচিং সেন্টারে একজন জীববিজ্ঞান শিক্ষক হিসেবে কাজ করেছেন। শিক্ষকতা কেবল তার পেশা নয়, এটি তার কাছে একটি সেবার ব্রত। শিক্ষার্থীদের মাঝে বিজ্ঞানের প্রতি আগ্রহ তৈরি করা এবং তাদের মেধা বিকাশে সহায়তা করা তার অন্যতম লক্ষ্য। তিনি বিশ্বাস করেন, একটি শিক্ষিত প্রজন্মই পারে দেশের ভবিষ্যৎকে উজ্জ্বল করতে। সংগঠক ও নেতা হিসেবে ভূমিকা: তিনি অ্যানিমাল জেনেটিক্স এবং মলিকুলার বায়োলজি ক্লাবের (AGMBC) সভাপতি এবং জুওলজি ডিবেটিং ক্লাবের সহ-সভাপতি হিসেবে দায়িত্ব পালন করেছেন। এসব পদ তাকে কেবল সাংগঠনিক দক্ষতা অর্জনে সাহায্য করেনি, বরং ছাত্রসমাজের সমস্যাগুলো কাছ থেকে দেখার এবং সমাধানের পথ খুঁজে বের করার সুযোগ দিয়েছে। তিনি দলগত কাজের গুরুত্ব বোঝেন এবং সবার সাথে মিলেমিশে কাজ করতে আগ্রহী। সামাজিক কর্মকাণ্ডে অংশগ্রহণ: সিয়াম ইমন তার পেশাগত জীবনের বাইরেও সমাজের জন্য কাজ করেন। তিনি বিভিন্ন স্বেচ্ছাসেবী কর্মকাণ্ডে অংশ নেন, যেমন- দুস্থদের মাঝে ত্রাণ ও শীতবস্ত্র বিতরণ, এবং পরিবেশ সচেতনতা বৃদ্ধিতে কাজ করেন। তার এই উদ্যোগগুলো প্রমাণ করে, তিনি একজন মানবিক ও দায়িত্বশীল নাগরিক। সিয়াম ইমনের পেশাগত জীবন এবং জনসেবা পরস্পরের পরিপূরক। তার কাজের অভিজ্ঞতা এবং সমাজের প্রতি তার অঙ্গীকারই তাকে একজন যোগ্য ও প্রতিশ্রুতিবদ্ধ নেতা হিসেবে প্রতিষ্ঠিত করেছে।
                 </p>
               </section>
-
-              <section>
+              
+               <section>
                  <h3 className="font-headline text-3xl font-bold text-foreground flex items-center justify-center gap-3 text-center">
                    <Award className="w-8 h-8 text-primary" />
                    ভবিষ্যতের জন্য আমাদের লক্ষ্য: একটি উন্নত ছাত্রসমাজ ও প্রগতিশীল দেশ
@@ -105,7 +112,7 @@ export default function AboutPage() {
                             src="https://i.postimg.cc/GtNj8Tzk/500230099-3604313253210085-5495573021943078961-n.jpg"
                             alt="আমাদের যাত্রা"
                             fill
-                            className="object-cover transform group-hover:scale-105 transition-transform duration-300"
+                            className="object-contain transform group-hover:scale-105 transition-transform duration-300"
                             data-ai-hint="team students"
                         />
                     </div>
@@ -124,10 +131,9 @@ export default function AboutPage() {
                     </div>
                 </div>
               </section>
-
             </div>
-          </div>
-        </div>
+        </section>
+
       </div>
     </div>
   );
