@@ -57,7 +57,7 @@ export function Footer() {
         </div>
         
         <div className="mt-12 border-t border-primary-foreground/20 pt-6 flex flex-col md:flex-row justify-between items-center text-sm font-body">
-           <p className="text-primary-foreground/80 text-center md:text-left">© ২০২৪ সর্বস্বত্ব সংরক্ষিত | সিয়াম ফেরদৌস ইমন ক্যাম্পেইন</p>
+           <p className="text-primary-foreground/80 text-center md:text-left">© ২০২৪ সর্বস্বত্ব সংরক্ষিত | <Link href="/admin" className="hover:underline">সিয়াম ফেরদৌস ইমন ক্যাম্পেইন</Link></p>
           <div className="flex gap-4 mt-4 md:mt-0">
             <Link href="#" className="text-primary-foreground/80 hover:text-primary-foreground">
               <Facebook className="h-5 w-5" />
