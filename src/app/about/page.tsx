@@ -1,49 +1,40 @@
 
+"use client";
+
 import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { GraduationCap, Briefcase, Award, CheckCircle, ShipWheel, Users } from "lucide-react";
+import { useState, useEffect } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "@/lib/firebase";
+import { Skeleton } from "@/components/ui/skeleton";
 
-const teamMembers = [
-  {
-    name: "Rhythm Munshi",
-    role: "Founder & CEO",
-    image: "https://placehold.co/400x400.png",
-    hint: "man portrait"
-  },
-  {
-    name: "Arnab Datta",
-    role: "CTO",
-    image: "https://placehold.co/400x400.png",
-    hint: "man sunglasses"
-  },
-  {
-    name: "Ashekin Sneha",
-    role: "COO",
-    image: "https://placehold.co/400x400.png",
-    hint: "woman portrait"
-  },
-    {
-    name: "Placeholder Name",
-    role: "Placeholder Role",
-    image: "https://placehold.co/400x400.png",
-    hint: "person portrait"
-  },
-    {
-    name: "Placeholder Name",
-    role: "Placeholder Role",
-    image: "https://placehold.co/400x400.png",
-    hint: "person portrait"
-  },
-    {
-    name: "Placeholder Name",
-    role: "Placeholder Role",
-    image: "https://placehold.co/400x400.png",
-    hint: "person portrait"
-  }
-];
+
+type TeamMember = {
+    id: string;
+    name: string;
+    role: string;
+    image: string;
+    hint: string;
+};
 
 
 export default function AboutPage() {
+    const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchTeamMembers = async () => {
+            setIsLoading(true);
+            const teamMembersCollection = collection(db, "teamMembers");
+            const teamMembersSnapshot = await getDocs(teamMembersCollection);
+            const teamMembersList = teamMembersSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as TeamMember));
+            setTeamMembers(teamMembersList);
+            setIsLoading(false);
+        };
+        fetchTeamMembers();
+    }, []);
+
   return (
     <div className="bg-background">
       <div className="container mx-auto px-4 py-16 md:py-24">
@@ -179,26 +170,38 @@ export default function AboutPage() {
                 <Users className="mx-auto h-12 w-12 text-primary" />
                 <h1 className="font-headline text-5xl md:text-6xl font-bold mt-4 text-foreground">আড়ালের মানুষগুলো</h1>
             </div>
-            <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
-                {teamMembers.map((member, index) => (
-                    <Card key={index} className="text-center shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
-                        <CardContent className="p-0">
-                            <div className="relative w-full aspect-square rounded-t-lg overflow-hidden border-4 border-transparent group-hover:border-primary transition-all duration-300">
-                                <Image
-                                    src={member.image}
-                                    alt={member.name}
-                                    fill
-                                    className="object-cover"
-                                    data-ai-hint={member.hint}
-                                />
-                            </div>
+            <div className="mt-16 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8">
+                {isLoading ? (
+                    Array.from({ length: 6 }).map((_, index) => (
+                        <Card key={index} className="text-center shadow-lg">
+                            <Skeleton className="w-full aspect-square rounded-t-lg" />
                             <div className="p-4">
-                                <CardTitle className="font-headline text-xl">{member.name}</CardTitle>
-                                <CardDescription className="font-body text-primary">{member.role}</CardDescription>
+                                <Skeleton className="h-6 w-3/4 mx-auto" />
+                                <Skeleton className="h-4 w-1/2 mx-auto mt-2" />
                             </div>
-                        </CardContent>
-                    </Card>
-                ))}
+                        </Card>
+                    ))
+                ) : (
+                    teamMembers.map((member) => (
+                        <Card key={member.id} className="text-center shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
+                            <CardContent className="p-0">
+                                <div className="relative w-full aspect-square rounded-t-lg overflow-hidden border-4 border-transparent group-hover:border-primary transition-all duration-300">
+                                    <Image
+                                        src={member.image}
+                                        alt={member.name}
+                                        fill
+                                        className="object-cover"
+                                        data-ai-hint={member.hint}
+                                    />
+                                </div>
+                                <div className="p-4">
+                                    <CardTitle className="font-headline text-xl">{member.name}</CardTitle>
+                                    <CardDescription className="font-body text-primary">{member.role}</CardDescription>
+                                </div>
+                            </CardContent>
+                        </Card>
+                    ))
+                )}
             </div>
         </section>
 

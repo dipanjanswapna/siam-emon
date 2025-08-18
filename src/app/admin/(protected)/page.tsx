@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Shield, PlusCircle, Edit, Trash2, BrainCircuit, BookOpenCheck, Library, Award, FileText, Mic, GraduationCap, ImagePlus, LogOut, MessageSquare } from "lucide-react";
+import { Shield, PlusCircle, Edit, Trash2, BrainCircuit, BookOpenCheck, Library, Award, FileText, Mic, GraduationCap, ImagePlus, LogOut, MessageSquare, Users } from "lucide-react";
 import { useState, useEffect } from "react";
 import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc, orderBy, query } from "firebase/firestore";
 import { db, auth } from "@/lib/firebase";
@@ -72,6 +72,14 @@ type Feedback = {
     createdAt: any;
 };
 
+type TeamMember = {
+    id: string;
+    name: string;
+    role: string;
+    image: string;
+    hint: string;
+};
+
 
 const iconMap = {
     BrainCircuit: <BrainCircuit />,
@@ -88,6 +96,7 @@ function AdminPage() {
     const [academicAchievements, setAcademicAchievements] = useState<AcademicAchievement[]>([]);
     const [socialWorks, setSocialWorks] = useState<SocialWork[]>([]);
     const [feedbacks, setFeedbacks] = useState<Feedback[]>([]);
+    const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     
     const [isCommitmentFormOpen, setIsCommitmentFormOpen] = useState(false);
@@ -100,6 +109,10 @@ function AdminPage() {
     
     const [isSocialWorkFormOpen, setIsSocialWorkFormOpen] = useState(false);
     const [currentSocialWork, setCurrentSocialWork] = useState<Partial<SocialWork>>({});
+
+    const [isTeamMemberFormOpen, setIsTeamMemberFormOpen] = useState(false);
+    const [currentTeamMember, setCurrentTeamMember] = useState<Partial<TeamMember>>({});
+    const [isEditingTeamMember, setIsEditingTeamMember] = useState(false);
 
     const [signOut] = useSignOut(auth);
     const router = useRouter();
@@ -134,10 +147,17 @@ function AdminPage() {
         setFeedbacks(feedbacksList);
     };
 
+    const fetchTeamMembers = async () => {
+        const teamMembersCollection = collection(db, "teamMembers");
+        const teamMembersSnapshot = await getDocs(teamMembersCollection);
+        const teamMembersList = teamMembersSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as TeamMember));
+        setTeamMembers(teamMembersList);
+    };
+
 
     const loadAllData = async () => {
         setIsLoading(true);
-        await Promise.all([fetchCommitments(), fetchAcademicAchievements(), fetchSocialWorks(), fetchFeedbacks()]);
+        await Promise.all([fetchCommitments(), fetchAcademicAchievements(), fetchSocialWorks(), fetchFeedbacks(), fetchTeamMembers()]);
         setIsLoading(false);
     }
 
@@ -343,6 +363,73 @@ function AdminPage() {
         }
     };
 
+    const handleTeamMemberFormSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        const action = isEditingTeamMember ? 'আপডেট' : 'যোগ';
+        try {
+            if (isEditingTeamMember && currentTeamMember.id) {
+                const teamMemberDoc = doc(db, "teamMembers", currentTeamMember.id);
+                await updateDoc(teamMemberDoc, {
+                    name: currentTeamMember.name,
+                    role: currentTeamMember.role,
+                    image: currentTeamMember.image,
+                    hint: currentTeamMember.hint,
+                });
+            } else {
+                await addDoc(collection(db, "teamMembers"), {
+                    name: currentTeamMember.name,
+                    role: currentTeamMember.role,
+                    image: currentTeamMember.image,
+                    hint: currentTeamMember.hint,
+                });
+            }
+            closeTeamMemberForm();
+            fetchTeamMembers();
+            toast({
+                title: `টিম মেম্বার সফলভাবে ${action} হয়েছে`,
+            });
+        } catch (error) {
+            toast({
+                variant: 'destructive',
+                title: `টিম মেম্বার ${action} করতে সমস্যা হয়েছে`,
+                description: (error as Error).message,
+            });
+        }
+    };
+
+    const openTeamMemberForm = (member?: TeamMember) => {
+        if (member) {
+            setCurrentTeamMember(member);
+            setIsEditingTeamMember(true);
+        } else {
+            setCurrentTeamMember({ name: "", role: "", image: "https://placehold.co/400x400.png", hint: "" });
+            setIsEditingTeamMember(false);
+        }
+        setIsTeamMemberFormOpen(true);
+    };
+
+    const closeTeamMemberForm = () => {
+        setIsTeamMemberFormOpen(false);
+        setCurrentTeamMember({});
+        setIsEditingTeamMember(false);
+    };
+
+    const handleDeleteTeamMember = async (id: string) => {
+        try {
+            await deleteDoc(doc(db, "teamMembers", id));
+            fetchTeamMembers();
+            toast({
+                title: "টিম মেম্বার সফলভাবে মুছে ফেলা হয়েছে",
+            });
+        } catch (error) {
+            toast({
+                variant: 'destructive',
+                title: "টিম মেম্বার মুছে ফেলতে সমস্যা হয়েছে",
+                description: (error as Error).message,
+            });
+        }
+    };
+
 
     const handleSignOut = async () => {
         const success = await signOut();
@@ -526,6 +613,45 @@ function AdminPage() {
                                     )}
                                 </div>
                             </ScrollArea>
+                        </AccordionContent>
+                    </Card>
+                </AccordionItem>
+                <AccordionItem value="team-members">
+                    <Card>
+                        <AccordionTrigger className="p-6">
+                            <CardTitle>টিম মেম্বার ব্যবস্থাপনা</CardTitle>
+                        </AccordionTrigger>
+                        <AccordionContent className="p-6 pt-0">
+                            <div className="flex justify-end mb-4">
+                                <Button onClick={() => openTeamMemberForm()}>
+                                    <Users className="mr-2 h-4 w-4" /> নতুন মেম্বার যোগ করুন
+                                </Button>
+                            </div>
+                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                {isLoading ? (
+                                    <p>লোড হচ্ছে...</p>
+                                ) : (
+                                    teamMembers.map(tm => (
+                                        <Card key={tm.id} className="p-4 bg-primary/5 flex items-center justify-between">
+                                            <div className="flex items-center gap-4">
+                                                <Image src={tm.image} alt={tm.name} width={50} height={50} className="rounded-full object-cover" />
+                                                <div>
+                                                    <h3 className="font-bold text-lg">{tm.name}</h3>
+                                                    <p className="text-sm text-muted-foreground">{tm.role}</p>
+                                                </div>
+                                            </div>
+                                            <div className="flex items-center gap-2">
+                                                <Button variant="outline" size="icon" onClick={() => openTeamMemberForm(tm)}>
+                                                    <Edit className="h-4 w-4" />
+                                                </Button>
+                                                <Button variant="destructive" size="icon" onClick={() => handleDeleteTeamMember(tm.id)}>
+                                                    <Trash2 className="h-4 w-4" />
+                                                </Button>
+                                            </div>
+                                        </Card>
+                                    ))
+                                )}
+                            </div>
                         </AccordionContent>
                     </Card>
                 </AccordionItem>
@@ -716,10 +842,66 @@ function AdminPage() {
                 </form>
             </DialogContent>
         </Dialog>
+        
+        {/* Team Member Form Dialog */}
+        <Dialog open={isTeamMemberFormOpen} onOpenChange={setIsTeamMemberFormOpen}>
+            <DialogContent>
+                <DialogHeader>
+                    <DialogTitle>{isEditingTeamMember ? 'টিম মেম্বার সম্পাদনা করুন' : 'নতুন টিম মেম্বার যোগ করুন'}</DialogTitle>
+                    <DialogDescription>
+                        এখানে টিম মেম্বারের নাম, ভূমিকা, ছবির URL এবং ছবির Hint যোগ বা পরিবর্তন করুন।
+                    </DialogDescription>
+                </DialogHeader>
+                <form onSubmit={handleTeamMemberFormSubmit} className="space-y-4">
+                    <div className="space-y-2">
+                        <Label htmlFor="tm-name">নাম</Label>
+                        <Input
+                            id="tm-name"
+                            value={currentTeamMember.name || ''}
+                            onChange={(e) => setCurrentTeamMember({ ...currentTeamMember, name: e.target.value })}
+                            required
+                        />
+                    </div>
+                    <div className="space-y-2">
+                        <Label htmlFor="tm-role">ভূমিকা</Label>
+                        <Input
+                            id="tm-role"
+                            value={currentTeamMember.role || ''}
+                            onChange={(e) => setCurrentTeamMember({ ...currentTeamMember, role: e.target.value })}
+                            required
+                        />
+                    </div>
+                    <div className="space-y-2">
+                        <Label htmlFor="tm-image">ছবির URL</Label>
+                        <Input
+                            id="tm-image"
+                            value={currentTeamMember.image || ''}
+                            onChange={(e) => setCurrentTeamMember({ ...currentTeamMember, image: e.target.value })}
+                            placeholder="https://placehold.co/400x400.png"
+                            required
+                        />
+                    </div>
+                    <div className="space-y-2">
+                        <Label htmlFor="tm-hint">ছবির Hint (for AI)</Label>
+                        <Input
+                            id="tm-hint"
+                            value={currentTeamMember.hint || ''}
+                            onChange={(e) => setCurrentTeamMember({ ...currentTeamMember, hint: e.target.value })}
+                            placeholder="e.g. man portrait"
+                            required
+                        />
+                    </div>
+                    <DialogFooter>
+                        <Button type="submit">{isEditingTeamMember ? 'সংরক্ষণ করুন' : 'যোগ করুন'}</Button>
+                        <DialogClose asChild>
+                            <Button type="button" variant="secondary" onClick={closeTeamMemberForm}>বাতিল</Button>
+                        </DialogClose>
+                    </DialogFooter>
+                </form>
+            </DialogContent>
+        </Dialog>
     </div>
   );
 }
 
 export default useAuth(AdminPage);
-
-    
