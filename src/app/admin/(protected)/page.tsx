@@ -7,10 +7,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Shield, PlusCircle, Edit, Trash2, BrainCircuit, BookOpenCheck, Library, Award, FileText, Mic, GraduationCap, ImagePlus } from "lucide-react";
+import { Shield, PlusCircle, Edit, Trash2, BrainCircuit, BookOpenCheck, Library, Award, FileText, Mic, GraduationCap, ImagePlus, LogOut } from "lucide-react";
 import { useState, useEffect } from "react";
 import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc } from "firebase/firestore";
-import { db } from "@/lib/firebase";
+import { db, auth } from "@/lib/firebase";
 import {
   Dialog,
   DialogContent,
@@ -28,6 +28,10 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import Image from "next/image";
+import { useAuth } from "@/hooks/use-auth";
+import { useSignOut } from "react-firebase-hooks/auth";
+import { useRouter } from "next/navigation";
+import { useToast } from "@/hooks/use-toast";
 
 
 type Commitment = {
@@ -63,7 +67,7 @@ const iconMap = {
     GraduationCap: <GraduationCap />,
 };
 
-export default function AdminPage() {
+function AdminPage() {
     const [commitments, setCommitments] = useState<Commitment[]>([]);
     const [academicAchievements, setAcademicAchievements] = useState<AcademicAchievement[]>([]);
     const [socialWorks, setSocialWorks] = useState<SocialWork[]>([]);
@@ -79,6 +83,10 @@ export default function AdminPage() {
     
     const [isSocialWorkFormOpen, setIsSocialWorkFormOpen] = useState(false);
     const [currentSocialWork, setCurrentSocialWork] = useState<Partial<SocialWork>>({});
+
+    const [signOut] = useSignOut(auth);
+    const router = useRouter();
+    const {toast} = useToast();
 
     const fetchCommitments = async () => {
         const commitmentsCollection = collection(db, "commitments");
@@ -225,16 +233,32 @@ export default function AdminPage() {
         fetchSocialWorks();
     };
 
+    const handleSignOut = async () => {
+        const success = await signOut();
+        if (success) {
+          router.push('/');
+           toast({
+              title: "সফলভাবে সাইন আউট হয়েছে",
+              description: "আপনি অ্যাডমিন প্যানেল থেকে লগ আউট করেছেন।",
+            });
+        }
+    };
+
 
   return (
     <div className="bg-background">
       <div className="container mx-auto px-4 py-16 md:py-24">
         <header className="text-center max-w-4xl mx-auto">
-          <Shield className="mx-auto h-12 w-12 text-primary" />
-          <h1 className="font-headline text-5xl md:text-6xl font-bold mt-4 text-foreground">অ্যাডমিন প্যানেল</h1>
-          <p className="font-body text-lg mt-4 text-muted-foreground">
-            ওয়েবসাইট পরিচালনার জন্য অ্যাডমিন প্যানেলে স্বাগতম।
-          </p>
+            <div className="flex justify-center items-center gap-4">
+              <Shield className="mx-auto h-12 w-12 text-primary" />
+              <h1 className="font-headline text-5xl md:text-6xl font-bold text-foreground">অ্যাডমিন প্যানেল</h1>
+            </div>
+            <p className="font-body text-lg mt-4 text-muted-foreground">
+                ওয়েবসাইট পরিচালনার জন্য অ্যাডমিন প্যানেলে স্বাগতম।
+            </p>
+            <Button onClick={handleSignOut} variant="destructive" className="mt-4">
+                <LogOut className="mr-2 h-4 w-4"/> সাইন আউট
+            </Button>
         </header>
 
         <main className="mt-16">
@@ -533,3 +557,5 @@ export default function AdminPage() {
     </div>
   );
 }
+
+export default useAuth(AdminPage);
