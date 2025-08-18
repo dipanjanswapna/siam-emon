@@ -63,7 +63,7 @@ export default function AboutPage() {
                 />
                 <div className="p-6 text-center">
                   <h2 className="font-headline text-3xl font-bold">সিয়াম ফেরদৌস ইমন</h2>
-                  <p className="font-body text-primary mt-1">একটি উন্নত ভবিষ্যতের জন্য</p>
+                  <p className="font-body text-primary mt-1">গবেষণা ও প্রকাশনা সম্পাদক পদপ্রার্থী</p>
                 </div>
               </CardContent>
             </Card>
