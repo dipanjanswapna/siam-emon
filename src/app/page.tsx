@@ -7,7 +7,7 @@ import React, { useState } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { ArrowRight, BookOpenCheck, BrainCircuit, Library, Users, Camera, X, Heart, Megaphone, Flag } from "lucide-react";
+import { ArrowRight, BookOpenCheck, BrainCircuit, Library, Users, Camera, X, Heart, Megaphone, Flag, Award, FileText, Mic, GraduationCap } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 
@@ -88,6 +88,7 @@ export default function Home() {
       <CommitmentSection />
       <ResearchSection />
       <LogicalMovementSection />
+      <AcademicAchievementSection />
     </div>
   );
 }
@@ -291,7 +292,7 @@ const researchActivities = [
         { src: "https://placehold.co/800x600.png", alt: "শ্রোতারা প্রশ্ন করছেন", hint: "audience asking question" },
     ],
   },
-  {
+    {
     icon: Users,
     title: "ইয়ুথ কনফারেন্স আয়োজন",
     description: "সিয়াম ফেরদৌস ইমন তরুণদের মেধা ও সম্ভাবনা বিকাশে একটি ইয়ুথ কনফারেন্স আয়োজনের পরিকল্পনা করছেন। এই কনফারেন্সে দেশের বিভিন্ন প্রান্তের তরুণরা একত্রিত হয়ে তাদের ধারণা, উদ্ভাবন এবং অভিজ্ঞতা বিনিময় করার সুযোগ পাবে, যা একটি সমৃদ্ধशाली ভবিষ্যতের পথ দেখাবে।",
@@ -485,4 +486,57 @@ function LogicalMovementSection() {
   );
 }
 
+const academicAchievements = [
+  {
+    icon: Award,
+    title: "ডিন'স অ্যাওয়ার্ড",
+    description: "শিক্ষায় অসামান্য সাফল্যের জন্য জীব বিজ্ঞান অনুষদ থেকে ডিন'স অ্যাওয়ার্ড প্রাপ্তি।",
+  },
+  {
+    icon: FileText,
+    title: "গবেষণা প্রকাশনা",
+    description: "আন্তর্জাতিক জার্নালে মলিকুলার বায়োলজি বিষয়ে গবেষণা প্রবন্ধ প্রকাশিত হয়েছে।",
+  },
+  {
+    icon: Mic,
+    title: "জাতীয় সম্মেলনে অংশগ্রহণ",
+    description: "২৪তম জাতীয় প্রাণীবিজ্ঞান সম্মেলনে গবেষণা পোস্টার উপস্থাপন এবং অংশগ্রহণ।",
+  },
+  {
+    icon: GraduationCap,
+    title: "মেধা বৃত্তি",
+    description: "একাডেমিক ফলাফলের উপর ভিত্তি করে বিশ্ববিদ্যালয় থেকে মেধা বৃত্তি অর্জন।",
+  },
+];
 
+function AcademicAchievementSection() {
+  return (
+    <section className="py-16 md:py-24 bg-card">
+      <div className="container mx-auto px-4">
+        <div className="text-center max-w-4xl mx-auto">
+          <h2 className="font-headline text-4xl md:text-5xl font-bold text-foreground">একাডেমিক অর্জন</h2>
+          <p className="mt-4 font-body text-lg text-muted-foreground">
+            আমাদের প্রার্থীর শিক্ষাজীবনের কিছু উল্লেখযোগ্য সাফল্য এবং অর্জন নিচে তুলে ধরা হলো।
+          </p>
+        </div>
+        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {academicAchievements.map((achievement, index) => (
+            <Card key={index} className="text-center shadow-lg hover:shadow-primary/20 hover:-translate-y-2 transition-all duration-300 bg-background">
+              <CardHeader className="items-center">
+                <div className="bg-primary/10 p-4 rounded-full">
+                  <achievement.icon className="h-10 w-10 text-primary" />
+                </div>
+                <CardTitle className="font-headline text-2xl mt-4">{achievement.title}</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="font-body text-muted-foreground">{achievement.description}</p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+    
