@@ -501,83 +501,81 @@ function AdminPage() {
         
         {/* Academic Achievement Form Dialog */}
         <Dialog open={isAchievementFormOpen} onOpenChange={setIsAchievementFormOpen}>
-            <DialogContent className="max-h-[90vh]">
-                <DialogHeader>
-                    <DialogTitle>{isEditingAchievement ? 'অর্জন সম্পাদনা করুন' : 'নতুন অর্জন যোগ করুন'}</DialogTitle>
-                    <DialogDescription>
-                        এখানে একাডেমিক অর্জনের শিরোনাম, বর্ণনা, আইকন এবং ছবি যোগ বা পরিবর্তন করুন।
-                    </DialogDescription>
-                </DialogHeader>
-                <form onSubmit={handleAchievementFormSubmit}>
-                  <div className="space-y-4 py-4">
-                    <ScrollArea className="h-96 pr-6">
-                        <div className="space-y-4">
-                            <div className="space-y-2">
-                                <Label htmlFor="ach-title">শিরোনাম</Label>
-                                <Input
-                                    id="ach-title"
-                                    value={currentAchievement.title || ''}
-                                    onChange={(e) => setCurrentAchievement({ ...currentAchievement, title: e.target.value })}
-                                    required
-                                />
-                            </div>
-                            <div className="space-y-2">
-                                <Label htmlFor="ach-description">বর্ণনা</Label>
-                                <Textarea
-                                    id="ach-description"
-                                    value={currentAchievement.description || ''}
-                                    onChange={(e) => setCurrentAchievement({ ...currentAchievement, description: e.target.value })}
-                                    required
-                                />
-                            </div>
-                            <div className="space-y-2">
-                                <Label htmlFor="ach-icon">আইকন</Label>
-                                <Select
-                                    value={currentAchievement.icon}
-                                    onValueChange={(value) => setCurrentAchievement({ ...currentAchievement, icon: value })}
-                                >
-                                    <SelectTrigger>
-                                        <SelectValue placeholder="আইকন নির্বাচন করুন" />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectItem value="Award">ডিন'স অ্যাওয়ার্ড (Award)</SelectItem>
-                                        <SelectItem value="FileText">গবেষণা প্রকাশনা (FileText)</SelectItem>
-                                        <SelectItem value="Mic">জাতীয় সম্মেলনে অংশগ্রহণ (Mic)</SelectItem>
-                                        <SelectItem value="GraduationCap">মেধা বৃত্তি (GraduationCap)</SelectItem>
-                                    </SelectContent>
-                                </Select>
-                            </div>
-                            <div className="space-y-2">
-                                <Label htmlFor="ach-image">ছবির URL</Label>
-                                <Input
-                                    id="ach-image"
-                                    value={currentAchievement.image || ''}
-                                    onChange={(e) => setCurrentAchievement({ ...currentAchievement, image: e.target.value })}
-                                    placeholder="https://placehold.co/600x400.png"
-                                    required
-                                />
-                            </div>
-                            <div className="space-y-2">
-                                <Label htmlFor="ach-image-hint">ছবির Hint (for AI)</Label>
-                                <Input
-                                    id="ach-image-hint"
-                                    value={currentAchievement.imageHint || ''}
-                                    onChange={(e) => setCurrentAchievement({ ...currentAchievement, imageHint: e.target.value })}
-                                    placeholder="e.g. award ceremony"
-                                    required
-                                />
-                            </div>
+          <DialogContent className="max-h-[90vh] flex flex-col p-0">
+            <DialogHeader className="p-6 pb-0 flex-shrink-0">
+              <DialogTitle>{isEditingAchievement ? 'অর্জন সম্পাদনা করুন' : 'নতুন অর্জন যোগ করুন'}</DialogTitle>
+              <DialogDescription>
+                  এখানে একাডেমিক অর্জনের শিরোনাম, বর্ণনা, আইকন এবং ছবি যোগ বা পরিবর্তন করুন।
+              </DialogDescription>
+            </DialogHeader>
+            <form onSubmit={handleAchievementFormSubmit} className="flex-grow flex flex-col overflow-hidden">
+                <ScrollArea className="flex-grow overflow-auto p-6">
+                    <div className="space-y-4">
+                        <div className="space-y-2">
+                            <Label htmlFor="ach-title">শিরোনাম</Label>
+                            <Input
+                                id="ach-title"
+                                value={currentAchievement.title || ''}
+                                onChange={(e) => setCurrentAchievement({ ...currentAchievement, title: e.target.value })}
+                                required
+                            />
                         </div>
-                    </ScrollArea>
-                  </div>
-                  <DialogFooter className="pt-4 border-t">
-                      <Button type="submit">{isEditingAchievement ? 'সংরক্ষণ করুন' : 'যোগ করুন'}</Button>
-                      <DialogClose asChild>
-                          <Button type="button" variant="secondary" onClick={closeAchievementForm}>বাতিল</Button>
-                      </DialogClose>
-                  </DialogFooter>
-                </form>
-            </DialogContent>
+                        <div className="space-y-2">
+                            <Label htmlFor="ach-description">বর্ণনা</Label>
+                            <Textarea
+                                id="ach-description"
+                                value={currentAchievement.description || ''}
+                                onChange={(e) => setCurrentAchievement({ ...currentAchievement, description: e.target.value })}
+                                required
+                            />
+                        </div>
+                        <div className="space-y-2">
+                            <Label htmlFor="ach-icon">আইকন</Label>
+                            <Select
+                                value={currentAchievement.icon}
+                                onValueChange={(value) => setCurrentAchievement({ ...currentAchievement, icon: value })}
+                            >
+                                <SelectTrigger>
+                                    <SelectValue placeholder="আইকন নির্বাচন করুন" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectItem value="Award">ডিন'স অ্যাওয়ার্ড (Award)</SelectItem>
+                                    <SelectItem value="FileText">গবেষণা প্রকাশনা (FileText)</SelectItem>
+                                    <SelectItem value="Mic">জাতীয় সম্মেলনে অংশগ্রহণ (Mic)</SelectItem>
+                                    <SelectItem value="GraduationCap">মেধা বৃত্তি (GraduationCap)</SelectItem>
+                                </SelectContent>
+                            </Select>
+                        </div>
+                        <div className="space-y-2">
+                            <Label htmlFor="ach-image">ছবির URL</Label>
+                            <Input
+                                id="ach-image"
+                                value={currentAchievement.image || ''}
+                                onChange={(e) => setCurrentAchievement({ ...currentAchievement, image: e.target.value })}
+                                placeholder="https://placehold.co/600x400.png"
+                                required
+                            />
+                        </div>
+                        <div className="space-y-2">
+                            <Label htmlFor="ach-image-hint">ছবির Hint (for AI)</Label>
+                            <Input
+                                id="ach-image-hint"
+                                value={currentAchievement.imageHint || ''}
+                                onChange={(e) => setCurrentAchievement({ ...currentAchievement, imageHint: e.target.value })}
+                                placeholder="e.g. award ceremony"
+                                required
+                            />
+                        </div>
+                    </div>
+                </ScrollArea>
+              <DialogFooter className="p-6 pt-4 border-t flex-shrink-0">
+                  <Button type="submit">{isEditingAchievement ? 'সংরক্ষণ করুন' : 'যোগ করুন'}</Button>
+                  <DialogClose asChild>
+                      <Button type="button" variant="secondary" onClick={closeAchievementForm}>বাতিল</Button>
+                  </DialogClose>
+              </DialogFooter>
+            </form>
+          </DialogContent>
         </Dialog>
 
         {/* Social Work Form Dialog */}
@@ -634,7 +632,5 @@ function AdminPage() {
 }
 
 export default useAuth(AdminPage);
-
-    
 
     
