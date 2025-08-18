@@ -7,12 +7,13 @@ import React, { useState } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { ArrowRight, BookOpenCheck, BrainCircuit, Library, Users, Camera, X, Heart, Megaphone, Flag, Award, FileText, Mic, GraduationCap, HandHeart, BookText, ShieldCheck, User, MessageSquare, Mail, Switch } from "lucide-react";
+import { ArrowRight, BookOpenCheck, BrainCircuit, Library, Users, Camera, X, Heart, Megaphone, Flag, Award, FileText, Mic, GraduationCap, HandHeart, BookText, ShieldCheck, MessageSquare, Mail } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { Switch } from "@/components/ui/switch";
 
 
 const carouselItems = [
@@ -879,5 +880,7 @@ function FeedbackSection() {
 
 
 
+
+    
 
     
