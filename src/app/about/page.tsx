@@ -1,7 +1,7 @@
 
 import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { GraduationCap, Briefcase, Award, CheckCircle } from "lucide-react";
+import { GraduationCap, Briefcase, Award, CheckCircle, ShipWheel } from "lucide-react";
 
 export default function AboutPage() {
   return (
@@ -96,6 +96,40 @@ export default function AboutPage() {
                   </p>
                 </div>
               </section>
+
+              <section>
+                 <h3 className="font-headline text-3xl font-bold text-foreground flex items-center gap-3">
+                  <ShipWheel className="w-8 h-8 text-primary" />
+                  আমাদের যাত্রা: বিশ্বাস ও প্রতিশ্রুতির গল্প
+                </h3>
+                <div className="mt-4 grid md:grid-cols-5 gap-8 items-center">
+                    <div className="md:col-span-2 relative w-full aspect-square rounded-lg overflow-hidden shadow-lg group">
+                        <Image
+                        src="https://i.postimg.cc/9M4d22G6/journey-image.jpg"
+                        alt="আমাদের যাত্রা"
+                        fill
+                        className="object-cover transform group-hover:scale-105 transition-transform duration-300"
+                        data-ai-hint="team students"
+                        />
+                    </div>
+                    <div className="md:col-span-3">
+                        <div className="font-body text-lg text-muted-foreground space-y-4">
+                            <p>
+                            আমি, সিয়াম ফেরদৌস ইমন এবং আমার দল কোনো হঠাৎ করে আসা নেতা নই। আমাদের এই যাত্রা শুরু হয়েছিল ঢাকা বিশ্ববিদ্যালয়ের প্রতিটি শিক্ষার্থীর হৃদয়ের কথা শোনার মধ্য দিয়ে। আমি দেখেছি আপনাদের স্বপ্ন, উপলব্ধি করেছি আপনাদের সংগ্রাম। আমি দেখেছি কীভাবে আধুনিক গবেষণা ও শিক্ষার অভাব আমাদের ভবিষ্যৎকে বাধাগ্রস্ত করছে। আর তাই, আমাদের এই যাত্রা কেবল একটি নির্বাচন জেতার জন্য নয়, এটি একটি পরিবর্তনের জন্য।
+                            </p>
+                            <div className="pl-4 border-l-4 border-primary space-y-2">
+                                <p><strong>শুরুর গল্প:</strong> আমার যাত্রা শুরু হয় ফজলুল হক মুসলিম হলের বিতর্ক ক্লাব থেকে। সেখান থেকে আমি শিখেছি কীভাবে যুক্তি দিয়ে কথা বলতে হয়, কীভাবে ভিন্নমতকে সম্মান করতে হয়। আমি দেখেছি, একজন যোগ্য নেতা কেবল কথা বলেন না, তিনি শোনেনও।</p>
+                                <p><strong>মাঠের অভিজ্ঞতা:</strong> আমি শুধু এসি রুমে বসে পরিকল্পনা করিনি। আমি আপনাদের সাথে মাঠে ছিলাম, বিভিন্ন সেমিনার ও কর্মশালায় অংশ নিয়েছি। আপনাদের সমস্যাগুলো সরাসরি জেনেছি এবং তার সমাধানের পথ খুঁজেছি।</p>
+                                <p><strong>প্রতিশ্রুতি থেকে কাজ:</strong> আমি শুধু প্রতিশ্রুতি দেইনি, কাজ করে দেখিয়েছি। বিগব্যাং একাডেমি এবং ইউসিসি কোচিং সেন্টারে আমি শিক্ষক হিসেবে কাজ করেছি, যার মাধ্যমে আমি আপনাদের শিক্ষাগত চাহিদাগুলো বুঝতে পেরেছি।</p>
+                            </div>
+                            <p className="font-semibold text-foreground pt-2">
+                            এই যাত্রা আপনাদের বিশ্বাস আর ভালোবাসার ওপর ভিত্তি করে গড়ে উঠেছে। আমি জানি, আমার সামনে অনেক চ্যালেঞ্জ আছে, কিন্তু আপনাদের সমর্থন পেলে আমি সেই চ্যালেঞ্জগুলো অতিক্রম করতে পারব। আমার এই যাত্রা আপনাদের এবং আপনাদের ভবিষ্যতের জন্য। আসুন, এই পরিবর্তনের যাত্রায় আমার সঙ্গী হন। আপনার মূল্যবান ভোট আমার পথচলার মূল শক্তি।
+                            </p>
+                        </div>
+                    </div>
+                </div>
+              </section>
+
             </div>
           </div>
         </div>
