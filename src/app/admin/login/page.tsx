@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { auth } from "@/lib/firebase";
@@ -39,13 +39,16 @@ export default function LoginPage() {
     }
   };
 
-  if (error) {
-     toast({
-        variant: "destructive",
-        title: "লগইন ব্যর্থ হয়েছে",
-        description: error.message,
-    });
-  }
+  useEffect(() => {
+    if (error) {
+       toast({
+          variant: "destructive",
+          title: "লগইন ব্যর্থ হয়েছে",
+          description: error.message,
+      });
+    }
+  }, [error, toast]);
+
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-background">
