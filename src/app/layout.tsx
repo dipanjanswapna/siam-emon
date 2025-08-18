@@ -80,6 +80,7 @@ export default function RootLayout({
             gtag('config', 'G-TS85T6ZB8Q');
           `}
         </Script>
+        <Script src="https://www.powr.io/powr.js?platform=html" strategy="lazyOnload"></Script>
       </head>
       <body className={cn("font-body antialiased min-h-screen flex flex-col")}>
         <Header />
