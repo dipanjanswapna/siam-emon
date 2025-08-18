@@ -500,21 +500,29 @@ const academicAchievements = [
     icon: Award,
     title: "ডিন'স অ্যাওয়ার্ড",
     description: "শিক্ষায় অসামান্য সাফল্যের জন্য জীব বিজ্ঞান অনুষদ থেকে ডিন'স অ্যাওয়ার্ড প্রাপ্তি।",
+    image: "https://placehold.co/600x400.png",
+    imageHint: "award ceremony",
   },
   {
     icon: FileText,
     title: "গবেষণা প্রকাশনা",
     description: "আন্তর্জাতিক জার্নালে মলিকুলার বায়োলজি বিষয়ে গবেষণা প্রবন্ধ প্রকাশিত হয়েছে।",
+    image: "https://placehold.co/600x400.png",
+    imageHint: "research paper",
   },
   {
     icon: Mic,
     title: "জাতীয় সম্মেলনে অংশগ্রহণ",
     description: "২৪তম জাতীয় প্রাণীবিজ্ঞান সম্মেলনে গবেষণা পোস্টার উপস্থাপন এবং অংশগ্রহণ।",
+    image: "https://placehold.co/600x400.png",
+    imageHint: "conference presentation",
   },
   {
     icon: GraduationCap,
     title: "মেধা বৃত্তি",
     description: "একাডেমিক ফলাফলের উপর ভিত্তি করে বিশ্ববিদ্যালয় থেকে মেধা বৃত্তি অর্জন।",
+    image: "https://placehold.co/600x400.png",
+    imageHint: "scholarship certificate",
   },
 ];
 
@@ -530,14 +538,23 @@ function AcademicAchievementSection() {
         </div>
         <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {academicAchievements.map((achievement, index) => (
-            <Card key={index} className="text-center shadow-lg hover:shadow-primary/20 hover:-translate-y-2 transition-all duration-300 bg-background">
-              <CardHeader className="items-center">
-                <div className="bg-primary/10 p-4 rounded-full">
-                  <achievement.icon className="h-10 w-10 text-primary" />
+             <Card key={index} className="flex flex-col shadow-lg hover:shadow-primary/20 hover:-translate-y-2 transition-all duration-300 bg-background overflow-hidden">
+               <div className="relative w-full aspect-video">
+                 <Image 
+                   src={achievement.image}
+                   alt={achievement.title}
+                   fill
+                   className="object-cover"
+                   data-ai-hint={achievement.imageHint}
+                 />
+               </div>
+              <CardHeader className="items-center text-center">
+                <div className="bg-primary/10 p-3 rounded-full -mt-10 mb-2 border-4 border-background z-10">
+                  <achievement.icon className="h-8 w-8 text-primary" />
                 </div>
-                <CardTitle className="font-headline text-2xl mt-4">{achievement.title}</CardTitle>
+                <CardTitle className="font-headline text-xl mt-2">{achievement.title}</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="text-center flex-grow">
                 <p className="font-body text-muted-foreground">{achievement.description}</p>
               </CardContent>
             </Card>
@@ -547,3 +564,5 @@ function AcademicAchievementSection() {
     </section>
   );
 }
+
+    
