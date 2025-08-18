@@ -304,7 +304,7 @@ const researchActivities = [
     {
     icon: Users,
     title: "ইয়ুথ কনফারেন্স আয়োজন",
-    description: "সিয়াম ফেরদৌস ইমন তরুণদের মেধা ও সম্ভাবনা বিকাশে একটি ইয়ুথ কনফারেন্স আয়োজনের পরিকল্পনা করছেন। এই কনফারেন্সে দেশের বিভিন্ন প্রান্তের তরুণরা একত্রিত হয়ে তাদের ধারণা, উদ্ভাবন এবং অভিজ্ঞতা বিনিময় করার সুযোগ পাবে, যা একটি সমৃদ্ধशाली ভবিষ্যতের পথ দেখাবে।",
+    description: "সিয়াম ফেরদৌস ইমন তরুণদের মেধা ও সম্ভাবনা বিকাশে একটি ইয়ুথ কনফারেন্স আয়োজনের পরিকল্পনা করছেন। এই কনফারেন্সে দেশের বিভিন্ন প্রান্তের তরুণরা একত্রিত হয়ে তাদের ধারণা, উদ্ভাবন এবং অভিজ্ঞতা বিনিময় করার সুযোগ পাবে, যা একটি সমৃদ্ধশালী ভবিষ্যতের পথ দেখাবে।",
     images: [
         { src: "https://placehold.co/800x600.png", alt: "তরুণ অংশগ্রহণকারীরা কনফারেন্সে অংশ নিচ্ছেন", hint: "youth conference" },
         { src: "https://placehold.co/800x600.png", alt: "মঞ্চে বক্তা বক্তব্য রাখছেন", hint: "youth speaker" },
@@ -527,42 +527,74 @@ const academicAchievements = [
 ];
 
 function AcademicAchievementSection() {
+    const [selectedAchievement, setSelectedAchievement] = useState<(typeof academicAchievements)[0] | null>(null);
+
+    const openDialog = (achievement: (typeof academicAchievements)[0]) => {
+      setSelectedAchievement(achievement);
+    };
+
+    const closeDialog = () => {
+      setSelectedAchievement(null);
+    };
+
   return (
-    <section className="py-16 md:py-24 bg-card">
-      <div className="container mx-auto px-4">
-        <div className="text-center max-w-4xl mx-auto">
-          <h2 className="font-headline text-4xl md:text-5xl font-bold text-foreground">একাডেমিক অর্জন</h2>
-          <p className="mt-4 font-body text-lg text-muted-foreground">
-            আমাদের প্রার্থীর শিক্ষাজীবনের কিছু উল্লেখযোগ্য সাফল্য এবং অর্জন নিচে তুলে ধরা হলো।
-          </p>
+    <>
+      <section className="py-16 md:py-24 bg-card">
+        <div className="container mx-auto px-4">
+          <div className="text-center max-w-4xl mx-auto">
+            <h2 className="font-headline text-4xl md:text-5xl font-bold text-foreground">একাডেমিক অর্জন</h2>
+            <p className="mt-4 font-body text-lg text-muted-foreground">
+              আমাদের প্রার্থীর শিক্ষাজীবনের কিছু উল্লেখযোগ্য সাফল্য এবং অর্জন নিচে তুলে ধরা হলো।
+            </p>
+          </div>
+          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {academicAchievements.map((achievement, index) => (
+               <Card key={index} className="flex flex-col shadow-lg hover:shadow-primary/20 hover:-translate-y-2 transition-all duration-300 bg-background overflow-hidden cursor-pointer" onClick={() => openDialog(achievement)}>
+                 <div className="relative w-full aspect-video">
+                   <Image 
+                     src={achievement.image}
+                     alt={achievement.title}
+                     fill
+                     className="object-cover"
+                     data-ai-hint={achievement.imageHint}
+                   />
+                 </div>
+                <CardHeader className="items-center text-center">
+                  <div className="bg-primary/10 p-3 rounded-full -mt-10 mb-2 border-4 border-background z-10">
+                    <achievement.icon className="h-8 w-8 text-primary" />
+                  </div>
+                  <CardTitle className="font-headline text-xl mt-2">{achievement.title}</CardTitle>
+                </CardHeader>
+                <CardContent className="text-center flex-grow">
+                  <p className="font-body text-muted-foreground">{achievement.description}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
-        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {academicAchievements.map((achievement, index) => (
-             <Card key={index} className="flex flex-col shadow-lg hover:shadow-primary/20 hover:-translate-y-2 transition-all duration-300 bg-background overflow-hidden">
-               <div className="relative w-full aspect-video">
-                 <Image 
-                   src={achievement.image}
-                   alt={achievement.title}
-                   fill
-                   className="object-cover"
-                   data-ai-hint={achievement.imageHint}
-                 />
-               </div>
-              <CardHeader className="items-center text-center">
-                <div className="bg-primary/10 p-3 rounded-full -mt-10 mb-2 border-4 border-background z-10">
-                  <achievement.icon className="h-8 w-8 text-primary" />
+      </section>
+
+      <Dialog open={!!selectedAchievement} onOpenChange={(isOpen) => !isOpen && closeDialog()}>
+        <DialogContent className="max-w-4xl w-[95vw] h-[90vh] p-0 bg-card border-none shadow-2xl rounded-2xl flex flex-col">
+          {selectedAchievement && (
+            <>
+              <div className="relative flex-grow w-full h-full">
+                 <Button variant="ghost" size="icon" onClick={closeDialog} className="absolute top-2 right-2 z-10 bg-destructive text-destructive-foreground rounded-full h-8 w-8 hover:bg-destructive/80">
+                  <X className="h-5 w-5" />
+                  <span className="sr-only">বন্ধ করুন</span>
+                </Button>
+                <div className="w-full h-full relative rounded-lg overflow-hidden">
+                    <Image src={selectedAchievement.image} alt={selectedAchievement.title} fill className="object-contain" data-ai-hint={selectedAchievement.imageHint}/>
                 </div>
-                <CardTitle className="font-headline text-xl mt-2">{achievement.title}</CardTitle>
-              </CardHeader>
-              <CardContent className="text-center flex-grow">
-                <p className="font-body text-muted-foreground">{achievement.description}</p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </div>
-    </section>
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
+    </>
   );
 }
+
+    
 
     
