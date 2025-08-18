@@ -158,8 +158,24 @@ function AdminPage() {
 
     const loadAllData = async () => {
         setIsLoading(true);
-        await Promise.all([fetchCommitments(), fetchAcademicAchievements(), fetchSocialWorks(), fetchFeedbacks(), fetchTeamMembers()]);
-        setIsLoading(false);
+        try {
+            await Promise.all([
+                fetchCommitments(), 
+                fetchAcademicAchievements(), 
+                fetchSocialWorks(), 
+                fetchFeedbacks(), 
+                fetchTeamMembers()
+            ]);
+        } catch (error) {
+            console.error("Error loading data: ", error);
+            toast({
+                variant: 'destructive',
+                title: 'ডেটা লোড করতে সমস্যা হয়েছে',
+                description: (error as Error).message,
+            });
+        } finally {
+            setIsLoading(false);
+        }
     }
 
     useEffect(() => {
@@ -630,7 +646,21 @@ function AdminPage() {
                             </div>
                              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                                 {isLoading ? (
-                                    <p>লোড হচ্ছে...</p>
+                                    Array.from({ length: 3 }).map((_, index) => (
+                                        <Card key={index} className="p-4 bg-primary/5 flex items-center justify-between">
+                                            <div className="flex items-center gap-4">
+                                                <Skeleton className="h-12 w-12 rounded-full" />
+                                                <div className="space-y-2">
+                                                    <Skeleton className="h-4 w-24" />
+                                                    <Skeleton className="h-3 w-16" />
+                                                </div>
+                                            </div>
+                                            <div className="flex items-center gap-2">
+                                                <Skeleton className="h-8 w-8" />
+                                                <Skeleton className="h-8 w-8" />
+                                            </div>
+                                        </Card>
+                                    ))
                                 ) : (
                                     teamMembers.map(tm => (
                                         <Card key={tm.id} className="p-4 bg-primary/5 flex items-center justify-between">
@@ -716,8 +746,8 @@ function AdminPage() {
         
         {/* Academic Achievement Form Dialog */}
          <Dialog open={isAchievementFormOpen} onOpenChange={setIsAchievementFormOpen}>
-            <DialogContent className="max-w-lg w-full">
-                <form onSubmit={handleAchievementFormSubmit} className="flex flex-col max-h-[90vh]">
+            <DialogContent className="max-w-lg w-full flex flex-col max-h-[90vh]">
+                <form onSubmit={handleAchievementFormSubmit} className="flex flex-col flex-grow min-h-0">
                     <DialogHeader className="flex-shrink-0">
                         <DialogTitle>{isEditingAchievement ? 'অর্জন সম্পাদনা করুন' : 'নতুন অর্জন যোগ করুন'}</DialogTitle>
                         <DialogDescription>
@@ -906,3 +936,5 @@ function AdminPage() {
 }
 
 export default useAuth(AdminPage);
+
+    
