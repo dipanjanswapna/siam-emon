@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Shield, PlusCircle, Edit, Trash2, BrainCircuit, BookOpenCheck, Library, Award, FileText, Mic, GraduationCap, ImagePlus, LogOut, MessageSquare } from "lucide-react";
 import { useState, useEffect } from "react";
-import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc } from "firebase/firestore";
+import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc, orderBy, query } from "firebase/firestore";
 import { db, auth } from "@/lib/firebase";
 import {
   Dialog,
@@ -128,9 +128,10 @@ function AdminPage() {
 
     const fetchFeedbacks = async () => {
         const feedbacksCollection = collection(db, "feedback");
-        const feedbacksSnapshot = await getDocs(feedbacksCollection);
+        const q = query(feedbacksCollection, orderBy("createdAt", "desc"));
+        const feedbacksSnapshot = await getDocs(q);
         const feedbacksList = feedbacksSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Feedback));
-        setFeedbacks(feedbacksList.sort((a, b) => b.createdAt.toDate() - a.createdAt.toDate()));
+        setFeedbacks(feedbacksList);
     };
 
 
@@ -588,16 +589,16 @@ function AdminPage() {
         
         {/* Academic Achievement Form Dialog */}
          <Dialog open={isAchievementFormOpen} onOpenChange={setIsAchievementFormOpen}>
-            <form onSubmit={handleAchievementFormSubmit}>
-                <DialogContent className="max-h-[90vh] flex flex-col p-0">
-                    <DialogHeader className="p-6 pb-0 flex-shrink-0">
+            <DialogContent className="max-w-lg w-full">
+                <form onSubmit={handleAchievementFormSubmit} className="flex flex-col max-h-[90vh]">
+                    <DialogHeader className="flex-shrink-0">
                         <DialogTitle>{isEditingAchievement ? 'অর্জন সম্পাদনা করুন' : 'নতুন অর্জন যোগ করুন'}</DialogTitle>
                         <DialogDescription>
                             এখানে একাডেমিক অর্জনের শিরোনাম, বর্ণনা, আইকন এবং ছবি যোগ বা পরিবর্তন করুন।
                         </DialogDescription>
                     </DialogHeader>
-                    <ScrollArea className="flex-grow p-6 pr-4">
-                        <div className="space-y-4 pr-2">
+                    <ScrollArea className="flex-grow my-4 pr-6 -mr-6">
+                        <div className="space-y-4">
                             <div className="space-y-2">
                                 <Label htmlFor="ach-title">শিরোনাম</Label>
                                 <Input
@@ -655,14 +656,14 @@ function AdminPage() {
                             </div>
                         </div>
                     </ScrollArea>
-                    <DialogFooter className="p-6 pt-4 border-t flex-shrink-0">
+                    <DialogFooter className="flex-shrink-0">
                         <Button type="submit">{isEditingAchievement ? 'সংরক্ষণ করুন' : 'যোগ করুন'}</Button>
                         <DialogClose asChild>
                             <Button type="button" variant="secondary" onClick={closeAchievementForm}>বাতিল</Button>
                         </DialogClose>
                     </DialogFooter>
-                </DialogContent>
-            </form>
+                </form>
+            </DialogContent>
         </Dialog>
 
 
