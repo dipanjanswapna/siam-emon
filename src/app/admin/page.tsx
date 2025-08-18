@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Shield, PlusCircle, Edit, Trash2, BrainCircuit, BookOpenCheck, Library, Award, FileText, Mic, GraduationCap } from "lucide-react";
+import { Shield, PlusCircle, Edit, Trash2, BrainCircuit, BookOpenCheck, Library, Award, FileText, Mic, GraduationCap, ImagePlus } from "lucide-react";
 import { useState, useEffect } from "react";
 import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
@@ -27,6 +27,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import Image from "next/image";
 
 
 type Commitment = {
@@ -45,6 +46,13 @@ type AcademicAchievement = {
     imageHint: string;
 };
 
+type SocialWork = {
+    id: string;
+    image: string;
+    alt: string;
+    imageHint: string;
+};
+
 const iconMap = {
     BrainCircuit: <BrainCircuit />,
     BookOpenCheck: <BookOpenCheck />,
@@ -58,6 +66,7 @@ const iconMap = {
 export default function AdminPage() {
     const [commitments, setCommitments] = useState<Commitment[]>([]);
     const [academicAchievements, setAcademicAchievements] = useState<AcademicAchievement[]>([]);
+    const [socialWorks, setSocialWorks] = useState<SocialWork[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     
     const [isCommitmentFormOpen, setIsCommitmentFormOpen] = useState(false);
@@ -67,29 +76,39 @@ export default function AdminPage() {
     const [isAchievementFormOpen, setIsAchievementFormOpen] = useState(false);
     const [currentAchievement, setCurrentAchievement] = useState<Partial<AcademicAchievement>>({});
     const [isEditingAchievement, setIsEditingAchievement] = useState(false);
-
+    
+    const [isSocialWorkFormOpen, setIsSocialWorkFormOpen] = useState(false);
+    const [currentSocialWork, setCurrentSocialWork] = useState<Partial<SocialWork>>({});
 
     const fetchCommitments = async () => {
-        setIsLoading(true);
         const commitmentsCollection = collection(db, "commitments");
         const commitmentsSnapshot = await getDocs(commitmentsCollection);
         const commitmentsList = commitmentsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Commitment));
         setCommitments(commitmentsList);
-        setIsLoading(false);
     };
     
     const fetchAcademicAchievements = async () => {
-        setIsLoading(true);
         const achievementsCollection = collection(db, "academicAchievements");
         const achievementsSnapshot = await getDocs(achievementsCollection);
         const achievementsList = achievementsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as AcademicAchievement));
         setAcademicAchievements(achievementsList);
-        setIsLoading(false);
     };
 
+    const fetchSocialWorks = async () => {
+        const socialWorksCollection = collection(db, "socialWorks");
+        const socialWorksSnapshot = await getDocs(socialWorksCollection);
+        const socialWorksList = socialWorksSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as SocialWork));
+        setSocialWorks(socialWorksList);
+    };
+
+    const loadAllData = async () => {
+        setIsLoading(true);
+        await Promise.all([fetchCommitments(), fetchAcademicAchievements(), fetchSocialWorks()]);
+        setIsLoading(false);
+    }
+
     useEffect(() => {
-        fetchCommitments();
-        fetchAcademicAchievements();
+        loadAllData();
     }, []);
 
     const handleCommitmentFormSubmit = async (e: React.FormEvent) => {
@@ -180,6 +199,32 @@ export default function AdminPage() {
         fetchAcademicAchievements();
     };
 
+    const handleSocialWorkFormSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        await addDoc(collection(db, "socialWorks"), {
+            image: currentSocialWork.image,
+            alt: currentSocialWork.alt,
+            imageHint: currentSocialWork.imageHint,
+        });
+        closeSocialWorkForm();
+        fetchSocialWorks();
+    };
+
+    const openSocialWorkForm = () => {
+        setCurrentSocialWork({ image: "https://placehold.co/600x800.png", alt: "", imageHint: "" });
+        setIsSocialWorkFormOpen(true);
+    };
+
+    const closeSocialWorkForm = () => {
+        setIsSocialWorkFormOpen(false);
+        setCurrentSocialWork({});
+    };
+
+    const handleDeleteSocialWork = async (id: string) => {
+        await deleteDoc(doc(db, "socialWorks", id));
+        fetchSocialWorks();
+    };
+
 
   return (
     <div className="bg-background">
@@ -256,6 +301,43 @@ export default function AdminPage() {
                                                     <Edit className="h-4 w-4" />
                                                 </Button>
                                                 <Button variant="destructive" size="icon" onClick={() => handleDeleteAchievement(a.id)}>
+                                                    <Trash2 className="h-4 w-4" />
+                                                </Button>
+                                            </div>
+                                        </Card>
+                                    ))
+                                )}
+                            </div>
+                        </AccordionContent>
+                    </Card>
+                </AccordionItem>
+                <AccordionItem value="social-works">
+                    <Card>
+                        <AccordionTrigger className="p-6">
+                            <CardTitle>সামাজিক কাজ ব্যবস্থাপনা</CardTitle>
+                        </AccordionTrigger>
+                        <AccordionContent className="p-6 pt-0">
+                            <div className="flex justify-end mb-4">
+                                <Button onClick={() => openSocialWorkForm()}>
+                                    <ImagePlus className="mr-2 h-4 w-4" /> নতুন ছবি যোগ করুন
+                                </Button>
+                            </div>
+                            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                                {isLoading ? (
+                                    <p>লোড হচ্ছে...</p>
+                                ) : (
+                                    socialWorks.map(sw => (
+                                        <Card key={sw.id} className="relative group overflow-hidden">
+                                          <Image
+                                            src={sw.image}
+                                            alt={sw.alt}
+                                            width={200}
+                                            height={280}
+                                            className="object-cover w-full h-full"
+                                            data-ai-hint={sw.imageHint}
+                                          />
+                                            <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                                <Button variant="destructive" size="icon" onClick={() => handleDeleteSocialWork(sw.id)}>
                                                     <Trash2 className="h-4 w-4" />
                                                 </Button>
                                             </div>
@@ -398,8 +480,56 @@ export default function AdminPage() {
                 </form>
             </DialogContent>
         </Dialog>
+
+        {/* Social Work Form Dialog */}
+        <Dialog open={isSocialWorkFormOpen} onOpenChange={setIsSocialWorkFormOpen}>
+            <DialogContent>
+                <DialogHeader>
+                    <DialogTitle>নতুন সামাজিক কাজের ছবি যোগ করুন</DialogTitle>
+                    <DialogDescription>
+                        এখানে সামাজিক কাজের ছবির URL, alt টেক্সট এবং AI hint যোগ করুন।
+                    </DialogDescription>
+                </DialogHeader>
+                <form onSubmit={handleSocialWorkFormSubmit} className="space-y-4">
+                    <div className="space-y-2">
+                        <Label htmlFor="sw-image">ছবির URL</Label>
+                        <Input
+                            id="sw-image"
+                            value={currentSocialWork.image || ''}
+                            onChange={(e) => setCurrentSocialWork({ ...currentSocialWork, image: e.target.value })}
+                             placeholder="https://placehold.co/600x800.png"
+                            required
+                        />
+                    </div>
+                    <div className="space-y-2">
+                        <Label htmlFor="sw-alt">ছবির বর্ণনা (Alt Text)</Label>
+                        <Input
+                            id="sw-alt"
+                            value={currentSocialWork.alt || ''}
+                            onChange={(e) => setCurrentSocialWork({ ...currentSocialWork, alt: e.target.value })}
+                             placeholder="e.g., রক্তদান কর্মসূচি"
+                            required
+                        />
+                    </div>
+                     <div className="space-y-2">
+                        <Label htmlFor="sw-image-hint">ছবির Hint (for AI)</Label>
+                        <Input
+                            id="sw-image-hint"
+                            value={currentSocialWork.imageHint || ''}
+                            onChange={(e) => setCurrentSocialWork({ ...currentSocialWork, imageHint: e.target.value })}
+                             placeholder="e.g. blood donation"
+                            required
+                        />
+                    </div>
+                    <DialogFooter>
+                        <Button type="submit">যোগ করুন</Button>
+                        <DialogClose asChild>
+                            <Button type="button" variant="secondary" onClick={closeSocialWorkForm}>বাতিল</Button>
+                        </DialogClose>
+                    </DialogFooter>
+                </form>
+            </DialogContent>
+        </Dialog>
     </div>
   );
 }
-
-    

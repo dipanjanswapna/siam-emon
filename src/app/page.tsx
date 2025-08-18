@@ -7,7 +7,7 @@ import React, { useState, useEffect } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { ArrowRight, BookOpenCheck, BrainCircuit, Library, Users, Camera, X, Heart, Megaphone, Flag, Award, FileText, Mic, GraduationCap, HandHeart, BookText, ShieldCheck, MessageSquare, Mail, Icon } from "lucide-react";
+import { ArrowRight, BookOpenCheck, BrainCircuit, Library, Users, Camera, X, Heart, Megaphone, Flag, Award, FileText, Mic, GraduationCap, HandHeart, BookText, ShieldCheck, MessageSquare, Mail, Icon, ImagePlus } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -756,18 +756,30 @@ function AcademicAchievementSection() {
   );
 }
 
-const socialWorkImages = [
-    { src: "https://i.postimg.cc/mD3mXyNq/photo-2025-08-18-02-18-09.jpg", alt: "শিশুদের সাথে সিয়াম", hint: "Siam with children" },
-    { src: "https://i.postimg.cc/k4G3zRkM/photo-2025-08-18-02-18-36.jpg", alt: "বন্যার্তদের মাঝে ত্রাণ বিতরণ", hint: "flood relief" },
-    { src: "https://i.postimg.cc/Rh0jjM0h/photo-2025-08-18-02-19-01.jpg", alt: "শীতবস্ত্র বিতরণ", hint: "winter clothes distribution" },
-    { src: "https://i.postimg.cc/T3N3ffg6/photo-2025-08-18-02-19-23.jpg", alt: "পরিচ্ছন্নতা অভিযান", hint: "cleaning campaign" },
-    { src: "https://i.postimg.cc/WpD6D5qT/photo-2025-08-18-02-19-54.jpg", alt: "বৃক্ষরোপণ কর্মসূচি", hint: "tree plantation" },
-    { src: "https://i.postimg.cc/j5P6cQYf/photo-2025-08-18-02-20-19.jpg", alt: "রক্তদান কর্মসূচি", hint: "blood donation" },
-    { src: "https://i.postimg.cc/d0QjBnjc/photo-2025-08-18-02-20-44.jpg", alt: "পথশিশুদের জন্য খাদ্য বিতরণ", hint: "food for street children" },
-];
+type SocialWork = {
+    id: string;
+    image: string;
+    alt: string;
+    imageHint: string;
+};
 
 function SocialWorkSection() {
-    const images = [...socialWorkImages, ...socialWorkImages]; // Duplicate for seamless loop
+    const [socialWorks, setSocialWorks] = useState<SocialWork[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchSocialWorks = async () => {
+            setIsLoading(true);
+            const socialWorksCollection = collection(db, "socialWorks");
+            const snapshot = await getDocs(socialWorksCollection);
+            const list = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as SocialWork));
+            setSocialWorks(list);
+            setIsLoading(false);
+        };
+        fetchSocialWorks();
+    }, []);
+
+    const imagesToDisplay = [...socialWorks, ...socialWorks]; // Duplicate for seamless loop
 
     return (
         <section className="py-16 md:py-24 bg-background">
@@ -781,21 +793,27 @@ function SocialWorkSection() {
                 </div>
             </div>
             <div className="mt-16 relative w-full overflow-hidden mask-image-lr">
+                 {isLoading ? (
+                    <div className="flex justify-center items-center h-80">
+                        <p>ছবি লোড হচ্ছে...</p>
+                    </div>
+                ) : (
                 <div className="flex animate-scroll">
-                    {images.map((image, index) => (
-                        <Card key={index} className="flex-shrink-0 w-64 h-80 mx-4 shadow-lg overflow-hidden group">
+                    {imagesToDisplay.map((image, index) => (
+                        <Card key={`${image.id}-${index}`} className="flex-shrink-0 w-64 h-80 mx-4 shadow-lg overflow-hidden group">
                             <div className="relative w-full h-full">
                                 <Image
-                                    src={image.src}
+                                    src={image.image}
                                     alt={image.alt}
                                     fill
                                     className="object-cover transform group-hover:scale-105 transition-transform duration-300"
-                                    data-ai-hint={image.hint}
+                                    data-ai-hint={image.imageHint}
                                 />
                             </div>
                         </Card>
                     ))}
                 </div>
+                )}
             </div>
         </section>
     );
