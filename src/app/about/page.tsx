@@ -174,7 +174,7 @@ export default function AboutPage() {
             </div>
         </section>
 
-        <section className="py-16 md:py-24">
+        <section id="team" className="py-16 md:py-24">
             <div className="text-center max-w-4xl mx-auto">
                 <Users className="mx-auto h-12 w-12 text-primary" />
                 <h1 className="font-headline text-5xl md:text-6xl font-bold mt-4 text-foreground">আড়ালের মানুষগুলো</h1>
