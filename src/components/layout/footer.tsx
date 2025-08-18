@@ -2,15 +2,16 @@ import Link from "next/link";
 import { Facebook, Youtube, Instagram, Vote } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 export function Footer() {
   return (
     <footer className="bg-primary text-primary-foreground rounded-t-2xl">
       <div className="container mx-auto px-4 py-12 md:px-6">
-        <div className="grid gap-12 md:grid-cols-12">
+        <div className="grid gap-8 md:grid-cols-3 items-center">
           
           {/* Logo and Subscribe */}
-          <div className="md:col-span-5">
+          <div className="md:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-4">
               <Vote className="h-8 w-8" />
               <span className="text-2xl font-headline font-bold">
@@ -20,22 +21,21 @@ export function Footer() {
             <p className="font-body text-sm text-primary-foreground/80 mb-6">
               একটি উন্নত, সমৃদ্ধ এবং অন্তর্ভুক্তিমূলক ভবিষ্যতের জন্য আমাদের সাথে যোগ দিন।
             </p>
-            <h3 className="font-headline text-lg font-semibold mb-2">ক্যাম্পেইনের আপডেট পেতে সাবস্ক্রাইব করুন!</h3>
-            <div className="flex w-full max-w-sm items-center space-x-2">
-              <Input 
-                type="email" 
-                placeholder="আপনার ইমেইল লিখুন" 
-                className="bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/60 focus:bg-background focus:text-foreground"
-              />
-              <Button type="submit" variant="accent" className="bg-lime-400 hover:bg-lime-500 text-black">সাবস্ক্রাইব</Button>
-            </div>
           </div>
 
-          {/* Spacer */}
-          <div className="md:col-span-2"></div>
+          {/* Center Image */}
+          <div className="md:col-span-1 flex justify-center">
+              <Image 
+                src="https://i.postimg.cc/KvkZtjtq/Screenshot-2025-08-18-191039-removebg-preview.png" 
+                alt="Footer Logo"
+                width={150}
+                height={150}
+                className="object-contain"
+                />
+          </div>
 
           {/* Links */}
-          <div className="md:col-span-5 grid grid-cols-2 gap-8">
+          <div className="md:col-span-1 grid grid-cols-2 gap-8">
             <div>
               <h3 className="font-headline text-lg font-semibold mb-4">দ্রুত লিঙ্ক</h3>
               <ul className="space-y-2 font-body">
@@ -50,7 +50,17 @@ export function Footer() {
               <ul className="space-y-2 font-body">
                 <li><Link href="/get-involved" className="hover:underline text-primary-foreground/80">যোগাযোগ করুন</Link></li>
                 <li><Link href="/transparency" className="hover:underline text-primary-foreground/80">স্বচ্ছতা</Link></li>
-                <li><Link href="/get-involved#register-to-vote" className="hover:underline text-primary-foreground/80">ভোটার নিবন্ধন</Link></li>
+                 <li>
+                  <h3 className="font-headline text-lg font-semibold mt-4 mb-2">আপডেট পান!</h3>
+                  <div className="flex w-full max-w-sm items-center space-x-2">
+                    <Input 
+                      type="email" 
+                      placeholder="আপনার ইমেইল" 
+                      className="bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/60 focus:bg-background focus:text-foreground"
+                    />
+                    <Button type="submit" variant="accent" size="sm" className="bg-lime-400 hover:bg-lime-500 text-black">দিন</Button>
+                  </div>
+                </li>
               </ul>
             </div>
           </div>
