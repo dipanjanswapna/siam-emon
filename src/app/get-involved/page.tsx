@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -18,10 +19,10 @@ export default function GetInvolvedPage() {
         </div>
 
         <div className="mt-16 grid lg:grid-cols-2 gap-16">
-          {/* Contact Form & Info */}
+          {/* Contact Info */}
           <div>
-            <h2 className="font-headline text-4xl font-bold mb-8 text-foreground">যোগাযোগ করুন</h2>
-            <div className="grid md:grid-cols-2 gap-8 mb-12">
+            <h2 className="font-headline text-4xl font-bold mb-8 text-foreground">যোগাযোগের তথ্য</h2>
+            <div className="grid md:grid-cols-1 gap-8">
               <Card className="shadow-lg">
                 <CardHeader className="flex-row items-center gap-4">
                   <MapPin className="w-8 h-8 text-primary" />
@@ -40,36 +41,16 @@ export default function GetInvolvedPage() {
                   </div>
                 </CardHeader>
               </Card>
+                <Card className="shadow-lg">
+                <CardHeader className="flex-row items-center gap-4">
+                  <Mail className="w-8 h-8 text-primary" />
+                  <div>
+                    <CardTitle className="font-headline">আমাদের ইমেইল করুন</CardTitle>
+                    <CardDescription className="font-body">contact@siamfermousemon.com</CardDescription>
+                  </div>
+                </CardHeader>
+              </Card>
             </div>
-            <Card className="shadow-lg">
-              <CardHeader>
-                <CardTitle className="font-headline flex items-center gap-3"><Mail className="w-6 h-6 text-primary"/> একটি বার্তা পাঠান বা একটি সমস্যা রিপোর্ট করুন</CardTitle>
-                <CardDescription className="font-body">একটি প্রশ্ন, প্রতিক্রিয়া, বা একটি স্থানীয় সমস্যা রিপোর্ট করতে চান? নীচের ফর্মটি পূরণ করুন।</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <form className="space-y-4">
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="name" className="font-headline">নাম</Label>
-                      <Input id="name" placeholder="আপনার নাম" />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="email" className="font-headline">ইমেল</Label>
-                      <Input id="email" type="email" placeholder="your@email.com" />
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="subject" className="font-headline">বিষয়</Label>
-                    <Input id="subject" placeholder="স্বাস্থ্যসেবা সম্পর্কে প্রশ্ন" />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="message" className="font-headline">বার্তা</Label>
-                    <Textarea id="message" placeholder="আপনার বিস্তারিত বার্তা বা সমস্যার বিবরণ..." rows={5} />
-                  </div>
-                  <Button type="submit" className="w-full font-headline text-lg">বার্তা পাঠান</Button>
-                </form>
-              </CardContent>
-            </Card>
           </div>
 
           {/* Donation & Voter Reg */}
@@ -110,3 +91,5 @@ export default function GetInvolvedPage() {
     </div>
   );
 }
+
+    

@@ -7,9 +7,12 @@ import React, { useState } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { ArrowRight, BookOpenCheck, BrainCircuit, Library, Users, Camera, X, Heart, Megaphone, Flag, Award, FileText, Mic, GraduationCap, HandHeart, BookText, ShieldCheck, User, MessageSquare } from "lucide-react";
+import { ArrowRight, BookOpenCheck, BrainCircuit, Library, Users, Camera, X, Heart, Megaphone, Flag, Award, FileText, Mic, GraduationCap, HandHeart, BookText, ShieldCheck, User, MessageSquare, Mail, Switch } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 
 
 const carouselItems = [
@@ -92,6 +95,7 @@ export default function Home() {
       <AcademicAchievementSection />
       <SocialWorkSection />
       <LeadershipSection />
+      <FeedbackSection />
     </div>
   );
 }
@@ -800,6 +804,71 @@ function LeadershipSection() {
         </section>
     );
 }
+
+function FeedbackSection() {
+  return (
+    <section id="feedback-form" className="py-16 md:py-24 bg-background">
+      <div className="container mx-auto px-4">
+        <div className="max-w-4xl mx-auto">
+          <Card className="shadow-lg">
+            <CardHeader className="text-center">
+              <Mail className="mx-auto h-12 w-12 text-primary" />
+              <CardTitle className="font-headline text-4xl md:text-5xl">মতামত দিন</CardTitle>
+              <CardDescription className="font-body text-lg mt-2 text-muted-foreground">
+                আপনার মূল্যবান মতামত, পরামর্শ বা অভিযোগ আমাদের জানান। আপনার প্রতিটি কথাই আমাদের কাছে গুরুত্বপূর্ণ।
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <form className="space-y-6">
+                <div className="flex items-center space-x-2">
+                  <Switch id="anonymous-mode" />
+                  <Label htmlFor="anonymous-mode" className="font-headline">পরিচয় গোপন রাখতে চাই</Label>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <Label htmlFor="name" className="font-headline">আপনার নাম</Label>
+                    <Input id="name" placeholder="আপনার সম্পূর্ণ নাম" />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="mobile" className="font-headline">মোবাইল</Label>
+                    <Input id="mobile" placeholder="আপনার মোবাইল নম্বর" />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="hall" className="font-headline">আপনার হল</Label>
+                    <Input id="hall" placeholder="আপনার হলের নাম" />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="department" className="font-headline">বিভাগ</Label>
+                    <Input id="department" placeholder="আপনার বিভাগ" />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="email" className="font-headline">আপনার ইমেইল</Label>
+                    <Input id="email" type="email" placeholder="your@email.com" />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="session" className="font-headline">শিক্ষাবর্ষ</Label>
+                    <Input id="session" placeholder="যেমন: ২০১৮-১৯" />
+                  </div>
+                </div>
+                 <div className="space-y-2">
+                    <Label htmlFor="subject" className="font-headline">আপনার সমস্যা/মতামতের বিষয়</Label>
+                    <Input id="subject" placeholder="যেমন: লাইব্রেরী সুবিধা, হলের সমস্যা" />
+                  </div>
+                <div className="space-y-2">
+                  <Label htmlFor="message" className="font-headline">আপনার সমস্যার বিস্তারিত বিবরণ...</Label>
+                  <Textarea id="message" placeholder="আপনার মতামত বা সমস্যার বিস্তারিত এখানে লিখুন..." rows={6} />
+                </div>
+                <Button type="submit" size="lg" className="w-full font-headline text-xl bg-green-600 hover:bg-green-700">
+                  জমা দিন
+                </Button>
+              </form>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    </section>
+  );
+}
     
 
     
@@ -809,3 +878,6 @@ function LeadershipSection() {
     
 
 
+
+
+    
