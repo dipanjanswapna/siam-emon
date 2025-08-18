@@ -56,12 +56,12 @@ export default function AboutPage() {
                 </p>
               </section>
 
-              <section>
-                <h3 className="font-headline text-3xl font-bold text-foreground flex items-center gap-3">
-                  <Award className="w-8 h-8 text-primary" />
-                  ভবিষ্যতের জন্য আমাদের লক্ষ্য: একটি উন্নত ছাত্রসমাজ ও প্রগতিশীল দেশ
-                </h3>
-                <div className="font-body text-lg mt-4 text-muted-foreground space-y-4">
+              <section className="text-center">
+                 <h3 className="font-headline text-3xl font-bold text-foreground flex items-center justify-center gap-3">
+                   <Award className="w-8 h-8 text-primary" />
+                   ভবিষ্যতের জন্য আমাদের লক্ষ্য: একটি উন্নত ছাত্রসমাজ ও প্রগতিশীল দেশ
+                 </h3>
+                 <div className="font-body text-lg mt-4 text-muted-foreground space-y-4 text-left">
                   <p>
                     সিয়াম ফেরদৌস ইমন কেবল বর্তমানের সমস্যা সমাধানে আগ্রহী নন, বরং ভবিষ্যতের জন্য একটি সুদূরপ্রসারী লক্ষ্য নিয়ে কাজ করতে চান। তাঁর লক্ষ্য হলো এমন একটি ছাত্রসমাজ গড়ে তোলা, যা দেশের অগ্রযাত্রায় সক্রিয় ভূমিকা রাখবে। তাঁর ভবিষ্যতের কিছু প্রধান লক্ষ্য নিচে দেওয়া হলো:
                   </p>
