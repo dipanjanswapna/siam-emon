@@ -66,3 +66,23 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+    .animate-scroll {
+        animation: scroll 40s linear infinite;
+    }
+
+    @keyframes scroll {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+    
+    .mask-image-lr {
+        -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+        mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+    }
+}

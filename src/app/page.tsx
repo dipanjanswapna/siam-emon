@@ -7,7 +7,7 @@ import React, { useState } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { ArrowRight, BookOpenCheck, BrainCircuit, Library, Users, Camera, X, Heart, Megaphone, Flag, Award, FileText, Mic, GraduationCap } from "lucide-react";
+import { ArrowRight, BookOpenCheck, BrainCircuit, Library, Users, Camera, X, Heart, Megaphone, Flag, Award, FileText, Mic, GraduationCap, HandHeart } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 
@@ -88,6 +88,7 @@ export default function Home() {
       <CommitmentSection />
       <ResearchSection />
       <LogicalMovementSection />
+      <SocialWorkSection />
       <AcademicAchievementSection />
     </div>
   );
@@ -593,6 +594,51 @@ function AcademicAchievementSection() {
       </Dialog>
     </>
   );
+}
+
+const socialWorkImages = [
+    { src: "https://i.postimg.cc/mD3mXyNq/photo-2025-08-18-02-18-09.jpg", alt: "শিশুদের সাথে সিয়াম", hint: "Siam with children" },
+    { src: "https://i.postimg.cc/k4G3zRkM/photo-2025-08-18-02-18-36.jpg", alt: "বন্যার্তদের মাঝে ত্রাণ বিতরণ", hint: "flood relief" },
+    { src: "https://i.postimg.cc/Rh0jjM0h/photo-2025-08-18-02-19-01.jpg", alt: "শীতবস্ত্র বিতরণ", hint: "winter clothes distribution" },
+    { src: "https://i.postimg.cc/T3N3ffg6/photo-2025-08-18-02-19-23.jpg", alt: "পরিচ্ছন্নতা অভিযান", hint: "cleaning campaign" },
+    { src: "https://i.postimg.cc/WpD6D5qT/photo-2025-08-18-02-19-54.jpg", alt: "বৃক্ষরোপণ কর্মসূচি", hint: "tree plantation" },
+    { src: "https://i.postimg.cc/j5P6cQYf/photo-2025-08-18-02-20-19.jpg", alt: "রক্তদান কর্মসূচি", hint: "blood donation" },
+    { src: "https://i.postimg.cc/d0QjBnjc/photo-2025-08-18-02-20-44.jpg", alt: "পথশিশুদের জন্য খাদ্য বিতরণ", hint: "food for street children" },
+];
+
+function SocialWorkSection() {
+    const images = [...socialWorkImages, ...socialWorkImages]; // Duplicate for seamless loop
+
+    return (
+        <section className="py-16 md:py-24 bg-background">
+            <div className="container mx-auto px-4">
+                <div className="text-center max-w-4xl mx-auto">
+                    <HandHeart className="mx-auto h-12 w-12 text-primary" />
+                    <h1 className="font-headline text-5xl md:text-6xl font-bold mt-4 text-foreground">সামাজিক কাজে সিয়াম ইমন</h1>
+                    <p className="font-body text-lg mt-4 text-muted-foreground">
+                        সমাজের প্রতি দায়বদ্ধতা থেকে আমাদের প্রার্থীর বিভিন্ন সামাজিক ও মানবিক কার্যক্রমের কিছু মুহূর্ত।
+                    </p>
+                </div>
+            </div>
+            <div className="mt-16 relative w-full overflow-hidden mask-image-lr">
+                <div className="flex animate-scroll">
+                    {images.map((image, index) => (
+                        <Card key={index} className="flex-shrink-0 w-64 h-80 mx-4 shadow-lg overflow-hidden group">
+                            <div className="relative w-full h-full">
+                                <Image
+                                    src={image.src}
+                                    alt={image.alt}
+                                    fill
+                                    className="object-cover transform group-hover:scale-105 transition-transform duration-300"
+                                    data-ai-hint={image.hint}
+                                />
+                            </div>
+                        </Card>
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
 }
 
     
