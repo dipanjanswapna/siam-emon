@@ -181,6 +181,15 @@ function AboutSection() {
     <section className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="relative w-full aspect-[4/5] rounded-lg overflow-hidden shadow-lg group">
+            <Image
+              src="https://placehold.co/600x750.png"
+              alt="সিয়াম ফেরদৌস ইমন"
+              fill
+              className="object-cover transform group-hover:scale-105 transition-transform duration-300"
+              data-ai-hint="politician portrait"
+            />
+          </div>
           <div className="text-center md:text-left">
             <h2 className="font-headline text-4xl md:text-5xl font-bold text-foreground mb-6">আসসালামু আলাইকুম।</h2>
             <div className="font-body text-lg md:text-xl space-y-4 text-muted-foreground">
