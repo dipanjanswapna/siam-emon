@@ -28,7 +28,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import Image from "next/image";
-import { useAuth } from "@/hooks/use-auth.tsx";
+import { useAuth } from "@/hooks/use-auth";
 import { useSignOut } from "react-firebase-hooks/auth";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
@@ -627,3 +627,5 @@ function AdminPage() {
 }
 
 export default useAuth(AdminPage);
+
+    
