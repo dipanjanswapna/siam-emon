@@ -26,8 +26,8 @@ export function WelcomePopup() {
             setIsLoading(true);
             if (docSnap.exists()) {
                 const data = docSnap.data() as PopupData;
-                
-                const hasBeenClosedThisSession = sessionStorage.getItem(`popup_closed_${data.imageUrl}`);
+                const sessionKey = `popup_closed_${data.imageUrl}`;
+                const hasBeenClosedThisSession = sessionStorage.getItem(sessionKey);
                 
                 setPopupData(data);
 

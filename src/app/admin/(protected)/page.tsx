@@ -179,10 +179,11 @@ function AdminPage() {
     };
     
     const fetchPopup = async () => {
-        const popupDocRef = doc(db, "popup", "main-popup");
-        const popupSnapshot = await getDoc(popupDocRef);
-        if (popupSnapshot.exists()) {
-            setPopup({ id: popupSnapshot.id, ...popupSnapshot.data() } as Popup);
+        const popupCollectionRef = collection(db, "popup");
+        const popupSnapshot = await getDocs(popupCollectionRef);
+        if (!popupSnapshot.empty) {
+            const popupDoc = popupSnapshot.docs[0];
+            setPopup({ id: popupDoc.id, ...popupDoc.data() } as Popup);
         }
     };
 
