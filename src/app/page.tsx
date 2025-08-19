@@ -1128,14 +1128,12 @@ function PreVoteSection() {
                 if (docSnap.exists()) {
                     setVoteCount(docSnap.data().count);
                 } else {
-                    // If the document doesn't exist, create it with an initial count.
                     await setDoc(voteDocRef, { count: 1205 });
                     setVoteCount(1205);
                 }
             } catch (error) {
                 console.error("Error fetching vote count:", error);
-                // Fallback to a default value in case of error
-                setVoteCount(1205);
+                setVoteCount(1205); // Fallback
             } finally {
                 setIsLoading(false);
             }
@@ -1143,23 +1141,24 @@ function PreVoteSection() {
         
         checkVotedStatus();
         fetchVoteCount();
-    }, []);
+    }, [voteDocRef]);
 
     const handleVote = async () => {
         if (!hasVoted) {
+            setIsLoading(true);
             try {
-                // To avoid race conditions, we update the server first
                 await updateDoc(voteDocRef, {
                     count: increment(1)
                 });
                 
-                // Then update the local state optimistically
                 setVoteCount(prev => prev + 1);
                 setHasVoted(true);
                 localStorage.setItem('hasVotedForSiam', 'true');
 
             } catch (error) {
                 console.error("Error updating vote count:", error);
+            } finally {
+                setIsLoading(false);
             }
         }
     };
