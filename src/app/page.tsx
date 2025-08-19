@@ -7,7 +7,7 @@ import React, { useState, useEffect } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { ArrowRight, BookOpenCheck, BrainCircuit, Library, Users, Camera, X, Heart, Megaphone, Flag, Award, FileText, Mic, GraduationCap, HandHeart, BookText, ShieldCheck, MessageSquare, Mail, Icon, ImagePlus, Annoyed, HelpCircle } from "lucide-react";
+import { ArrowRight, BookOpenCheck, BrainCircuit, Library, Users, Camera, X, Heart, Megaphone, Flag, Award, FileText, Mic, GraduationCap, HandHeart, BookText, ShieldCheck, MessageSquare, Mail, Icon, ImagePlus, Annoyed, HelpCircle, Vote, Share2 } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -113,6 +113,7 @@ export default function Home() {
       <LeadershipSection />
       <FAQSection />
       <FeedbackSection />
+      <PreVoteSection />
     </div>
   );
 }
@@ -1105,6 +1106,61 @@ function FeedbackSection() {
   );
 }
 
+
+function PreVoteSection() {
+    const [voteCount, setVoteCount] = useState(1205); // Initial dummy count
+    const [hasVoted, setHasVoted] = useState(false);
+
+    const handleVote = () => {
+        if (!hasVoted) {
+            setVoteCount(prev => prev + 1);
+            setHasVoted(true);
+        }
+    };
+
+    return (
+        <section id="pre-vote" className="py-16 md:py-24 bg-primary/10">
+            <div className="container mx-auto px-4">
+                <div className="max-w-4xl mx-auto text-center">
+                    <Vote className="mx-auto h-16 w-16 text-primary animate-pulse" />
+                    <h2 className="font-headline text-4xl md:text-5xl font-bold mt-4 text-foreground">প্রি-ভোটিং: আপনার সমর্থনই আমাদের শক্তি</h2>
+                    <p className="font-body text-lg mt-4 text-muted-foreground">
+                        মূল নির্বাচনের আগে আপনার মূল্যবান ভোট দিয়ে সিয়াম ফেরদৌস ইমনকে সমর্থন জানান এবং এই পরিবর্তনের যাত্রায় আমাদের সঙ্গী হোন।
+                    </p>
+                    
+                    <Card className="mt-8 shadow-2xl bg-card max-w-md mx-auto">
+                        <CardContent className="p-6">
+                            <p className="font-body text-muted-foreground">মোট প্রাপ্ত ভোট:</p>
+                            <div className="text-6xl font-bold font-headline text-primary my-4">
+                                {voteCount.toLocaleString('bn-BD')}
+                            </div>
+                            <Button 
+                                size="lg" 
+                                className="w-full font-headline text-xl h-14" 
+                                onClick={handleVote}
+                                disabled={hasVoted}
+                            >
+                                {hasVoted ? 'ভোট দিয়েছেন' : 'সিয়াম ভাইকে ভোট দিন'}
+                            </Button>
+                            {hasVoted && (
+                                <p className="text-green-600 font-semibold mt-3">আপনার ভোট সফলভাবে গৃহীত হয়েছে!</p>
+                            )}
+                        </CardContent>
+                    </Card>
+
+                    <div className="mt-8">
+                        <h3 className="font-headline text-xl font-semibold text-foreground">বন্ধুদের সাথে শেয়ার করুন</h3>
+                        <div className="flex justify-center gap-4 mt-4">
+                            <Button variant="outline" size="icon">
+                                <Share2 className="h-5 w-5" />
+                            </Button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+}
     
 
     
