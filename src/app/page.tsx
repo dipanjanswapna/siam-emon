@@ -14,7 +14,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
-import { collection, getDocs, addDoc, serverTimestamp, doc } from "firebase/firestore";
+import { collection, getDocs, addDoc, serverTimestamp, doc, getDoc, setDoc, updateDoc, increment } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { useToast } from "@/hooks/use-toast";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -1108,13 +1108,59 @@ function FeedbackSection() {
 
 
 function PreVoteSection() {
-    const [voteCount, setVoteCount] = useState(1205); // Initial dummy count
+    const [voteCount, setVoteCount] = useState(0);
     const [hasVoted, setHasVoted] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+    const voteDocRef = doc(db, "pre-votes", "live-count");
 
-    const handleVote = () => {
+    useEffect(() => {
+        const checkVotedStatus = () => {
+            const voted = localStorage.getItem('hasVotedForSiam');
+            if (voted === 'true') {
+                setHasVoted(true);
+            }
+        };
+
+        const fetchVoteCount = async () => {
+            setIsLoading(true);
+            try {
+                const docSnap = await getDoc(voteDocRef);
+                if (docSnap.exists()) {
+                    setVoteCount(docSnap.data().count);
+                } else {
+                    // If the document doesn't exist, create it with an initial count.
+                    await setDoc(voteDocRef, { count: 1205 });
+                    setVoteCount(1205);
+                }
+            } catch (error) {
+                console.error("Error fetching vote count:", error);
+                // Fallback to a default value in case of error
+                setVoteCount(1205);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+        
+        checkVotedStatus();
+        fetchVoteCount();
+    }, [voteDocRef]);
+
+    const handleVote = async () => {
         if (!hasVoted) {
-            setVoteCount(prev => prev + 1);
-            setHasVoted(true);
+            try {
+                // To avoid race conditions, we update the server first
+                await updateDoc(voteDocRef, {
+                    count: increment(1)
+                });
+                
+                // Then update the local state optimistically
+                setVoteCount(prev => prev + 1);
+                setHasVoted(true);
+                localStorage.setItem('hasVotedForSiam', 'true');
+
+            } catch (error) {
+                console.error("Error updating vote count:", error);
+            }
         }
     };
 
@@ -1132,13 +1178,13 @@ function PreVoteSection() {
                         <CardContent className="p-6">
                             <p className="font-body text-muted-foreground">মোট প্রাপ্ত ভোট:</p>
                             <div className="text-6xl font-bold font-headline text-primary my-4">
-                                {voteCount.toLocaleString('bn-BD')}
+                                {isLoading ? '...' : voteCount.toLocaleString('bn-BD')}
                             </div>
                             <Button 
                                 size="lg" 
                                 className="w-full font-headline text-xl h-14" 
                                 onClick={handleVote}
-                                disabled={hasVoted}
+                                disabled={hasVoted || isLoading}
                             >
                                 {hasVoted ? 'ভোট দিয়েছেন' : 'সিয়াম ভাইকে ভোট দিন'}
                             </Button>
@@ -1161,6 +1207,8 @@ function PreVoteSection() {
         </section>
     );
 }
+    
+
     
 
     
