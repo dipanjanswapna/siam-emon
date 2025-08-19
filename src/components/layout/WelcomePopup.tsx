@@ -52,7 +52,7 @@ export function WelcomePopup() {
 
         // Cleanup listener on component unmount
         return () => unsubscribe();
-    }, []); // dependency 'popupData' removed to avoid re-triggering on every state change
+    }, []);
 
     const handleClose = () => {
         setIsOpen(false);
@@ -68,12 +68,11 @@ export function WelcomePopup() {
     }
 
     return (
-        <Dialog open={isOpen} onOpenChange={setIsOpen}>
+        <Dialog open={isOpen} onOpenChange={(open) => { if(!open) handleClose()}}>
             <DialogContent 
-                className="p-0 border-none w-auto max-w-4xl bg-transparent shadow-none"
+                className="p-0 border-none w-auto max-w-lg bg-transparent shadow-none"
                 onInteractOutside={(e) => {
-                    // Do not close on overlay click by default, only by button
-                    e.preventDefault();
+                    handleClose();
                 }}
             >
                 <div className="relative">
@@ -86,7 +85,7 @@ export function WelcomePopup() {
                         <X className="h-5 w-5" />
                         <span className="sr-only">বন্ধ করুন</span>
                     </Button>
-                    <div className="relative w-full aspect-[4/3] max-w-[80vw] max-h-[80vh]">
+                    <div className="relative w-full aspect-[3/4] max-w-[80vw] max-h-[80vh] bg-card rounded-lg overflow-hidden">
                         <Image
                             src={popupData.imageUrl}
                             alt="Welcome Popup"
@@ -100,4 +99,3 @@ export function WelcomePopup() {
         </Dialog>
     );
 }
-
