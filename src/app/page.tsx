@@ -1143,7 +1143,7 @@ function PreVoteSection() {
         
         checkVotedStatus();
         fetchVoteCount();
-    }, [voteDocRef]);
+    }, []);
 
     const handleVote = async () => {
         if (!hasVoted) {
@@ -1207,6 +1207,8 @@ function PreVoteSection() {
         </section>
     );
 }
+    
+
     
 
     
