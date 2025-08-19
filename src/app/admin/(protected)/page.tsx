@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Shield, PlusCircle, Edit, Trash2, BrainCircuit, BookOpenCheck, Library, Award, FileText, Mic, GraduationCap, ImagePlus, LogOut, MessageSquare, Users, Bell, Image as ImageIcon } from "lucide-react";
+import { Shield, PlusCircle, Edit, Trash2, BrainCircuit, BookOpenCheck, Library, Award, FileText, Mic, GraduationCap, ImagePlus, LogOut, MessageSquare, Users, Bell, Image as ImageIcon, Settings } from "lucide-react";
 import { useState, useEffect } from "react";
 import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc, orderBy, query, serverTimestamp, setDoc, getDoc } from "firebase/firestore";
 import { db, auth } from "@/lib/firebase";
@@ -34,6 +34,7 @@ import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Switch } from "@/components/ui/switch";
 
 
 type Commitment = {
@@ -86,6 +87,14 @@ type Notice = {
     text: string;
 };
 
+type PromotionalPopup = {
+    id: string;
+    enabled: boolean;
+    displayFrequency: 'every-load' | 'once-per-session';
+    imageUrl: string;
+    imageHint: string;
+};
+
 const iconMap = {
     BrainCircuit: <BrainCircuit />,
     BookOpenCheck: <BookOpenCheck />,
@@ -103,6 +112,13 @@ function AdminPage() {
     const [feedbacks, setFeedbacks] = useState<Feedback[]>([]);
     const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
     const [notice, setNotice] = useState<Notice>({ id: "live-notice", text: "" });
+    const [promotionalPopup, setPromotionalPopup] = useState<PromotionalPopup>({
+        id: "settings",
+        enabled: false,
+        displayFrequency: 'once-per-session',
+        imageUrl: "https://placehold.co/600x800.png",
+        imageHint: "promotional banner"
+    });
     const [isLoading, setIsLoading] = useState(true);
     
     const [isCommitmentFormOpen, setIsCommitmentFormOpen] = useState(false);
@@ -161,7 +177,6 @@ function AdminPage() {
     };
 
     const fetchNotice = async () => {
-        const noticeDocRef = doc(db, "notices", "live-notice");
         const noticeSnapshot = await getDocs(collection(db, "notices"));
         if (!noticeSnapshot.empty) {
             const noticeDoc = noticeSnapshot.docs[0];
@@ -169,6 +184,14 @@ function AdminPage() {
         }
     };
     
+    const fetchPromotionalPopup = async () => {
+        const popupDocRef = doc(db, "promotionalPopups", "settings");
+        const popupDocSnap = await getDoc(popupDocRef);
+        if (popupDocSnap.exists()) {
+            setPromotionalPopup({ id: popupDocSnap.id, ...popupDocSnap.data() } as PromotionalPopup);
+        }
+    };
+
     const loadAllData = async () => {
         setIsLoading(true);
         try {
@@ -179,6 +202,7 @@ function AdminPage() {
                 fetchFeedbacks(), 
                 fetchTeamMembers(),
                 fetchNotice(),
+                fetchPromotionalPopup()
             ]);
         } catch (error) {
             console.error("Error loading data: ", error);
@@ -479,6 +503,29 @@ function AdminPage() {
         }
     };
 
+    const handlePromotionalPopupFormSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        try {
+            const popupDoc = doc(db, "promotionalPopups", "settings");
+            await setDoc(popupDoc, { 
+                enabled: promotionalPopup.enabled,
+                displayFrequency: promotionalPopup.displayFrequency,
+                imageUrl: promotionalPopup.imageUrl,
+                imageHint: promotionalPopup.imageHint,
+             });
+            fetchPromotionalPopup();
+            toast({
+                title: 'পপআপ সেটিংস সফলভাবে আপডেট হয়েছে',
+            });
+        } catch (error) {
+             toast({
+                variant: 'destructive',
+                title: 'পপআপ সেটিংস আপডেট করতে সমস্যা হয়েছে',
+                description: (error as Error).message,
+            });
+        }
+    };
+
     const handleSignOut = async () => {
         const success = await signOut();
         if (success) {
@@ -509,6 +556,83 @@ function AdminPage() {
 
         <main className="mt-16">
             <Accordion type="multiple" className="w-full space-y-4">
+                 <AccordionItem value="promotional-popup">
+                    <Card>
+                        <AccordionTrigger className="p-6">
+                            <CardTitle>প্রোমোশনাল পপআপ</CardTitle>
+                        </AccordionTrigger>
+                        <AccordionContent className="p-6 pt-0">
+                             <form onSubmit={handlePromotionalPopupFormSubmit} className="space-y-6">
+                                <Card className="p-4">
+                                    <div className="flex items-center justify-between">
+                                        <div>
+                                            <Label htmlFor="popup-enabled" className="font-bold">পপআপ সক্রিয় করুন</Label>
+                                            <p className="text-sm text-muted-foreground">ব্যবহারকারীদের পপআপ দেখাতে এটি চালু করুন।</p>
+                                        </div>
+                                        <Switch
+                                            id="popup-enabled"
+                                            checked={promotionalPopup.enabled}
+                                            onCheckedChange={(checked) => setPromotionalPopup({ ...promotionalPopup, enabled: checked })}
+                                        />
+                                    </div>
+                                </Card>
+                                <div className="space-y-2">
+                                    <Label htmlFor="popup-frequency">প্রদর্শনের ফ্রিকোয়েন্সি</Label>
+                                    <Select
+                                        value={promotionalPopup.displayFrequency}
+                                        onValueChange={(value: 'every-load' | 'once-per-session') => setPromotionalPopup({ ...promotionalPopup, displayFrequency: value })}
+                                    >
+                                        <SelectTrigger id="popup-frequency">
+                                            <SelectValue placeholder="কত ঘন ঘন পপআপ প্রদর্শিত হবে তা নির্বাচন করুন" />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            <SelectItem value="once-per-session">প্রতি সেশনে একবার দেখান</SelectItem>
+                                            <SelectItem value="every-load">প্রতিবার পেজ লোড হলে দেখান</SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                     <p className="text-sm text-muted-foreground">একজন ব্যবহারকারীকে কত ঘন ঘন পপআপ দেখানো উচিত।</p>
+                                </div>
+                                <div className="space-y-2">
+                                    <Label>পপআপ ছবি</Label>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+                                        <div className="relative aspect-square w-full max-w-sm rounded-lg overflow-hidden border">
+                                            <Image
+                                                src={promotionalPopup.imageUrl}
+                                                alt="Popup preview"
+                                                fill
+                                                className="object-contain"
+                                                data-ai-hint={promotionalPopup.imageHint}
+                                            />
+                                        </div>
+                                        <div className="space-y-4">
+                                            <div className="space-y-2">
+                                                <Label htmlFor="popup-image-url">ছবির URL</Label>
+                                                <Input
+                                                    id="popup-image-url"
+                                                    value={promotionalPopup.imageUrl}
+                                                    onChange={(e) => setPromotionalPopup({ ...promotionalPopup, imageUrl: e.target.value })}
+                                                    placeholder="https://.../image.png"
+                                                />
+                                            </div>
+                                            <div className="space-y-2">
+                                                <Label htmlFor="popup-image-hint">ছবির Hint (for AI)</Label>
+                                                <Input
+                                                    id="popup-image-hint"
+                                                    value={promotionalPopup.imageHint}
+                                                    onChange={(e) => setPromotionalPopup({ ...promotionalPopup, imageHint: e.target.value })}
+                                                    placeholder="e.g. promotional banner"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <Button type="submit">
+                                    <Settings className="mr-2 h-4 w-4" /> সেটিংস সেভ করুন
+                                </Button>
+                            </form>
+                        </AccordionContent>
+                    </Card>
+                </AccordionItem>
                 <AccordionItem value="notice-bar">
                     <Card>
                         <AccordionTrigger className="p-6">
@@ -991,3 +1115,5 @@ function AdminPage() {
 }
 
 export default useAuth(AdminPage);
+
+    
