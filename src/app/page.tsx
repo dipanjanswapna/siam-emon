@@ -1,4 +1,5 @@
 
+
 "use client";
 
 import Image from "next/image";
@@ -18,6 +19,7 @@ import { collection, getDocs, addDoc, serverTimestamp, doc, getDoc, setDoc, upda
 import { db } from "@/lib/firebase";
 import { useToast } from "@/hooks/use-toast";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Skeleton } from "@/components/ui/skeleton";
 
 
 const carouselItems = [
@@ -1141,7 +1143,7 @@ function PreVoteSection() {
         
         checkVotedStatus();
         fetchVoteCount();
-    }, [voteDocRef]);
+    }, []);
 
     const handleVote = async () => {
         if (!hasVoted) {
@@ -1151,7 +1153,8 @@ function PreVoteSection() {
                     count: increment(1)
                 });
                 
-                setVoteCount(prev => prev + 1);
+                const newVoteCount = voteCount + 1;
+                setVoteCount(newVoteCount);
                 setHasVoted(true);
                 localStorage.setItem('hasVotedForSiam', 'true');
 
@@ -1176,8 +1179,16 @@ function PreVoteSection() {
                     <Card className="mt-8 shadow-2xl bg-card max-w-md mx-auto">
                         <CardContent className="p-6">
                             <p className="font-body text-muted-foreground">মোট প্রাপ্ত ভোট:</p>
-                            <div className="text-6xl font-bold font-headline text-primary my-4">
-                                {isLoading ? '...' : voteCount.toLocaleString('bn-BD')}
+                             <div className="text-6xl font-bold font-headline text-primary my-4 min-h-[72px] flex items-center justify-center">
+                                {isLoading ? (
+                                    <div className="flex space-x-2">
+                                        <div className="h-4 w-4 bg-primary rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+                                        <div className="h-4 w-4 bg-primary rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+                                        <div className="h-4 w-4 bg-primary rounded-full animate-bounce"></div>
+                                    </div>
+                                ) : (
+                                    voteCount.toLocaleString('bn-BD')
+                                )}
                             </div>
                             <Button 
                                 size="lg" 
@@ -1213,3 +1224,4 @@ function PreVoteSection() {
     
 
     
+
