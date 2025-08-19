@@ -111,7 +111,7 @@ function AdminPage() {
     const [feedbacks, setFeedbacks] = useState<Feedback[]>([]);
     const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
     const [notice, setNotice] = useState<Notice>({ id: "live-notice", text: "" });
-    const [popup, setPopup] = useState<Popup>({ id: "main-popup", imageUrl: "https://placehold.co/800x600.png", isEnabled: true });
+    const [popup, setPopup] = useState<Popup>({ id: "main-popup", imageUrl: "https://i.postimg.cc/8z9WzRy4/photo-2025-08-18-15-33-20-1.jpg", isEnabled: true });
     const [isLoading, setIsLoading] = useState(true);
     
     const [isCommitmentFormOpen, setIsCommitmentFormOpen] = useState(false);

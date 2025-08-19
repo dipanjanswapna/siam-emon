@@ -2,7 +2,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { doc, getDoc, onSnapshot } from 'firebase/firestore';
+import { doc, onSnapshot } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
 import Image from 'next/image';
@@ -26,24 +26,20 @@ export function WelcomePopup() {
             setIsLoading(true);
             if (docSnap.exists()) {
                 const data = docSnap.data() as PopupData;
-                const lastImageUrl = sessionStorage.getItem('lastPopupImageUrl');
+                setPopupData(data); // Always update state with latest data
 
-                // If popup is enabled and either the image has changed or it's a new session
-                if (data.isEnabled) {
-                     // Check if the popup was closed in this session
-                    const closedInSession = sessionStorage.getItem('popupClosed');
-                    // If image changed, we should show it again, ignoring if it was closed
-                    if (lastImageUrl !== data.imageUrl) {
-                        setIsOpen(true);
-                        sessionStorage.setItem('lastPopupImageUrl', data.imageUrl);
-                        sessionStorage.removeItem('popupClosed'); // Reset closed status on new image
-                    } else if (!closedInSession) {
-                        setIsOpen(true);
-                    }
+                const sessionKey = `popup_closed_${data.imageUrl}`;
+                const hasBeenClosedThisSession = sessionStorage.getItem(sessionKey);
+
+                if (data.isEnabled && !hasBeenClosedThisSession) {
+                    setIsOpen(true);
                 } else {
                     setIsOpen(false);
                 }
-                setPopupData(data);
+            } else {
+                // If doc doesn't exist, disable popup
+                setPopupData(null);
+                setIsOpen(false);
             }
             setIsLoading(false);
         }, (error) => {
@@ -57,7 +53,11 @@ export function WelcomePopup() {
 
     const handleClose = () => {
         setIsOpen(false);
-        sessionStorage.setItem('popupClosed', 'true');
+        if (popupData) {
+            // Mark this specific image URL as closed for this session
+            const sessionKey = `popup_closed_${popupData.imageUrl}`;
+            sessionStorage.setItem(sessionKey, 'true');
+        }
     }
 
     if (isLoading || !popupData || !popupData.isEnabled || !isOpen) {
@@ -65,14 +65,20 @@ export function WelcomePopup() {
     }
 
     return (
-        <Dialog open={isOpen} onOpenChange={handleClose}>
-            <DialogContent className="p-0 border-none w-auto max-w-2xl bg-transparent shadow-none">
+        <Dialog open={isOpen} onOpenChange={setIsOpen}>
+            <DialogContent 
+                className="p-0 border-none w-auto max-w-4xl bg-transparent shadow-none"
+                onInteractOutside={(e) => {
+                    e.preventDefault();
+                    handleClose();
+                }}
+            >
                 <div className="relative">
                      <Button 
                         variant="ghost" 
                         size="icon" 
                         onClick={handleClose}
-                        className="absolute -top-10 right-0 z-50 bg-destructive text-destructive-foreground rounded-full h-8 w-8 hover:bg-destructive/80"
+                        className="absolute -top-2 -right-2 md:-top-4 md:-right-4 z-50 bg-destructive text-destructive-foreground rounded-full h-8 w-8 hover:bg-destructive/80"
                     >
                         <X className="h-5 w-5" />
                         <span className="sr-only">বন্ধ করুন</span>
