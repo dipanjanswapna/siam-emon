@@ -1113,6 +1113,7 @@ function PreVoteSection() {
     const [voteCount, setVoteCount] = useState(0);
     const [hasVoted, setHasVoted] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
+    const { toast } = useToast();
     const voteDocRef = doc(db, "pre-votes", "live-count");
 
     useEffect(() => {
@@ -1160,9 +1161,42 @@ function PreVoteSection() {
 
             } catch (error) {
                 console.error("Error updating vote count:", error);
+                 toast({
+                    variant: "destructive",
+                    title: "ভোট দেওয়া যায়নি",
+                    description: "ভোট দেওয়ার সময় একটি সমস্যা হয়েছে। অনুগ্রহ করে আবার চেষ্টা করুন।",
+                });
             } finally {
                 setIsLoading(false);
             }
+        }
+    };
+    
+    const handleShare = async () => {
+        const shareData = {
+            title: 'সিয়াম ফেরদৌস ইমনকে প্রি-ভোটে সমর্থন জানান!',
+            text: 'আমি ডাকসু নির্বাচনে গবেষণা ও প্রকাশনা সম্পাদক পদে সিয়াম ফেরদৌস ইমনকে সমর্থন করছি। আপনিও প্রি-ভোটে অংশ নিয়ে তাকে সমর্থন জানান!',
+            url: window.location.origin + '#pre-vote',
+        };
+
+        try {
+            if (navigator.share) {
+                await navigator.share(shareData);
+            } else {
+                // Fallback for browsers that don't support Web Share API
+                await navigator.clipboard.writeText(shareData.url);
+                toast({
+                    title: "লিঙ্ক কপি হয়েছে!",
+                    description: "প্রি-ভোটিং লিঙ্কটি আপনার ক্লিপবোর্ডে কপি করা হয়েছে।",
+                });
+            }
+        } catch (error) {
+            console.error('Error sharing:', error);
+            toast({
+                variant: "destructive",
+                title: "শেয়ার করা যায়নি",
+                description: "এই মুহূর্তে শেয়ার করা যাচ্ছে না। অনুগ্রহ করে আবার চেষ্টা করুন।",
+            });
         }
     };
 
@@ -1207,8 +1241,9 @@ function PreVoteSection() {
                     <div className="mt-8">
                         <h3 className="font-headline text-xl font-semibold text-foreground">বন্ধুদের সাথে শেয়ার করুন</h3>
                         <div className="flex justify-center gap-4 mt-4">
-                            <Button variant="outline" size="icon">
+                            <Button variant="outline" size="lg" onClick={handleShare}>
                                 <Share2 className="h-5 w-5" />
+                                এখনই শেয়ার করুন
                             </Button>
                         </div>
                     </div>
@@ -1224,5 +1259,6 @@ function PreVoteSection() {
     
 
     
+
 
 
