@@ -1190,7 +1190,11 @@ function PreVoteSection() {
                     description: "প্রি-ভোটিং লিঙ্কটি আপনার ক্লিপবোর্ডে কপি করা হয়েছে।",
                 });
             }
-        } catch (error) {
+        } catch (error: any) {
+            // Don't show an error if the user cancels the share dialog
+            if (error.name === 'AbortError') {
+                return;
+            }
             console.error('Error sharing:', error);
             toast({
                 variant: "destructive",
@@ -1259,6 +1263,7 @@ function PreVoteSection() {
     
 
     
+
 
 
 
