@@ -7,7 +7,7 @@ import React, { useState, useEffect } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { ArrowRight, BookOpenCheck, BrainCircuit, Library, Users, Camera, X, Heart, Megaphone, Flag, Award, FileText, Mic, GraduationCap, HandHeart, BookText, ShieldCheck, MessageSquare, Mail, Icon, ImagePlus, Annoyed } from "lucide-react";
+import { ArrowRight, BookOpenCheck, BrainCircuit, Library, Users, Camera, X, Heart, Megaphone, Flag, Award, FileText, Mic, GraduationCap, HandHeart, BookText, ShieldCheck, MessageSquare, Mail, Icon, ImagePlus, Annoyed, HelpCircle } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -17,6 +17,7 @@ import { Switch } from "@/components/ui/switch";
 import { collection, getDocs, addDoc, serverTimestamp, doc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { useToast } from "@/hooks/use-toast";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 
 const carouselItems = [
@@ -110,6 +111,7 @@ export default function Home() {
       <AcademicAchievementSection />
       <SocialWorkSection />
       <LeadershipSection />
+      <FAQSection />
       <FeedbackSection />
     </div>
   );
@@ -907,6 +909,59 @@ function LeadershipSection() {
     );
 }
 
+const faqItems = [
+    {
+        question: "গবেষণা ও প্রকাশনা সম্পাদক পদে সিয়াম ইমন কেন যোগ্য?",
+        answer: "সিয়াম ইমন নিজে একজন সক্রিয় গবেষক এবং তার একাধিক গবেষণা আন্তর্জাতিক জার্নালে প্রকাশিত হয়েছে। তিনি শিক্ষার্থীদের গবেষণার সুযোগ বৃদ্ধি, প্রকাশনা সহজীকরণ এবং একটি আধুনিক ডিজিটাল লাইব্রেরি তৈরির জন্য বাস্তবসম্মত পরিকল্পনা করেছেন। তার অভিজ্ঞতা এবং পরিকল্পনা তাকে এই পদের জন্য সবচেয়ে যোগ্য প্রার্থী করে তুলেছে।"
+    },
+    {
+        question: "ছাত্রছাত্রীদের জন্য তার বিশেষ পরিকল্পনা কী?",
+        answer: "তার প্রধান পরিকল্পনার মধ্যে রয়েছে—গবেষণার জন্য ফান্ডিং সহজ করা, আন্তর্জাতিক সেমিনারে অংশগ্রহণের সুযোগ বৃদ্ধি, একটি ডিজিটাল প্রকাশনা প্ল্যাটফর্ম তৈরি, এবং ছাত্র-শিক্ষক সম্পর্ক উন্নয়ন। তিনি বিশ্বাস করেন, এই উদ্যোগগুলো শিক্ষার্থীদের একাডেমিক এবং পেশাগত জীবনে ইতিবাচক পরিবর্তন আনবে।"
+    },
+    {
+        question: "তিনি কি শিক্ষার্থীদের অধিকার আদায়ে সক্রিয়?",
+        answer: "হ্যাঁ, সিয়াম ইমন ক্যাম্পাস জীবনের শুরু থেকেই বিভিন্ন যৌক্তিক আন্দোলনে সক্রিয়ভাবে অংশগ্রহণ করেছেন। তিনি শিক্ষার্থীদের ন্যায্য দাবি আদায়ে সর্বদা সামনে থেকে নেতৃত্ব দিয়েছেন এবং ভবিষ্যতেও ছাত্রসমাজের অধিকার রক্ষায় comprometido থাকবেন।"
+    },
+    {
+        question: "নির্বাচিত হলে তার কাজের স্বচ্ছতা কীভাবে নিশ্চিত করবেন?",
+        answer: "স্বচ্ছতা ও জবাবদিহিতা তার কাজের মূল ভিত্তি। তিনি নির্বাচিত হলে সকল কাজের নিয়মিত আপডেট ওয়েবসাইটের মাধ্যমে প্রকাশ করবেন। এছাড়াও, একটি 'ট্রান্সপারেন্সি' পেজ থাকবে যেখানে সকল আর্থিক হিসাব এবং প্রতিশ্রুতির বাস্তবায়ন প্রক্রিয়া সম্পর্কে বিস্তারিত তথ্য দেওয়া থাকবে।"
+    }
+];
+
+function FAQSection() {
+    return (
+        <section className="py-16 md:py-24 bg-background">
+            <div className="container mx-auto px-4">
+                <div className="text-center max-w-4xl mx-auto">
+                    <HelpCircle className="mx-auto h-12 w-12 text-primary" />
+                    <h2 className="font-headline text-4xl md:text-5xl font-bold mt-4 text-foreground">
+                       কেন সিয়াম ফেরদৌস ইমনকে ভোট দেবেন?
+                    </h2>
+                    <p className="font-body text-lg mt-4 text-muted-foreground">
+                       আপনার মনে থাকা কিছু সাধারণ প্রশ্নের উত্তর, যা আপনাকে সঠিক সিদ্ধান্ত নিতে সাহায্য করবে।
+                    </p>
+                </div>
+                <div className="mt-12 max-w-3xl mx-auto">
+                    <Accordion type="single" collapsible className="w-full space-y-4">
+                        {faqItems.map((item, index) => (
+                             <AccordionItem key={index} value={`item-${index}`} className="border-b-0">
+                                <Card className="shadow-md bg-card">
+                                     <AccordionTrigger className="p-6 text-left hover:no-underline font-headline text-lg">
+                                        {item.question}
+                                     </AccordionTrigger>
+                                     <AccordionContent className="px-6 pb-6">
+                                        <p className="font-body text-muted-foreground">{item.answer}</p>
+                                     </AccordionContent>
+                                </Card>
+                             </AccordionItem>
+                        ))}
+                    </Accordion>
+                </div>
+            </div>
+        </section>
+    );
+}
+
 const initialFeedbackState = {
     name: '',
     mobile: '',
@@ -1049,5 +1104,7 @@ function FeedbackSection() {
     </section>
   );
 }
+
+    
 
     
