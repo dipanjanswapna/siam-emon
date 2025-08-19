@@ -26,21 +26,17 @@ export function WelcomePopup() {
             setIsLoading(true);
             if (docSnap.exists()) {
                 const data = docSnap.data() as PopupData;
-                const oldData = popupData;
-                setPopupData(data);
-
+                
                 const hasBeenClosedThisSession = sessionStorage.getItem(`popup_closed_${data.imageUrl}`);
                 
-                // If the popup is enabled AND 
-                // (it's a new image OR it hasn't been closed this session)
-                // then show it.
-                if (data.isEnabled && (!oldData || data.imageUrl !== oldData.imageUrl || !hasBeenClosedThisSession)) {
+                setPopupData(data);
+
+                if (data.isEnabled && !hasBeenClosedThisSession) {
                     setIsOpen(true);
-                } else if (!data.isEnabled) {
+                } else {
                     setIsOpen(false);
                 }
             } else {
-                // If doc doesn't exist, disable popup
                 setPopupData(null);
                 setIsOpen(false);
             }
@@ -50,14 +46,12 @@ export function WelcomePopup() {
             setIsLoading(false);
         });
 
-        // Cleanup listener on component unmount
         return () => unsubscribe();
     }, []);
 
     const handleClose = () => {
         setIsOpen(false);
         if (popupData) {
-            // Mark this specific image URL as closed for this session
             const sessionKey = `popup_closed_${popupData.imageUrl}`;
             sessionStorage.setItem(sessionKey, 'true');
         }
@@ -92,6 +86,7 @@ export function WelcomePopup() {
                             fill
                             className="object-contain"
                             data-ai-hint="advertisement popup"
+                            priority
                         />
                     </div>
                 </div>
