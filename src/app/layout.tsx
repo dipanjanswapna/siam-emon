@@ -1,3 +1,4 @@
+
 import type {Metadata} from 'next';
 import './globals.css';
 import { cn } from "@/lib/utils";
@@ -7,6 +8,7 @@ import { Toaster } from '@/components/ui/toaster';
 import { FloatingFeedbackButton } from '@/components/layout/FloatingFeedbackButton';
 import Image from 'next/image';
 import Script from 'next/script';
+import { WelcomePopup } from '@/components/layout/WelcomePopup';
 
 export const metadata: Metadata = {
   title: {
@@ -83,6 +85,7 @@ export default function RootLayout({
         <Script src="https://www.powr.io/powr.js?platform=html" strategy="lazyOnload"></Script>
       </head>
       <body className={cn("font-body antialiased min-h-screen flex flex-col")}>
+        <WelcomePopup />
         <Header />
         <main className="flex-grow">{children}</main>
         <section className="w-full">

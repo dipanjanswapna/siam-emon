@@ -7,9 +7,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Shield, PlusCircle, Edit, Trash2, BrainCircuit, BookOpenCheck, Library, Award, FileText, Mic, GraduationCap, ImagePlus, LogOut, MessageSquare, Users, Bell } from "lucide-react";
+import { Shield, PlusCircle, Edit, Trash2, BrainCircuit, BookOpenCheck, Library, Award, FileText, Mic, GraduationCap, ImagePlus, LogOut, MessageSquare, Users, Bell, Image as ImageIcon } from "lucide-react";
 import { useState, useEffect } from "react";
-import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc, orderBy, query, serverTimestamp, setDoc } from "firebase/firestore";
+import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc, orderBy, query, serverTimestamp, setDoc, getDoc } from "firebase/firestore";
 import { db, auth } from "@/lib/firebase";
 import {
   Dialog,
@@ -87,6 +87,12 @@ type Notice = {
     text: string;
 };
 
+type Popup = {
+    id: string;
+    imageUrl: string;
+    isEnabled: boolean;
+};
+
 
 const iconMap = {
     BrainCircuit: <BrainCircuit />,
@@ -105,6 +111,7 @@ function AdminPage() {
     const [feedbacks, setFeedbacks] = useState<Feedback[]>([]);
     const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
     const [notice, setNotice] = useState<Notice>({ id: "live-notice", text: "" });
+    const [popup, setPopup] = useState<Popup>({ id: "main-popup", imageUrl: "https://placehold.co/800x600.png", isEnabled: true });
     const [isLoading, setIsLoading] = useState(true);
     
     const [isCommitmentFormOpen, setIsCommitmentFormOpen] = useState(false);
@@ -170,6 +177,14 @@ function AdminPage() {
             setNotice({ id: noticeDoc.id, ...noticeDoc.data() } as Notice);
         }
     };
+    
+    const fetchPopup = async () => {
+        const popupDocRef = doc(db, "popup", "main-popup");
+        const popupSnapshot = await getDoc(popupDocRef);
+        if (popupSnapshot.exists()) {
+            setPopup({ id: popupSnapshot.id, ...popupSnapshot.data() } as Popup);
+        }
+    };
 
 
     const loadAllData = async () => {
@@ -181,7 +196,8 @@ function AdminPage() {
                 fetchSocialWorks(), 
                 fetchFeedbacks(), 
                 fetchTeamMembers(),
-                fetchNotice()
+                fetchNotice(),
+                fetchPopup()
             ]);
         } catch (error) {
             console.error("Error loading data: ", error);
@@ -482,6 +498,27 @@ function AdminPage() {
         }
     };
 
+    const handlePopupFormSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        try {
+            const popupDoc = doc(db, "popup", "main-popup");
+            await setDoc(popupDoc, { 
+                imageUrl: popup.imageUrl,
+                isEnabled: popup.isEnabled,
+             }, { merge: true });
+            fetchPopup();
+            toast({
+                title: 'পপআপ সফলভাবে আপডেট হয়েছে',
+            });
+        } catch (error) {
+            toast({
+                variant: 'destructive',
+                title: 'পপআপ আপডেট করতে সমস্যা হয়েছে',
+                description: (error as Error).message,
+            });
+        }
+    };
+
     const handleSignOut = async () => {
         const success = await signOut();
         if (success) {
@@ -512,6 +549,38 @@ function AdminPage() {
 
         <main className="mt-16">
             <Accordion type="multiple" className="w-full space-y-4">
+                <AccordionItem value="popup">
+                    <Card>
+                        <AccordionTrigger className="p-6">
+                            <CardTitle>পপআপ ব্যবস্থাপনা</CardTitle>
+                        </AccordionTrigger>
+                        <AccordionContent className="p-6 pt-0">
+                             <form onSubmit={handlePopupFormSubmit} className="space-y-4">
+                                <div className="space-y-2">
+                                    <Label htmlFor="popup-image">ছবির URL</Label>
+                                    <Input
+                                        id="popup-image"
+                                        value={popup.imageUrl}
+                                        onChange={(e) => setPopup({ ...popup, imageUrl: e.target.value })}
+                                        placeholder="পপআপ ছবির URL দিন"
+                                        required
+                                    />
+                                </div>
+                                <div className="flex items-center space-x-2">
+                                  <Switch 
+                                    id="popup-enabled" 
+                                    checked={popup.isEnabled}
+                                    onCheckedChange={(checked) => setPopup({ ...popup, isEnabled: checked })}
+                                  />
+                                  <Label htmlFor="popup-enabled">পপআপ দেখান</Label>
+                                </div>
+                                <Button type="submit">
+                                    <ImageIcon className="mr-2 h-4 w-4" /> আপডেট করুন
+                                </Button>
+                            </form>
+                        </AccordionContent>
+                    </Card>
+                </AccordionItem>
                 <AccordionItem value="notice-bar">
                     <Card>
                         <AccordionTrigger className="p-6">
@@ -994,5 +1063,3 @@ function AdminPage() {
 }
 
 export default useAuth(AdminPage);
-
-    
