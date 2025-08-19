@@ -1130,12 +1130,12 @@ function PreVoteSection() {
                 if (docSnap.exists()) {
                     setVoteCount(docSnap.data().count);
                 } else {
-                    await setDoc(voteDocRef, { count: 1205 });
-                    setVoteCount(1205);
+                    await setDoc(voteDocRef, { count: 103 });
+                    setVoteCount(103);
                 }
             } catch (error) {
                 console.error("Error fetching vote count:", error);
-                setVoteCount(1205); // Fallback
+                setVoteCount(103); // Fallback
             } finally {
                 setIsLoading(false);
             }
@@ -1224,4 +1224,5 @@ function PreVoteSection() {
     
 
     
+
 
