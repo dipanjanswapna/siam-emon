@@ -385,8 +385,17 @@ const researchActivities = [
     title: "সেমিনার ও আলোচনা সভা",
     description: "গবেষণা ও উচ্চশিক্ষায় শিক্ষার্থীদের নিয়ে সেমিনার:\n\nসিয়াম ফেরদৌস ইমন শিক্ষার্থীদের গবেষণায় উৎসাহিত করতে এবং তাদের উচ্চশিক্ষার পথ দেখাতে একটি সেমিনার আয়োজনের পরিকল্পনা করেছেন। এই সেমিনারে গবেষণার গুরুত্ব, বিদেশে উচ্চশিক্ষার সুযোগ এবং অভিজ্ঞ গবেষকদের সাথে সরাসরি আলোচনার ব্যবস্থা থাকবে। এর লক্ষ্য হলো শিক্ষার্থীদের ভবিষ্যতের জন্য প্রস্তুত করা এবং তাদের মধ্যে নতুন কিছু শেখার আগ্রহ তৈরি করা।",
     images: [
-        { src: "https://placehold.co/800x600.png", alt: "সেমিনারে বক্তা বক্তব্য রাখছেন", hint: "seminar speaker" },
-        { src: "https://placehold.co/800x600.png", alt: "শ্রোতারা প্রশ্ন করছেন", hint: "audience asking question" },
+        { src: "https://i.postimg.cc/ZYNzxJDx/photo-2025-08-21-01-06-15.jpg", alt: "সেমিনারে অংশগ্রহণকারীদের একাংশ", hint: "seminar audience" },
+        { src: "https://i.postimg.cc/4ypCf1hS/photo-2025-08-21-01-06-17.jpg", alt: "আলোচনা সভায় বক্তব্য রাখছেন", hint: "speaker presentation" },
+        { src: "https://i.postimg.cc/cJJNRYVv/photo-2025-08-21-01-06-22.jpg", alt: "শিক্ষার্থীদের সাথে মতবিনিময়", hint: "discussion students" },
+        { src: "https://i.postimg.cc/LXYK7S4R/photo-2025-08-21-01-06-24.jpg", alt: "সেমিনারে অতিথিদের একাংশ", hint: "seminar guests" },
+        { src: "https://i.postimg.cc/c4MqPXWK/photo-2025-08-21-01-06-05.jpg", alt: "বক্তব্য রাখার মুহূর্ত", hint: "giving speech" },
+        { src: "https://i.postimg.cc/DyKkCR9k/photo-2025-08-21-01-06-07.jpg", alt: "উপস্থিত শিক্ষার্থীদের একাংশ", hint: "student audience" },
+        { src: "https://i.postimg.cc/fRTPps5F/photo-2025-08-21-01-04-50.jpg", alt: "আলোচনা সভা", hint: "panel discussion" },
+        { src: "https://i.postimg.cc/SRhTrbJg/photo-2025-08-21-01-04-05.jpg", alt: "প্রশ্নোত্তর পর্ব", hint: "q&a session" },
+        { src: "https://i.postimg.cc/fyfHqqdD/photo-2025-08-21-01-04-12.jpg", alt: "শিক্ষার্থীদের সাথে গ্রুপ ছবি", hint: "group photo students" },
+        { src: "https://i.postimg.cc/d1dNrVt7/photo-2025-08-21-01-04-17.jpg", alt: "সেমিনারের একটি মুহূর্ত", hint: "seminar moment" },
+        { src: "https://i.postimg.cc/fbVrWvGf/photo-2025-08-21-01-04-27.jpg", alt: "অংশগ্রহণকারীদের সাথে আলোচনা", hint: "discussion participants" }
     ],
   },
     {
@@ -1263,6 +1272,7 @@ function PreVoteSection() {
     
 
     
+
 
 
 
