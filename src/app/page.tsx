@@ -461,12 +461,39 @@ function ResearchSection() {
       </section>
 
        <Dialog open={!!selectedActivity} onOpenChange={(isOpen) => !isOpen && closeDialog()}>
-          <DialogContent className="max-w-4xl w-[95vw] p-0 bg-card border-none shadow-2xl rounded-2xl flex flex-col gap-0">
+          <DialogContent className="max-w-4xl w-[95vw] h-[90vh] p-0 bg-card border-none shadow-2xl rounded-2xl flex flex-col">
              {selectedActivity && (
                 <>
-                <DialogHeader className="p-4 border-b flex-shrink-0">
-                    <DialogTitle className="sr-only">{selectedActivity.title}</DialogTitle>
-                    <Button
+                  <div className="relative h-[70vh] w-full">
+                    <Carousel className="w-full h-full">
+                      <CarouselContent className="h-full">
+                        {selectedActivity.images.map((image, index) => (
+                          <CarouselItem key={index} className="h-full">
+                            <div className="w-full h-full relative">
+                              <Image
+                                src={image.src}
+                                alt={image.alt}
+                                fill
+                                className="object-contain"
+                                data-ai-hint={image.hint}
+                              />
+                            </div>
+                          </CarouselItem>
+                        ))}
+                      </CarouselContent>
+                      <CarouselPrevious className="absolute left-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none h-10 w-10" />
+                      <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none h-10 w-10" />
+                    </Carousel>
+                  </div>
+                  <ScrollArea className="flex-shrink-0 text-center p-4 md:p-6 bg-card rounded-b-2xl max-h-[calc(90vh-70vh)]">
+                    <h3 className="font-headline text-xl md:text-3xl font-bold">
+                      {selectedActivity.title}
+                    </h3>
+                    <p className="font-body text-sm md:text-lg text-muted-foreground mt-2 max-w-3xl mx-auto whitespace-pre-line">
+                      {selectedActivity.description}
+                    </p>
+                  </ScrollArea>
+                   <Button
                       variant="ghost"
                       size="icon"
                       onClick={closeDialog}
@@ -475,38 +502,6 @@ function ResearchSection() {
                       <X className="h-5 w-5" />
                       <span className="sr-only">বন্ধ করুন</span>
                     </Button>
-                </DialogHeader>
-                 <div className="grid grid-rows-[minmax(0,1fr)_auto] h-[90vh]">
-                     <div className="relative overflow-hidden h-full">
-                       <Carousel className="w-full h-full">
-                         <CarouselContent className="h-full">
-                           {selectedActivity.images.map((image, index) => (
-                             <CarouselItem key={index} className="h-full">
-                               <div className="w-full h-full relative">
-                                 <Image
-                                   src={image.src}
-                                   alt={image.alt}
-                                   fill
-                                   className="object-contain"
-                                   data-ai-hint={image.hint}
-                                 />
-                               </div>
-                             </CarouselItem>
-                           ))}
-                         </CarouselContent>
-                         <CarouselPrevious className="absolute left-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none h-10 w-10" />
-                         <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none h-10 w-10" />
-                       </Carousel>
-                     </div>
-                     <ScrollArea className="flex-shrink-0 text-center p-4 md:p-6 bg-card rounded-b-2xl max-h-[25vh]">
-                       <h3 className="font-headline text-xl md:text-3xl font-bold">
-                         {selectedActivity.title}
-                       </h3>
-                       <p className="font-body text-sm md:text-lg text-muted-foreground mt-2 max-w-3xl mx-auto whitespace-pre-line">
-                         {selectedActivity.description}
-                       </p>
-                     </ScrollArea>
-                 </div>
                 </>
              )}
           </DialogContent>
@@ -1290,6 +1285,7 @@ function PreVoteSection() {
     
 
     
+
 
 
 
