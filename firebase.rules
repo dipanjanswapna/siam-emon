@@ -1,50 +1,60 @@
 
 rules_version = '2';
+
 service cloud.firestore {
   match /databases/{database}/documents {
-    
-    // Allow admin write access and public read access for specific collections.
+
+    // Helper function to check for admin UID
+    function isAdmin() {
+      return request.auth != null && request.auth.uid == 'jY5SNkuZxbgadjdZzSe9Favqs7n1';
+    }
+
+    // Publicly readable collections, writable only by admin
     match /commitments/{docId} {
       allow read: if true;
-      allow write: if request.auth != null && request.auth.uid == 'jY5SNkuZxbgadjdZzSe9Favqs7n1';
+      allow write: if isAdmin();
     }
 
     match /academicAchievements/{docId} {
       allow read: if true;
-      allow write: if request.auth != null && request.auth.uid == 'jY5SNkuZxbgadjdZzSe9Favqs7n1';
+      allow write: if isAdmin();
     }
 
     match /socialWorks/{docId} {
       allow read: if true;
-      allow write: if request.auth != null && request.auth.uid == 'jY5SNkuZxbgadjdZzSe9Favqs7n1';
+      allow write: if isAdmin();
     }
 
     match /teamMembers/{docId} {
       allow read: if true;
-      allow write: if request.auth != null && request.auth.uid == 'jY5SNkuZxbgadjdZzSe9Favqs7n1';
-    }
-
-    match /notices/{docId} {
-        allow read: if true;
-        allow write: if request.auth != null && request.auth.uid == 'jY5SNkuZxbgadjdZzSe9Favqs7n1';
+      allow write: if isAdmin();
     }
     
-    match /popup/{docId} {
-        allow read: if true;
-        allow write: if request.auth != null && request.auth.uid == 'jY5SNkuZxbgadjdZzSe9Favqs7n1';
+    match /notices/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
     }
 
-    // Allow anyone to submit feedback.
-    // Only the admin can read or delete feedback.
+    match /promotionalPopups/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Feedback can be created by anyone, but only managed by admin
     match /feedback/{docId} {
       allow create: if true;
-      allow read, update, delete: if request.auth != null && request.auth.uid == 'jY5SNkuZxbgadjdZzSe9Favqs7n1';
+      allow read, update, delete: if isAdmin();
     }
 
-    // Allow anyone to read and update the vote count.
-    match /pre-votes/{docId} {
+    // Pre-vote count can be read by anyone, but only incremented by 1
+    match /pre-votes/live-count {
       allow read: if true;
-      allow create, update: if true;
+      // Ensure the count is only incremented by 1
+      // and that no other fields are changed.
+      allow update: if request.resource.data.keys().hasOnly(['count']) &&
+                     request.resource.data.count == resource.data.count + 1;
+      // Allow admin to create or delete the document if needed
+      allow create, delete: if isAdmin();
     }
   }
 }
