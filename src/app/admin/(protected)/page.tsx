@@ -512,7 +512,7 @@ function AdminPage() {
                 displayFrequency: promotionalPopup.displayFrequency,
                 imageUrl: promotionalPopup.imageUrl,
                 imageHint: promotionalPopup.imageHint,
-             });
+             }, { merge: true });
             fetchPromotionalPopup();
             toast({
                 title: 'পপআপ সেটিংস সফলভাবে আপডেট হয়েছে',
