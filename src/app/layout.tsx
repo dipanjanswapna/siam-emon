@@ -6,6 +6,7 @@ import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
 import { Toaster } from '@/components/ui/toaster';
 import { FloatingFeedbackButton } from '@/components/layout/FloatingFeedbackButton';
+import { PromotionalPopup } from '@/components/layout/PromotionalPopup';
 import Image from 'next/image';
 import Script from 'next/script';
 
@@ -85,6 +86,7 @@ export default function RootLayout({
       </head>
       <body className={cn("font-body antialiased min-h-screen flex flex-col")}>
         <Header />
+        <PromotionalPopup />
         <main className="flex-grow">{children}</main>
         <section className="w-full">
             <div className="relative w-full h-auto aspect-[16/9]">

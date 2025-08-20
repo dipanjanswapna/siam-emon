@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Shield, PlusCircle, Edit, Trash2, BrainCircuit, BookOpenCheck, Library, Award, FileText, Mic, GraduationCap, ImagePlus, LogOut, MessageSquare, Users, Bell, Image as ImageIcon, Settings } from "lucide-react";
+import { Shield, PlusCircle, Edit, Trash2, BrainCircuit, BookOpenCheck, Library, Award, FileText, Mic, GraduationCap, ImagePlus, LogOut, MessageSquare, Users, Bell, Image as ImageIcon, Settings, Megaphone } from "lucide-react";
 import { useState, useEffect } from "react";
 import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc, orderBy, query, serverTimestamp, setDoc, getDoc } from "firebase/firestore";
 import { db, auth } from "@/lib/firebase";
@@ -87,6 +87,13 @@ type Notice = {
     text: string;
 };
 
+type PromotionalPopup = {
+    id: string;
+    enabled: boolean;
+    imageUrl: string;
+};
+
+
 const iconMap = {
     BrainCircuit: <BrainCircuit />,
     BookOpenCheck: <BookOpenCheck />,
@@ -104,6 +111,7 @@ function AdminPage() {
     const [feedbacks, setFeedbacks] = useState<Feedback[]>([]);
     const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
     const [notice, setNotice] = useState<Notice>({ id: "live-notice", text: "" });
+    const [promotionalPopup, setPromotionalPopup] = useState<PromotionalPopup>({ id: "promotional-popup", enabled: true, imageUrl: "" });
     const [isLoading, setIsLoading] = useState(true);
     
     const [isCommitmentFormOpen, setIsCommitmentFormOpen] = useState(false);
@@ -168,6 +176,13 @@ function AdminPage() {
             setNotice({ id: noticeDoc.id, ...noticeDoc.data() } as Notice);
         }
     };
+    
+    const fetchPromotionalPopup = async () => {
+        const popupDoc = await getDoc(doc(db, "siteSettings", "promotional-popup"));
+        if (popupDoc.exists()) {
+            setPromotionalPopup({ id: popupDoc.id, ...popupDoc.data() } as PromotionalPopup);
+        }
+    };
 
     const loadAllData = async () => {
         setIsLoading(true);
@@ -179,6 +194,7 @@ function AdminPage() {
                 fetchFeedbacks(), 
                 fetchTeamMembers(),
                 fetchNotice(),
+                fetchPromotionalPopup(),
             ]);
         } catch (error) {
             console.error("Error loading data: ", error);
@@ -478,6 +494,24 @@ function AdminPage() {
             });
         }
     };
+    
+    const handlePromotionalPopupFormSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        try {
+            const popupDoc = doc(db, "siteSettings", "promotional-popup");
+            await setDoc(popupDoc, { enabled: promotionalPopup.enabled, imageUrl: promotionalPopup.imageUrl });
+            fetchPromotionalPopup();
+            toast({
+                title: 'প্রমোশনাল পপআপ সফলভাবে আপডেট হয়েছে',
+            });
+        } catch (error) {
+            toast({
+                variant: 'destructive',
+                title: 'পপআপ আপডেট করতে সমস্যা হয়েছে',
+                description: (error as Error).message,
+            });
+        }
+    };
 
     const handleSignOut = async () => {
         const success = await signOut();
@@ -509,6 +543,39 @@ function AdminPage() {
 
         <main className="mt-16">
             <Accordion type="multiple" className="w-full space-y-4">
+                 <AccordionItem value="site-settings">
+                    <Card>
+                        <AccordionTrigger className="p-6">
+                            <CardTitle>সাইট সেটিংস</CardTitle>
+                        </AccordionTrigger>
+                        <AccordionContent className="p-6 pt-0">
+                            <form onSubmit={handlePromotionalPopupFormSubmit} className="space-y-4">
+                                <div className="space-y-2">
+                                     <div className="flex items-center space-x-2">
+                                        <Switch
+                                            id="popup-enabled"
+                                            checked={promotionalPopup.enabled}
+                                            onCheckedChange={(checked) => setPromotionalPopup({ ...promotionalPopup, enabled: checked })}
+                                        />
+                                        <Label htmlFor="popup-enabled">প্রমোশনাল পপআপ সক্রিয় করুন</Label>
+                                    </div>
+                                </div>
+                                <div className="space-y-2">
+                                    <Label htmlFor="popup-image-url">পপআপ ছবির URL</Label>
+                                    <Input
+                                        id="popup-image-url"
+                                        value={promotionalPopup.imageUrl}
+                                        onChange={(e) => setPromotionalPopup({ ...promotionalPopup, imageUrl: e.target.value })}
+                                        placeholder="https://example.com/image.jpg"
+                                    />
+                                </div>
+                                <Button type="submit">
+                                    <Settings className="mr-2 h-4 w-4" /> সেটিংস সেভ করুন
+                                </Button>
+                            </form>
+                        </AccordionContent>
+                    </Card>
+                </AccordionItem>
                 <AccordionItem value="notice-bar">
                     <Card>
                         <AccordionTrigger className="p-6">
@@ -993,3 +1060,4 @@ function AdminPage() {
 export default useAuth(AdminPage);
 
     
+
