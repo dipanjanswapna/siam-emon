@@ -463,8 +463,11 @@ function ResearchSection() {
 
             <Dialog open={!!selectedActivity} onOpenChange={(isOpen) => !isOpen && closeDialog()}>
                 <DialogContent className="max-w-4xl w-full h-[95vh] flex flex-col p-0 sm:p-0 bg-transparent border-none shadow-none">
+                    <DialogHeader className="sr-only">
+                        <DialogTitle>{selectedActivity?.title} Gallery</DialogTitle>
+                    </DialogHeader>
                     <div className="relative flex flex-col items-center justify-center h-full w-full">
-                         <div className="relative w-full flex-grow">
+                        <div className="relative w-full h-full">
                              <Carousel className="w-full h-full">
                                 <CarouselContent>
                                     {selectedActivity?.images.map((image, index) => (
@@ -485,16 +488,15 @@ function ResearchSection() {
                                 <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50" />
                             </Carousel>
                         </div>
-                        <Button variant="destructive" onClick={closeDialog} className="mt-4 md:hidden">
-                            <X className="mr-2 h-4 w-4" /> বন্ধ করুন
-                        </Button>
-                        <Button variant="ghost" size="icon" onClick={closeDialog} className="absolute top-0 right-0 hidden md:inline-flex z-50 bg-destructive text-destructive-foreground rounded-full h-8 w-8 hover:bg-destructive/80">
+                        <div className="absolute bottom-4 md:hidden">
+                            <Button variant="destructive" onClick={closeDialog}>
+                                <X className="mr-2 h-4 w-4" /> বন্ধ করুন
+                            </Button>
+                        </div>
+                        <Button variant="ghost" size="icon" onClick={closeDialog} className="absolute top-2 right-2 hidden md:inline-flex z-50 bg-destructive text-destructive-foreground rounded-full h-8 w-8 hover:bg-destructive/80">
                             <X className="h-5 w-5" />
                             <span className="sr-only">বন্ধ করুন</span>
                         </Button>
-                         <DialogHeader className="sr-only">
-                            <DialogTitle>{selectedActivity?.title}</DialogTitle>
-                        </DialogHeader>
                     </div>
                 </DialogContent>
             </Dialog>
@@ -577,38 +579,40 @@ function PublicationSection() {
     </section>
     <Dialog open={!!selectedActivity} onOpenChange={(isOpen) => !isOpen && closeDialog()}>
         <DialogContent className="max-w-4xl w-full h-[95vh] flex flex-col p-0 sm:p-0 bg-transparent border-none shadow-none">
+            <DialogHeader className="sr-only">
+                <DialogTitle>{selectedActivity?.title} Gallery</DialogTitle>
+            </DialogHeader>
             <div className="relative flex flex-col items-center justify-center h-full w-full">
-                    <div className="relative w-full flex-grow">
-                        <Carousel className="w-full h-full">
-                            <CarouselContent>
-                                {selectedActivity?.images.map((image, index) => (
-                                    <CarouselItem key={index}>
-                                        <div className="relative w-full h-full">
-                                            <Image
-                                                src={image.src}
-                                                alt={image.alt}
-                                                fill
-                                                className="object-contain"
-                                                data-ai-hint={image.hint}
-                                            />
-                                        </div>
-                                    </CarouselItem>
-                                ))}
-                            </CarouselContent>
-                            <CarouselPrevious className="absolute left-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50" />
-                            <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50" />
-                        </Carousel>
-                    </div>
-                <Button variant="destructive" onClick={closeDialog} className="mt-4 md:hidden">
-                    <X className="mr-2 h-4 w-4" /> বন্ধ করুন
-                </Button>
-                <Button variant="ghost" size="icon" onClick={closeDialog} className="absolute top-0 right-0 hidden md:inline-flex z-50 bg-destructive text-destructive-foreground rounded-full h-8 w-8 hover:bg-destructive/80">
+                <div className="relative w-full h-full">
+                    <Carousel className="w-full h-full">
+                        <CarouselContent>
+                            {selectedActivity?.images.map((image, index) => (
+                                <CarouselItem key={index}>
+                                    <div className="relative w-full h-full">
+                                        <Image
+                                            src={image.src}
+                                            alt={image.alt}
+                                            fill
+                                            className="object-contain"
+                                            data-ai-hint={image.hint}
+                                        />
+                                    </div>
+                                </CarouselItem>
+                            ))}
+                        </CarouselContent>
+                        <CarouselPrevious className="absolute left-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50" />
+                        <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50" />
+                    </Carousel>
+                </div>
+                <div className="absolute bottom-4 md:hidden">
+                    <Button variant="destructive" onClick={closeDialog}>
+                        <X className="mr-2 h-4 w-4" /> বন্ধ করুন
+                    </Button>
+                </div>
+                <Button variant="ghost" size="icon" onClick={closeDialog} className="absolute top-2 right-2 hidden md:inline-flex z-50 bg-destructive text-destructive-foreground rounded-full h-8 w-8 hover:bg-destructive/80">
                     <X className="h-5 w-5" />
                     <span className="sr-only">বন্ধ করুন</span>
                 </Button>
-                <DialogHeader className="sr-only">
-                    <DialogTitle>{selectedActivity?.title}</DialogTitle>
-                </DialogHeader>
             </div>
         </DialogContent>
     </Dialog>
@@ -682,38 +686,40 @@ function LogicalMovementSection() {
     </section>
     <Dialog open={!!selectedActivity} onOpenChange={(isOpen) => !isOpen && closeDialog()}>
         <DialogContent className="max-w-4xl w-full h-[95vh] flex flex-col p-0 sm:p-0 bg-transparent border-none shadow-none">
+            <DialogHeader className="sr-only">
+                <DialogTitle>{selectedActivity?.title} Gallery</DialogTitle>
+            </DialogHeader>
             <div className="relative flex flex-col items-center justify-center h-full w-full">
-                    <div className="relative w-full flex-grow">
-                        <Carousel className="w-full h-full">
-                            <CarouselContent>
-                                {selectedActivity?.images.map((image, index) => (
-                                    <CarouselItem key={index}>
-                                        <div className="relative w-full h-full">
-                                            <Image
-                                                src={image.src}
-                                                alt={image.alt}
-                                                fill
-                                                className="object-contain"
-                                                data-ai-hint={image.hint}
-                                            />
-                                        </div>
-                                    </CarouselItem>
-                                ))}
-                            </CarouselContent>
-                            <CarouselPrevious className="absolute left-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50" />
-                            <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50" />
-                        </Carousel>
-                    </div>
-                <Button variant="destructive" onClick={closeDialog} className="mt-4 md:hidden">
-                    <X className="mr-2 h-4 w-4" /> বন্ধ করুন
-                </Button>
-                <Button variant="ghost" size="icon" onClick={closeDialog} className="absolute top-0 right-0 hidden md:inline-flex z-50 bg-destructive text-destructive-foreground rounded-full h-8 w-8 hover:bg-destructive/80">
+                <div className="relative w-full h-full">
+                    <Carousel className="w-full h-full">
+                        <CarouselContent>
+                            {selectedActivity?.images.map((image, index) => (
+                                <CarouselItem key={index}>
+                                    <div className="relative w-full h-full">
+                                        <Image
+                                            src={image.src}
+                                            alt={image.alt}
+                                            fill
+                                            className="object-contain"
+                                            data-ai-hint={image.hint}
+                                        />
+                                    </div>
+                                </CarouselItem>
+                            ))}
+                        </CarouselContent>
+                        <CarouselPrevious className="absolute left-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50" />
+                        <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50" />
+                    </Carousel>
+                </div>
+                <div className="absolute bottom-4 md:hidden">
+                    <Button variant="destructive" onClick={closeDialog}>
+                        <X className="mr-2 h-4 w-4" /> বন্ধ করুন
+                    </Button>
+                </div>
+                <Button variant="ghost" size="icon" onClick={closeDialog} className="absolute top-2 right-2 hidden md:inline-flex z-50 bg-destructive text-destructive-foreground rounded-full h-8 w-8 hover:bg-destructive/80">
                     <X className="h-5 w-5" />
                     <span className="sr-only">বন্ধ করুন</span>
                 </Button>
-                <DialogHeader className="sr-only">
-                    <DialogTitle>{selectedActivity?.title}</DialogTitle>
-                </DialogHeader>
             </div>
         </DialogContent>
     </Dialog>
@@ -812,8 +818,8 @@ function AcademicAchievementSection() {
         <DialogContent className="max-w-4xl w-[95vw] h-[90vh] p-0 bg-card border-none shadow-2xl rounded-2xl flex flex-col">
           {selectedAchievement && (
             <>
-               <DialogHeader className="p-4 border-b">
-                <DialogTitle className="sr-only">{selectedAchievement.title}</DialogTitle>
+               <DialogHeader className="p-4 border-b sr-only">
+                <DialogTitle>{selectedAchievement.title}</DialogTitle>
               </DialogHeader>
               <div className="relative flex-grow w-full h-full">
                  <Button variant="ghost" size="icon" onClick={closeDialog} className="absolute top-2 right-2 z-10 bg-destructive text-destructive-foreground rounded-full h-8 w-8 hover:bg-destructive/80">
@@ -1286,6 +1292,7 @@ function PreVoteSection() {
     
 
     
+
 
 
 
