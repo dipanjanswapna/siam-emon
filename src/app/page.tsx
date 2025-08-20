@@ -409,47 +409,58 @@ const researchActivities = [
   },
 ];
 
-type ResearchActivity = (typeof researchActivities)[0];
-
 function ResearchSection() {
-    return (
-        <section className="bg-primary/5 py-16 md:py-24">
-            <div className="container mx-auto px-4">
-                <div className="text-center max-w-4xl mx-auto">
-                    <Camera className="mx-auto h-12 w-12 text-primary" />
-                    <h1 className="font-headline text-5xl md:text-6xl font-bold mt-4 text-foreground">গবেষণা ও কার্যক্রম</h1>
-                    <p className="font-body text-lg mt-4 text-muted-foreground">
-                        জ্ঞানভিত্তিক সমাজ গঠনে আমাদের গবেষণা, ওয়ার্কশপ এবং বিভিন্ন কার্যক্রমের ঝলক।
-                    </p>
+  return (
+    <section className="bg-primary/5 py-16 md:py-24">
+      <div className="container mx-auto px-4">
+        <div className="text-center max-w-4xl mx-auto">
+          <Camera className="mx-auto h-12 w-12 text-primary" />
+          <h1 className="font-headline text-5xl md:text-6xl font-bold mt-4 text-foreground">গবেষণা ও কার্যক্রম</h1>
+          <p className="font-body text-lg mt-4 text-muted-foreground">
+            জ্ঞানভিত্তিক সমাজ গঠনে আমাদের গবেষণা, ওয়ার্কশপ এবং বিভিন্ন কার্যক্রমের ঝলক।
+          </p>
+        </div>
+        <div className="mt-16 space-y-8">
+          {researchActivities.map((activity, index) => (
+            <div key={index} className="grid md:grid-cols-2 gap-8 items-center bg-card p-6 rounded-lg shadow-md">
+              <div className="order-2 md:order-1">
+                <div className="flex items-center gap-3 mb-4">
+                  <activity.icon className="w-8 h-8 text-primary" />
+                  <h3 className="font-headline text-3xl font-bold text-foreground">{activity.title}</h3>
                 </div>
-                <div className="mt-16 space-y-8">
-                    {researchActivities.map((activity, index) => (
-                        <div key={index} className="grid md:grid-cols-2 gap-8 items-center bg-card p-6 rounded-lg shadow-md">
-                            <div className="order-2 md:order-1">
-                                <div className="flex items-center gap-3 mb-4">
-                                    <activity.icon className="w-8 h-8 text-primary" />
-                                    <h3 className="font-headline text-3xl font-bold text-foreground">{activity.title}</h3>
-                                </div>
-                                <p className="font-body text-muted-foreground whitespace-pre-line">{activity.description}</p>
-                            </div>
-                            <div className="relative w-full aspect-video rounded-lg overflow-hidden group order-1 md:order-2">
-                                <Image
-                                    src={activity.images[0].src}
-                                    alt={activity.images[0].alt}
-                                    fill
-                                    className="object-cover transform group-hover:scale-105 transition-transform duration-300"
-                                    data-ai-hint={activity.images[0].hint}
-                                />
-                                <div className="absolute bottom-2 right-2 bg-black/50 text-white text-xs font-bold px-2 py-1 rounded">
-                                    {activity.images.length} ছবি
-                                </div>
-                            </div>
+                <p className="font-body text-muted-foreground whitespace-pre-line">{activity.description}</p>
+              </div>
+              <div className="relative w-full aspect-video rounded-lg overflow-hidden order-1 md:order-2">
+                <Carousel className="w-full h-full">
+                  <CarouselContent>
+                    {activity.images.map((image, i) => (
+                      <CarouselItem key={i}>
+                        <div className="relative w-full h-full aspect-video">
+                          <Image
+                            src={image.src}
+                            alt={image.alt}
+                            fill
+                            className="object-cover"
+                            data-ai-hint={image.hint}
+                          />
                         </div>
+                      </CarouselItem>
                     ))}
-                </div>
+                  </CarouselContent>
+                   {activity.images.length > 1 && (
+                    <>
+                        <CarouselPrevious className="absolute left-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none" />
+                        <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none" />
+                    </>
+                   )}
+                </Carousel>
+              </div>
             </div>
-        </section>
-    );
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }
 
 
@@ -474,7 +485,6 @@ const publicationActivities = [
   },
 ];
 
-type PublicationActivity = (typeof publicationActivities)[0];
 
 function PublicationSection() {
   return (
@@ -497,17 +507,30 @@ function PublicationSection() {
                 </div>
                 <p className="font-body text-muted-foreground whitespace-pre-line">{activity.description}</p>
               </div>
-              <div className="relative w-full aspect-video rounded-lg overflow-hidden group order-1 md:order-2">
-                  <Image
-                    src={activity.images[0].src}
-                    alt={activity.images[0].alt}
-                    fill
-                    className="object-cover transform group-hover:scale-105 transition-transform duration-300"
-                    data-ai-hint={activity.images[0].hint}
-                  />
-                  <div className="absolute bottom-2 right-2 bg-black/50 text-white text-xs font-bold px-2 py-1 rounded">
-                     {activity.images.length} ছবি
-                  </div>
+              <div className="relative w-full aspect-video rounded-lg overflow-hidden order-1 md:order-2">
+                <Carousel className="w-full h-full">
+                  <CarouselContent>
+                    {activity.images.map((image, i) => (
+                      <CarouselItem key={i}>
+                        <div className="relative w-full h-full aspect-video">
+                          <Image
+                            src={image.src}
+                            alt={image.alt}
+                            fill
+                            className="object-cover"
+                            data-ai-hint={image.hint}
+                          />
+                        </div>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                   {activity.images.length > 1 && (
+                    <>
+                        <CarouselPrevious className="absolute left-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none" />
+                        <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none" />
+                    </>
+                   )}
+                </Carousel>
               </div>
             </div>
           ))}
@@ -530,8 +553,6 @@ const logicalMovementActivities = [
   },
 ];
 
-type LogicalMovementActivity = (typeof logicalMovementActivities)[0];
-
 function LogicalMovementSection() {
   return (
     <section className="bg-primary/5 py-16 md:py-24">
@@ -553,17 +574,30 @@ function LogicalMovementSection() {
                 </div>
                 <p className="font-body text-muted-foreground whitespace-pre-line">{activity.description}</p>
               </div>
-              <div className="relative w-full aspect-video rounded-lg overflow-hidden group order-1 md:order-2">
-                  <Image
-                    src={activity.images[0].src}
-                    alt={activity.images[0].alt}
-                    fill
-                    className="object-cover transform group-hover:scale-105 transition-transform duration-300"
-                    data-ai-hint={activity.images[0].hint}
-                  />
-                   <div className="absolute bottom-2 right-2 bg-black/50 text-white text-xs font-bold px-2 py-1 rounded">
-                       {activity.images.length} ছবি
-                    </div>
+              <div className="relative w-full aspect-video rounded-lg overflow-hidden order-1 md:order-2">
+                <Carousel className="w-full h-full">
+                  <CarouselContent>
+                    {activity.images.map((image, i) => (
+                      <CarouselItem key={i}>
+                        <div className="relative w-full h-full aspect-video">
+                          <Image
+                            src={image.src}
+                            alt={image.alt}
+                            fill
+                            className="object-cover"
+                            data-ai-hint={image.hint}
+                          />
+                        </div>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                   {activity.images.length > 1 && (
+                    <>
+                        <CarouselPrevious className="absolute left-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none" />
+                        <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none" />
+                    </>
+                   )}
+                </Carousel>
               </div>
             </div>
           ))}
@@ -1138,6 +1172,7 @@ function PreVoteSection() {
     
 
     
+
 
 
 
