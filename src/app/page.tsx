@@ -463,31 +463,33 @@ function ResearchSection() {
         <DialogContent className="max-w-4xl w-[95vw] h-[90vh] p-0 bg-card border-none shadow-2xl rounded-2xl flex flex-col">
           {selectedActivity && (
             <>
-               <DialogHeader className="p-4 border-b">
-                 <DialogTitle className="sr-only">{selectedActivity.title}</DialogTitle>
-              </DialogHeader>
-              <div className="relative flex-grow w-full h-[70%]">
-                <Button variant="ghost" size="icon" onClick={closeDialog} className="absolute top-2 right-2 z-10 bg-destructive text-destructive-foreground rounded-full h-8 w-8 hover:bg-destructive/80">
+              <DialogHeader className="p-4 border-b">
+                <DialogTitle className="sr-only">{selectedActivity.title}</DialogTitle>
+                 <Button variant="ghost" size="icon" onClick={closeDialog} className="absolute top-2 right-2 z-50 bg-destructive text-destructive-foreground rounded-full h-8 w-8 hover:bg-destructive/80">
                   <X className="h-5 w-5" />
                   <span className="sr-only">বন্ধ করুন</span>
                 </Button>
-                <Carousel className="w-full h-full">
-                  <CarouselContent className="h-full">
-                    {selectedActivity.images.map((image, index) => (
-                      <CarouselItem key={index} className="h-full">
-                        <div className="w-full h-full relative rounded-t-lg overflow-hidden">
-                          <Image src={image.src} alt={image.alt} fill className="object-contain" data-ai-hint={image.hint}/>
-                        </div>
-                      </CarouselItem>
-                    ))}
-                  </CarouselContent>
-                  <CarouselPrevious className="absolute left-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none h-10 w-10" />
-                  <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none h-10 w-10" />
-                </Carousel>
-              </div>
-              <div className="flex-shrink-0 text-center p-4 md:p-6 bg-card rounded-b-2xl">
-                <h3 className="font-headline text-xl md:text-3xl font-bold">{selectedActivity.title}</h3>
-                <p className="font-body text-sm md:text-lg text-muted-foreground mt-2 max-w-3xl mx-auto whitespace-pre-line">{selectedActivity.description}</p>
+              </DialogHeader>
+              <div className="relative flex-grow w-full h-full flex flex-col">
+                  <div className="relative w-full h-[70%]">
+                      <Carousel className="w-full h-full">
+                          <CarouselContent className="h-full">
+                              {selectedActivity.images.map((image, index) => (
+                                  <CarouselItem key={index} className="h-full">
+                                      <div className="w-full h-full relative rounded-t-lg overflow-hidden">
+                                          <Image src={image.src} alt={image.alt} fill className="object-contain" data-ai-hint={image.hint} />
+                                      </div>
+                                  </CarouselItem>
+                              ))}
+                          </CarouselContent>
+                          <CarouselPrevious className="absolute left-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none h-10 w-10" />
+                          <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none h-10 w-10" />
+                      </Carousel>
+                  </div>
+                  <div className="flex-shrink-0 text-center p-4 md:p-6 bg-card rounded-b-2xl h-[30%] overflow-y-auto">
+                      <h3 className="font-headline text-xl md:text-3xl font-bold">{selectedActivity.title}</h3>
+                      <p className="font-body text-sm md:text-lg text-muted-foreground mt-2 max-w-3xl mx-auto whitespace-pre-line">{selectedActivity.description}</p>
+                  </div>
               </div>
             </>
           )}
@@ -1272,6 +1274,7 @@ function PreVoteSection() {
     
 
     
+
 
 
 
