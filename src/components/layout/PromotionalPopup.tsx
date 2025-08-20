@@ -65,7 +65,7 @@ export default function PromotionalPopup() {
 
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
-            <DialogContent className="p-0 border-none bg-transparent shadow-none w-[95vw] max-w-xl">
+            <DialogContent className="p-0 border-none bg-transparent shadow-none w-[95vw] max-w-md">
                 <div className="relative">
                     <div className="relative w-full aspect-[4/5] rounded-lg overflow-hidden">
                         <Image 
