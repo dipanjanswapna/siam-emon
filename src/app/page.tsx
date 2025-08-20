@@ -359,7 +359,7 @@ function VoteBannerSection() {
   return (
     <section className="bg-primary/20 py-12 md:py-16">
       <div className="container mx-auto px-4 text-center">
-        <h2 className="text-4xl md:text-5xl font-bold font-headline text-green-700">ভোট দিন সিয়ামকে!</h2>
+        <h2 className="text-4xl md:text-5xl font-bold font-headline text-green-700">ভোট দিন সিয়াম ফেরদৌস ইমন - কে!</h2>
         <p className="mt-2 text-lg md:text-xl font-body text-foreground">আপনার প্রতিনিধি, আপনার কন্ঠস্বর | ডাকসু ২০২৫</p>
         <p className="mt-4 inline-block bg-accent text-accent-foreground font-headline text-2xl md:text-3xl font-bold py-2 px-6 rounded-full shadow-lg transform hover:scale-105 transition-transform duration-300">
           আপনাদের প্রত্যাশাই আমার ইশতেহার
@@ -1263,6 +1263,7 @@ function PreVoteSection() {
     
 
     
+
 
 
 
