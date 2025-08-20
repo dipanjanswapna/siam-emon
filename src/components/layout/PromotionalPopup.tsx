@@ -4,7 +4,7 @@
 import { useState, useEffect } from 'react';
 import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "@/lib/firebase";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import Image from 'next/image';
 import { X } from 'lucide-react';
 import { Button } from '../ui/button';
@@ -40,11 +40,11 @@ export default function PromotionalPopup() {
     useEffect(() => {
       // This effect runs only on the client, after the component has mounted.
       // This prevents hydration errors from accessing sessionStorage on the server.
-      if (!isLoading && popupData) {
-          const sessionKey = `popupShown_${popupData.imageUrl}`;
-          const hasBeenShown = sessionStorage.getItem(sessionKey);
+      if (!isLoading) {
+          if (popupData?.enabled) {
+              const sessionKey = `popupShown_${popupData.imageUrl}`;
+              const hasBeenShown = sessionStorage.getItem(sessionKey);
 
-          if (popupData.enabled) {
               if (popupData.displayFrequency === 'once-per-session' && hasBeenShown) {
                   setIsOpen(false);
               } else {
@@ -53,10 +53,8 @@ export default function PromotionalPopup() {
           } else {
               setIsOpen(false);
           }
-      } else if (!isLoading && !popupData) {
-          setIsOpen(false);
+          setIsReady(true);
       }
-      setIsReady(true);
     }, [popupData, isLoading]);
 
 
@@ -75,6 +73,9 @@ export default function PromotionalPopup() {
     return (
         <Dialog open={isOpen} onOpenChange={handleClose}>
             <DialogContent className="p-0 border-none bg-transparent shadow-none w-[95vw] max-w-md">
+                <DialogHeader>
+                    <DialogTitle className="sr-only">Promotional Popup</DialogTitle>
+                </DialogHeader>
                 <div className="relative">
                     <div className="relative w-full aspect-[4/5] rounded-lg overflow-hidden">
                         <Image 
