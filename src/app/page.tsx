@@ -462,39 +462,40 @@ function ResearchSection() {
             </section>
 
             <Dialog open={!!selectedActivity} onOpenChange={(isOpen) => !isOpen && closeDialog()}>
-                <DialogContent className="max-w-4xl w-full h-[90vh] p-0 bg-transparent border-none shadow-none">
-                    {selectedActivity && (
-                         <>
-                            <DialogHeader className="sr-only">
-                                <DialogTitle>{selectedActivity.title}</DialogTitle>
-                            </DialogHeader>
-                            <Button variant="ghost" size="icon" onClick={closeDialog} className="absolute top-0 right-0 z-50 bg-destructive text-destructive-foreground rounded-full h-8 w-8 hover:bg-destructive/80 -translate-y-4 translate-x-4">
-                                <X className="h-5 w-5" />
-                                <span className="sr-only">বন্ধ করুন</span>
-                            </Button>
-                            <div className="relative w-full h-full">
-                                <Carousel className="w-full h-full">
-                                    <CarouselContent>
-                                        {selectedActivity.images.map((image, index) => (
-                                            <CarouselItem key={index}>
-                                                <div className="relative w-full h-[90vh]">
-                                                    <Image
-                                                        src={image.src}
-                                                        alt={image.alt}
-                                                        fill
-                                                        className="object-contain"
-                                                        data-ai-hint={image.hint}
-                                                    />
-                                                </div>
-                                            </CarouselItem>
-                                        ))}
-                                    </CarouselContent>
-                                    <CarouselPrevious className="absolute left-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50" />
-                                    <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50" />
-                                </Carousel>
-                            </div>
-                        </>
-                    )}
+                <DialogContent className="max-w-4xl w-full h-[95vh] flex flex-col p-0 sm:p-0 bg-transparent border-none shadow-none">
+                    <div className="relative flex flex-col items-center justify-center h-full w-full">
+                         <div className="relative w-full flex-grow">
+                             <Carousel className="w-full h-full">
+                                <CarouselContent>
+                                    {selectedActivity?.images.map((image, index) => (
+                                        <CarouselItem key={index}>
+                                            <div className="relative w-full h-full">
+                                                <Image
+                                                    src={image.src}
+                                                    alt={image.alt}
+                                                    fill
+                                                    className="object-contain"
+                                                    data-ai-hint={image.hint}
+                                                />
+                                            </div>
+                                        </CarouselItem>
+                                    ))}
+                                </CarouselContent>
+                                <CarouselPrevious className="absolute left-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50" />
+                                <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50" />
+                            </Carousel>
+                        </div>
+                        <Button variant="destructive" onClick={closeDialog} className="mt-4 md:hidden">
+                            <X className="mr-2 h-4 w-4" /> বন্ধ করুন
+                        </Button>
+                        <Button variant="ghost" size="icon" onClick={closeDialog} className="absolute top-0 right-0 hidden md:inline-flex z-50 bg-destructive text-destructive-foreground rounded-full h-8 w-8 hover:bg-destructive/80">
+                            <X className="h-5 w-5" />
+                            <span className="sr-only">বন্ধ করুন</span>
+                        </Button>
+                         <DialogHeader className="sr-only">
+                            <DialogTitle>{selectedActivity?.title}</DialogTitle>
+                        </DialogHeader>
+                    </div>
                 </DialogContent>
             </Dialog>
         </>
@@ -574,23 +575,15 @@ function PublicationSection() {
         </div>
       </div>
     </section>
-     <Dialog open={!!selectedActivity} onOpenChange={(isOpen) => !isOpen && closeDialog()}>
-        <DialogContent className="max-w-4xl w-full h-[90vh] p-0 bg-transparent border-none shadow-none">
-            {selectedActivity && (
-                 <>
-                    <DialogHeader className="sr-only">
-                        <DialogTitle>{selectedActivity.title}</DialogTitle>
-                    </DialogHeader>
-                     <Button variant="ghost" size="icon" onClick={closeDialog} className="absolute top-0 right-0 z-50 bg-destructive text-destructive-foreground rounded-full h-8 w-8 hover:bg-destructive/80 -translate-y-4 translate-x-4">
-                        <X className="h-5 w-5" />
-                        <span className="sr-only">বন্ধ করুন</span>
-                    </Button>
-                    <div className="relative w-full h-full">
+    <Dialog open={!!selectedActivity} onOpenChange={(isOpen) => !isOpen && closeDialog()}>
+        <DialogContent className="max-w-4xl w-full h-[95vh] flex flex-col p-0 sm:p-0 bg-transparent border-none shadow-none">
+            <div className="relative flex flex-col items-center justify-center h-full w-full">
+                    <div className="relative w-full flex-grow">
                         <Carousel className="w-full h-full">
                             <CarouselContent>
-                                {selectedActivity.images.map((image, index) => (
+                                {selectedActivity?.images.map((image, index) => (
                                     <CarouselItem key={index}>
-                                        <div className="relative w-full h-[90vh]">
+                                        <div className="relative w-full h-full">
                                             <Image
                                                 src={image.src}
                                                 alt={image.alt}
@@ -606,8 +599,17 @@ function PublicationSection() {
                             <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50" />
                         </Carousel>
                     </div>
-                </>
-            )}
+                <Button variant="destructive" onClick={closeDialog} className="mt-4 md:hidden">
+                    <X className="mr-2 h-4 w-4" /> বন্ধ করুন
+                </Button>
+                <Button variant="ghost" size="icon" onClick={closeDialog} className="absolute top-0 right-0 hidden md:inline-flex z-50 bg-destructive text-destructive-foreground rounded-full h-8 w-8 hover:bg-destructive/80">
+                    <X className="h-5 w-5" />
+                    <span className="sr-only">বন্ধ করুন</span>
+                </Button>
+                <DialogHeader className="sr-only">
+                    <DialogTitle>{selectedActivity?.title}</DialogTitle>
+                </DialogHeader>
+            </div>
         </DialogContent>
     </Dialog>
     </>
@@ -679,22 +681,14 @@ function LogicalMovementSection() {
       </div>
     </section>
     <Dialog open={!!selectedActivity} onOpenChange={(isOpen) => !isOpen && closeDialog()}>
-        <DialogContent className="max-w-4xl w-full h-[90vh] p-0 bg-transparent border-none shadow-none">
-            {selectedActivity && (
-                 <>
-                    <DialogHeader className="sr-only">
-                        <DialogTitle>{selectedActivity.title}</DialogTitle>
-                    </DialogHeader>
-                     <Button variant="ghost" size="icon" onClick={closeDialog} className="absolute top-0 right-0 z-50 bg-destructive text-destructive-foreground rounded-full h-8 w-8 hover:bg-destructive/80 -translate-y-4 translate-x-4">
-                        <X className="h-5 w-5" />
-                        <span className="sr-only">বন্ধ করুন</span>
-                    </Button>
-                    <div className="relative w-full h-full">
+        <DialogContent className="max-w-4xl w-full h-[95vh] flex flex-col p-0 sm:p-0 bg-transparent border-none shadow-none">
+            <div className="relative flex flex-col items-center justify-center h-full w-full">
+                    <div className="relative w-full flex-grow">
                         <Carousel className="w-full h-full">
                             <CarouselContent>
-                                {selectedActivity.images.map((image, index) => (
+                                {selectedActivity?.images.map((image, index) => (
                                     <CarouselItem key={index}>
-                                        <div className="relative w-full h-[90vh]">
+                                        <div className="relative w-full h-full">
                                             <Image
                                                 src={image.src}
                                                 alt={image.alt}
@@ -710,8 +704,17 @@ function LogicalMovementSection() {
                             <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50" />
                         </Carousel>
                     </div>
-                </>
-            )}
+                <Button variant="destructive" onClick={closeDialog} className="mt-4 md:hidden">
+                    <X className="mr-2 h-4 w-4" /> বন্ধ করুন
+                </Button>
+                <Button variant="ghost" size="icon" onClick={closeDialog} className="absolute top-0 right-0 hidden md:inline-flex z-50 bg-destructive text-destructive-foreground rounded-full h-8 w-8 hover:bg-destructive/80">
+                    <X className="h-5 w-5" />
+                    <span className="sr-only">বন্ধ করুন</span>
+                </Button>
+                <DialogHeader className="sr-only">
+                    <DialogTitle>{selectedActivity?.title}</DialogTitle>
+                </DialogHeader>
+            </div>
         </DialogContent>
     </Dialog>
     </>
@@ -1283,6 +1286,7 @@ function PreVoteSection() {
     
 
     
+
 
 
 
