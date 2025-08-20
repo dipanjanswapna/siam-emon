@@ -526,7 +526,7 @@ function PublicationSection() {
         <div className="container mx-auto px-4">
           <div className="text-center max-w-4xl mx-auto">
             <BookOpenCheck className="mx-auto h-12 w-12 text-primary" />
-            <h1 className="font-headline text-5xl md:text-6xl font-bold mt-4 text-foreground">প্রকাশনায় সিয়াম ভাইয়া</h1>
+            <h1 className="font-headline text-5xl md:text-6xl font-bold mt-4 text-foreground">প্রকাশনায় সিয়াম ফেরদৌস ইমন</h1>
             <p className="font-body text-lg mt-4 text-muted-foreground">
               জ্ঞানচর্চা ও সৃজনশীলতার প্রসারে প্রকাশনা জগতে আমাদের উদ্যোগ ও কার্যক্রম।
             </p>
@@ -1263,6 +1263,7 @@ function PreVoteSection() {
     
 
     
+
 
 
 
