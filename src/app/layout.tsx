@@ -8,7 +8,6 @@ import { Toaster } from '@/components/ui/toaster';
 import { FloatingFeedbackButton } from '@/components/layout/FloatingFeedbackButton';
 import Image from 'next/image';
 import Script from 'next/script';
-import PromotionalPopup from '@/components/layout/PromotionalPopup';
 
 export const metadata: Metadata = {
   title: {
@@ -85,7 +84,6 @@ export default function RootLayout({
         <Script src="https://www.powr.io/powr.js?platform=html" strategy="lazyOnload"></Script>
       </head>
       <body className={cn("font-body antialiased min-h-screen flex flex-col")}>
-        <PromotionalPopup />
         <Header />
         <main className="flex-grow">{children}</main>
         <section className="w-full">
