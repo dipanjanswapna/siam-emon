@@ -80,7 +80,7 @@ export default function PromotionalPopup() {
                         variant="destructive" 
                         size="icon" 
                         onClick={handleClose} 
-                        className="absolute -top-3 -right-3 rounded-full h-8 w-8 z-10"
+                        className="absolute top-1 right-1 rounded-full h-8 w-8 z-10"
                     >
                         <X className="h-5 w-5" />
                         <span className="sr-only">বন্ধ করুন</span>
