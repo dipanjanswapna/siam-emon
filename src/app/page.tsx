@@ -412,95 +412,43 @@ const researchActivities = [
 type ResearchActivity = (typeof researchActivities)[0];
 
 function ResearchSection() {
-    const [selectedActivity, setSelectedActivity] = useState<ResearchActivity | null>(null);
-
-    const openDialog = (activity: ResearchActivity) => {
-        setSelectedActivity(activity);
-    };
-
-    const closeDialog = () => {
-        setSelectedActivity(null);
-    };
-
     return (
-        <>
-            <section className="bg-primary/5 py-16 md:py-24">
-                <div className="container mx-auto px-4">
-                    <div className="text-center max-w-4xl mx-auto">
-                        <Camera className="mx-auto h-12 w-12 text-primary" />
-                        <h1 className="font-headline text-5xl md:text-6xl font-bold mt-4 text-foreground">গবেষণা ও কার্যক্রম</h1>
-                        <p className="font-body text-lg mt-4 text-muted-foreground">
-                            জ্ঞানভিত্তিক সমাজ গঠনে আমাদের গবেষণা, ওয়ার্কশপ এবং বিভিন্ন কার্যক্রমের ঝলক।
-                        </p>
-                    </div>
-                    <div className="mt-16 space-y-8">
-                        {researchActivities.map((activity, index) => (
-                            <div key={index} className="grid md:grid-cols-2 gap-8 items-center bg-card p-6 rounded-lg shadow-md cursor-pointer" onClick={() => openDialog(activity)}>
-                                <div className="order-2 md:order-1">
-                                    <div className="flex items-center gap-3 mb-4">
-                                        <activity.icon className="w-8 h-8 text-primary" />
-                                        <h3 className="font-headline text-3xl font-bold text-foreground">{activity.title}</h3>
-                                    </div>
-                                    <p className="font-body text-muted-foreground whitespace-pre-line">{activity.description}</p>
+        <section className="bg-primary/5 py-16 md:py-24">
+            <div className="container mx-auto px-4">
+                <div className="text-center max-w-4xl mx-auto">
+                    <Camera className="mx-auto h-12 w-12 text-primary" />
+                    <h1 className="font-headline text-5xl md:text-6xl font-bold mt-4 text-foreground">গবেষণা ও কার্যক্রম</h1>
+                    <p className="font-body text-lg mt-4 text-muted-foreground">
+                        জ্ঞানভিত্তিক সমাজ গঠনে আমাদের গবেষণা, ওয়ার্কশপ এবং বিভিন্ন কার্যক্রমের ঝলক।
+                    </p>
+                </div>
+                <div className="mt-16 space-y-8">
+                    {researchActivities.map((activity, index) => (
+                        <div key={index} className="grid md:grid-cols-2 gap-8 items-center bg-card p-6 rounded-lg shadow-md">
+                            <div className="order-2 md:order-1">
+                                <div className="flex items-center gap-3 mb-4">
+                                    <activity.icon className="w-8 h-8 text-primary" />
+                                    <h3 className="font-headline text-3xl font-bold text-foreground">{activity.title}</h3>
                                 </div>
-                                <div className="relative w-full aspect-video rounded-lg overflow-hidden group order-1 md:order-2">
-                                    <Image
-                                        src={activity.images[0].src}
-                                        alt={activity.images[0].alt}
-                                        fill
-                                        className="object-cover transform group-hover:scale-105 transition-transform duration-300"
-                                        data-ai-hint={activity.images[0].hint}
-                                    />
-                                    <div className="absolute bottom-2 right-2 bg-black/50 text-white text-xs font-bold px-2 py-1 rounded">
-                                        {activity.images.length} ছবি
-                                    </div>
+                                <p className="font-body text-muted-foreground whitespace-pre-line">{activity.description}</p>
+                            </div>
+                            <div className="relative w-full aspect-video rounded-lg overflow-hidden group order-1 md:order-2">
+                                <Image
+                                    src={activity.images[0].src}
+                                    alt={activity.images[0].alt}
+                                    fill
+                                    className="object-cover transform group-hover:scale-105 transition-transform duration-300"
+                                    data-ai-hint={activity.images[0].hint}
+                                />
+                                <div className="absolute bottom-2 right-2 bg-black/50 text-white text-xs font-bold px-2 py-1 rounded">
+                                    {activity.images.length} ছবি
                                 </div>
                             </div>
-                        ))}
-                    </div>
+                        </div>
+                    ))}
                 </div>
-            </section>
-
-            <Dialog open={!!selectedActivity} onOpenChange={(isOpen) => !isOpen && closeDialog()}>
-                <DialogContent className="max-w-4xl w-full h-[95vh] flex flex-col p-0 sm:p-0 bg-transparent border-none shadow-none">
-                    <DialogHeader className="sr-only">
-                        <DialogTitle>{selectedActivity?.title} Gallery</DialogTitle>
-                    </DialogHeader>
-                    <div className="relative flex flex-col items-center justify-center h-full w-full">
-                        <div className="relative w-full h-full">
-                             <Carousel className="w-full h-full">
-                                <CarouselContent>
-                                    {selectedActivity?.images.map((image, index) => (
-                                        <CarouselItem key={index}>
-                                            <div className="relative w-full h-full">
-                                                <Image
-                                                    src={image.src}
-                                                    alt={image.alt}
-                                                    fill
-                                                    className="object-contain"
-                                                    data-ai-hint={image.hint}
-                                                />
-                                            </div>
-                                        </CarouselItem>
-                                    ))}
-                                </CarouselContent>
-                                <CarouselPrevious className="absolute left-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50" />
-                                <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50" />
-                            </Carousel>
-                        </div>
-                        <div className="absolute bottom-4 md:hidden">
-                            <Button variant="destructive" onClick={closeDialog}>
-                                <X className="mr-2 h-4 w-4" /> বন্ধ করুন
-                            </Button>
-                        </div>
-                        <Button variant="ghost" size="icon" onClick={closeDialog} className="absolute top-2 right-2 hidden md:inline-flex z-50 bg-destructive text-destructive-foreground rounded-full h-8 w-8 hover:bg-destructive/80">
-                            <X className="h-5 w-5" />
-                            <span className="sr-only">বন্ধ করুন</span>
-                        </Button>
-                    </div>
-                </DialogContent>
-            </Dialog>
-        </>
+            </div>
+        </section>
     );
 }
 
@@ -529,18 +477,7 @@ const publicationActivities = [
 type PublicationActivity = (typeof publicationActivities)[0];
 
 function PublicationSection() {
-    const [selectedActivity, setSelectedActivity] = useState<PublicationActivity | null>(null);
-
-    const openDialog = (activity: PublicationActivity) => {
-        setSelectedActivity(activity);
-    };
-
-    const closeDialog = () => {
-        setSelectedActivity(null);
-    };
-
   return (
-    <>
     <section className="bg-card py-16 md:py-24">
       <div className="container mx-auto px-4">
         <div className="text-center max-w-4xl mx-auto">
@@ -552,7 +489,7 @@ function PublicationSection() {
         </div>
         <div className="mt-16 space-y-8">
           {publicationActivities.map((activity, index) => (
-            <div key={index} className="grid md:grid-cols-2 gap-8 items-center bg-primary/5 p-6 rounded-lg shadow-md cursor-pointer" onClick={() => openDialog(activity)}>
+            <div key={index} className="grid md:grid-cols-2 gap-8 items-center bg-primary/5 p-6 rounded-lg shadow-md">
               <div className="order-2 md:order-1">
                 <div className="flex items-center gap-3 mb-4">
                    <activity.icon className="w-8 h-8 text-primary" />
@@ -577,46 +514,6 @@ function PublicationSection() {
         </div>
       </div>
     </section>
-    <Dialog open={!!selectedActivity} onOpenChange={(isOpen) => !isOpen && closeDialog()}>
-        <DialogContent className="max-w-4xl w-full h-[95vh] flex flex-col p-0 sm:p-0 bg-transparent border-none shadow-none">
-            <DialogHeader className="sr-only">
-                <DialogTitle>{selectedActivity?.title} Gallery</DialogTitle>
-            </DialogHeader>
-            <div className="relative flex flex-col items-center justify-center h-full w-full">
-                <div className="relative w-full h-full">
-                    <Carousel className="w-full h-full">
-                        <CarouselContent>
-                            {selectedActivity?.images.map((image, index) => (
-                                <CarouselItem key={index}>
-                                    <div className="relative w-full h-full">
-                                        <Image
-                                            src={image.src}
-                                            alt={image.alt}
-                                            fill
-                                            className="object-contain"
-                                            data-ai-hint={image.hint}
-                                        />
-                                    </div>
-                                </CarouselItem>
-                            ))}
-                        </CarouselContent>
-                        <CarouselPrevious className="absolute left-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50" />
-                        <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50" />
-                    </Carousel>
-                </div>
-                <div className="absolute bottom-4 md:hidden">
-                    <Button variant="destructive" onClick={closeDialog}>
-                        <X className="mr-2 h-4 w-4" /> বন্ধ করুন
-                    </Button>
-                </div>
-                <Button variant="ghost" size="icon" onClick={closeDialog} className="absolute top-2 right-2 hidden md:inline-flex z-50 bg-destructive text-destructive-foreground rounded-full h-8 w-8 hover:bg-destructive/80">
-                    <X className="h-5 w-5" />
-                    <span className="sr-only">বন্ধ করুন</span>
-                </Button>
-            </div>
-        </DialogContent>
-    </Dialog>
-    </>
   );
 }
 
@@ -636,18 +533,7 @@ const logicalMovementActivities = [
 type LogicalMovementActivity = (typeof logicalMovementActivities)[0];
 
 function LogicalMovementSection() {
-    const [selectedActivity, setSelectedActivity] = useState<LogicalMovementActivity | null>(null);
-
-    const openDialog = (activity: LogicalMovementActivity) => {
-        setSelectedActivity(activity);
-    };
-
-    const closeDialog = () => {
-        setSelectedActivity(null);
-    };
-
   return (
-    <>
     <section className="bg-primary/5 py-16 md:py-24">
       <div className="container mx-auto px-4">
         <div className="text-center max-w-4xl mx-auto">
@@ -659,7 +545,7 @@ function LogicalMovementSection() {
         </div>
         <div className="mt-16 space-y-8">
           {logicalMovementActivities.map((activity, index) => (
-            <div key={index} className="grid md:grid-cols-2 gap-8 items-center bg-card p-6 rounded-lg shadow-md cursor-pointer" onClick={() => openDialog(activity)}>
+            <div key={index} className="grid md:grid-cols-2 gap-8 items-center bg-card p-6 rounded-lg shadow-md">
               <div className="order-2 md:order-1">
                 <div className="flex items-center gap-3 mb-4">
                    <activity.icon className="w-8 h-8 text-primary" />
@@ -684,46 +570,6 @@ function LogicalMovementSection() {
         </div>
       </div>
     </section>
-    <Dialog open={!!selectedActivity} onOpenChange={(isOpen) => !isOpen && closeDialog()}>
-        <DialogContent className="max-w-4xl w-full h-[95vh] flex flex-col p-0 sm:p-0 bg-transparent border-none shadow-none">
-            <DialogHeader className="sr-only">
-                <DialogTitle>{selectedActivity?.title} Gallery</DialogTitle>
-            </DialogHeader>
-            <div className="relative flex flex-col items-center justify-center h-full w-full">
-                <div className="relative w-full h-full">
-                    <Carousel className="w-full h-full">
-                        <CarouselContent>
-                            {selectedActivity?.images.map((image, index) => (
-                                <CarouselItem key={index}>
-                                    <div className="relative w-full h-full">
-                                        <Image
-                                            src={image.src}
-                                            alt={image.alt}
-                                            fill
-                                            className="object-contain"
-                                            data-ai-hint={image.hint}
-                                        />
-                                    </div>
-                                </CarouselItem>
-                            ))}
-                        </CarouselContent>
-                        <CarouselPrevious className="absolute left-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50" />
-                        <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50" />
-                    </Carousel>
-                </div>
-                <div className="absolute bottom-4 md:hidden">
-                    <Button variant="destructive" onClick={closeDialog}>
-                        <X className="mr-2 h-4 w-4" /> বন্ধ করুন
-                    </Button>
-                </div>
-                <Button variant="ghost" size="icon" onClick={closeDialog} className="absolute top-2 right-2 hidden md:inline-flex z-50 bg-destructive text-destructive-foreground rounded-full h-8 w-8 hover:bg-destructive/80">
-                    <X className="h-5 w-5" />
-                    <span className="sr-only">বন্ধ করুন</span>
-                </Button>
-            </div>
-        </DialogContent>
-    </Dialog>
-    </>
   );
 }
 
@@ -1292,6 +1138,7 @@ function PreVoteSection() {
     
 
     
+
 
 
 
