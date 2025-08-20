@@ -20,6 +20,7 @@ export default function PromotionalPopup() {
     const [popupData, setPopupData] = useState<PromotionalPopupData | null>(null);
     const [isOpen, setIsOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
+    const [isReady, setIsReady] = useState(false);
 
     useEffect(() => {
         const popupDocRef = doc(db, "promotionalPopups", "settings");
@@ -27,29 +28,37 @@ export default function PromotionalPopup() {
             if (docSnap.exists()) {
                 const data = docSnap.data() as PromotionalPopupData;
                 setPopupData(data);
-
-                const sessionKey = `popupShown_${data.imageUrl}`; 
-                const hasBeenShown = sessionStorage.getItem(sessionKey);
-
-                if (data.enabled) {
-                    if (data.displayFrequency === 'once-per-session' && hasBeenShown) {
-                        setIsOpen(false);
-                    } else {
-                        setIsOpen(true);
-                    }
-                } else {
-                    setIsOpen(false);
-                }
-
             } else {
                 setPopupData(null);
-                setIsOpen(false);
             }
             setIsLoading(false);
         });
 
         return () => unsubscribe();
     }, []);
+
+    useEffect(() => {
+      // This effect runs only on the client, after the component has mounted.
+      // This prevents hydration errors from accessing sessionStorage on the server.
+      if (!isLoading && popupData) {
+          const sessionKey = `popupShown_${popupData.imageUrl}`;
+          const hasBeenShown = sessionStorage.getItem(sessionKey);
+
+          if (popupData.enabled) {
+              if (popupData.displayFrequency === 'once-per-session' && hasBeenShown) {
+                  setIsOpen(false);
+              } else {
+                  setIsOpen(true);
+              }
+          } else {
+              setIsOpen(false);
+          }
+      } else if (!isLoading && !popupData) {
+          setIsOpen(false);
+      }
+      setIsReady(true);
+    }, [popupData, isLoading]);
+
 
     const handleClose = () => {
         setIsOpen(false);
@@ -59,12 +68,12 @@ export default function PromotionalPopup() {
         }
     };
 
-    if (isLoading || !isOpen || !popupData) {
+    if (!isReady || isLoading || !isOpen || !popupData) {
         return null;
     }
 
     return (
-        <Dialog open={isOpen} onOpenChange={setIsOpen}>
+        <Dialog open={isOpen} onOpenChange={handleClose}>
             <DialogContent className="p-0 border-none bg-transparent shadow-none w-[95vw] max-w-md">
                 <div className="relative">
                     <div className="relative w-full aspect-[4/5] rounded-lg overflow-hidden">
