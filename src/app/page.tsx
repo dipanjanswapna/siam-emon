@@ -375,9 +375,8 @@ const researchActivities = [
     title: "গবেষণা",
     description: "গবেষণায় সক্রিয় অংশগ্রহণ: সিয়াম ফেরদৌস ইমন কেবল একজন প্রার্থী নন, বরং একজন সক্রিয় গবেষকও। তিনি বাংলাদেশ জুওলজিক্যাল সোসাইটির বার্ষিক সাধারণ সভায় নিয়মিত উপস্থিত থেকে দেশের সেরা গবেষক ও শিক্ষাবিদদের সাথে জ্ঞান আদান-প্রদান করেন। তাঁর নিজস্ব গবেষণাগারে নিরলস কাজ করার অভিজ্ঞতা তাকে শিক্ষার্থীদের বাস্তব সমস্যাগুলো বুঝতে সাহায্য করে।",
     images: [
-      { src: "https://placehold.co/800x600.png", alt: "ওয়ার্কশপের অংশগ্রহণকারীরা কম্পিউটারে কাজ করছেন", hint: "students workshop" },
-      { src: "https://placehold.co/800x600.png", alt: "প্রশিক্ষক শিক্ষার্থীদের সহায়তা করছেন", hint: "instructor teaching" },
-      { src: "https://placehold.co/800x600.png", alt: "শিক্ষার্থীরা মনযোগ সহকারে শুনছেন", hint: "students listening" },
+      { src: "https://i.postimg.cc/vHRK5YwG/photo-2025-08-18-02-08-33.jpg", alt: "ওয়ার্কশপের অংশগ্রহণকারীরা কম্পিউটারে কাজ করছেন", hint: "students workshop" },
+      { src: "https://i.postimg.cc/9XZXtkTj/photo-2025-08-18-01-30-06.jpg", alt: "প্রশিক্ষক শিক্ষার্থীদের সহায়তা করছেন", hint: "instructor teaching" },
     ],
   },
   {
@@ -410,6 +409,7 @@ const researchActivities = [
 ];
 
 function ResearchSection() {
+    
   return (
     <section className="bg-primary/5 py-16 md:py-24">
       <div className="container mx-auto px-4">
@@ -431,28 +431,28 @@ function ResearchSection() {
                 <p className="font-body text-muted-foreground whitespace-pre-line">{activity.description}</p>
               </div>
               <div className="relative w-full aspect-video rounded-lg overflow-hidden order-1 md:order-2">
-                <Carousel className="w-full h-full">
-                  <CarouselContent>
-                    {activity.images.map((image, i) => (
-                      <CarouselItem key={i}>
-                        <div className="relative w-full h-full aspect-video">
-                          <Image
-                            src={image.src}
-                            alt={image.alt}
-                            fill
-                            className="object-cover"
-                            data-ai-hint={image.hint}
-                          />
-                        </div>
-                      </CarouselItem>
-                    ))}
-                  </CarouselContent>
-                   {activity.images.length > 1 && (
-                    <>
-                        <CarouselPrevious className="absolute left-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none" />
-                        <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none" />
-                    </>
-                   )}
+                 <Carousel className="w-full h-full">
+                    <CarouselContent>
+                        {activity.images.map((image, i) => (
+                        <CarouselItem key={i}>
+                            <div className="relative w-full h-full aspect-video">
+                            <Image
+                                src={image.src}
+                                alt={image.alt}
+                                fill
+                                className="object-cover"
+                                data-ai-hint={image.hint}
+                            />
+                            </div>
+                        </CarouselItem>
+                        ))}
+                    </CarouselContent>
+                    {activity.images.length > 1 && (
+                        <>
+                            <CarouselPrevious className="absolute left-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none" />
+                            <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none" />
+                        </>
+                    )}
                 </Carousel>
               </div>
             </div>
@@ -487,6 +487,7 @@ const publicationActivities = [
 
 
 function PublicationSection() {
+
   return (
     <section className="bg-card py-16 md:py-24">
       <div className="container mx-auto px-4">
@@ -508,28 +509,28 @@ function PublicationSection() {
                 <p className="font-body text-muted-foreground whitespace-pre-line">{activity.description}</p>
               </div>
               <div className="relative w-full aspect-video rounded-lg overflow-hidden order-1 md:order-2">
-                <Carousel className="w-full h-full">
-                  <CarouselContent>
-                    {activity.images.map((image, i) => (
-                      <CarouselItem key={i}>
-                        <div className="relative w-full h-full aspect-video">
-                          <Image
-                            src={image.src}
-                            alt={image.alt}
-                            fill
-                            className="object-cover"
-                            data-ai-hint={image.hint}
-                          />
-                        </div>
-                      </CarouselItem>
-                    ))}
-                  </CarouselContent>
-                   {activity.images.length > 1 && (
-                    <>
-                        <CarouselPrevious className="absolute left-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none" />
-                        <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none" />
-                    </>
-                   )}
+                 <Carousel className="w-full h-full">
+                    <CarouselContent>
+                        {activity.images.map((image, i) => (
+                        <CarouselItem key={i}>
+                            <div className="relative w-full h-full aspect-video">
+                            <Image
+                                src={image.src}
+                                alt={image.alt}
+                                fill
+                                className="object-cover"
+                                data-ai-hint={image.hint}
+                            />
+                            </div>
+                        </CarouselItem>
+                        ))}
+                    </CarouselContent>
+                    {activity.images.length > 1 && (
+                        <>
+                            <CarouselPrevious className="absolute left-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none" />
+                            <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none" />
+                        </>
+                    )}
                 </Carousel>
               </div>
             </div>
@@ -547,13 +548,17 @@ const logicalMovementActivities = [
     title: "জুলাই ২৪",
     description: "শহীদুল্লাহ হল ও ফজলুল হক হল মুক্ত করতে সাধারণ ছাত্রদের সাথে সক্রিয় ছিলাম, ১৭ জুলাই শেষ মুহূর্ত পর্যন্ত হল থেকে বের হইনি। ঢাকা বিশ্ববিদ্যালয়ের নিয়মিত ছাত্র হিসেবে ক্যাম্পাস জীবনের শুরু থেকে সব ধরণের যৌক্তিক আন্দোলনে সক্রিয়ভাবে রাজপথে ছিলাম ।",
     images: [
-      { src: "https://placehold.co/800x600.png", alt: "আন্দোলনে অংশগ্রহণ", hint: "protest movement" },
-      { src: "https://placehold.co/800x600.png", alt: "ছাত্রদের সমাবেশ", hint: "student gathering" },
+      { src: "https://i.postimg.cc/DZ8nTsg9/photo_2025-08-21_01-07-09.jpg", alt: "আন্দোলনে অংশগ্রহণ", hint: "protest movement" },
+      { src: "https://i.postimg.cc/XJm37J1p/photo_2025-08-21_01-07-12.jpg", alt: "ছাত্রদের সমাবেশ", hint: "student gathering" },
+      { src: "https://i.postimg.cc/bwpPv4gH/photo_2025-08-21_01-06-54.jpg", alt: "ছাত্রদের সমাবেশ", hint: "student gathering" },
+      { src: "https://i.postimg.cc/CMnSrGdD/photo_2025-08-21_01-07-05.jpg", alt: "ছাত্রদের সমাবেশ", hint: "student gathering" },
+      { src: "https://i.postimg.cc/VLj1mzqk/photo_2025-08-21_01-07-01.jpg", alt: "ছাত্রদের সমাবেশ", hint: "student gathering" },
     ],
   },
 ];
 
 function LogicalMovementSection() {
+
   return (
     <section className="bg-primary/5 py-16 md:py-24">
       <div className="container mx-auto px-4">
@@ -576,27 +581,27 @@ function LogicalMovementSection() {
               </div>
               <div className="relative w-full aspect-video rounded-lg overflow-hidden order-1 md:order-2">
                 <Carousel className="w-full h-full">
-                  <CarouselContent>
-                    {activity.images.map((image, i) => (
-                      <CarouselItem key={i}>
-                        <div className="relative w-full h-full aspect-video">
-                          <Image
-                            src={image.src}
-                            alt={image.alt}
-                            fill
-                            className="object-cover"
-                            data-ai-hint={image.hint}
-                          />
-                        </div>
-                      </CarouselItem>
-                    ))}
-                  </CarouselContent>
-                   {activity.images.length > 1 && (
-                    <>
-                        <CarouselPrevious className="absolute left-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none" />
-                        <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none" />
-                    </>
-                   )}
+                    <CarouselContent>
+                        {activity.images.map((image, i) => (
+                        <CarouselItem key={i}>
+                            <div className="relative w-full h-full aspect-video">
+                            <Image
+                                src={image.src}
+                                alt={image.alt}
+                                fill
+                                className="object-cover"
+                                data-ai-hint={image.hint}
+                            />
+                            </div>
+                        </CarouselItem>
+                        ))}
+                    </CarouselContent>
+                    {activity.images.length > 1 && (
+                        <>
+                            <CarouselPrevious className="absolute left-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none" />
+                            <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none" />
+                        </>
+                    )}
                 </Carousel>
               </div>
             </div>
@@ -1172,6 +1177,7 @@ function PreVoteSection() {
     
 
     
+
 
 
 
