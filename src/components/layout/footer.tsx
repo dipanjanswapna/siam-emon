@@ -1,3 +1,4 @@
+
 import Link from "next/link";
 import { Facebook, Youtube, Instagram, Vote } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -15,7 +16,7 @@ export function Footer() {
             <Link href="/" className="flex items-center gap-2 mb-4">
               <Vote className="h-8 w-8" />
               <span className="text-2xl font-headline font-bold">
-                Seam Ferdous Emon
+                সিয়াম ফেরদৌস ইমন
               </span>
             </Link>
             <p className="font-body text-sm text-primary-foreground/80 mb-6">

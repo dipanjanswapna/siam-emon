@@ -26,7 +26,7 @@ export function Header() {
         <Link href="/" className="flex items-center gap-2">
           <Vote className="h-8 w-8" />
           <span className="text-xl font-headline font-bold">
-            Seam Ferdous Emon
+            সিয়াম ফেরদৌস ইমন
           </span>
         </Link>
         
@@ -67,7 +67,7 @@ export function Header() {
                 <Link href="/" className="flex items-center gap-2 mb-4">
                   <Vote className="h-8 w-8" />
                   <span className="text-xl font-headline font-bold">
-                    Seam Ferdous Emon
+                    সিয়াম ফেরদৌস ইমন
                   </span>
                 </Link>
                 {[...navLinks, { href: "/get-involved", label: "যুক্ত হোন" }].map((link) => (
