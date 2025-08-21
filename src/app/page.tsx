@@ -7,7 +7,7 @@ import React, { useState, useEffect } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { ArrowRight, BookOpenCheck, BrainCircuit, Library, Users, Camera, X, Heart, Megaphone, Flag, Award, FileText, Mic, GraduationCap, HandHeart, BookText, ShieldCheck, MessageSquare, Mail, Icon, ImagePlus, Annoyed, HelpCircle, Vote, Share2 } from "lucide-react";
+import { ArrowRight, BookOpenCheck, BrainCircuit, Library, Users, Camera, X, Heart, Megaphone, Flag, Award, FileText, Mic, GraduationCap, HandHeart, BookText, ShieldCheck, MessageSquare, Mail, Icon, ImagePlus, Annoyed, HelpCircle, Vote, Share2, DollarSign, Archive, Laptop } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -89,8 +89,11 @@ const carouselItems = [
 ];
 
 const icons: { [key: string]: React.ElementType } = {
-    BrainCircuit,
+    DollarSign,
     BookOpenCheck,
+    Archive,
+    Laptop,
+    BrainCircuit,
     Library,
     Award,
     FileText,
@@ -227,7 +230,7 @@ function AboutSection() {
                 আপনাদের ভালোবাসা, সহযোগিতা ও আস্থার জোরেই আমি আসন্ন ঢাকা বিশ্ববিদ্যালয়ের কেন্দ্রীয় ছাত্র সংসদ (ডাকসু) নির্বাচনে <span className="bg-primary/20 text-red-600 font-bold p-1 rounded">গবেষণা ও প্রকাশনা সম্পাদক পদে</span> প্রার্থী হওয়ার সিদ্ধান্ত নিয়েছি।
               </p>
               <p>
-                আমি বিশ্বাস করি, ডাকসুর গবেষণা ও প্রকাশনা সম্পাদক পদ শুধু গবেষণামুখী ছাত্রছাত্রীদের জন্য নয়, বরং পুরো বিশ্ববিদ্যালয়ের <span className="font-semibold text-foreground">জ্ঞানচর্চা, গবেষণা সংস্কৃতি, আন্তর্জাতিক প্রকাশনা ও বৈশ্বিক স্বীকৃতি</span> বৃদ্ধির জন্যও অত্যন্ত গুরুত্বপূর্ণ।
+              আমি প্রতিশ্রুতি দিচ্ছি, যদি আপনারা আমাকে ডাকসু ২০২৫-এ গবেষণা ও প্রকাশনা সম্পাদক হিসেবে দায়িত্ব দেন, তবে আমি আপনাদের জন্য একটি কার্যকর এবং ছাত্রবান্ধব পরিবেশ তৈরি করতে কাজ করে যাবো।
               </p>
             </div>
             <Button asChild className="mt-8 font-headline text-lg">
@@ -256,11 +259,23 @@ function CommitmentSection() {
     useEffect(() => {
         const fetchCommitments = async () => {
             setIsLoading(true);
-            const commitmentsCollection = collection(db, "commitments");
-            const commitmentsSnapshot = await getDocs(commitmentsCollection);
-            const commitmentsList = commitmentsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Commitment));
-            setCommitments(commitmentsList);
-            setIsLoading(false);
+            try {
+                const commitmentsCollection = collection(db, "commitments");
+                const commitmentsSnapshot = await getDocs(commitmentsCollection);
+                const commitmentsList = commitmentsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Commitment));
+                setCommitments(commitmentsList);
+            } catch (error) {
+                console.error("Error fetching commitments, using fallback.", error);
+                const fallbackCommitments = [
+                    { id: "1", icon: "DollarSign", title: "গবেষণা তহবিল ও স্কলারশিপ", description: "বিভাগভিত্তিক গবেষণা তহবিল এবং আন্তর্জাতিক স্কলারশিপের জন্য ‘রিসার্চ হেল্প ডেস্ক’ চালু করা হবে।" },
+                    { id: "2", icon: "BookOpenCheck", title: "শিক্ষার্থীদের নিজস্ব জার্নাল", description: "ডাকসুর উদ্যোগে একটি স্টুডেন্ট জার্নাল (SJDU) প্রকাশ করা হবে, যেখানে শিক্ষার্থীরা তাদের গবেষণা প্রকাশ করতে পারবে।" },
+                    { id: "3", icon: "Archive", title: "ডিজিটাল আর্কাইভ ও ওপেন অ্যাকসেস", description: "প্রতিটি বিভাগের গবেষণা-প্রবন্ধ ও থিসিসের জন্য ডিজিটাল আর্কাইভ তৈরি এবং আন্তর্জাতিক জার্নালে সহজ অ্যাকসেস।" },
+                    { id: "4", icon: "Laptop", title: "প্রশিক্ষণ ও কর্মশালা", description: "একাডেমিক রাইটিং, গবেষণা পদ্ধতি এবং SPSS, R, EndNote, Latex এর মতো সফটওয়্যারের উপর নিয়মিত কর্মশালা আয়োজন।" },
+                ];
+                setCommitments(fallbackCommitments);
+            } finally {
+                setIsLoading(false);
+            }
         };
 
         fetchCommitments();
@@ -272,14 +287,11 @@ function CommitmentSection() {
                 <div className="text-center max-w-4xl mx-auto">
                     <h2 className="font-headline text-4xl md:text-5xl font-bold text-foreground">আপনার প্রতি আমাদের প্রতিশ্রুতি</h2>
                     <p className="mt-4 font-body text-lg text-muted-foreground">
-                        ঢাকা বিশ্ববিদ্যালয়ের ছাত্রসমাজকে একটি উন্নত, শিক্ষাবান্ধব পরিবেশ উপহার দিতে এবং গবেষণার সংস্কৃতিকে বেগবান করতে সিয়াম ফেরদৌস ইমন নিরলসভাবে কাজ করে চলেছেন। তাঁর প্রধান লক্ষ্য হলো শিক্ষার্থীদের সম্ভাবনাকে উন্মোচন করা এবং একটি উজ্জ্বল ভবিষ্যৎ নিশ্চিত করা। আপনার ভালোবাসা ও আস্থাই তাঁর পথচলার মূল শক্তি।
-                    </p>
-                    <p className="mt-6 font-headline text-xl text-primary font-semibold">
-                        তাঁর কিছু প্রধান প্রতিশ্রুতি নিচে তুলে ধরা হলো:
+                        আমরা সবাই জানি—জ্ঞানচর্চা, গবেষণা আর প্রকাশনা ছাড়া প্রকৃত উচ্চশিক্ষার অগ্রগতি সম্ভব নয়। কিন্তু আমাদের অনেক সম্ভাবনাময় গবেষণা কেবল সুযোগ ও প্ল্যাটফর্মের অভাবে থেমে যায়। আপনার ভোটে গড়ে উঠুক একটি গবেষণা-উদ্যমী ডাকসু।
                     </p>
                 </div>
-                <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {isLoading ? Array.from({ length: 3 }).map((_, i) => (
+                <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    {isLoading ? Array.from({ length: 4 }).map((_, i) => (
                         <Card key={i} className="text-center shadow-lg bg-card p-6">
                             <div className="bg-muted/50 p-4 rounded-full w-20 h-20 mx-auto animate-pulse"></div>
                              <div className="h-6 w-3/4 bg-muted/50 rounded mt-4 mx-auto animate-pulse"></div>
@@ -362,7 +374,7 @@ function VoteBannerSection() {
         <h2 className="text-4xl md:text-5xl font-bold font-headline text-green-700">ভোট দিন সিয়াম ফেরদৌস ইমন - কে!</h2>
         <p className="mt-2 text-lg md:text-xl font-body text-foreground">আপনার প্রতিনিধি, আপনার কন্ঠস্বর | ডাকসু ২০২৫</p>
         <p className="mt-4 inline-block bg-accent text-accent-foreground font-headline text-2xl md:text-3xl font-bold py-2 px-6 rounded-full shadow-lg transform hover:scale-105 transition-transform duration-300">
-          আপনাদের প্রত্যাশাই আমার ইশতেহার
+          আপনার ভোটে গড়ে উঠুক একটি গবেষণা-উদ্যমী ডাকসু
         </p>
       </div>
     </section>
@@ -835,19 +847,19 @@ function LeadershipSection() {
 const faqItems = [
     {
         question: "গবেষণা ও প্রকাশনা সম্পাদক পদে সিয়াম ফেরদৌস ইমন কেন যোগ্য?",
-        answer: "সিয়াম ফেরদৌস ইমন নিজে একজন সক্রিয় গবেষক এবং তার একাধিক গবেষণা আন্তর্জাতিক জার্নালে প্রকাশিত হয়েছে। তিনি শিক্ষার্থীদের গবেষণার সুযোগ বৃদ্ধি, প্রকাশনা সহজীকরণ এবং একটি আধুনিক ডিজিটাল লাইব্রেরি তৈরির জন্য বাস্তবসম্মত পরিকল্পনা করেছেন। তার অভিজ্ঞতা এবং পরিকল্পনা তাকে এই পদের জন্য সবচেয়ে যোগ্য প্রার্থী করে তুলেছে।"
+        answer: "সিয়াম ফেরদৌস ইমন নিজে একজন সক্রিয় গবেষক এবং ছাত্র সমাজের সমস্যাগুলো সম্পর্কে অবগত। তিনি শিক্ষার্থীদের জন্য গবেষণা তহবিল, আন্তর্জাতিক স্কলারশিপের তথ্য প্রদানে ‘রিসার্চ হেল্প ডেস্ক’, ডাকসুর নিজস্ব স্টুডেন্ট জার্নাল প্রকাশ এবং ডিজিটাল আর্কাইভ তৈরির মতো বাস্তবসম্মত ও সুনির্দিষ্ট পরিকল্পনা করেছেন, যা তাকে এই পদের জন্য সবচেয়ে যোগ্য করে তুলেছে।"
     },
     {
-        question: "ছাত্রছাত্রীদের জন্য তার বিশেষ পরিকল্পনা কী?",
-        answer: "তার প্রধান পরিকল্পনার মধ্যে রয়েছে—গবেষণার জন্য ফান্ডিং সহজ করা, আন্তর্জাতিক সেমিনারে অংশগ্রহণের সুযোগ বৃদ্ধি, একটি ডিজিটাল প্রকাশনা প্ল্যাটফর্ম তৈরি, এবং ছাত্র-শিক্ষক সম্পর্ক উন্নয়ন। তিনি বিশ্বাস করেন, এই উদ্যোগগুলো শিক্ষার্থীদের একাডেমিক এবং পেশাগত জীবনে ইতিবাচক পরিবর্তন আনবে।"
+        question: "শিক্ষার্থীদের জন্য তার বিশেষ পরিকল্পনা কী?",
+        answer: "তার প্রধান পরিকল্পনার মধ্যে রয়েছে—গবেষণা পদ্ধতি, একাডেমিক রাইটিং এবং SPSS, R, EndNote, Latex এর মতো সফটওয়্যারের উপর নিয়মিত বিনামূল্যে কর্মশালা আয়োজন করা। এছাড়াও তিনি শিক্ষার্থীদের গবেষণা উপস্থাপনের জন্য সেমিনার, কনফারেন্স ও পোস্টার প্রেজেন্টেশনের সুযোগ তৈরি করতে চান।"
     },
     {
         question: "তিনি কি শিক্ষার্থীদের অধিকার আদায়ে সক্রিয়?",
-        answer: "হ্যাঁ, সিয়াম ফেরদৌস ইমন ক্যাম্পাস জীবনের শুরু থেকেই বিভিন্ন যৌক্তিক আন্দোলনে সক্রিয়ভাবে অংশগ্রহণ করেছেন। তিনি শিক্ষার্থীদের ন্যায্য দাবি আদায়ে সর্বদা সামনে থেকে নেতৃত্ব দিয়েছেন এবং ভবিষ্যতেও ছাত্রসমাজের অধিকার রক্ষায় comprometido থাকবেন।"
+        answer: "হ্যাঁ, সিয়াম ফেরদৌস ইমন তার ক্যাম্পাস জীবনের শুরু থেকেই বিভিন্ন যৌক্তিক আন্দোলনে সক্রিয়ভাবে অংশগ্রহণ করেছেন। তিনি শিক্ষার্থীদের ন্যায্য দাবি আদায়ে সর্বদা সামনে থেকে নেতৃত্ব দিয়েছেন এবং ভবিষ্যতেও ছাত্রসমাজের অধিকার রক্ষায় প্রতিশ্রুতিবদ্ধ থাকবেন।"
     },
     {
-        question: "নির্বাচিত হলে তার কাজের স্বচ্ছতা কীভাবে নিশ্চিত করবেন?",
-        answer: "স্বচ্ছতা ও জবাবদিহিতা তার কাজের মূল ভিত্তি। তিনি নির্বাচিত হলে সকল কাজের নিয়মিত আপডেট ওয়েবসাইটের মাধ্যমে প্রকাশ করবেন। এছাড়াও, একটি 'ট্রান্সপারেন্সি' পেজ থাকবে যেখানে সকল আর্থিক হিসাব এবং প্রতিশ্রুতির বাস্তবায়ন প্রক্রিয়া সম্পর্কে বিস্তারিত তথ্য দেওয়া থাকবে।"
+        question: "নির্বাচিত হলে তিনি কীভাবে স্বচ্ছতা নিশ্চিত করবেন?",
+        answer: "স্বচ্ছতা ও জবাবদিহিতা তার কাজের মূল ভিত্তি হবে। তিনি প্রতিটি উদ্যোগ শিক্ষার্থীদের পরামর্শ ও অংশগ্রহণের মাধ্যমে গড়ে তুলবেন। সকল কাজের নিয়মিত আপডেট ওয়েবসাইটের মাধ্যমে প্রকাশ করা হবে এবং শিক্ষার্থীরাই হবে গবেষণা ও প্রকাশনার মূল চালিকা শক্তি—ডাকসু হবে তাদের ভরসার জায়গা।"
     }
 ];
 

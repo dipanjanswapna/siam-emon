@@ -1,33 +1,33 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { CheckCircle, BookOpen, Library, Users, Award, Calendar, Target, Download } from "lucide-react";
+import { CheckCircle, BookOpen, Library, Users, Award, Calendar, Target, Download, DollarSign, Laptop, Archive } from "lucide-react";
 
 const keyPledges = [
   {
-    icon: CheckCircle,
-    title: "গবেষণায় সহযোগিতা",
-    description: "শিক্ষার্থীদের গবেষণামূলক কাজে সার্বিক সহায়তা, আন্তর্জাতিক মানের সেমিনার ও ওয়ার্কশপের আয়োজন এবং প্রয়োজনীয় ফান্ডিং নিশ্চিত করা।"
+    icon: DollarSign,
+    title: "গবেষণা তহবিল ও স্কলারশিপ",
+    description: "বিভাগভিত্তিক গবেষণা তহবিল সংগ্রহ ও বণ্টনের স্বচ্ছ প্রক্রিয়া নিশ্চিত করা এবং আন্তর্জাতিক স্কলারশিপের জন্য ‘রিসার্চ হেল্প ডেস্ক’ চালু করা।"
   },
   {
     icon: BookOpen,
-    title: "প্রকাশনা সহজীকরণ",
-    description: "আন্তর্জাতিক জার্নালে লেখা প্রকাশে সহায়তা এবং বিশ্ববিদ্যালয়ের নিজস্ব একটি আধুনিক প্রকাশনা প্ল্যাটফর্ম তৈরি করা।"
+    title: "শিক্ষার্থীদের নিজস্ব জার্নাল",
+    description: "ডাকসুর উদ্যোগে একটি 'স্টুডেন্ট জার্নাল অব ঢাকা ইউনিভার্সিটি (SJDU)' প্রকাশ করা, যেখানে শিক্ষার্থীরা তাদের গবেষণা সহজে প্রকাশ করতে পারবে।"
   },
   {
-    icon: Library,
-    title: "ডিজিটাল লাইব্রেরি",
-    description: "একটি উন্নত, সহজলভ্য এবং আধুনিক ডিজিটাল লাইব্রেরি স্থাপন করা, যেখানে দেশ-বিদেশের সেরা রিসোর্স পাওয়া যাবে।"
+    icon: Archive,
+    title: "ডিজিটাল আর্কাইভ ও ওপেন অ্যাকসেস",
+    description: "প্রতিটি বিভাগের গবেষণা-প্রবন্ধ ও থিসিসের জন্য একটি ডিজিটাল আর্কাইভ তৈরি করা এবং আন্তর্জাতিক জার্নালে বিনামূল্যে অ্যাকসেসের ব্যবস্থা করা।"
+  },
+  {
+    icon: Laptop,
+    title: "প্রশিক্ষণ ও কর্মশালা",
+    description: "একাডেমিক রাইটিং, গবেষণা পদ্ধতি এবং SPSS, R, EndNote, Latex এর মতো সফটওয়্যারের উপর নিয়মিত বিনামূল্যে কর্মশালা আয়োজন করা।"
   },
   {
     icon: Users,
-    title: "ছাত্র-শিক্ষক সম্পর্ক উন্নয়ন",
-    description: "নিয়মিত মতবিনিময় সভা এবং কার্যকর যোগাযোগ ব্যবস্থা গড়ে তুলে শিক্ষক ও শিক্ষার্থীদের মধ্যে একটি আস্থার সম্পর্ক তৈরি করা।"
-  },
-  {
-    icon: Award,
-    title: "সামাজিক ও সাংস্কৃতিক কর্মকাণ্ড",
-    description: "বিতর্ক, পাবলিক স্পিকিং, এবং অন্যান্য সামাজিক ও সাংস্কৃতিক অনুষ্ঠানের আয়োজন করে শিক্ষার্থীদের প্রতিভা বিকাশের সুযোগ তৈরি করা।"
+    title: "গবেষণায় স্বচ্ছতা ও অংশগ্রহণ",
+    description: "প্রতিটি উদ্যোগ শিক্ষার্থীদের পরামর্শ ও অংশগ্রহণের মাধ্যমে গড়ে তোলা হবে। শিক্ষার্থীরাই হবে গবেষণা ও প্রকাশনার মূল চালিকা শক্তি।"
   }
 ];
 
@@ -37,9 +37,9 @@ export default function ManifestoPage() {
       <div className="container mx-auto px-4 py-16 md:py-24">
         
         <header className="text-center max-w-4xl mx-auto">
-          <h1 className="font-headline text-5xl md:text-6xl font-bold text-foreground">ইশতেহার: আমাদের অঙ্গীকার, আমাদের পথ</h1>
+          <h1 className="font-headline text-5xl md:text-6xl font-bold text-foreground">আমার অঙ্গীকার: একটি গবেষণা-উদ্যমী ডাকসু</h1>
           <p className="font-body text-lg mt-4 text-muted-foreground">
-            ঢাকা বিশ্ববিদ্যালয়ের কেন্দ্রীয় ছাত্র সংসদ (ডাকসু) নির্বাচনে গবেষণা ও প্রকাশনা সম্পাদক পদে সিয়াম ফেরদৌস ইমন-এর ইশতেহার পেজে স্বাগতম। এটি আমাদের অভিজ্ঞতা ও বাস্তবসম্মত চিন্তাভাবনার প্রতিফলন, কোনো গতানুগতিক প্রতিশ্রুতি নয়।
+            প্রিয় ঢাকা বিশ্ববিদ্যালয়ের সহপাঠীরা, আমরা সবাই জানি—জ্ঞানচর্চা, গবেষণা আর প্রকাশনা ছাড়া প্রকৃত উচ্চশিক্ষার অগ্রগতি সম্ভব নয়। কিন্তু আমাদের অনেক সম্ভাবনাময় গবেষণা কেবল সুযোগ ও প্ল্যাটফর্মের অভাবে থেমে যায়। এখানে আমার প্রতিশ্রুতির বিস্তারিত তুলে ধরলাম।
           </p>
            <Button variant="accent" size="lg" className="mt-8 font-headline text-lg">
                 <Download className="mr-2 h-5 w-5" />
@@ -79,22 +79,22 @@ export default function ManifestoPage() {
             <div className="mt-12 grid md:grid-cols-2 gap-8">
                 <Card className="shadow-md">
                     <CardHeader>
-                        <CardTitle className="font-headline">গবেষণার সুযোগ বৃদ্ধি</CardTitle>
+                        <CardTitle className="font-headline">গবেষণা তহবিল ও প্রকাশনা</CardTitle>
                     </CardHeader>
                     <CardContent className="font-body text-muted-foreground space-y-2">
-                        <p><strong>ল্যাব সুবিধা:</strong> সকল বিভাগের গবেষণাগার আধুনিকায়ন এবং ২৪/৭ খোলা রাখার উদ্যোগ গ্রহণ।</p>
-                        <p><strong>ফান্ডিং:</strong> সরকারি ও বেসরকারি উদ্যোগে গবেষণা অনুদান বৃদ্ধি এবং আবেদন প্রক্রিয়া সহজীকরণ।</p>
-                        <p><strong>মেন্টরশিপ:</strong> সিনিয়র গবেষক ও শিক্ষকদের নিয়ে একটি মেন্টরশিপ প্রোগ্রাম চালু করা।</p>
+                        <p><strong>রিসার্চ হেল্প ডেস্ক:</strong> আন্তর্জাতিক গবেষণা স্কলারশিপের তথ্য ও আবেদন সহায়তার জন্য একটি বিশেষ ডেস্ক চালু করা হবে।</p>
+                        <p><strong>স্টুডেন্ট জার্নাল (SJDU):</strong> ডাকসুর উদ্যোগে শিক্ষার্থীদের গবেষণা প্রবন্ধ প্রকাশের জন্য একটি মানসম্মত জার্নাল প্রকাশ করা হবে।</p>
+                        <p><strong>সেমিনার ও কনফারেন্স:</strong> শিক্ষার্থীদের গবেষণা উপস্থাপনের জন্য নিয়মিত সেমিনার, কনফারেন্স ও পোস্টার প্রেজেন্টেশনের আয়োজন করা হবে।</p>
                     </CardContent>
                 </Card>
                  <Card className="shadow-md">
                     <CardHeader>
-                        <CardTitle className="font-headline">প্রকাশনা ও ডিজিটাল লাইব্রেরি</CardTitle>
+                        <CardTitle className="font-headline">প্রশিক্ষণ ও ডিজিটাল রিসোর্স</CardTitle>
                     </CardHeader>
                     <CardContent className="font-body text-muted-foreground space-y-2">
-                        <p><strong>ওয়ার্কশপ:</strong> 'কীভাবে গবেষণা প্রবন্ধ লিখতে হয়'—এই বিষয়ে নিয়মিত কর্মশালার আয়োজন।</p>
-                        <p><strong>সহযোগিতা:</strong> আন্তর্জাতিক প্রকাশনা সংস্থার সাথে চুক্তি করে প্রকাশনা ফি কমানোর চেষ্টা।</p>
-                        <p><strong>ডিজিটাল রিসোর্স:</strong> বিশ্বের সেরা বিশ্ববিদ্যালয়গুলোর ডিজিটাল লাইব্রেরিতে বিনামূল্যে প্রবেশের ব্যবস্থা করা।</p>
+                        <p><strong>ডিজিটাল আর্কাইভ:</strong> সকল বিভাগের গবেষণা-প্রবন্ধ ও থিসিসের জন্য একটি ডিজিটাল আর্কাইভ তৈরি করা হবে, যা সবার জন্য উন্মুক্ত থাকবে।</p>
+                        <p><strong>সফটওয়্যার ট্রেনিং:</strong> SPSS, R, EndNote, Latex-এর মতো গুরুত্বপূর্ণ সফটওয়্যারের উপর বিনামূল্যে কর্মশালার আয়োজন করা হবে।</p>
+                        <p><strong>একাডেমিক রাইটিং:</strong> গবেষণা পদ্ধতি ও একাডেমিক রাইটিং-এর উপর নিয়মিত প্রশিক্ষণ কর্মশালা পরিচালনা করা হবে।</p>
                     </CardContent>
                 </Card>
             </div>
@@ -114,9 +114,9 @@ export default function ManifestoPage() {
                         <CardTitle className="font-headline">প্রথম ৬ মাস</CardTitle>
                     </CardHeader>
                     <CardContent className="font-body text-muted-foreground space-y-2">
-                        <p> • সকল গবেষণা সুযোগ এবং অনুদান সম্পর্কে তথ্য নিয়ে একটি কেন্দ্রীয় ডাটাবেস তৈরি।</p>
-                        <p> • ছাত্র-শিক্ষক সম্পর্ক উন্নয়নে প্রথম মতবিনিময় সভার আয়োজন।</p>
-                        <p> • ডিজিটাল লাইব্রেরি প্রকল্পের প্রাথমিক পর্যায় শুরু করা।</p>
+                        <p> • ‘রিসার্চ হেল্প ডেস্ক’ চালু এবং বিভাগভিত্তিক গবেষণা তহবিলের জন্য আবেদন গ্রহণ শুরু।</p>
+                        <p> • ডিজিটাল আর্কাইভ তৈরির কাজ শুরু করা এবং প্রাথমিক তথ্য সংযোজন।</p>
+                        <p> • প্রথম একাডেমিক রাইটিং ও সফটওয়্যার ট্রেনিং কর্মশালার আয়োজন।</p>
                     </CardContent>
                 </Card>
                 <Card className="shadow-md bg-primary/5">
@@ -124,16 +124,16 @@ export default function ManifestoPage() {
                         <CardTitle className="font-headline">প্রথম বছর</CardTitle>
                     </CardHeader>
                     <CardContent className="font-body text-muted-foreground space-y-2">
-                       <p> • অন্তত দুটি আন্তর্জাতিক মানের গবেষণা সেমিনারের আয়োজন।</p>
-                       <p> • বিশ্ববিদ্যালয়ের নিজস্ব প্রকাশনা প্ল্যাটফর্মের উদ্বোধন।</p>
-                       <p> • মেন্টরশিপ প্রোগ্রামের সফল বাস্তবায়ন এবং এর ফলাফল মূল্যায়ন।</p>
+                       <p> • 'স্টুডেন্ট জার্নাল অব ঢাকা ইউনিভার্সিটি (SJDU)'-এর প্রথম সংখ্যা প্রকাশ।</p>
+                       <p> • অন্তত দুটি গবেষণাভিত্তিক কনফারেন্স ও পোস্টার প্রেজেন্টেশন ইভেন্টের আয়োজন।</p>
+                       <p> • আন্তর্জাতিক জার্নালে বিনামূল্যে অ্যাকসেসের জন্য অন্তত একটি চুক্তি স্বাক্ষর।</p>
                     </CardContent>
                 </Card>
             </div>
           </section>
           
           <section id="conclusion" className="text-center max-w-4xl mx-auto border-t pt-12">
-            <h2 className="font-headline text-3xl font-bold text-foreground">শেষ কথা</h2>
+            <h2 className="font-headline text-3xl font-bold text-foreground">আপনার কণ্ঠস্বরই হবে পরিবর্তনের শক্তি</h2>
             <p className="font-body text-lg mt-4 text-muted-foreground">
                 এই ইশতেহার আমাদের সম্মিলিত স্বপ্নের দলিল। আপনাদের সমর্থন ও বিশ্বাসই আমাদের এই পথচলার মূল শক্তি। আসুন, আমরা সবাই মিলে একটি জ্ঞানভিত্তিক, প্রগতিশীল এবং উন্নত ঢাকা বিশ্ববিদ্যালয় গড়ে তুলি।
             </p>

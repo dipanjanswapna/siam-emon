@@ -3,48 +3,49 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Scale, FileText, BarChart, Users, CheckCircle, Clock } from "lucide-react";
+import { Scale, FileText, BarChart, Users, CheckCircle, Clock, BookOpen, DollarSign, Laptop } from "lucide-react";
 import FinancialSummaryForm from "@/components/transparency/financial-summary-form";
 import Link from "next/link";
 
 const manifestoPledges = [
   {
-    title: "গবেষণায় সহযোগিতা",
-    status: "কাজ চলছে",
-    statusColor: "bg-yellow-500",
-    icon: Clock,
-    updates: [
-      "কেন্দ্রীয় ডাটাবেস তৈরির কাজ শুরু হয়েছে।",
-      "প্রথম মতবিনিময় সভার তারিখ নির্ধারিত হয়েছে।"
-    ]
-  },
-  {
-    title: "প্রকাশনা সহজীকরণ",
+    title: "গবেষণা তহবিল ও স্কলারশিপ",
     status: "পরিকল্পনাধীন",
     statusColor: "bg-blue-500",
-    icon: CheckCircle,
+    icon: DollarSign,
     updates: [
-      "বিশ্ববিদ্যালয়ের নিজস্ব প্রকাশনা প্ল্যাটফর্মের জন্য খসড়া প্রস্তাবনা তৈরি।",
+      "বিভাগভিত্তিক গবেষণা তহবিল সংগ্রহের জন্য নীতিমালা তৈরি করা হচ্ছে।",
+      "‘রিসার্চ হেল্প ডেস্ক’ চালুর জন্য প্রস্তুতি চলছে।"
     ]
   },
   {
-    title: "ডিজিটাল লাইব্রেরি",
+    title: "স্টুডেন্ট জার্নাল প্রকাশ",
+    status: "পরিকল্পনাধীন",
+    statusColor: "bg-blue-500",
+    icon: BookOpen,
+    updates: [
+      "জার্নালের সম্পাদকীয় বোর্ড গঠনের জন্য আলোচনা চলছে।",
+      "প্রথম সংখ্যার জন্য গবেষণা প্রবন্ধ আহ্বানের প্রস্তুতি নেওয়া হচ্ছে।"
+    ]
+  },
+  {
+    title: "ডিজিটাল আর্কাইভ ও ওপেন অ্যাকসেস",
     status: "কাজ চলছে",
     statusColor: "bg-yellow-500",
     icon: Clock,
     updates: [
-      "ডিজিটাল লাইব্রেরি প্রকল্পের প্রাথমিক পর্যায় শুরু হয়েছে।",
-      "আন্তর্জাতিক রিসোর্স এক্সেসের জন্য আলোচনা চলছে।"
+      "ডিজিটাল আর্কাইভের জন্য সফটওয়্যার নির্বাচন করা হয়েছে।",
+      "আন্তর্জাতিক জার্নাল অ্যাকসেসের জন্য বিভিন্ন সংস্থার সাথে আলোচনা চলছে।"
     ]
   },
     {
-    title: "ছাত্র-শিক্ষক সম্পর্ক উন্নয়ন",
-    status: "সম্পন্ন হয়েছে",
-    statusColor: "bg-green-500",
-    icon: CheckCircle,
+    title: "প্রশিক্ষণ ও কর্মশালা",
+    status: "কাজ চলছে",
+    statusColor: "bg-yellow-500",
+    icon: Laptop,
     updates: [
-      "ছাত্র-শিক্ষকদের মধ্যে প্রথম মতবিনিময় সভা সফলভাবে অনুষ্ঠিত হয়েছে।",
-      "যোগাযোগ সহজ করার জন্য একটি অনলাইন ফোরাম চালু করা হয়েছে।"
+      "একাডেমিক রাইটিং-এর উপর প্রথম কর্মশালা সফলভাবে অনুষ্ঠিত হয়েছে।",
+      "পরবর্তী SPSS ও R কর্মশালার জন্য রেজিস্ট্রেশন скоро শুরু হবে।"
     ]
   },
 ];
