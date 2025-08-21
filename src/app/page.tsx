@@ -7,7 +7,7 @@ import React, { useState, useEffect } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { ArrowRight, BookOpenCheck, BrainCircuit, Library, Users, Camera, X, Heart, Megaphone, Flag, Award, FileText, Mic, GraduationCap, HandHeart, BookText, ShieldCheck, MessageSquare, Mail, Icon, ImagePlus, Annoyed, HelpCircle, Vote, Share2, DollarSign, Archive, Laptop } from "lucide-react";
+import { ArrowRight, BookOpenCheck, BrainCircuit, Library, Users, Camera, X, Heart, Megaphone, Flag, Award, FileText, Mic, GraduationCap, HandHeart, BookText, ShieldCheck, MessageSquare, Mail, Icon, ImagePlus, Annoyed, HelpCircle, Vote, Share2, DollarSign, Archive, Laptop, Combine } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -114,6 +114,7 @@ export default function Home() {
       <PublicationSection />
       <LogicalMovementSection />
       <AcademicAchievementSection />
+      <SkillsLeadershipServiceSection />
       <SocialWorkSection />
       <LeadershipSection />
       <FAQSection />
@@ -269,7 +270,7 @@ function CommitmentSection() {
                 const fallbackCommitments = [
                     { id: "1", icon: "DollarSign", title: "গবেষণা তহবিল ও স্কলারশিপ", description: "বিভাগভিত্তিক গবেষণা তহবিল এবং আন্তর্জাতিক স্কলারশিপের জন্য ‘রিসার্চ হেল্প ডেস্ক’ চালু করা হবে।" },
                     { id: "2", icon: "BookOpenCheck", title: "শিক্ষার্থীদের নিজস্ব জার্নাল", description: "ডাকসুর উদ্যোগে একটি স্টুডেন্ট জার্নাল (SJDU) প্রকাশ করা হবে, যেখানে শিক্ষার্থীরা তাদের গবেষণা প্রকাশ করতে পারবে।" },
-                    { id: "3", icon: "Archive", title: "ডিজিটাল আর্কাইভ ও ওপেন অ্যাকসেস", description: "প্রতিটি বিভাগের গবেষণা-প্রবন্ধ ও থিসিসের জন্য ডিজিটাল আর্কাইভ তৈরি এবং আন্তর্জাতিক জার্নালে সহজ অ্যাকসেস।" },
+                    { id: "3", icon: "Archive", title: "ডিজিটাল আর্কাইভ ও ওপেন অ্যাকসেস", description: "প্রতিটি বিভাগের গবেষণা-প্রবন্ধ ও থিসিসের জন্য ডিজিটাল আর্কাইভ তৈরি এবং আন্তর্জাতিক জার্নালে সহজ অ্যাক্সেস।" },
                     { id: "4", icon: "Laptop", title: "প্রশিক্ষণ ও কর্মশালা", description: "একাডেমিক রাইটিং, গবেষণা পদ্ধতি এবং SPSS, R, EndNote, Latex এর মতো সফটওয়্যারের উপর নিয়মিত কর্মশালা আয়োজন।" },
                 ];
                 setCommitments(fallbackCommitments);
@@ -287,7 +288,7 @@ function CommitmentSection() {
                 <div className="text-center max-w-4xl mx-auto">
                     <h2 className="font-headline text-4xl md:text-5xl font-bold text-foreground">আপনার প্রতি আমাদের প্রতিশ্রুতি</h2>
                     <p className="mt-4 font-body text-lg text-muted-foreground">
-                        আমরা সবাই জানি—জ্ঞানচর্চা, গবেষণা আর প্রকাশনা ছাড়া প্রকৃত উচ্চশিক্ষার অগ্রগতি সম্ভব নয়। কিন্তু আমাদের অনেক সম্ভাবনাময় গবেষণা কেবল সুযোগ ও প্ল্যাটফর্মের অভাবে থেমে যায়। আপনার ভোটে গড়ে উঠুক একটি গবেষণা-উদ্যমী ডাকসু।
+                        আমি প্রতিশ্রুতি দিচ্ছি, যদি আপনারা আমাকে ডাকসু ২০২৫-এ গবেষণা ও প্রকাশনা সম্পাদক হিসেবে দায়িত্ব দেন, তবে বিভাগভিত্তিক গবেষণা তহবিল ও আন্তর্জাতিক স্কলারশিপের সহায়তা, ডাকসুর নিজস্ব স্টুডেন্ট জার্নাল প্রকাশ, প্রতিটি থিসিস ও গবেষণার জন্য ডিজিটাল আর্কাইভ, একাডেমিক রাইটিং ও সফটওয়্যার ট্রেনিং কর্মশালা এবং শিক্ষার্থীদের জন্য গবেষণাভিত্তিক কনফারেন্স ও সেমিনার আয়োজন করব। আপনার ভোটে গড়ে উঠুক একটি গবেষণা-উদ্যমী ডাকসু।
                     </p>
                 </div>
                 <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -387,8 +388,8 @@ const researchActivities = [
     title: "গবেষণা",
     description: "গবেষণায় সক্রিয় অংশগ্রহণ: সিয়াম ফেরদৌস ইমন কেবল একজন প্রার্থী নন, বরং একজন সক্রিয় গবেষকও। তিনি বাংলাদেশ জুওলজিক্যাল সোসাইটির বার্ষিক সাধারণ সভায় নিয়মিত উপস্থিত থেকে দেশের সেরা গবেষক ও শিক্ষাবিদদের সাথে জ্ঞান আদান-প্রদান করেন। তাঁর নিজস্ব গবেষণাগারে নিরলস কাজ করার অভিজ্ঞতা তাকে শিক্ষার্থীদের বাস্তব সমস্যাগুলো বুঝতে সাহায্য করে।",
     images: [
-      { src: "https://i.postimg.cc/vHRK5YwG/photo-2025-08-18-02-08-33.jpg", alt: "ওয়ার্কশপের অংশগ্রহণকারীরা কম্পিউটারে কাজ করছেন", hint: "students workshop" },
-      { src: "https://i.postimg.cc/9XZXtkTj/photo-2025-08-18-01-30-06.jpg", alt: "প্রশিক্ষক শিক্ষার্থীদের সহায়তা করছেন", hint: "instructor teaching" },
+      { src: "https://i.postimg.cc/vHRK5YwG/photo-2025-08-18-02-08-33.jpg", alt: "গবেষণাগারে কাজ করছেন", hint: "working in lab" },
+      { src: "https://i.postimg.cc/9XZXtkTj/photo-2025-08-18-01-30-06.jpg", alt: "গবেষণার সরঞ্জাম", hint: "research equipment" },
     ],
   },
   {
@@ -422,7 +423,7 @@ const researchActivities = [
 ];
 
 function ResearchSection() {
-    
+  
   return (
     <section className="bg-primary/5 py-16 md:py-24">
       <div className="container mx-auto px-4">
@@ -443,7 +444,7 @@ function ResearchSection() {
                 </div>
                 <p className="font-body text-muted-foreground whitespace-pre-line">{activity.description}</p>
               </div>
-              <div className="relative w-full aspect-video rounded-lg overflow-hidden order-1 md:order-2">
+               <div className="relative w-full aspect-video rounded-lg overflow-hidden order-1 md:order-2">
                  <Carousel className="w-full h-full">
                     <CarouselContent>
                         {activity.images.map((image, i) => (
@@ -643,7 +644,6 @@ type AcademicAchievement = {
 function AcademicAchievementSection() {
     const [achievements, setAchievements] = useState<AcademicAchievement[]>([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [selectedAchievement, setSelectedAchievement] = useState<AcademicAchievement | null>(null);
 
      useEffect(() => {
         const fetchAchievements = async () => {
@@ -657,14 +657,6 @@ function AcademicAchievementSection() {
 
         fetchAchievements();
     }, []);
-
-    const openDialog = (achievement: AcademicAchievement) => {
-      setSelectedAchievement(achievement);
-    };
-
-    const closeDialog = () => {
-      setSelectedAchievement(null);
-    };
 
   return (
     <>
@@ -692,7 +684,7 @@ function AcademicAchievementSection() {
             )) : achievements.map((achievement) => {
                const IconComponent = icons[achievement.icon];
                return (
-               <Card key={achievement.id} className="flex flex-col shadow-lg hover:shadow-primary/20 hover:-translate-y-2 transition-all duration-300 bg-background overflow-hidden cursor-pointer" onClick={() => openDialog(achievement)}>
+               <Card key={achievement.id} className="flex flex-col shadow-lg hover:shadow-primary/20 hover:-translate-y-2 transition-all duration-300 bg-background overflow-hidden">
                  <div className="relative w-full aspect-video">
                    <Image 
                      src={achievement.image}
@@ -716,29 +708,26 @@ function AcademicAchievementSection() {
           </div>
         </div>
       </section>
-
-      <Dialog open={!!selectedAchievement} onOpenChange={(isOpen) => !isOpen && closeDialog()}>
-        <DialogContent className="max-w-4xl w-[95vw] h-[90vh] p-0 bg-card border-none shadow-2xl rounded-2xl flex flex-col">
-          {selectedAchievement && (
-            <>
-               <DialogHeader className="p-4 border-b sr-only">
-                <DialogTitle>{selectedAchievement.title}</DialogTitle>
-              </DialogHeader>
-              <div className="relative flex-grow w-full h-full">
-                 <Button variant="ghost" size="icon" onClick={closeDialog} className="absolute top-2 right-2 z-10 bg-destructive text-destructive-foreground rounded-full h-8 w-8 hover:bg-destructive/80">
-                  <X className="h-5 w-5" />
-                  <span className="sr-only">বন্ধ করুন</span>
-                </Button>
-                <div className="w-full h-full relative rounded-lg overflow-hidden">
-                    <Image src={selectedAchievement.image} alt={selectedAchievement.title} fill className="object-contain" data-ai-hint={selectedAchievement.imageHint}/>
-                </div>
-              </div>
-            </>
-          )}
-        </DialogContent>
-      </Dialog>
     </>
   );
+}
+
+function SkillsLeadershipServiceSection() {
+    return (
+        <section className="py-16 md:py-24 bg-primary/5">
+            <div className="container mx-auto px-4">
+                <div className="text-center max-w-4xl mx-auto">
+                    <Combine className="mx-auto h-12 w-12 text-primary" />
+                    <h2 className="font-headline text-4xl md:text-5xl font-bold mt-4 text-foreground">
+                        দক্ষতা, নেতৃত্ব ও সেবার সমন্বয়
+                    </h2>
+                    <p className="mt-4 font-body text-lg text-muted-foreground">
+                        আমি বিশ্বাস করি, একজন শিক্ষার্থীর প্রকৃত বিকাশ শুধু একাডেমিক পড়াশোনার মধ্যে সীমাবদ্ধ থাকে না, বরং তার পূর্ণতা আসে সহশিক্ষা কার্যক্রমের মাধ্যমে। আমার বিশ্ববিদ্যালয় জীবনজুড়ে আমি সেই চেষ্টাই করেছি—একদিকে যেমন যৌক্তিক আন্দোলনে রাজপথে থেকেছি, তেমনই সহপাঠী ও অনুজদের জন্য কর্মশালা ও সম্মেলন আয়োজন করেছি। ভর্তিচ্ছুদের স্বপ্নপূরণের পথে সঙ্গী হতে কলম ধরেছি, আবার গবেষণার জগতে তরুণদের উৎসাহিত করতে নতুন নতুন প্ল্যাটফর্ম তৈরির চেষ্টা করেছি। আমার এই পথচলা মূলত দক্ষতা, নেতৃত্ব ও সেবার এক সমন্বয়, যার মাধ্যমে আমি ঢাকা বিশ্ববিদ্যালয়ের প্রতিটি শিক্ষার্থীর জন্য একটি সমৃদ্ধ ক্যাম্পাস জীবন নিশ্চিত করতে চাই।
+                    </p>
+                </div>
+            </div>
+        </section>
+    );
 }
 
 type SocialWork = {
