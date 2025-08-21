@@ -474,15 +474,6 @@ const publicationActivities = [
       { src: "https://i.postimg.cc/50Dr8XCv/photo-2025-08-21-17-23-48.jpg", alt: "সিয়াম ফেরদৌস ইমন", hint: "author portrait" },
     ],
   },
-  {
-    icon: FileText,
-    title: "বিশ্ববিদ্যালয় প্রকাশনা",
-    description: "বিশ্ববিদ্যালয়ের নিজস্ব প্রকাশনা সংস্থার মাধ্যমে শিক্ষার্থীদের সৃজনশীল লেখা, যেমন— কবিতা, গল্প এবং প্রবন্ধ প্রকাশের জন্য একটি প্ল্যাটফর্ম তৈরি করার পরিকল্পনা রয়েছে। এর মাধ্যমে নবীন লেখকদের প্রতিভা বিকাশের সুযোগ তৈরি হবে।",
-    images: [
-        { src: "https://placehold.co/800x600.png", alt: "বিশ্ববিদ্যালয়ের প্রকাশনা সংস্থার লোগো", hint: "university press" },
-        { src: "https://placehold.co/800x600.png", alt: "প্রকাশিত বইয়ের মোড়ক", hint: "book cover" },
-    ],
-  },
 ];
 
 
