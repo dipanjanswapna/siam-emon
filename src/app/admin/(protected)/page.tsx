@@ -993,7 +993,7 @@ function AdminPage() {
         </Dialog>
         
         {/* Academic Achievement Form Dialog */}
-         <Dialog open={isAchievementFormOpen} onOpenChange={setIsAchievementFormOpen}>
+        <Dialog open={isAchievementFormOpen} onOpenChange={setIsAchievementFormOpen}>
             <DialogContent className="max-w-lg w-full flex flex-col max-h-[90vh]">
                 <form onSubmit={handleAchievementFormSubmit} className="flex flex-col flex-grow min-h-0">
                     <DialogHeader className="flex-shrink-0">
@@ -1061,7 +1061,7 @@ function AdminPage() {
                             </div>
                         </div>
                     </ScrollArea>
-                    <DialogFooter className="flex-shrink-0">
+                    <DialogFooter className="flex-shrink-0 pt-4">
                         <Button type="submit">{isEditingAchievement ? 'সংরক্ষণ করুন' : 'যোগ করুন'}</Button>
                         <DialogClose asChild>
                             <Button type="button" variant="secondary" onClick={closeAchievementForm}>বাতিল</Button>
