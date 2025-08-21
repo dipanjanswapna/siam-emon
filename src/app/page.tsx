@@ -467,11 +467,11 @@ function ResearchSection() {
 const publicationActivities = [
   {
     icon: BookText,
-    title: "আন্তর্জাতিক জার্নালে প্রকাশনা",
-    description: "সিয়াম ফেরদৌস ইমনের গবেষণা प्रतिष्ठित আন্তর্জাতিক জার্নালে প্রকাশিত হয়েছে, যা ঢাকা বিশ্ববিদ্যালয়ের সুনাম বৃদ্ধিতে সহায়ক ভূমিকা পালন করেছে।",
+    title: "রাজপথ থেকে পড়ার টেবিল, আমি আছি তোমাদের পাশে।",
+    description: "শিক্ষার্থীদের অধিকার আদায়ের সংগ্রামের পাশাপাশি তাদের একাডেমিক স্বপ্নপূরণের পথ সহজ করে দেওয়াও আমার দায়িত্ব বলে মনে করি। আমার লেখা \"Royal Admission Biology\" বইটি সেই চেষ্টারই একটি প্রতিফলন। ভর্তিযুদ্ধে অংশ নেওয়া ছোট ভাই-বোনদের জন্য আমার এই ক্ষুদ্র প্রয়াস, তাদের স্বপ্নযাত্রায় সামান্য সাহায্য করতে পারলেই আমি সার্থক।",
     images: [
-      { src: "https://placehold.co/800x600.png", alt: "আন্তর্জাতিক জার্নালের কভার", hint: "journal cover" },
-      { src: "https://placehold.co/800x600.png", alt: "গবেষণা পত্রের একটি পাতা", hint: "research paper" },
+      { src: "https://i.postimg.cc/8CVbShVj/Screenshot-2025-08-21-170853.png", alt: "Royal Admission Biology বইয়ের কভার", hint: "book cover", link: "https://bdbooks.net/product/Royal-Admission-Biology-1st-&-2nd-Paper-Short-Syllabus---2024-25" },
+      { src: "https://i.postimg.cc/50Dr8XCv/photo-2025-08-21-17-23-48.jpg", alt: "সিয়াম ফেরদৌস ইমন", hint: "author portrait" },
     ],
   },
   {
@@ -513,15 +513,29 @@ function PublicationSection() {
                     <CarouselContent>
                         {activity.images.map((image, i) => (
                         <CarouselItem key={i}>
-                            <div className="relative w-full h-full aspect-video">
-                            <Image
-                                src={image.src}
-                                alt={image.alt}
-                                fill
-                                className="object-cover"
-                                data-ai-hint={image.hint}
-                            />
-                            </div>
+                            {image.link ? (
+                                <Link href={image.link} target="_blank" rel="noopener noreferrer">
+                                    <div className="relative w-full h-full aspect-video">
+                                    <Image
+                                        src={image.src}
+                                        alt={image.alt}
+                                        fill
+                                        className="object-cover"
+                                        data-ai-hint={image.hint}
+                                    />
+                                    </div>
+                                </Link>
+                            ) : (
+                                <div className="relative w-full h-full aspect-video">
+                                <Image
+                                    src={image.src}
+                                    alt={image.alt}
+                                    fill
+                                    className="object-cover"
+                                    data-ai-hint={image.hint}
+                                />
+                                </div>
+                            )}
                         </CarouselItem>
                         ))}
                     </CarouselContent>
@@ -1198,3 +1212,6 @@ function PreVoteSection() {
 
 
 
+
+
+    
