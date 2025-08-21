@@ -684,7 +684,7 @@ function AcademicAchievementSection() {
                     </CardContent>
                 </Card>
             )) : achievements.map((achievement) => {
-               const IconComponent = icons[achievement.icon];
+               const IconComponent = icons[achievement.icon] || Award;
                return (
                <Card key={achievement.id} className="flex flex-col shadow-lg hover:shadow-primary/20 hover:-translate-y-2 transition-all duration-300 bg-background overflow-hidden">
                  <div className="relative w-full aspect-video">
@@ -698,7 +698,7 @@ function AcademicAchievementSection() {
                  </div>
                 <CardHeader className="items-center text-center">
                   <div className="bg-primary/10 p-3 rounded-full -mt-10 mb-2 border-4 border-background z-10">
-                    {IconComponent && <IconComponent className="h-8 w-8 text-primary" />}
+                    <IconComponent className="h-8 w-8 text-primary" />
                   </div>
                   <CardTitle className="font-headline text-xl mt-2">{achievement.title}</CardTitle>
                 </CardHeader>

@@ -301,23 +301,19 @@ function AdminPage() {
         e.preventDefault();
         const action = isEditingAchievement ? 'আপডেট' : 'যোগ';
         try {
+            const achievementData = {
+                title: currentAchievement.title,
+                description: currentAchievement.description,
+                icon: "Award", // Default icon
+                image: currentAchievement.image,
+                imageHint: currentAchievement.imageHint,
+            };
+
             if (isEditingAchievement && currentAchievement.id) {
                 const achievementDoc = doc(db, "academicAchievements", currentAchievement.id);
-                await updateDoc(achievementDoc, {
-                    title: currentAchievement.title,
-                    description: currentAchievement.description,
-                    icon: currentAchievement.icon,
-                    image: currentAchievement.image,
-                    imageHint: currentAchievement.imageHint,
-                });
+                await updateDoc(achievementDoc, achievementData);
             } else {
-                await addDoc(collection(db, "academicAchievements"), {
-                    title: currentAchievement.title,
-                    description: currentAchievement.description,
-                    icon: currentAchievement.icon,
-                    image: currentAchievement.image,
-                    imageHint: currentAchievement.imageHint,
-                });
+                await addDoc(collection(db, "academicAchievements"), achievementData);
             }
             closeAchievementForm();
             fetchAcademicAchievements();
@@ -999,7 +995,7 @@ function AdminPage() {
                     <DialogHeader className="flex-shrink-0">
                         <DialogTitle>{isEditingAchievement ? 'অর্জন সম্পাদনা করুন' : 'নতুন অর্জন যোগ করুন'}</DialogTitle>
                         <DialogDescription>
-                            এখানে একাডেমিক অর্জনের শিরোনাম, বর্ণনা, আইকন এবং ছবি যোগ বা পরিবর্তন করুন।
+                            এখানে একাডেমিক অর্জনের শিরোনাম, বর্ণনা, এবং ছবি যোগ বা পরিবর্তন করুন।
                         </DialogDescription>
                     </DialogHeader>
                     <ScrollArea className="flex-grow my-4 pr-6 -mr-6">
@@ -1021,23 +1017,6 @@ function AdminPage() {
                                     onChange={(e) => setCurrentAchievement({ ...currentAchievement, description: e.target.value })}
                                     required
                                 />
-                            </div>
-                            <div className="space-y-2">
-                                <Label htmlFor="ach-icon">আইকন</Label>
-                                <Select
-                                    value={currentAchievement.icon}
-                                    onValueChange={(value) => setCurrentAchievement({ ...currentAchievement, icon: value })}
-                                >
-                                    <SelectTrigger>
-                                        <SelectValue placeholder="আইকন নির্বাচন করুন" />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectItem value="Award">ডিন'স অ্যাওয়ার্ড (Award)</SelectItem>
-                                        <SelectItem value="FileText">গবেষণা প্রকাশনা (FileText)</SelectItem>
-                                        <SelectItem value="Mic">জাতীয় সম্মেলনে অংশগ্রহণ (Mic)</SelectItem>
-                                        <SelectItem value="GraduationCap">মেধা বৃত্তি (GraduationCap)</SelectItem>
-                                    </SelectContent>
-                                </Select>
                             </div>
                             <div className="space-y-2">
                                 <Label htmlFor="ach-image">ছবির URL</Label>
