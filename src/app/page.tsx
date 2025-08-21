@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { ArrowRight, BookOpenCheck, BrainCircuit, Library, Users, Camera, X, Heart, Megaphone, Flag, Award, FileText, Mic, GraduationCap, HandHeart, BookText, ShieldCheck, MessageSquare, Mail, Icon, ImagePlus, Annoyed, HelpCircle, Vote, Share2, DollarSign, Archive, Laptop, Combine, Trophy } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogClose } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -26,63 +26,63 @@ const carouselItems = [
   {
     title: "শিক্ষার্থীদের জন্য গবেষণার সুযোগ",
     subtitle: "গবেষণাগারে জ্ঞানের আলো",
-    description: "একটি গবেষণামুখী ছাত্র সংসদ গঠনের অঙ্গীকার নিয়ে সিয়াম ফেরদৌস ইমন শিক্ষার্থীদের জন্য গবেষণাগারে প্রয়োজনীয় সুযোগ-সুবিধা নিশ্চিত করতে কাজ করবেন।",
+    description: "একটি গবেষণামুখী ছাত্র সংসদ গঠনের অঙ্গীকার নিয়ে আমি শিক্ষার্থীদের জন্য গবেষণাগারে প্রয়োজনীয় সুযোগ-সুবিধা নিশ্চিত করতে কাজ করব।",
     image: "https://i.postimg.cc/9XZXtkTj/photo-2025-08-18-01-30-06.jpg",
     imageHint: "research opportunity"
   },
   {
     title: "Dean's Award 2025 , জীব বিজ্ঞান অনুষদ",
     subtitle: "শিক্ষায় অবদানের জন্য সম্মাননা",
-    description: "ছাত্র-শিক্ষক সম্পর্ক উন্নয়ন, গবেষণা ও প্রকাশনায় অবদান এবং সার্বিক একাডেমিক উৎকর্ষতা সাধনের জন্য সিয়াম ফেরদৌস ইমন-কে এই সম্মাননায় ভূষিত করা হয়েছে।",
+    description: "ছাত্র-শিক্ষক সম্পর্ক উন্নয়ন, গবেষণা ও প্রকাশনায় অবদান এবং সার্বিক একাডেমিক উৎকর্ষতা সাধনের জন্য আমাকে এই সম্মাননায় ভূষিত করা হয়েছে।",
     image: "https://i.postimg.cc/7LwWCm7D/Screenshot-2025-08-18-014212.png",
     imageHint: "receiving award"
   },
   {
     title: "গবেষণামূলক উপস্থাপনা",
     subtitle: "নতুন ধারণা, নতুন পথ",
-    description: "একটি শিক্ষাবান্ধব পরিবেশ তৈরিতে সিয়াম ফেরদৌস ইমন তার গবেষণামূলক কাজগুলো শিক্ষার্থীদের সামনে তুলে ধরছেন, যা তাদের মধ্যে নতুন ধারণা ও গবেষণার প্রতি আগ্রহ সৃষ্টি করবে।",
+    description: "একটি শিক্ষাবান্ধব পরিবেশ তৈরিতে আমি আমার গবেষণামূলক কাজগুলো শিক্ষার্থীদের সামনে তুলে ধরছি, যা তাদের মধ্যে নতুন ধারণা ও গবেষণার প্রতি আগ্রহ সৃষ্টি করবে।",
     image: "https://i.postimg.cc/763HDBgz/Screenshot-2025-08-18-020259.png",
     imageHint: "research presentation"
   },
   {
     title: "গবেষণাগারে নিরলস কাজ",
     subtitle: "গবেষণায় আধুনিক প্রযুক্তি",
-    description: "একটি উন্নত গবেষণামুখী ছাত্র সংসদ গঠনের অঙ্গীকার নিয়ে সিয়াম ফেরদৌস ইমন শিক্ষার্থীদের জন্য গবেষণাগারে প্রয়োজনীয় আধুনিক সুযোগ-সুবিধা নিশ্চিত করতে কাজ করছেন।",
+    description: "একটি উন্নত গবেষণামুখী ছাত্র সংসদ গঠনের অঙ্গীকার নিয়ে আমি শিক্ষার্থীদের জন্য গবেষণাগারে প্রয়োজনীয় আধুনিক সুযোগ-সুবিধা নিশ্চিত করতে কাজ করছি।",
     image: "https://i.postimg.cc/vHRK5YwG/photo-2025-08-18-02-08-33.jpg",
     imageHint: "working in lab"
   },
   {
-    title: "গবেষণাগারে সিয়াম: জ্ঞানের সন্ধানে",
+    title: "গবেষণাগারে আমি: জ্ঞানের সন্ধানে",
     subtitle: "ল্যাবরেটরি থেকে নতুন উদ্ভাবন",
-    description: "একটি উন্নত গবেষণামূলক পরিবেশ নিশ্চিত করার মাধ্যমে শিক্ষার্থীদের মাঝে নতুন উদ্ভাবনী ধারণার জন্ম দিতে সিয়াম ফেরদৌস ইমন নিরলসভাবে কাজ করে যাচ্ছেন।",
+    description: "একটি উন্নত গবেষণামূলক পরিবেশ নিশ্চিত করার মাধ্যমে শিক্ষার্থীদের মাঝে নতুন উদ্ভাবনী ধারণার জন্ম দিতে আমি নিরলসভাবে কাজ করে যাচ্ছি।",
     image: "https://i.postimg.cc/wxPZWxXt/photo-2025-08-18-01-23-31.jpg",
     imageHint: "siam in laboratory"
   },
   {
-    title: "জাতীয় সম্মেলনে সিয়াম ফেরদৌস ইমন",
+    title: "জাতীয় সম্মেলনে আমার অংশগ্রহণ",
     subtitle: "গবেষণা ও প্রকাশনার প্রতি প্রতিশ্রুতি",
-    description: "২৪তম জাতীয় সম্মেলন এবং বাংলাদেশ জুওলজিক্যাল সোসাইটির বার্ষিক সাধারণ সভায় উপস্থিত থেকে সিয়াম ফেরদৌস ইমন দেশের সেরা গবেষক ও শিক্ষাবিদদের সাথে গবেষণা ও প্রকাশনা খাতের ভবিষ্যৎ নিয়ে আলোচনা করেন।",
+    description: "২৪তম জাতীয় সম্মেলন এবং বাংলাদেশ জুওলজিক্যাল সোসাইটির বার্ষিক সাধারণ সভায় উপস্থিত থেকে আমি দেশের সেরা গবেষক ও শিক্ষাবিদদের সাথে গবেষণা ও প্রকাশনা খাতের ভবিষ্যৎ নিয়ে আলোচনা করি।",
     image: "https://i.postimg.cc/26MQRS7y/Screenshot-2025-08-18-015837.png",
     imageHint: "national conference"
   },
   {
     title: "পরিবেশ সুরক্ষা অভিযান",
     subtitle: "সবুজ বাঁচাও",
-    description: "পরিবেশ রক্ষায় বৃক্ষরোপণ এবং সচেতনতামূলক কার্যক্রম চলমান রয়েছে।",
+    description: "পরিবেশ রক্ষায় আমি বৃক্ষরোপণ এবং সচেতনতামূলক কার্যক্রম চলমান রেখেছি।",
     image: "https://i.postimg.cc/7hPr1K0g/photo-2025-08-18-00-47-45.jpg",
     imageHint: "environment protection campaign"
   },
   {
     title: "শিক্ষায় অবদানের জন্য সম্মাননা",
     subtitle: "অ্যানিমাল জেনেটিক্স এবং মলিকিউলার বায়োলজি",
-    description: "একটি শিক্ষাবান্ধব পরিবেশ তৈরিতে সিয়াম ফেরদৌস ইমন-এর অবদানের জন্য অ্যানিমাল জেনেটিক্স এবং মলিকিউলার বায়োলজি বিভাগ কর্তৃক তাকে এই বিশেষ সম্মাননা প্রদান করা হয়।",
+    description: "একটি শিক্ষাবান্ধব পরিবেশ তৈরিতে আমার অবদানের জন্য অ্যানিমাল জেনেটিক্স এবং মলিকিউলার বায়োলজি বিভাগ কর্তৃক আমাকে এই বিশেষ সম্মাননা প্রদান করা হয়।",
     image: "https://i.postimg.cc/FRpK3W74/photo-2025-08-18-02-08-11.jpg",
     imageHint: "receiving award biology"
   },
     {
-    title: "গবেষণায় সিয়াম ফেরদৌস ইমন-এর সক্রিয় অংশগ্রহণ",
+    title: "গবেষণায় আমার সক্রিয় অংশগ্রহণ",
     subtitle: "ঢাকা বিশ্ববিদ্যালয় প্রাণিবিজ্ঞান বিভাগ কর্তৃক আয়োজিত",
-    description: "বাংলাদেশ জুওলজিক্যাল সোসাইটির বার্ষিক সাধারণ সভায় (২০২৪) উপস্থিত হয়ে সিয়াম ফেরদৌস ইমন গবেষণা ও প্রকাশনা খাতে তার অঙ্গীকার ব্যক্ত করেছেন।",
+    description: "বাংলাদেশ জুওলজিক্যাল সোসাইটির বার্ষিক সাধারণ সভায় (২০২৪) উপস্থিত হয়ে আমি গবেষণা ও প্রকাশনা খাতে আমার অঙ্গীকার ব্যক্ত করেছি।",
     image: "https://i.postimg.cc/PJqYGk1N/photo-2025-08-18-01-08-52.jpg",
     imageHint: "research participation"
   },
@@ -98,7 +98,8 @@ const icons: { [key: string]: React.ElementType } = {
     Award,
     FileText,
     Mic,
-    GraduationCap
+    GraduationCap,
+    Users
 };
 
 
@@ -169,7 +170,7 @@ function NewHeroSection() {
                     <p className="mt-4 text-lg text-muted-foreground font-body">{item.description}</p>
                     <div className="mt-6 flex gap-4">
                        <Button asChild size="lg" className="font-headline text-lg">
-                         <Link href="/manifesto">আমাদের লক্ষ্য</Link>
+                         <Link href="/manifesto">আমার লক্ষ্য</Link>
                        </Button>
                        <Button asChild size="lg" variant="secondary" className="font-headline text-lg">
                          <Link href="/get-involved">যুক্ত হোন</Link>
@@ -236,7 +237,7 @@ function AboutSection() {
             </div>
             <Button asChild className="mt-8 font-headline text-lg">
               <Link href="/about">
-                সম্পূর্ণ জীবনী পড়ুন <ArrowRight className="ml-2 h-5 w-5" />
+                আমার সম্পর্কে আরও জানুন <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
           </div>
@@ -268,10 +269,11 @@ function CommitmentSection() {
             } catch (error) {
                 console.error("Error fetching commitments, using fallback.", error);
                 const fallbackCommitments = [
-                    { id: "1", icon: "DollarSign", title: "গবেষণা তহবিল ও স্কলারশিপ", description: "বিভাগভিত্তিক গবেষণা তহবিল এবং আন্তর্জাতিক স্কলারশিপের জন্য ‘রিসার্চ হেল্প ডেস্ক’ চালু করা হবে।" },
-                    { id: "2", icon: "BookOpenCheck", title: "শিক্ষার্থীদের নিজস্ব জার্নাল", description: "ডাকসুর উদ্যোগে একটি স্টুডেন্ট জার্নাল (SJDU) প্রকাশ করা হবে, যেখানে শিক্ষার্থীরা তাদের গবেষণা প্রকাশ করতে পারবে।" },
-                    { id: "3", icon: "Archive", title: "ডিজিটাল আর্কাইভ ও ওপেন অ্যাকসেস", description: "প্রতিটি বিভাগের গবেষণা-প্রবন্ধ ও থিসিসের জন্য ডিজিটাল আর্কাইভ তৈরি এবং আন্তর্জাতিক জার্নালে সহজ অ্যাক্সেস।" },
-                    { id: "4", icon: "Laptop", title: "প্রশিক্ষণ ও কর্মশালা", description: "একাডেমিক রাইটিং, গবেষণা পদ্ধতি এবং SPSS, R, EndNote, Latex এর মতো সফটওয়্যারের উপর নিয়মিত কর্মশালা আয়োজন।" },
+                    { id: "1", icon: "DollarSign", title: "গবেষণা তহবিল ও স্কলারশিপ", description: "আমি বিভাগভিত্তিক গবেষণা তহবিল এবং আন্তর্জাতিক স্কলারশিপের জন্য ‘রিসার্চ হেল্প ডেস্ক’ চালু করব।" },
+                    { id: "2", icon: "BookOpenCheck", title: "শিক্ষার্থীদের নিজস্ব জার্নাল", description: "আমি ডাকসুর উদ্যোগে একটি স্টুডেন্ট জার্নাল (SJDU) প্রকাশ করব, যেখানে শিক্ষার্থীরা তাদের গবেষণা প্রকাশ করতে পারবে।" },
+                    { id: "3", icon: "Archive", title: "ডিজিটাল আর্কাইভ ও ওপেন অ্যাকসেস", description: "আমি প্রতিটি বিভাগের গবেষণা-প্রবন্ধ ও থিসিসের জন্য ডিজিটাল আর্কাইভ তৈরি এবং আন্তর্জাতিক জার্নালে সহজ অ্যাক্সেস নিশ্চিত করব।" },
+                    { id: "4", icon: "Laptop", title: "প্রশিক্ষণ ও কর্মশালা", description: "আমি একাডেমিক রাইটিং, গবেষণা পদ্ধতি এবং বিভিন্ন সফটওয়্যারের উপর নিয়মিত কর্মশালা আয়োজন করব।" },
+                    { id: "5", icon: "Users", title: "গবেষণায় স্বচ্ছতা ও অংশগ্রহণ", description: "আমি প্রতিটি উদ্যোগ শিক্ষার্থীদের পরামর্শ ও অংশগ্রহণের মাধ্যমে গড়ে তুলব।" },
                 ];
                 setCommitments(fallbackCommitments);
             } finally {
@@ -286,13 +288,13 @@ function CommitmentSection() {
         <section className="py-16 md:py-24 bg-primary/10">
             <div className="container mx-auto px-4">
                 <div className="text-center max-w-4xl mx-auto">
-                    <h2 className="font-headline text-4xl md:text-5xl font-bold text-foreground">আপনার প্রতি আমাদের প্রতিশ্রুতি</h2>
+                    <h2 className="font-headline text-4xl md:text-5xl font-bold text-foreground">আমার অঙ্গীকার</h2>
                     <p className="mt-4 font-body text-lg text-muted-foreground">
-                        আমি প্রতিশ্রুতি দিচ্ছি, যদি আপনারা আমাকে ডাকসু ২০২৫-এ গবেষণা ও প্রকাশনা সম্পাদক হিসেবে দায়িত্ব দেন, তবে বিভাগভিত্তিক গবেষণা তহবিল ও আন্তর্জাতিক স্কলারশিপের সহায়তা, ডাকসুর নিজস্ব স্টুডেন্ট জার্নাল প্রকাশ, প্রতিটি থিসিস ও গবেষণার জন্য ডিজিটাল আর্কাইভ, একাডেমিক রাইটিং ও সফটওয়্যার ট্রেনিং কর্মশালা এবং শিক্ষার্থীদের জন্য গবেষণাভিত্তিক কনফারেন্স ও সেমিনার আয়োজন করব। আপনার ভোটে গড়ে উঠুক একটি গবেষণা-উদ্যমী ডাকসু।
+                        আমি প্রতিশ্রুতি দিচ্ছি, যদি আপনারা আমাকে ডাকসু ২০২৫-এ গবেষণা ও প্রকাশনা সম্পাদক হিসেবে দায়িত্ব দেন, তবে আমি বিভাগভিত্তিক গবেষণা তহবিল ও আন্তর্জাতিক স্কলারশিপের সহায়তা, ডাকসুর নিজস্ব স্টুডেন্ট জার্নাল প্রকাশ, প্রতিটি থিসিস ও গবেষণার জন্য ডিজিটাল আর্কাইভ, একাডেমিক রাইটিং ও সফটওয়্যার ট্রেনিং কর্মশালা এবং শিক্ষার্থীদের জন্য গবেষণাভিত্তিক কনফারেন্স ও সেমিনার আয়োজন করব। আপনার ভোটে গড়ে উঠুক একটি গবেষণা-উদ্যমী ডাকসু।
                     </p>
                 </div>
-                <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                    {isLoading ? Array.from({ length: 4 }).map((_, i) => (
+                <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
+                    {isLoading ? Array.from({ length: 5 }).map((_, i) => (
                         <Card key={i} className="text-center shadow-lg bg-card p-6">
                             <div className="bg-muted/50 p-4 rounded-full w-20 h-20 mx-auto animate-pulse"></div>
                              <div className="h-6 w-3/4 bg-muted/50 rounded mt-4 mx-auto animate-pulse"></div>
@@ -372,7 +374,7 @@ function VoteBannerSection() {
   return (
     <section className="bg-primary/20 py-12 md:py-16">
       <div className="container mx-auto px-4 text-center">
-        <h2 className="text-4xl md:text-5xl font-bold font-headline text-green-700">ভোট দিন সিয়াম ফেরদৌস ইমন - কে!</h2>
+        <h2 className="text-4xl md:text-5xl font-bold font-headline text-green-700">ভোট দিন আমাকে!</h2>
         <p className="mt-2 text-lg md:text-xl font-body text-foreground">আপনার প্রতিনিধি, আপনার কন্ঠস্বর | ডাকসু ২০২৫</p>
         <p className="mt-4 inline-block bg-accent text-accent-foreground font-headline text-2xl md:text-3xl font-bold py-2 px-6 rounded-full shadow-lg transform hover:scale-105 transition-transform duration-300">
           আপনার ভোটে গড়ে উঠুক একটি গবেষণা-উদ্যমী ডাকসু
@@ -386,19 +388,19 @@ const researchActivities = [
   {
     icon: Heart,
     title: "গবেষণা",
-    description: "গবেষণায় সক্রিয় অংশগ্রহণ: সিয়াম ফেরদৌস ইমন কেবল একজন প্রার্থী নন, বরং একজন সক্রিয় গবেষকও। তিনি বাংলাদেশ জুওলজিক্যাল সোসাইটির বার্ষিক সাধারণ সভায় নিয়মিত উপস্থিত থেকে দেশের সেরা গবেষক ও শিক্ষাবিদদের সাথে জ্ঞান আদান-প্রদান করেন। তাঁর নিজস্ব গবেষণাগারে নিরলস কাজ করার অভিজ্ঞতা তাকে শিক্ষার্থীদের বাস্তব সমস্যাগুলো বুঝতে সাহায্য করে।",
+    description: "আমি কেবল একজন প্রার্থী নই, বরং একজন সক্রিয় গবেষক। আমি বাংলাদেশ জুওলজিক্যাল সোসাইটির বার্ষিক সাধারণ সভায় নিয়মিত উপস্থিত থেকে দেশের সেরা গবেষক ও শিক্ষাবিদদের সাথে জ্ঞান আদান-প্রদান করি। আমার নিজস্ব গবেষণাগারে নিরলস কাজ করার অভিজ্ঞতা আমাকে শিক্ষার্থীদের বাস্তব সমস্যাগুলো বুঝতে সাহায্য করে।",
     images: [
-      { src: "https://i.postimg.cc/vHRK5YwG/photo-2025-08-18-02-08-33.jpg", alt: "গবেষণাগারে কাজ করছেন", hint: "working in lab" },
+      { src: "https://i.postimg.cc/vHRK5YwG/photo-2025-08-18-02-08-33.jpg", alt: "গবেষণাগারে কাজ করছি", hint: "working in lab" },
       { src: "https://i.postimg.cc/9XZXtkTj/photo-2025-08-18-01-30-06.jpg", alt: "গবেষণার সরঞ্জাম", hint: "research equipment" },
     ],
   },
   {
     icon: Megaphone,
     title: "সেমিনার ও আলোচনা সভা",
-    description: "গবেষণা ও উচ্চশিক্ষায় শিক্ষার্থীদের নিয়ে সেমিনার:\n\nসিয়াম ফেরদৌস ইমন শিক্ষার্থীদের গবেষণায় উৎসাহিত করতে এবং তাদের উচ্চশিক্ষার পথ দেখাতে একটি সেমিনার আয়োজনের পরিকল্পনা করেছেন। এই সেমিনারে গবেষণার গুরুত্ব, বিদেশে উচ্চশিক্ষার সুযোগ এবং অভিজ্ঞ গবেষকদের সাথে সরাসরি আলোচনার ব্যবস্থা থাকবে। এর লক্ষ্য হলো শিক্ষার্থীদের ভবিষ্যতের জন্য প্রস্তুত করা এবং তাদের মধ্যে নতুন কিছু শেখার আগ্রহ তৈরি করা।",
+    description: "শিক্ষার্থীদের গবেষণায় উৎসাহিত করতে এবং তাদের উচ্চশিক্ষার পথ দেখাতে আমি একটি সেমিনার আয়োজনের পরিকল্পনা করেছি। এই সেমিনারে গবেষণার গুরুত্ব, বিদেশে উচ্চশিক্ষার সুযোগ এবং অভিজ্ঞ গবেষকদের সাথে সরাসরি আলোচনার ব্যবস্থা থাকবে। আমার লক্ষ্য হলো শিক্ষার্থীদের ভবিষ্যতের জন্য প্রস্তুত করা এবং তাদের মধ্যে নতুন কিছু শেখার আগ্রহ তৈরি করা।",
     images: [
         { src: "https://i.postimg.cc/ZYNzxJDx/photo-2025-08-21-01-06-15.jpg", alt: "সেমিনারে অংশগ্রহণকারীদের একাংশ", hint: "seminar audience" },
-        { src: "https://i.postimg.cc/4ypCf1hS/photo-2025-08-21-01-06-17.jpg", alt: "আলোচনা সভায় বক্তব্য রাখছেন", hint: "speaker presentation" },
+        { src: "https://i.postimg.cc/4ypCf1hS/photo-2025-08-21-01-06-17.jpg", alt: "আলোচনা সভায় বক্তব্য রাখছি", hint: "speaker presentation" },
         { src: "https://i.postimg.cc/cJJNRYVv/photo-2025-08-21-01-06-22.jpg", alt: "শিক্ষার্থীদের সাথে মতবিনিময়", hint: "discussion students" },
         { src: "https://i.postimg.cc/LXYK7S4R/photo-2025-08-21-01-06-24.jpg", alt: "সেমিনারে অতিথিদের একাংশ", hint: "seminar guests" },
         { src: "https://i.postimg.cc/c4MqPXWK/photo-2025-08-21-01-06-05.jpg", alt: "বক্তব্য রাখার মুহূর্ত", hint: "giving speech" },
@@ -415,9 +417,9 @@ const researchActivities = [
     title: "ইয়ুথ কনফারেন্স আয়োজন",
     description: "গবেষণা ও প্রকাশনা সম্পাদকের দায়িত্ব শুধু পদ অলংকৃত করা নয়, বরং শিক্ষার্থীদের জন্য কার্যকর সুযোগ তৈরি করা। আমি অতীতেও সেই কাজটিই করেছি।\n\nএই ছবিগুলো আমার আয়োজিত কয়েকটি সফল উদ্যোগের প্রমাণ। একটি বড় পরিসরের জাতীয় সম্মেলন থেকে শুরু করে শিক্ষার্থীদের জন্য বিশেষায়িত কর্মশালা—প্রতিটি ক্ষেত্রেই আমি নেতৃত্ব দিয়েছি এবং তরুণদের জন্য শেখার ও নিজেদের মেলে ধরার সুযোগ তৈরি করেছি। কথা দিয়ে নয়, আমি কাজের মাধ্যমে শিক্ষার্থীদের পাশে থাকতে চাই।",
     images: [
-        { src: "https://i.postimg.cc/KYTxK34X/photo-2025-08-21-17-43-25.jpg", alt: "তরুণ অংশগ্রহণকারীরা কনফারেন্সে অংশ নিচ্ছেন", hint: "youth conference" },
-        { src: "https://i.postimg.cc/bwszhBhw/photo_2025-08-21_17-43-23.jpg", alt: "মঞ্চে বক্তা বক্তব্য রাখছেন", hint: "youth speaker" },
-        { src: "https://i.postimg.cc/ht6KP1Db/photo_2025-08-21_17-43-20.jpg", alt: "তরুণ অংশগ্রহণকারীরা কনফারেন্সে অংশ নিচ্ছেন", hint: "youth conference" },
+      { src: "https://i.postimg.cc/KYTxK34X/photo-2025-08-21-17-43-25.jpg", alt: "তরুণ অংশগ্রহণকারীরা কনফারেন্সে অংশ নিচ্ছেন", hint: "youth conference" },
+      { src: "https://i.postimg.cc/bwszhBhw/photo_2025-08-21_17-43-23.jpg", alt: "মঞ্চে বক্তা বক্তব্য রাখছেন", hint: "youth speaker" },
+      { src: "https://i.postimg.cc/ht6KP1Db/photo_2025-08-21_17-43-20.jpg", alt: "তরুণ অংশগ্রহণকারীরা কনফারেন্সে অংশ নিচ্ছেন", hint: "youth conference" },
     ],
   },
 ];
@@ -429,9 +431,9 @@ function ResearchSection() {
       <div className="container mx-auto px-4">
         <div className="text-center max-w-4xl mx-auto">
           <Camera className="mx-auto h-12 w-12 text-primary" />
-          <h1 className="font-headline text-5xl md:text-6xl font-bold mt-4 text-foreground">গবেষণা ও কার্যক্রম</h1>
+          <h1 className="font-headline text-5xl md:text-6xl font-bold mt-4 text-foreground">আমার গবেষণা ও কার্যক্রম</h1>
           <p className="font-body text-lg mt-4 text-muted-foreground">
-            জ্ঞানভিত্তিক সমাজ গঠনে আমাদের গবেষণা, ওয়ার্কশপ এবং বিভিন্ন কার্যক্রমের ঝলক।
+            জ্ঞানভিত্তিক সমাজ গঠনে আমার গবেষণা, ওয়ার্কশপ এবং বিভিন্ন কার্যক্রমের ঝলক।
           </p>
         </div>
         <div className="mt-16 space-y-8">
@@ -498,9 +500,9 @@ function PublicationSection() {
       <div className="container mx-auto px-4">
         <div className="text-center max-w-4xl mx-auto">
           <BookOpenCheck className="mx-auto h-12 w-12 text-primary" />
-          <h1 className="font-headline text-5xl md:text-6xl font-bold mt-4 text-foreground">প্রকাশনায় সিয়াম ফেরদৌস ইমন</h1>
+          <h1 className="font-headline text-5xl md:text-6xl font-bold mt-4 text-foreground">প্রকাশনায় আমি</h1>
           <p className="font-body text-lg mt-4 text-muted-foreground">
-            জ্ঞানচর্চা ও সৃজনশীলতার প্রসারে প্রকাশনা জগতে আমাদের উদ্যোগ ও কার্যক্রম।
+            জ্ঞানচর্চা ও সৃজনশীলতার প্রসারে প্রকাশনা জগতে আমার উদ্যোগ ও কার্যক্রম।
           </p>
         </div>
         <div className="mt-16 space-y-8">
@@ -568,7 +570,7 @@ const logicalMovementActivities = [
     description: "সংগ্রামের সেই দিনগুলোর কথা আমি ভুলিনি। ১৭ই জুলাইয়ের সেই উত্তাল মুহূর্তে যখন সবাই শঙ্কায়, আমি শেষ মুহূর্ত পর্যন্ত হল আঁকড়ে ছিলাম, আমার ভাই-বন্ধু-সহযোদ্ধাদের ছেড়ে যাইনি। আসলে, ঢাকা বিশ্ববিদ্যালয়ের একজন ছাত্র হিসেবে আমার পরিচয় শুধু ক্লাসরুমে সীমাবদ্ধ থাকেনি। এই ক্যাম্পাসে পথচলার প্রথম দিন থেকে শুরু করে প্রতিটি যৌক্তিক ও ন্যায্য অধিকারের আন্দোলনে আমার ঠিকানা ছিল রাজপথ।",
     images: [
       { src: "https://i.postimg.cc/DZ8nTsg9/photo_2025-08-21_01-07-09.jpg", alt: "আন্দোলনে অংশগ্রহণ", hint: "protest movement" },
-      { src: "https://i.postimg.cc/XJm37J1p/photo_2025-08-21_01-07-12.jpg", alt: "ছাত্রদের সমাবেশ", hint: "student gathering" },
+      { src: "https://i.postimg.cc/XJm37J1p/photo_2025-08-21_01-07_12.jpg", alt: "ছাত্রদের সমাবেশ", hint: "student gathering" },
       { src: "https://i.postimg.cc/bwpPv4gH/photo_2025-08-21_01-06-54.jpg", alt: "ছাত্রদের সমাবেশ", hint: "student gathering" },
       { src: "https://i.postimg.cc/CMnSrGdD/photo_2025-08-21_01-07-05.jpg", alt: "ছাত্রদের সমাবেশ", hint: "student gathering" },
       { src: "https://i.postimg.cc/VLj1mzqk/photo_2025-08-21_01-07-01.jpg", alt: "ছাত্রদের সমাবেশ", hint: "student gathering" },
@@ -583,9 +585,9 @@ function LogicalMovementSection() {
       <div className="container mx-auto px-4">
         <div className="text-center max-w-4xl mx-auto">
           <Flag className="mx-auto h-12 w-12 text-primary" />
-          <h1 className="font-headline text-5xl md:text-6xl font-bold mt-4 text-foreground">যৌক্তিক আন্দোলনে অংশগ্রহণ</h1>
+          <h1 className="font-headline text-5xl md:text-6xl font-bold mt-4 text-foreground">যৌক্তিক আন্দোলনে আমি</h1>
           <p className="font-body text-lg mt-4 text-muted-foreground">
-            শিক্ষার্থীদের অধিকার এবং বিভিন্ন সামাজিক ন্যায্যতার দাবিতে আমাদের অংশগ্রহণের ঝলক।
+            শিক্ষার্থীদের অধিকার এবং বিভিন্ন সামাজিক ন্যায্যতার দাবিতে আমার অংশগ্রহণের ঝলক।
           </p>
         </div>
         <div className="mt-16 space-y-8">
@@ -663,9 +665,9 @@ function AcademicAchievementSection() {
       <section className="py-16 md:py-24 bg-card">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-4xl mx-auto">
-            <h2 className="font-headline text-4xl md:text-5xl font-bold text-foreground">একাডেমিক অর্জন</h2>
+            <h2 className="font-headline text-4xl md:text-5xl font-bold text-foreground">আমার একাডেমিক অর্জন</h2>
             <p className="mt-4 font-body text-lg text-muted-foreground">
-              আমাদের প্রার্থীর শিক্ষাজীবনের কিছু উল্লেখযোগ্য সাফল্য এবং অর্জন নিচে তুলে ধরা হলো।
+              আমার শিক্ষাজীবনের কিছু উল্লেখযোগ্য সাফল্য এবং অর্জন নিচে তুলে ধরা হলো।
             </p>
           </div>
           <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -754,7 +756,7 @@ function SkillsLeadershipServiceSection() {
                 <div className="text-center max-w-4xl mx-auto">
                     <Combine className="mx-auto h-12 w-12 text-primary" />
                     <h2 className="font-headline text-4xl md:text-5xl font-bold mt-4 text-foreground">
-                        দক্ষতা, নেতৃত্ব ও সেবার সমন্বয়
+                        আমার দক্ষতা, নেতৃত্ব ও সেবা
                     </h2>
                     <p className="mt-4 font-body text-lg text-muted-foreground">
                         আমি বিশ্বাস করি, একজন শিক্ষার্থীর প্রকৃত বিকাশ শুধু একাডেমিক পড়াশোনার মধ্যে সীমাবদ্ধ থাকে না, বরং তার পূর্ণতা আসে সহশিক্ষা কার্যক্রমের মাধ্যমে। আমার বিশ্ববিদ্যালয় জীবনজুড়ে আমি সেই চেষ্টাই করেছি—একদিকে যেমন যৌক্তিক আন্দোলনে রাজপথে থেকেছি, তেমনই সহপাঠী ও অনুজদের জন্য কর্মশালা ও সম্মেলন আয়োজন করেছি। ভর্তিচ্ছুদের স্বপ্নপূরণের পথে সঙ্গী হতে কলম ধরেছি, আবার গবেষণার জগতে তরুণদের উৎসাহিত করতে নতুন নতুন প্ল্যাটফর্ম তৈরির চেষ্টা করেছি। আমার এই পথচলা মূলত দক্ষতা, নেতৃত্ব ও সেবার এক সমন্বয়, যার মাধ্যমে আমি ঢাকা বিশ্ববিদ্যালয়ের প্রতিটি শিক্ষার্থীর জন্য একটি সমৃদ্ধ ক্যাম্পাস জীবন নিশ্চিত করতে চাই।
@@ -833,9 +835,9 @@ function SocialWorkSection() {
             <div className="container mx-auto px-4">
                 <div className="text-center max-w-4xl mx-auto">
                     <HandHeart className="mx-auto h-12 w-12 text-primary" />
-                    <h1 className="font-headline text-5xl md:text-6xl font-bold mt-4 text-foreground">সামাজিক কাজে সিয়াম ইমন</h1>
+                    <h1 className="font-headline text-5xl md:text-6xl font-bold mt-4 text-foreground">আমার সামাজিক কাজ</h1>
                     <p className="font-body text-lg mt-4 text-muted-foreground">
-                        সমাজের প্রতি দায়বদ্ধতা থেকে আমাদের প্রার্থীর বিভিন্ন সামাজিক ও মানবিক কার্যক্রমের কিছু মুহূর্ত।
+                        সমাজের প্রতি দায়বদ্ধতা থেকে আমার বিভিন্ন সামাজিক ও মানবিক কার্যক্রমের কিছু মুহূর্ত।
                     </p>
                 </div>
             </div>
@@ -867,7 +869,7 @@ function SocialWorkSection() {
 }
 
 const leadershipPoints = [
-    { icon: ShieldCheck, text: "জাতির অগ্রগতি আর শিক্ষার্থীদের অধিকার—সিয়াম ইমন আছে সবার পাশে, প্রতিটা পদক্ষেপে।" },
+    { icon: ShieldCheck, text: "জাতির অগ্রগতি আর শিক্ষার্থীদের অধিকার—আমি আছি সবার পাশে, প্রতিটা পদক্ষেপে।" },
     { icon: Users, text: "মাঠে আছি, মাঠে থাকব—আপনাদের সুখ-দুঃখের সঙ্গী হব।" },
     { icon: GraduationCap, text: "কাজ করেছি, নেতৃত্ব দিয়েছি, সংগ্রাম করেছি—আপনাদের পাশে থেকে নিজেকে প্রমাণ করেছি।" },
     { icon: Megaphone, text: "আপনাদের ভালোবাসা এবং বিশ্বাসই আমার মূলধন। আপনাদের ভোটে আমি আরও ভালো কিছু করে দেখাব।" },
@@ -879,7 +881,7 @@ function LeadershipSection() {
             <div className="container mx-auto px-4">
                 <div className="text-center max-w-4xl mx-auto">
                     <h1 className="font-headline text-4xl md:text-5xl font-bold text-foreground">
-                        পদ নয়, <span className="text-red-600">দায়িত্বই একজন নেতার আসল পরিচয়।</span>
+                        পদ নয়, <span className="text-red-600">দায়িত্বই আমার আসল পরিচয়।</span>
                     </h1>
                     <p className="font-body text-lg mt-4 text-muted-foreground">
                        প্রযুক্তি, শিক্ষা, গবেষণা ও আন্দোলন—এই চারটি স্তম্ভের ওপর দাঁড়িয়ে আমি আমার নেতৃত্বের প্রস্তুতি সম্পন্ন করেছি।
@@ -898,7 +900,7 @@ function LeadershipSection() {
                 <hr className="my-12 border-border" />
                 <div className="text-center max-w-3xl mx-auto">
                      <p className="font-headline text-xl text-foreground">আসুন, আমরা সবাই মিলে গড়ে তুলি আমাদের কাঙ্ক্ষিত ঢাকা বিশ্ববিদ্যালয়।</p>
-                     <p className="mt-2 font-headline text-2xl font-bold text-primary">প্রগতিশীল চিন্তাধারা, প্রযুক্তিগত দক্ষতা এবং সংগ্রামী মনোভাবের জন্য সিয়ামকে ভোট দিন।</p>
+                     <p className="mt-2 font-headline text-2xl font-bold text-primary">প্রগতিশীল চিন্তাধারা, প্রযুক্তিগত দক্ষতা এবং সংগ্রামী মনোভাবের জন্য আমাকে ভোট দিন।</p>
                      <p className="mt-4 font-body text-muted-foreground">তোমাদের প্রত্যক্ষ ও পরোক্ষ সমর্থন, সহযোগিতা, মতামত, পরামর্শ ও ভালোবাসাই আমার একমাত্র শক্তি ও সাহস❤️</p>
                 </div>
             </div>
@@ -908,20 +910,20 @@ function LeadershipSection() {
 
 const faqItems = [
     {
-        question: "গবেষণা ও প্রকাশনা সম্পাদক পদে সিয়াম ফেরদৌস ইমন কেন যোগ্য?",
-        answer: "সিয়াম ফেরদৌস ইমন নিজে একজন সক্রিয় গবেষক এবং ছাত্র সমাজের সমস্যাগুলো সম্পর্কে অবগত। তিনি শিক্ষার্থীদের জন্য গবেষণা তহবিল, আন্তর্জাতিক স্কলারশিপের তথ্য প্রদানে ‘রিসার্চ হেল্প ডেস্ক’, ডাকসুর নিজস্ব স্টুডেন্ট জার্নাল প্রকাশ এবং ডিজিটাল আর্কাইভ তৈরির মতো বাস্তবসম্মত ও সুনির্দিষ্ট পরিকল্পনা করেছেন, যা তাকে এই পদের জন্য সবচেয়ে যোগ্য করে তুলেছে।"
+        question: "গবেষণা ও প্রকাশনা সম্পাদক পদে আমি কেন যোগ্য?",
+        answer: "আমি নিজে একজন সক্রিয় গবেষক এবং ছাত্র সমাজের সমস্যাগুলো সম্পর্কে অবগত। আমি শিক্ষার্থীদের জন্য গবেষণা তহবিল, আন্তর্জাতিক স্কলারশিপের তথ্য প্রদানে ‘রিসার্চ হেল্প ডেস্ক’, ডাকসুর নিজস্ব স্টুডেন্ট জার্নাল প্রকাশ এবং ডিজিটাল আর্কাইভ তৈরির মতো বাস্তবসম্মত ও সুনির্দিষ্ট পরিকল্পনা করেছি, যা আমাকে এই পদের জন্য যোগ্য করে তুলেছে।"
     },
     {
-        question: "শিক্ষার্থীদের জন্য তার বিশেষ পরিকল্পনা কী?",
-        answer: "তার প্রধান পরিকল্পনার মধ্যে রয়েছে—গবেষণা পদ্ধতি, একাডেমিক রাইটিং এবং SPSS, R, EndNote, Latex এর মতো সফটওয়্যারের উপর নিয়মিত বিনামূল্যে কর্মশালা আয়োজন করা। এছাড়াও তিনি শিক্ষার্থীদের গবেষণা উপস্থাপনের জন্য সেমিনার, কনফারেন্স ও পোস্টার প্রেজেন্টেশনের সুযোগ তৈরি করতে চান।"
+        question: "শিক্ষার্থীদের জন্য আমার বিশেষ পরিকল্পনা কী?",
+        answer: "আমার প্রধান পরিকল্পনার মধ্যে রয়েছে—গবেষণা পদ্ধতি, একাডেমিক রাইটিং এবং SPSS, R, EndNote, Latex এর মতো সফটওয়্যারের উপর নিয়মিত বিনামূল্যে কর্মশালা আয়োজন করা। এছাড়াও আমি শিক্ষার্থীদের গবেষণা উপস্থাপনের জন্য সেমিনার, কনফারেন্স ও পোস্টার প্রেজেন্টেশনের সুযোগ তৈরি করতে চাই।"
     },
     {
-        question: "তিনি কি শিক্ষার্থীদের অধিকার আদায়ে সক্রিয়?",
-        answer: "হ্যাঁ, সিয়াম ফেরদৌস ইমন তার ক্যাম্পাস জীবনের শুরু থেকেই বিভিন্ন যৌক্তিক আন্দোলনে সক্রিয়ভাবে অংশগ্রহণ করেছেন। তিনি শিক্ষার্থীদের ন্যায্য দাবি আদায়ে সর্বদা সামনে থেকে নেতৃত্ব দিয়েছেন এবং ভবিষ্যতেও ছাত্রসমাজের অধিকার রক্ষায় প্রতিশ্রুতিবদ্ধ থাকবেন।"
+        question: "আমি কি শিক্ষার্থীদের অধিকার আদায়ে সক্রিয়?",
+        answer: "হ্যাঁ, আমি আমার ক্যাম্পাস জীবনের শুরু থেকেই বিভিন্ন যৌক্তিক আন্দোলনে সক্রিয়ভাবে অংশগ্রহণ করেছি। আমি শিক্ষার্থীদের ন্যায্য দাবি আদায়ে সর্বদা সামনে থেকে নেতৃত্ব দিয়েছি এবং ভবিষ্যতেও ছাত্রসমাজের অধিকার রক্ষায় প্রতিশ্রুতিবদ্ধ থাকব।"
     },
     {
-        question: "নির্বাচিত হলে তিনি কীভাবে স্বচ্ছতা নিশ্চিত করবেন?",
-        answer: "স্বচ্ছতা ও জবাবদিহিতা তার কাজের মূল ভিত্তি হবে। তিনি প্রতিটি উদ্যোগ শিক্ষার্থীদের পরামর্শ ও অংশগ্রহণের মাধ্যমে গড়ে তুলবেন। সকল কাজের নিয়মিত আপডেট ওয়েবসাইটের মাধ্যমে প্রকাশ করা হবে এবং শিক্ষার্থীরাই হবে গবেষণা ও প্রকাশনার মূল চালিকা শক্তি—ডাকসু হবে তাদের ভরসার জায়গা।"
+        question: "নির্বাচিত হলে আমি কীভাবে স্বচ্ছতা নিশ্চিত করব?",
+        answer: "স্বচ্ছতা ও জবাবদিহিতা আমার কাজের মূল ভিত্তি হবে। আমি প্রতিটি উদ্যোগ শিক্ষার্থীদের পরামর্শ ও অংশগ্রহণের মাধ্যমে গড়ে তুলব। সকল কাজের নিয়মিত আপডেট ওয়েবসাইটের মাধ্যমে প্রকাশ করা হবে এবং শিক্ষার্থীরাই হবে গবেষণা ও প্রকাশনার মূল চালিকা শক্তি—ডাকসু হবে তাদের ভরসার জায়গা।"
     }
 ];
 
@@ -932,7 +934,7 @@ function FAQSection() {
                 <div className="text-center max-w-4xl mx-auto">
                     <HelpCircle className="mx-auto h-12 w-12 text-primary" />
                     <h2 className="font-headline text-4xl md:text-5xl font-bold mt-4 text-foreground">
-                       কেন সিয়াম ফেরদৌস ইমনকে ভোট দেবেন?
+                       কেন আমাকে ভোট দেবেন?
                     </h2>
                     <p className="font-body text-lg mt-4 text-muted-foreground">
                        আপনার মনে থাকা কিছু সাধারণ প্রশ্নের উত্তর, যা আপনাকে সঠিক সিদ্ধান্ত নিতে সাহায্য করবে।
@@ -1039,9 +1041,9 @@ function FeedbackSection() {
           <Card className="shadow-lg">
             <CardHeader className="text-center">
               <Mail className="mx-auto h-12 w-12 text-primary" />
-              <CardTitle className="font-headline text-4xl md:text-5xl">মতামত দিন</CardTitle>
+              <CardTitle className="font-headline text-4xl md:text-5xl">আপনার মতামত দিন</CardTitle>
               <CardDescription className="font-body text-lg mt-2 text-muted-foreground">
-                আপনার মূল্যবান মতামত, পরামর্শ বা অভিযোগ আমাদের জানান। আপনার প্রতিটি কথাই আমাদের কাছে গুরুত্বপূর্ণ।
+                আপনার মূল্যবান মতামত, পরামর্শ বা অভিযোগ আমাকে জানান। আপনার প্রতিটি কথাই আমার কাছে গুরুত্বপূর্ণ।
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -1203,9 +1205,9 @@ function PreVoteSection() {
             <div className="container mx-auto px-4">
                 <div className="max-w-4xl mx-auto text-center">
                     <Vote className="mx-auto h-16 w-16 text-primary animate-pulse" />
-                    <h2 className="font-headline text-4xl md:text-5xl font-bold mt-4 text-foreground">প্রি-ভোটিং: আপনার সমর্থনই আমাদের শক্তি</h2>
+                    <h2 className="font-headline text-4xl md:text-5xl font-bold mt-4 text-foreground">প্রি-ভোটিং: আপনার সমর্থনই আমার শক্তি</h2>
                     <p className="font-body text-lg mt-4 text-muted-foreground">
-                        মূল নির্বাচনের আগে আপনার মূল্যবান ভোট দিয়ে সিয়াম ফেরদৌস ইমনকে সমর্থন জানান এবং এই পরিবর্তনের যাত্রায় আমাদের সঙ্গী হোন।
+                        মূল নির্বাচনের আগে আপনার মূল্যবান ভোট দিয়ে আমাকে সমর্থন জানান এবং এই পরিবর্তনের যাত্রায় আমার সঙ্গী হোন।
                     </p>
                     
                     <Card className="mt-8 shadow-2xl bg-card max-w-md mx-auto">
@@ -1228,7 +1230,7 @@ function PreVoteSection() {
                                 onClick={handleVote}
                                 disabled={hasVoted || isLoading}
                             >
-                                {hasVoted ? 'ভোট দিয়েছেন' : 'সিয়াম ভাইকে ভোট দিন'}
+                                {hasVoted ? 'ভোট দিয়েছেন' : 'আমাকে ভোট দিন'}
                             </Button>
                             {hasVoted && (
                                 <p className="text-green-600 font-semibold mt-3">আপনার ভোট সফলভাবে গৃহীত হয়েছে!</p>
@@ -1250,38 +1252,5 @@ function PreVoteSection() {
         </section>
     );
 }
-    
-
-    
-
-    
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-    
 
     
