@@ -1076,7 +1076,7 @@ function AdminPage() {
                         <Input
                             id="sw-alt"
                             value={currentSocialWork.alt || ''}
-                            onChange={(e) => setCurrentSocialWork({ ...currentSocialWork, alt: e.g.value })}
+                            onChange={(e) => setCurrentSocialWork({ ...currentSocialWork, alt: e.target.value })}
                              placeholder="e.g., রক্তদান কর্মসূচি"
                             required
                         />
@@ -1213,3 +1213,5 @@ function AdminPage() {
 }
 
 export default useAuth(AdminPage);
+
+    
