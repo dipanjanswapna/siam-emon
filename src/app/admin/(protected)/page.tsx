@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Shield, PlusCircle, Edit, Trash2, BrainCircuit, BookOpenCheck, Library, Award, FileText, Mic, GraduationCap, ImagePlus, LogOut, MessageSquare, Users, Bell, Image as ImageIcon, Settings, Megaphone } from "lucide-react";
+import { Shield, PlusCircle, Edit, Trash2, BrainCircuit, BookOpenCheck, Library, Award, FileText, Mic, GraduationCap, ImagePlus, LogOut, MessageSquare, Users, Bell, Image as ImageIcon, Settings, Megaphone, Camera } from "lucide-react";
 import { useState, useEffect } from "react";
 import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc, orderBy, query, serverTimestamp, setDoc, getDoc } from "firebase/firestore";
 import { db, auth } from "@/lib/firebase";
@@ -93,6 +93,13 @@ type PromotionalPopup = {
     imageUrl: string;
 };
 
+type GalleryImage = {
+    id: string;
+    src: string;
+    alt: string;
+    hint: string;
+};
+
 
 const iconMap = {
     BrainCircuit: <BrainCircuit />,
@@ -112,6 +119,7 @@ function AdminPage() {
     const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
     const [notice, setNotice] = useState<Notice>({ id: "live-notice", text: "" });
     const [promotionalPopup, setPromotionalPopup] = useState<PromotionalPopup>({ id: "promotional-popup", enabled: true, imageUrl: "" });
+    const [galleryImages, setGalleryImages] = useState<GalleryImage[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     
     const [isCommitmentFormOpen, setIsCommitmentFormOpen] = useState(false);
@@ -128,6 +136,9 @@ function AdminPage() {
     const [isTeamMemberFormOpen, setIsTeamMemberFormOpen] = useState(false);
     const [currentTeamMember, setCurrentTeamMember] = useState<Partial<TeamMember>>({});
     const [isEditingTeamMember, setIsEditingTeamMember] = useState(false);
+
+    const [isGalleryImageFormOpen, setIsGalleryImageFormOpen] = useState(false);
+    const [currentGalleryImage, setCurrentGalleryImage] = useState<Partial<GalleryImage>>({});
 
     const [signOut] = useSignOut(auth);
     const router = useRouter();
@@ -184,6 +195,13 @@ function AdminPage() {
         }
     };
 
+    const fetchGalleryImages = async () => {
+        const galleryCollection = collection(db, "gallery");
+        const gallerySnapshot = await getDocs(galleryCollection);
+        const galleryList = gallerySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as GalleryImage));
+        setGalleryImages(galleryList);
+    };
+
     const loadAllData = async () => {
         setIsLoading(true);
         try {
@@ -195,6 +213,7 @@ function AdminPage() {
                 fetchTeamMembers(),
                 fetchNotice(),
                 fetchPromotionalPopup(),
+                fetchGalleryImages(),
             ]);
         } catch (error) {
             console.error("Error loading data: ", error);
@@ -513,6 +532,55 @@ function AdminPage() {
         }
     };
 
+    const handleGalleryImageFormSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        try {
+            await addDoc(collection(db, "gallery"), {
+                src: currentGalleryImage.src,
+                alt: currentGalleryImage.alt,
+                hint: currentGalleryImage.hint,
+            });
+            closeGalleryImageForm();
+            fetchGalleryImages();
+            toast({
+                title: "গ্যালারির ছবি সফলভাবে যোগ হয়েছে",
+            });
+        } catch(error) {
+            toast({
+                variant: 'destructive',
+                title: "গ্যালারির ছবি যোগ করতে সমস্যা হয়েছে",
+                description: (error as Error).message,
+            });
+        }
+    };
+
+    const openGalleryImageForm = () => {
+        setCurrentGalleryImage({ src: "https://placehold.co/600x400.png", alt: "", hint: "" });
+        setIsGalleryImageFormOpen(true);
+    };
+
+    const closeGalleryImageForm = () => {
+        setIsGalleryImageFormOpen(false);
+        setCurrentGalleryImage({});
+    };
+
+    const handleDeleteGalleryImage = async (id: string) => {
+        try {
+            await deleteDoc(doc(db, "gallery", id));
+            fetchGalleryImages();
+            toast({
+                title: "গ্যালারির ছবি সফলভাবে মুছে ফেলা হয়েছে",
+            });
+        } catch(error) {
+            toast({
+                variant: 'destructive',
+                title: "গ্যালারির ছবি মুছে ফেলতে সমস্যা হয়েছে",
+                description: (error as Error).message,
+            });
+        }
+    };
+
+
     const handleSignOut = async () => {
         const success = await signOut();
         if (success) {
@@ -597,6 +665,43 @@ function AdminPage() {
                                     <Bell className="mr-2 h-4 w-4" /> আপডেট করুন
                                 </Button>
                             </form>
+                        </AccordionContent>
+                    </Card>
+                </AccordionItem>
+                 <AccordionItem value="gallery-images">
+                    <Card>
+                        <AccordionTrigger className="p-6">
+                            <CardTitle>গ্যালারি ব্যবস্থাপনা</CardTitle>
+                        </AccordionTrigger>
+                        <AccordionContent className="p-6 pt-0">
+                            <div className="flex justify-end mb-4">
+                                <Button onClick={openGalleryImageForm}>
+                                    <Camera className="mr-2 h-4 w-4" /> নতুন ছবি যোগ করুন
+                                </Button>
+                            </div>
+                            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                                {isLoading ? (
+                                    <p>লোড হচ্ছে...</p>
+                                ) : (
+                                    galleryImages.map(gi => (
+                                        <Card key={gi.id} className="relative group overflow-hidden">
+                                          <Image
+                                            src={gi.src}
+                                            alt={gi.alt}
+                                            width={200}
+                                            height={280}
+                                            className="object-cover w-full h-full"
+                                            data-ai-hint={gi.hint}
+                                          />
+                                            <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                                <Button variant="destructive" size="icon" onClick={() => handleDeleteGalleryImage(gi.id)}>
+                                                    <Trash2 className="h-4 w-4" />
+                                                </Button>
+                                            </div>
+                                        </Card>
+                                    ))
+                                )}
+                            </div>
                         </AccordionContent>
                     </Card>
                 </AccordionItem>
@@ -995,6 +1100,56 @@ function AdminPage() {
                 </form>
             </DialogContent>
         </Dialog>
+
+        {/* Gallery Image Form Dialog */}
+        <Dialog open={isGalleryImageFormOpen} onOpenChange={setIsGalleryImageFormOpen}>
+            <DialogContent>
+                <DialogHeader>
+                    <DialogTitle>নতুন গ্যালারির ছবি যোগ করুন</DialogTitle>
+                    <DialogDescription>
+                        এখানে গ্যালারির জন্য ছবির URL, alt টেক্সট এবং AI hint যোগ করুন।
+                    </DialogDescription>
+                </DialogHeader>
+                <form onSubmit={handleGalleryImageFormSubmit} className="space-y-4">
+                    <div className="space-y-2">
+                        <Label htmlFor="gallery-src">ছবির URL</Label>
+                        <Input
+                            id="gallery-src"
+                            value={currentGalleryImage.src || ''}
+                            onChange={(e) => setCurrentGalleryImage({ ...currentGalleryImage, src: e.target.value })}
+                             placeholder="https://placehold.co/600x400.png"
+                            required
+                        />
+                    </div>
+                    <div className="space-y-2">
+                        <Label htmlFor="gallery-alt">ছবির বর্ণনা (Alt Text)</Label>
+                        <Input
+                            id="gallery-alt"
+                            value={currentGalleryImage.alt || ''}
+                            onChange={(e) => setCurrentGalleryImage({ ...currentGalleryImage, alt: e.target.value })}
+                             placeholder="e.g., ক্যাম্পেইন এর মুহূর্ত"
+                            required
+                        />
+                    </div>
+                     <div className="space-y-2">
+                        <Label htmlFor="gallery-hint">ছবির Hint (for AI)</Label>
+                        <Input
+                            id="gallery-hint"
+                            value={currentGalleryImage.hint || ''}
+                            onChange={(e) => setCurrentGalleryImage({ ...currentGalleryImage, hint: e.target.value })}
+                             placeholder="e.g. campaign moment"
+                            required
+                        />
+                    </div>
+                    <DialogFooter>
+                        <Button type="submit">যোগ করুন</Button>
+                        <DialogClose asChild>
+                            <Button type="button" variant="secondary" onClick={closeGalleryImageForm}>বাতিল</Button>
+                        </DialogClose>
+                    </DialogFooter>
+                </form>
+            </DialogContent>
+        </Dialog>
         
         {/* Team Member Form Dialog */}
         <Dialog open={isTeamMemberFormOpen} onOpenChange={setIsTeamMemberFormOpen}>
@@ -1058,6 +1213,3 @@ function AdminPage() {
 }
 
 export default useAuth(AdminPage);
-
-    
-
