@@ -1,0 +1,62 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+  
+    // Helper function to check if a user is the authenticated admin
+    function isAdmin() {
+      return request.auth != null && request.auth.uid == "jY5SNkuZxbgadjdZzSe9Favqs7n1";
+    }
+
+    // Publicly readable collections, only writable by admin
+    match /commitments/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /academicAchievements/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /socialWorks/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    
+    match /teamMembers/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /notices/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /gallery/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /siteSettings/{docId} {
+        allow read: if true;
+        allow write: if isAdmin();
+    }
+
+    // Feedback can be created by anyone, but only read/deleted by the admin.
+    // Users cannot update their feedback once submitted.
+    match /feedback/{docId} {
+      allow read, delete: if isAdmin();
+      allow create: if true;
+      allow update: if false;
+    }
+    
+    // Pre-votes can be read by anyone. 
+    // Anyone can increment the count, but not set it to an arbitrary value.
+    match /pre-votes/live-count {
+        allow read: if true;
+        allow write: if request.resource.data.count == resource.data.count + 1;
+    }
+  }
+}
