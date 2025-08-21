@@ -7,7 +7,7 @@ import React, { useState, useEffect } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { ArrowRight, BookOpenCheck, BrainCircuit, Library, Users, Camera, X, Heart, Megaphone, Flag, Award, FileText, Mic, GraduationCap, HandHeart, BookText, ShieldCheck, MessageSquare, Mail, Icon, ImagePlus, Annoyed, HelpCircle, Vote, Share2, DollarSign, Archive, Laptop, Combine } from "lucide-react";
+import { ArrowRight, BookOpenCheck, BrainCircuit, Library, Users, Camera, X, Heart, Megaphone, Flag, Award, FileText, Mic, GraduationCap, HandHeart, BookText, ShieldCheck, MessageSquare, Mail, Icon, ImagePlus, Annoyed, HelpCircle, Vote, Share2, DollarSign, Archive, Laptop, Combine, Trophy } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -712,9 +712,44 @@ function AcademicAchievementSection() {
   );
 }
 
+const skillsAndLeadershipActivities = [
+  {
+    icon: Trophy,
+    title: "চ্যাম্পিয়ন, বারোয়ারী বিতর্ক প্রতিযোগিতা, প্রজাপতি মেলা ২০২২, জাহাঙ্গীরনগর বিশ্ববিদ্যালয়",
+    description: "",
+    images: [
+      { src: "https://placehold.co/600x400.png", alt: "বিতর্ক প্রতিযোগিতা পুরস্কার", hint: "debate award" },
+    ],
+  },
+  {
+    icon: Trophy,
+    title: "বারোয়ারী ডিবেট কম্পিটিশন, প্রজাপতি মেলা ২০২৩, জাহাঙ্গীরনগর বিশ্ববিদ্যালয়",
+    description: "",
+    images: [
+       { src: "https://placehold.co/600x400.png", alt: "বিতর্ক প্রতিযোগিতা", hint: "debate competition" },
+    ],
+  },
+    {
+    icon: Trophy,
+    title: "Intra Department Football Tournament 2023",
+    description: "",
+    images: [
+        { src: "https://placehold.co/600x400.png", alt: "ফুটবল টুর্নামেন্ট", hint: "football tournament" },
+    ],
+  },
+  {
+    icon: Trophy,
+    title: "প্রজাপতি মেলা ২০২১, ডিবেট কম্পিটিশন চ্যাম্পিয়ন, বারোয়ারী ডিবেট রানার্সআপ",
+    description: "",
+    images: [
+        { src: "https://placehold.co/600x400.png", alt: "প্রজাপতি মেলা পুরস্কার", hint: "butterfly fair award" },
+    ],
+  },
+];
+
 function SkillsLeadershipServiceSection() {
     return (
-        <section className="py-16 md:py-24 bg-primary/5">
+        <section className="bg-primary/5 py-16 md:py-24">
             <div className="container mx-auto px-4">
                 <div className="text-center max-w-4xl mx-auto">
                     <Combine className="mx-auto h-12 w-12 text-primary" />
@@ -724,6 +759,44 @@ function SkillsLeadershipServiceSection() {
                     <p className="mt-4 font-body text-lg text-muted-foreground">
                         আমি বিশ্বাস করি, একজন শিক্ষার্থীর প্রকৃত বিকাশ শুধু একাডেমিক পড়াশোনার মধ্যে সীমাবদ্ধ থাকে না, বরং তার পূর্ণতা আসে সহশিক্ষা কার্যক্রমের মাধ্যমে। আমার বিশ্ববিদ্যালয় জীবনজুড়ে আমি সেই চেষ্টাই করেছি—একদিকে যেমন যৌক্তিক আন্দোলনে রাজপথে থেকেছি, তেমনই সহপাঠী ও অনুজদের জন্য কর্মশালা ও সম্মেলন আয়োজন করেছি। ভর্তিচ্ছুদের স্বপ্নপূরণের পথে সঙ্গী হতে কলম ধরেছি, আবার গবেষণার জগতে তরুণদের উৎসাহিত করতে নতুন নতুন প্ল্যাটফর্ম তৈরির চেষ্টা করেছি। আমার এই পথচলা মূলত দক্ষতা, নেতৃত্ব ও সেবার এক সমন্বয়, যার মাধ্যমে আমি ঢাকা বিশ্ববিদ্যালয়ের প্রতিটি শিক্ষার্থীর জন্য একটি সমৃদ্ধ ক্যাম্পাস জীবন নিশ্চিত করতে চাই।
                     </p>
+                </div>
+                <div className="mt-16 space-y-8">
+                  {skillsAndLeadershipActivities.map((activity, index) => (
+                    <div key={index} className="grid md:grid-cols-2 gap-8 items-center bg-card p-6 rounded-lg shadow-md">
+                      <div className="order-2 md:order-1">
+                        <div className="flex items-center gap-3 mb-4">
+                          <activity.icon className="w-8 h-8 text-primary" />
+                          <h3 className="font-headline text-3xl font-bold text-foreground">{activity.title}</h3>
+                        </div>
+                        {activity.description && <p className="font-body text-muted-foreground whitespace-pre-line">{activity.description}</p>}
+                      </div>
+                       <div className="relative w-full aspect-video rounded-lg overflow-hidden order-1 md:order-2">
+                         <Carousel className="w-full h-full">
+                            <CarouselContent>
+                                {activity.images.map((image, i) => (
+                                <CarouselItem key={i}>
+                                    <div className="relative w-full h-full aspect-video">
+                                    <Image
+                                        src={image.src}
+                                        alt={image.alt}
+                                        fill
+                                        className="object-cover"
+                                        data-ai-hint={image.hint}
+                                    />
+                                    </div>
+                                </CarouselItem>
+                                ))}
+                            </CarouselContent>
+                            {activity.images.length > 1 && (
+                                <>
+                                    <CarouselPrevious className="absolute left-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none" />
+                                    <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none" />
+                                </>
+                            )}
+                        </Carousel>
+                      </div>
+                    </div>
+                  ))}
                 </div>
             </div>
         </section>
@@ -1206,6 +1279,8 @@ function PreVoteSection() {
 
 
 
+
+    
 
     
 
