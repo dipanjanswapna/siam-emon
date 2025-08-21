@@ -995,30 +995,12 @@ function AdminPage() {
                     <DialogHeader className="flex-shrink-0">
                         <DialogTitle>{isEditingAchievement ? 'অর্জন সম্পাদনা করুন' : 'নতুন অর্জন যোগ করুন'}</DialogTitle>
                         <DialogDescription>
-                            এখানে একাডেমিক অর্জনের শিরোনাম, বর্ণনা, এবং ছবি যোগ বা পরিবর্তন করুন।
+                            এখানে একাডেমিক অর্জনের ছবি, শিরোনাম, এবং বর্ণনা যোগ বা পরিবর্তন করুন।
                         </DialogDescription>
                     </DialogHeader>
                     <ScrollArea className="flex-grow my-4 pr-6 -mr-6">
                         <div className="space-y-4">
-                            <div className="space-y-2">
-                                <Label htmlFor="ach-title">শিরোনাম</Label>
-                                <Input
-                                    id="ach-title"
-                                    value={currentAchievement.title || ''}
-                                    onChange={(e) => setCurrentAchievement({ ...currentAchievement, title: e.target.value })}
-                                    required
-                                />
-                            </div>
-                            <div className="space-y-2">
-                                <Label htmlFor="ach-description">বর্ণনা</Label>
-                                <Textarea
-                                    id="ach-description"
-                                    value={currentAchievement.description || ''}
-                                    onChange={(e) => setCurrentAchievement({ ...currentAchievement, description: e.target.value })}
-                                    required
-                                />
-                            </div>
-                            <div className="space-y-2">
+                             <div className="space-y-2">
                                 <Label htmlFor="ach-image">ছবির URL</Label>
                                 <Input
                                     id="ach-image"
@@ -1035,6 +1017,24 @@ function AdminPage() {
                                     value={currentAchievement.imageHint || ''}
                                     onChange={(e) => setCurrentAchievement({ ...currentAchievement, imageHint: e.target.value })}
                                     placeholder="e.g. award ceremony"
+                                    required
+                                />
+                            </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="ach-title">শিরোনাম</Label>
+                                <Input
+                                    id="ach-title"
+                                    value={currentAchievement.title || ''}
+                                    onChange={(e) => setCurrentAchievement({ ...currentAchievement, title: e.target.value })}
+                                    required
+                                />
+                            </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="ach-description">বর্ণনা</Label>
+                                <Textarea
+                                    id="ach-description"
+                                    value={currentAchievement.description || ''}
+                                    onChange={(e) => setCurrentAchievement({ ...currentAchievement, description: e.target.value })}
                                     required
                                 />
                             </div>
@@ -1076,7 +1076,7 @@ function AdminPage() {
                         <Input
                             id="sw-alt"
                             value={currentSocialWork.alt || ''}
-                            onChange={(e) => setCurrentSocialWork({ ...currentSocialWork, alt: e.target.value })}
+                            onChange={(e) => setCurrentSocialWork({ ...currentSocialWork, alt: e.g.value })}
                              placeholder="e.g., রক্তদান কর্মসূচি"
                             required
                         />
@@ -1213,5 +1213,3 @@ function AdminPage() {
 }
 
 export default useAuth(AdminPage);
-
-    
