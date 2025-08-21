@@ -91,6 +91,7 @@ type PromotionalPopup = {
     id: string;
     enabled: boolean;
     imageUrl: string;
+    displayFrequency: 'every-load' | 'once-per-session' | 'once-per-day';
 };
 
 type GalleryImage = {
@@ -118,7 +119,7 @@ function AdminPage() {
     const [feedbacks, setFeedbacks] = useState<Feedback[]>([]);
     const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
     const [notice, setNotice] = useState<Notice>({ id: "live-notice", text: "" });
-    const [promotionalPopup, setPromotionalPopup] = useState<PromotionalPopup>({ id: "promotional-popup", enabled: true, imageUrl: "" });
+    const [promotionalPopup, setPromotionalPopup] = useState<PromotionalPopup>({ id: "promotional-popup", enabled: true, imageUrl: "", displayFrequency: "once-per-session" });
     const [galleryImages, setGalleryImages] = useState<GalleryImage[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     
@@ -518,7 +519,11 @@ function AdminPage() {
         e.preventDefault();
         try {
             const popupDoc = doc(db, "siteSettings", "promotional-popup");
-            await setDoc(popupDoc, { enabled: promotionalPopup.enabled, imageUrl: promotionalPopup.imageUrl });
+            await setDoc(popupDoc, { 
+                enabled: promotionalPopup.enabled, 
+                imageUrl: promotionalPopup.imageUrl,
+                displayFrequency: promotionalPopup.displayFrequency
+            });
             fetchPromotionalPopup();
             toast({
                 title: 'প্রমোশনাল পপআপ সফলভাবে আপডেট হয়েছে',
@@ -636,6 +641,22 @@ function AdminPage() {
                                         onChange={(e) => setPromotionalPopup({ ...promotionalPopup, imageUrl: e.target.value })}
                                         placeholder="https://example.com/image.jpg"
                                     />
+                                </div>
+                                <div className="space-y-2">
+                                    <Label htmlFor="display-frequency">Display Frequency</Label>
+                                    <Select
+                                        value={promotionalPopup.displayFrequency}
+                                        onValueChange={(value: 'every-load' | 'once-per-session' | 'once-per-day') => setPromotionalPopup({ ...promotionalPopup, displayFrequency: value })}
+                                    >
+                                        <SelectTrigger id="display-frequency">
+                                            <SelectValue placeholder="Select frequency" />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            <SelectItem value="every-load">Show on every page load</SelectItem>
+                                            <SelectItem value="once-per-session">Show once per session</SelectItem>
+                                            <SelectItem value="once-per-day">Show once per day</SelectItem>
+                                        </SelectContent>
+                                    </Select>
                                 </div>
                                 <Button type="submit">
                                     <Settings className="mr-2 h-4 w-4" /> সেটিংস সেভ করুন

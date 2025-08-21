@@ -12,6 +12,7 @@ import { X } from "lucide-react";
 type PromotionalPopupData = {
     enabled: boolean;
     imageUrl: string;
+    displayFrequency: 'every-load' | 'once-per-session' | 'once-per-day';
 };
 
 export function PromotionalPopup() {
@@ -35,17 +36,50 @@ export function PromotionalPopup() {
     }, []);
 
     useEffect(() => {
-        // This effect runs only on the client side
         setIsReady(true);
-        if (popupData?.enabled) {
-            const hasSeenPopup = sessionStorage.getItem("hasSeenPromotionalPopup");
-            if (!hasSeenPopup) {
-                setIsOpen(true);
-                sessionStorage.setItem("hasSeenPromotionalPopup", "true");
-            }
-        }
-    }, [popupData]);
+        if (!popupData?.enabled) return;
 
+        const handlePopupVisibility = () => {
+            const now = new Date().getTime();
+
+            switch (popupData.displayFrequency) {
+                case 'every-load':
+                    setIsOpen(true);
+                    break;
+                case 'once-per-session':
+                    const sessionSeen = sessionStorage.getItem("hasSeenPromotionalPopup");
+                    if (!sessionSeen) {
+                        setIsOpen(true);
+                        sessionStorage.setItem("hasSeenPromotionalPopup", "true");
+                    }
+                    break;
+                case 'once-per-day':
+                    const daySeenTimestamp = localStorage.getItem("lastSeenPromotionalPopup");
+                    if (daySeenTimestamp) {
+                        const oneDay = 24 * 60 * 60 * 1000;
+                        if (now - parseInt(daySeenTimestamp, 10) > oneDay) {
+                            setIsOpen(true);
+                            localStorage.setItem("lastSeenPromotionalPopup", now.toString());
+                        }
+                    } else {
+                        setIsOpen(true);
+                        localStorage.setItem("lastSeenPromotionalPopup", now.toString());
+                    }
+                    break;
+                default:
+                    // Default to once per session if frequency is not set
+                    const defaultSessionSeen = sessionStorage.getItem("hasSeenPromotionalPopup");
+                     if (!defaultSessionSeen) {
+                        setIsOpen(true);
+                        sessionStorage.setItem("hasSeenPromotionalPopup", "true");
+                    }
+                    break;
+            }
+        };
+
+        handlePopupVisibility();
+
+    }, [popupData]);
 
     const handleClose = () => {
         setIsOpen(false);
@@ -82,5 +116,3 @@ export function PromotionalPopup() {
         </Dialog>
     );
 }
-
-    
