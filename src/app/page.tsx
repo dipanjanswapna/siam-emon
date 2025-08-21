@@ -223,7 +223,7 @@ function AboutSection() {
             />
           </div>
           <div className="text-center md:text-left">
-            <h2 className="font-headline text-4xl md:text-5xl font-bold text-foreground mb-6">আসসালামু আলাইকুম।</h2>
+            <h2 className="font-headline text-4xl md:text-5xl font-bold text-foreground mb-6">আমার পরিচিতি</h2>
             <div className="font-body text-lg md:text-xl space-y-4 text-muted-foreground">
               <p>
                 আমি <span className="text-primary font-bold">সিয়াম ফেরদৌস ইমন</span>, ঢাকা বিশ্ববিদ্যালয়ের ২০১৮-১৯ সেশনের প্রাণিবিদ্যা বিভাগের মাস্টার্সে (Genetics and Molecular Biology Branch) অধ্যয়নরত এবং ফজলুল হক মুসলিম হলের নিয়মিত আবাসিক শিক্ষার্থী। আমি বিগত ৬ বছর ধরে বিশ্ববিদ্যালয় জীবনে বিভিন্ন <span className="text-accent font-semibold">ছাত্রকল্যাণমূলক কার্যক্রম</span>, যোক্তিক ও ন্যায্য দাবি আদায়ের পাশাপাশি <span className="text-accent font-semibold">গবেষণা ও একাডেমিক কর্মকাণ্ডের</span> সাথে শুরু থেকে সক্রিয় আছি।
@@ -289,8 +289,8 @@ function CommitmentSection() {
             <div className="container mx-auto px-4">
                 <div className="text-center max-w-4xl mx-auto">
                     <h2 className="font-headline text-4xl md:text-5xl font-bold text-foreground">আমার অঙ্গীকার</h2>
-                    <p className="mt-4 font-body text-lg text-muted-foreground">
-                       আমি প্রতিশ্রুতি দিচ্ছি, যদি আপনারা আমাকে ডাকসু ২০২৫-এ গবেষণা ও প্রকাশনা সম্পাদক হিসেবে দায়িত্ব দেন, তবে আমি বিভাগভিত্তিক গবেষণা তহবিল ও আন্তর্জাতিক স্কলারশিপের সহায়তা, ডাকসুর নিজস্ব স্টুডেন্ট জার্নাল প্রকাশ, প্রতিটি থিসিস ও গবেষণার জন্য ডিজিটাল আর্কাইভ, একাডেমিক রাইটিং ও সফটওয়্যার ট্রেনিং কর্মশালা এবং শিক্ষার্থীদের জন্য গবেষণাভিত্তিক কনফারেন্স ও সেমিনার আয়োজন করব। আপনার ভোটে গড়ে উঠুক একটি গবেষণা-উদ্যমী ডাকসু।
+                    <p className="font-body text-lg mt-4 text-muted-foreground">
+                        প্রিয় ঢাকা বিশ্ববিদ্যালয়ের সহপাঠীরা, আমরা সবাই জানি—জ্ঞানচর্চা, গবেষণা আর প্রকাশনা ছাড়া প্রকৃত উচ্চশিক্ষার অগ্রগতি সম্ভব নয়। কিন্তু আমাদের অনেক সম্ভাবনাময় গবেষণা কেবল সুযোগ ও প্ল্যাটফর্মের অভাবে থেমে যায়। আমি প্রতিশ্রুতি দিচ্ছি, যদি আপনারা আমাকে ডাকসু ২০২৫-এ গবেষণা ও প্রকাশনা সম্পাদক হিসেবে দায়িত্ব দেন, তবে আমি বিভাগভিত্তিক গবেষণা তহবিল ও আন্তর্জাতিক স্কলারশিপের সহায়তা, ডাকসুর নিজস্ব স্টুডেন্ট জার্নাল প্রকাশ, প্রতিটি থিসিস ও গবেষণার জন্য ডিজিটাল আর্কাইভ, একাডেমিক রাইটিং ও সফটওয়্যার ট্রেনিং কর্মশালা এবং শিক্ষার্থীদের জন্য গবেষণাভিত্তিক কনফারেন্স ও সেমিনার আয়োজন করব। আপনার ভোটে গড়ে উঠুক একটি গবেষণা-উদ্যমী ডাকসু।
                     </p>
                 </div>
                 <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
@@ -566,7 +566,7 @@ function PublicationSection() {
 const logicalMovementActivities = [
   {
     icon: Flag,
-    title: "জুলাই ২৪",
+    title: "যৌক্তিক আন্দোলনে আমি",
     description: "সংগ্রামের সেই দিনগুলোর কথা আমি ভুলিনি। ১৭ই জুলাইয়ের সেই উত্তাল মুহূর্তে যখন সবাই শঙ্কায়, আমি শেষ মুহূর্ত পর্যন্ত হল আঁকড়ে ছিলাম, আমার ভাই-বন্ধু-সহযোদ্ধাদের ছেড়ে যাইনি। আসলে, ঢাকা বিশ্ববিদ্যালয়ের একজন ছাত্র হিসেবে আমার পরিচয় শুধু ক্লাসরুমে সীমাবদ্ধ থাকেনি। এই ক্যাম্পাসে পথচলার প্রথম দিন থেকে শুরু করে প্রতিটি যৌক্তিক ও ন্যায্য অধিকারের আন্দোলনে আমার ঠিকানা ছিল রাজপথ।",
     images: [
       { src: "https://i.postimg.cc/DZ8nTsg9/photo_2025-08-21_01-07_09.jpg", alt: "আন্দোলনে অংশগ্রহণ", hint: "protest movement" },
@@ -852,13 +852,13 @@ function SocialWorkSection() {
                 ) : (
                 <div className="flex animate-scroll">
                     {imagesToDisplay.map((image, index) => (
-                        <Card key={`${image.id}-${index}`} className="flex-shrink-0 w-64 h-80 mx-4 shadow-lg overflow-hidden group">
-                            <div className="relative w-full h-full">
+                        <Card key={`${image.id}-${index}`} className="flex-shrink-0 w-64 mx-4 shadow-lg overflow-hidden group">
+                            <div className="relative w-full aspect-square">
                                 <Image
                                     src={image.image}
                                     alt={image.alt}
                                     fill
-                                    className="object-cover transform group-hover:scale-105 transition-transform duration-300"
+                                    className="object-contain transform group-hover:scale-105 transition-transform duration-300"
                                     data-ai-hint={image.imageHint}
                                 />
                             </div>
@@ -1255,5 +1255,3 @@ function PreVoteSection() {
         </section>
     );
 }
-
-    
