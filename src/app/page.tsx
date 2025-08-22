@@ -116,7 +116,6 @@ export default function Home() {
       <LogicalMovementSection />
       <AcademicAchievementSection />
       <SkillsLeadershipServiceSection />
-      <SocialWorkSection />
       <LeadershipSection />
       <FAQSection />
       <FeedbackSection />
@@ -803,69 +802,6 @@ function SkillsLeadershipServiceSection() {
                     </div>
                   ))}
                 </div>
-            </div>
-        </section>
-    );
-}
-
-type SocialWork = {
-    id: string;
-    image: string;
-    alt: string;
-    imageHint: string;
-};
-
-function SocialWorkSection() {
-    const [socialWorks, setSocialWorks] = useState<SocialWork[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
-
-    useEffect(() => {
-        const fetchSocialWorks = async () => {
-            setIsLoading(true);
-            const socialWorksCollection = collection(db, "socialWorks");
-            const snapshot = await getDocs(socialWorksCollection);
-            const list = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as SocialWork));
-            setSocialWorks(list);
-            setIsLoading(false);
-        };
-        fetchSocialWorks();
-    }, []);
-
-    const imagesToDisplay = socialWorks.length > 0 ? [...socialWorks, ...socialWorks] : [];
-
-    return (
-        <section className="py-16 md:py-24 bg-background">
-            <div className="container mx-auto px-4">
-                <div className="text-center max-w-4xl mx-auto">
-                    <HandHeart className="mx-auto h-12 w-12 text-primary" />
-                    <h1 className="font-headline text-5xl md:text-6xl font-bold mt-4 text-foreground">আমার সামাজিক কাজ</h1>
-                    <p className="font-body text-lg mt-4 text-muted-foreground">
-                        সমাজের প্রতি দায়বদ্ধতা থেকে আমার বিভিন্ন সামাজিক ও মানবিক কার্যক্রমের কিছু মুহূর্ত।
-                    </p>
-                </div>
-            </div>
-            <div className="mt-16 relative w-full overflow-hidden mask-image-lr group">
-                 {isLoading ? (
-                    <div className="flex justify-center items-center h-80">
-                        <p>ছবি লোড হচ্ছে...</p>
-                    </div>
-                ) : (
-                <div className="flex animate-scroll group-hover:pause-animation">
-                    {imagesToDisplay.map((image, index) => (
-                        <Card key={`${image.id}-${index}`} className="flex-shrink-0 w-auto mx-4 shadow-lg overflow-hidden">
-                            <div className="relative h-80 aspect-auto">
-                                <Image
-                                    src={image.image}
-                                    alt={image.alt}
-                                    fill
-                                    className="object-contain"
-                                    data-ai-hint={image.imageHint}
-                                />
-                            </div>
-                        </Card>
-                    ))}
-                </div>
-                )}
             </div>
         </section>
     );
