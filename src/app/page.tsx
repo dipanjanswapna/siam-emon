@@ -116,6 +116,7 @@ export default function Home() {
       <LogicalMovementSection />
       <AcademicAchievementSection />
       <SkillsLeadershipServiceSection />
+      <SocialWorkSection />
       <LeadershipSection />
       <FAQSection />
       <FeedbackSection />
@@ -807,6 +808,82 @@ function SkillsLeadershipServiceSection() {
     );
 }
 
+type SocialWork = {
+    id: string;
+    image: string;
+    alt: string;
+    imageHint: string;
+};
+
+function SocialWorkSection() {
+    const [socialWorks, setSocialWorks] = useState<SocialWork[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchSocialWorks = async () => {
+            setIsLoading(true);
+            try {
+                const socialWorksCollection = collection(db, "socialWorks");
+                const socialWorksSnapshot = await getDocs(socialWorksCollection);
+                const socialWorksList = socialWorksSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as SocialWork));
+                setSocialWorks(socialWorksList);
+            } catch (error) {
+                console.error("Error fetching social works:", error);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+        fetchSocialWorks();
+    }, []);
+
+    const imagesToDisplay = socialWorks.length > 0 ? [...socialWorks, ...socialWorks] : [];
+
+    return (
+        <section className="py-16 md:py-24 bg-card">
+            <div className="container mx-auto px-4">
+                <div className="text-center max-w-4xl mx-auto">
+                    <HandHeart className="mx-auto h-12 w-12 text-primary" />
+                    <h2 className="font-headline text-4xl md:text-5xl font-bold mt-4 text-foreground">
+                        আমার সামাজিক কাজ
+                    </h2>
+                    <p className="mt-4 font-body text-lg text-muted-foreground">
+                        সমাজের প্রতি দায়বদ্ধতা থেকে আমার বিভিন্ন সামাজিক ও মানবিক কার্যক্রমের কিছু মুহূর্ত।
+                    </p>
+                </div>
+                <div className="mt-12 w-full overflow-hidden mask-image-lr group">
+                    <div className="flex animate-scroll group-hover:pause-animation">
+                        {isLoading ? (
+                            Array.from({ length: 12 }).map((_, i) => (
+                                <div key={i} className="flex-shrink-0 w-64 p-4">
+                                    <Skeleton className="w-full h-40 rounded-lg" />
+                                </div>
+                            ))
+                        ) : (
+                            imagesToDisplay.map((work, index) => (
+                                <div key={`${work.id}-${index}`} className="flex-shrink-0 w-auto p-4">
+                                    <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300">
+                                        <CardContent className="p-4">
+                                            <div className="relative h-40 w-56">
+                                                <Image
+                                                    src={work.image}
+                                                    alt={work.alt}
+                                                    fill
+                                                    className="object-contain rounded-md"
+                                                    data-ai-hint={work.imageHint}
+                                                />
+                                            </div>
+                                        </CardContent>
+                                    </Card>
+                                </div>
+                            ))
+                        )}
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+}
+
 const leadershipPoints = [
     { icon: ShieldCheck, text: "জাতির অগ্রগতি আর শিক্ষার্থীদের অধিকার—আমি আছি সবার পাশে, প্রতিটা পদক্ষেপে।" },
     { icon: Users, text: "মাঠে আছি, মাঠে থাকব—আপনাদের সুখ-দুঃখের সঙ্গী হব।" },
@@ -1191,3 +1268,6 @@ function PreVoteSection() {
         </section>
     );
 }
+
+
+    
