@@ -720,7 +720,7 @@ const skillsAndLeadershipActivities = [
     title: "চ্যাম্পিয়ন, বারোয়ারী বিতর্ক প্রতিযোগিতা, প্রজাপতি মেলা ২০২২, জাহাঙ্গীরনগর বিশ্ববিদ্যালয়",
     description: "",
     images: [
-      { src: "https://i.postimg.cc/Zq10xrhb/photo_2025-08-21_23-26-09.jpg", alt: "বিতর্ক প্রতিযোগিতা পুরস্কার", hint: "debate award" },
+      { src: "https://i.postimg.cc/Zq10xrhb/photo_2025-08-21_23-26_09.jpg", alt: "বিতর্ক প্রতিযোগিতা পুরস্কার", hint: "debate award" },
     ],
   },
   {
@@ -852,16 +852,16 @@ function SocialWorkSection() {
                 </div>
             </div>
             <div className="mt-12 w-full overflow-hidden mask-image-lr group">
-                <div className="flex animate-scroll group-hover:pause-animation">
+                 <div className="animate-scroll group-hover:pause-animation">
                     {isLoading ? (
                         Array.from({ length: 12 }).map((_, i) => (
-                            <div key={i} className="flex-shrink-0 w-64 p-4">
-                                <Skeleton className="w-full h-40 rounded-lg" />
+                            <div key={i} className="inline-block p-4">
+                                <Skeleton className="w-56 h-40 rounded-lg" />
                             </div>
                         ))
                     ) : (
                         imagesToDisplay.map((work, index) => (
-                            <div key={`${work.id}-${index}`} className="flex-shrink-0 w-auto p-4">
+                            <div key={`${work.id}-${index}`} className="inline-block p-4">
                                 <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300">
                                     <CardContent className="p-4">
                                         <div className="relative h-40 w-56">
