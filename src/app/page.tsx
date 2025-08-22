@@ -831,7 +831,7 @@ function SocialWorkSection() {
         fetchSocialWorks();
     }, []);
 
-    const imagesToDisplay = [...socialWorks, ...socialWorks]; // Duplicate for seamless loop
+    const imagesToDisplay = socialWorks.length > 0 ? [...socialWorks, ...socialWorks] : [];
 
     return (
         <section className="py-16 md:py-24 bg-background">
