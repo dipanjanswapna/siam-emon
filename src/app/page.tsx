@@ -844,21 +844,21 @@ function SocialWorkSection() {
                     </p>
                 </div>
             </div>
-            <div className="mt-16 relative w-full overflow-hidden mask-image-lr">
+            <div className="mt-16 relative w-full overflow-hidden mask-image-lr group">
                  {isLoading ? (
                     <div className="flex justify-center items-center h-80">
                         <p>ছবি লোড হচ্ছে...</p>
                     </div>
                 ) : (
-                <div className="flex animate-scroll">
+                <div className="flex animate-scroll group-hover:pause-animation">
                     {imagesToDisplay.map((image, index) => (
-                        <Card key={`${image.id}-${index}`} className="flex-shrink-0 w-64 mx-4 shadow-lg overflow-hidden group">
-                            <div className="relative w-full aspect-square">
+                        <Card key={`${image.id}-${index}`} className="flex-shrink-0 w-auto mx-4 shadow-lg overflow-hidden">
+                            <div className="relative h-80 aspect-auto">
                                 <Image
                                     src={image.image}
                                     alt={image.alt}
                                     fill
-                                    className="object-contain transform group-hover:scale-105 transition-transform duration-300"
+                                    className="object-contain"
                                     data-ai-hint={image.imageHint}
                                 />
                             </div>
