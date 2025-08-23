@@ -116,6 +116,7 @@ export default function Home() {
       <LogicalMovementSection />
       <AcademicAchievementSection />
       <SkillsLeadershipServiceSection />
+      <OrganizerAndEditorSection />
       <SocialWorkSection />
       <LeadershipSection />
       <FAQSection />
@@ -802,6 +803,85 @@ function SkillsLeadershipServiceSection() {
                       </div>
                     </div>
                   ))}
+                </div>
+            </div>
+        </section>
+    );
+}
+
+const organizationExperience = [
+    {
+        title: "President",
+        description: "Animal Genetics & Molecular Biology Club- AGMBC, গবেষণা রিলেটেড ক্লাব",
+        image: "https://i.postimg.cc/6pgtWmgz/451374210-3661627947435304-7044717898982288749-n.jpg",
+        link: "https://www.facebook.com/profile.php?id=61562612316669"
+    },
+    {
+        title: "Co-Founder",
+        description: "স্টুডেন্ট এলায়েন্স অফ পিরোজপুর (বলেশ্বর), উচ্চশিক্ষা সহায়ক বিষয়ক অর্গানাইজেশনের",
+        image: "https://i.postimg.cc/pLn3ZXcY/image.png",
+        link: null
+    },
+    {
+        title: "Founder",
+        description: "The Hemoglobin, রক্তদান ও সচেতনতা সৃষ্টি",
+        image: "https://i.postimg.cc/j588TGkS/image.png",
+        link: "https://www.facebook.com/hemoglobinorg.du"
+    },
+    {
+        title: "Founding vice-president",
+        description: "Zoology Debating Club, University of Dhaka, বিভাগের বিতর্ক ক্লাব",
+        image: "https://i.postimg.cc/dQpbTy4t/image.png",
+        link: "https://www.facebook.com/profile.php?id=100090628602499"
+    },
+    {
+        title: "Secretary for Hospitality",
+        description: "F.H Hall Debating Club-FHDC, হলের বিতর্ক সংগঠন",
+        image: "https://i.postimg.cc/RF8Dfk1b/image.png",
+        link: "https://www.facebook.com/FHDC1999"
+    }
+];
+
+function OrganizerAndEditorSection() {
+    const renderCard = (item: typeof organizationExperience[0]) => (
+        <Card key={item.title} className="flex flex-col shadow-lg hover:shadow-primary/20 hover:-translate-y-2 transition-all duration-300 bg-background overflow-hidden">
+             <CardContent className="p-0">
+                <div className="relative w-full aspect-square">
+                    <Image 
+                        src={item.image}
+                        alt={item.title}
+                        fill
+                        className="object-cover"
+                        data-ai-hint="organization logo"
+                    />
+                </div>
+                 <div className="p-4 text-center">
+                    <CardTitle className="font-headline text-xl">{item.title}</CardTitle>
+                    <CardDescription className="font-body text-muted-foreground mt-1">{item.description}</CardDescription>
+                </div>
+            </CardContent>
+        </Card>
+    );
+
+    return (
+        <section className="py-16 md:py-24 bg-card">
+            <div className="container mx-auto px-4">
+                <div className="text-center max-w-4xl mx-auto">
+                    <Users className="mx-auto h-12 w-12 text-primary" />
+                    <h2 className="font-headline text-4xl md:text-5xl font-bold mt-4 text-foreground">
+                        একজন সংগঠক ও সম্পাদক হিসেবে আমার অভিজ্ঞতা
+                    </h2>
+                </div>
+                <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+                    {organizationExperience.map((item) => (
+                        item.link ? (
+                            <Link key={item.title} href={item.link} target="_blank" rel="noopener noreferrer" className="flex">
+                                {renderCard(item)}
+                            </Link>
+                        ) : (
+                           renderCard(item)
+                        )
+                    ))}
                 </div>
             </div>
         </section>
