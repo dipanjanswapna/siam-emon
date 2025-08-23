@@ -746,8 +746,8 @@ const skillsAndLeadershipActivities = [
     description: "",
     images: [
         { src: "https://i.postimg.cc/XNKX9G1W/photo_2025-08-21_23-30-16.jpg", alt: "প্রজাপতি মেলা পুরস্কার", hint: "butterfly fair award" },
-        { src: "https://i.postimg.cc/qqGRrS6q/photo_2025-08-21_23-30-21.jpg", alt: "প্রজাপতি মেলা পুরস্কার", hint: "butterfly fair award" },
-        { src: "https://i.postimg.cc/xCM8xc0K/photo_2025-08-21_23-30-26.jpg", alt: "প্রজাপতি মেলা পুরস্কার", hint: "butterfly fair award" },
+        { src: "https://i.postimg.cc/qqGRrS6q/photo_2025-08-21_23-30_21.jpg", alt: "প্রজাপতি মেলা পুরস্কার", hint: "butterfly fair award" },
+        { src: "https://i.postimg.cc/xCM8xc0K/photo_2025-08-21_23-30_26.jpg", alt: "প্রজাপতি মেলা পুরস্কার", hint: "butterfly fair award" },
     ],
   },
 ];
@@ -1268,3 +1268,5 @@ function PreVoteSection() {
         </section>
     );
 }
+
+    
