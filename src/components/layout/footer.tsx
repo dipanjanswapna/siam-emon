@@ -32,7 +32,6 @@ export function Footer() {
                 <li><Link href="/" className="hover:underline text-primary-foreground/80">হোম</Link></li>
                 <li><Link href="/about" className="hover:underline text-primary-foreground/80">আমাদের সম্পর্কে</Link></li>
                 <li><Link href="/manifesto" className="hover:underline text-primary-foreground/80">ইশতেহার</Link></li>
-                <li><Link href="/gallery" className="hover:underline text-primary-foreground/80">গ্যালারি</Link></li>
               </ul>
             </div>
             <div>
