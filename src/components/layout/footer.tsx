@@ -58,13 +58,15 @@ export function Footer() {
         <div className="mt-12 border-t border-primary-foreground/20 pt-6 flex flex-col md:flex-row justify-between items-center text-sm font-body">
            <div className="flex items-center gap-4 text-primary-foreground/80 text-center md:text-left">
               <span>© ২০২৪ সর্বস্বত্ব সংরক্ষিত</span>
-              <Image 
-                src="https://i.postimg.cc/KvkZtjtq/Screenshot-2025-08-18-191039-removebg-preview.png" 
-                alt="Footer Logo"
-                width={80}
-                height={80}
-                className="object-contain"
-                />
+                <Link href="https://www.facebook.com/dipanjanswapna2/" target="_blank" rel="noopener noreferrer">
+                    <Image 
+                    src="https://i.postimg.cc/KvkZtjtq/Screenshot-2025-08-18-191039-removebg-preview.png" 
+                    alt="Footer Logo"
+                    width={80}
+                    height={80}
+                    className="object-contain"
+                    />
+                </Link>
               <Link href="/admin" className="hover:underline">সিয়াম ফেরদৌস ইমন ক্যাম্পেইন</Link>
            </div>
           <div className="flex items-center gap-6 mt-4 md:mt-0">
