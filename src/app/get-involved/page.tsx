@@ -93,7 +93,7 @@ export default function GetInvolvedPage() {
                      <CardDescription className="font-body">আমাদের ফেসবুক, টুইটার এবং ইনস্টাগ্রাম পেজের লিংক এখানে দেওয়া হবে। ফলো করে আপনারা আমাদের সব আপডেট এবং কার্যক্রম সম্পর্কে জানতে পারবেন।</CardDescription>
                 </CardHeader>
                 <CardContent className="flex justify-center items-center gap-6">
-                    <Link href="#" className="text-primary hover:text-accent transition-colors">
+                    <Link href="https://www.facebook.com/siam.emon.52" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-accent transition-colors">
                         <Facebook className="h-10 w-10" />
                         <span className="sr-only">ফেসবুক</span>
                     </Link>

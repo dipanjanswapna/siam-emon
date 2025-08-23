@@ -69,7 +69,7 @@ export function Footer() {
            </div>
           <div className="flex items-center gap-6 mt-4 md:mt-0">
              <div className="powr-hit-counter" id="0496009a_1755529255"></div>
-            <Link href="#" className="text-primary-foreground/80 hover:text-primary-foreground">
+            <Link href="https://www.facebook.com/siam.emon.52" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/80 hover:text-primary-foreground">
               <Facebook className="h-5 w-5" />
               <span className="sr-only">ফেসবুক</span>
             </Link>
