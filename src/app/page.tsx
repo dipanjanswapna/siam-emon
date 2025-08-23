@@ -844,22 +844,20 @@ const organizationExperience = [
 
 function OrganizerAndEditorSection() {
     const renderCard = (item: typeof organizationExperience[0]) => (
-         <Card key={item.title} className="flex flex-col shadow-lg hover:shadow-primary/20 hover:-translate-y-2 transition-all duration-300 bg-background overflow-hidden h-full">
-            <CardContent className="p-0 flex flex-col flex-grow">
-                <div className="relative w-full aspect-square">
-                    <Image 
-                        src={item.image}
-                        alt={item.title}
-                        fill
-                        className="object-cover"
-                        data-ai-hint="organization logo"
-                    />
-                </div>
-                <div className="p-4 text-center flex flex-col flex-grow">
-                    <h3 className="font-headline text-xl font-bold">{item.title}</h3>
-                    <p className="font-body text-muted-foreground mt-1 flex-grow">{item.description}</p>
-                </div>
-            </CardContent>
+        <Card key={item.title} className="flex flex-col shadow-lg hover:shadow-primary/20 hover:-translate-y-2 transition-all duration-300 bg-background overflow-hidden h-full">
+            <div className="relative w-full aspect-square">
+                <Image 
+                    src={item.image}
+                    alt={item.title}
+                    fill
+                    className="object-cover"
+                    data-ai-hint="organization logo"
+                />
+            </div>
+            <div className="p-4 text-center flex flex-col flex-grow">
+                <h3 className="font-headline text-xl font-bold">{item.title}</h3>
+                <p className="font-body text-muted-foreground mt-1 flex-grow">{item.description}</p>
+            </div>
         </Card>
     );
 
@@ -872,14 +870,14 @@ function OrganizerAndEditorSection() {
                         একজন সংগঠক ও সম্পাদক হিসেবে আমার অভিজ্ঞতা
                     </h2>
                 </div>
-                <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                <div className="mt-12 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
                     {organizationExperience.map((item) => (
                         item.link ? (
                             <Link key={item.title} href={item.link} target="_blank" rel="noopener noreferrer" className="flex flex-col h-full">
                                 {renderCard(item)}
                             </Link>
                         ) : (
-                           <div className="flex flex-col h-full">{renderCard(item)}</div>
+                           <div key={item.title} className="flex flex-col h-full">{renderCard(item)}</div>
                         )
                     ))}
                 </div>
