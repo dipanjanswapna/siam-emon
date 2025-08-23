@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'সিয়াম ফেরদৌস ইমন - গবেষণা ও প্রকাশনা সম্পাদক পদপ্রার্থী | ডাকসু নির্বাচন ২০২৫',
     description: 'সিয়াম ফেরদৌস ইমন, ডাকসু নির্বাচনে গবেষণা ও প্রকাশনা সম্পাদক পদপ্রার্থী। ঢাকা বিশ্ববিদ্যালয় ও ফজলুল হক মুসলিম হলের একজন নিবেদিতপ্রাণ শিক্ষার্থী নেতা।',
-    url: 'https://siam-emon-du.firebaseapp.com', // Replace with actual domain
+    url: 'https://seamferdousemon.vercel.app/', // Replace with actual domain
     siteName: 'সিয়াম ফেরদৌস ইমন',
     images: [
       {
