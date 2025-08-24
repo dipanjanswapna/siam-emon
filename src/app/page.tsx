@@ -212,15 +212,15 @@ function NewHeroSection() {
 
 function VideoSection() {
     return (
-        <section className="py-16 md:py-24 bg-background">
+        <section className="py-8 md:py-12 bg-background">
             <div className="container mx-auto px-4">
                 <div className="relative w-full overflow-hidden" style={{ paddingTop: '56.25%' }}>
                     <iframe
                         className="absolute top-0 left-0 w-full h-full"
-                        src="https://www.youtube.com/embed/0Yr2EGZI-xc?autoplay=1&mute=1&controls=0&loop=1&playlist=0Yr2EGZI-xc&showinfo=0&rel=0&modestbranding=1"
+                        src="https://www.youtube.com/embed/0Yr2EGZI-xc?autoplay=1&controls=1&loop=1&playlist=0Yr2EGZI-xc&showinfo=0&rel=0&modestbranding=1"
                         title="Campaign Video"
                         frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         allowFullScreen
                     ></iframe>
                 </div>
@@ -229,9 +229,10 @@ function VideoSection() {
     );
 }
 
+
 function AboutSection() {
   return (
-    <section className="py-16 md:py-24 bg-background">
+    <section className="py-8 md:py-12 bg-background">
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="relative w-full aspect-[4/5] rounded-lg overflow-hidden shadow-lg group">
@@ -1368,4 +1369,6 @@ function PreVoteSection() {
 }
 
     
+
+
 
