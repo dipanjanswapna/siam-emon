@@ -217,7 +217,7 @@ function VideoSection() {
                 <div className="relative w-full overflow-hidden aspect-video rounded-lg shadow-2xl">
                     <iframe
                         className="absolute top-0 left-0 w-full h-full"
-                        src="https://www.youtube.com/embed/kUrF38w5dRg?si=Rb7jCxOb4Dyi9OC9&autoplay=1&loop=1&playlist=kUrF38w5dRg&controls=1&mute=1"
+                        src="https://www.youtube.com/embed/kUrF38w5dRg?si=Rb7jCxOb4Dyi9OC9&loop=1&playlist=kUrF38w5dRg&controls=1"
                         title="YouTube video player"
                         frameBorder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -867,7 +867,7 @@ const organizationExperience = [
 function OrganizerAndEditorSection() {
     const renderCard = (item: typeof organizationExperience[0]) => (
         <Card key={item.title} className="flex flex-col shadow-lg hover:shadow-primary/20 hover:-translate-y-2 transition-all duration-300 bg-background overflow-hidden h-full">
-            <div className="relative w-full aspect-square">
+             <div className="relative w-full aspect-square">
                 <Image 
                     src={item.image}
                     alt={item.title}
@@ -1378,4 +1378,5 @@ function PreVoteSection() {
 
 
     
+
 
