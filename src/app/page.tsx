@@ -107,7 +107,6 @@ export default function Home() {
   return (
     <div className="flex flex-col">
       <NewHeroSection />
-      <VideoSection />
       <AboutSection />
       <NoticeSection />
       <VoteBannerSection />
@@ -209,27 +208,6 @@ function NewHeroSection() {
     </section>
   )
 }
-
-function VideoSection() {
-    return (
-        <section className="py-8 bg-background">
-            <div className="container mx-auto px-4">
-                <div className="relative w-full overflow-hidden aspect-video rounded-lg shadow-2xl">
-                    <iframe
-                        className="absolute top-0 left-0 w-full h-full"
-                        src="https://www.youtube.com/embed/kUrF38w5dRg?si=Rb7jCxOb4Dyi9OC9&loop=1&playlist=kUrF38w5dRg&controls=1"
-                        title="YouTube video player"
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        referrerPolicy="strict-origin-when-cross-origin"
-                        allowFullScreen
-                    ></iframe>
-                </div>
-            </div>
-        </section>
-    );
-}
-
 
 function AboutSection() {
   return (
@@ -1378,5 +1356,6 @@ function PreVoteSection() {
 
 
     
+
 
 
