@@ -3,11 +3,11 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { ArrowRight, BookOpenCheck, BrainCircuit, Library, Users, Camera, X, Heart, Megaphone, Flag, Award, FileText, Mic, GraduationCap, HandHeart, BookText, ShieldCheck, MessageSquare, Mail, Icon, ImagePlus, Annoyed, HelpCircle, Vote, Share2, DollarSign, Archive, Laptop, Combine, Trophy } from "lucide-react";
+import { ArrowRight, BookOpenCheck, BrainCircuit, Library, Users, Camera, X, Heart, Megaphone, Flag, Award, FileText, Mic, GraduationCap, HandHeart, BookText, ShieldCheck, MessageSquare, Mail, Icon, ImagePlus, Annoyed, HelpCircle, Vote, Share2, DollarSign, Archive, Laptop, Combine, Trophy, VolumeX, Volume2 } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogClose } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -211,22 +211,83 @@ function NewHeroSection() {
 }
 
 function VideoSection() {
-  return (
-    <section className="py-8 md:py-12 bg-background">
-      <div className="container mx-auto px-4">
-        <div className="aspect-w-16 aspect-h-9">
-           <iframe
-            className="w-full h-full aspect-video rounded-lg shadow-lg"
-            src="https://www.youtube.com/embed/kUrF38w5dRg?si=3r4N0e9RkuLENu_W&controls=1&autoplay=1&mute=1&loop=1&playlist=kUrF38w5dRg"
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen>
-           </iframe>
-        </div>
-      </div>
-    </section>
-  );
+    const playerRef = useRef<any>(null);
+    const [isMuted, setIsMuted] = useState(true);
+    const videoId = 'kUrF38w5dRg';
+
+    useEffect(() => {
+        const loadYouTubeAPI = () => {
+            if (!(window as any).YT) {
+                const tag = document.createElement('script');
+                tag.src = "https://www.youtube.com/iframe_api";
+                const firstScriptTag = document.getElementsByTagName('script')[0];
+                firstScriptTag.parentNode!.insertBefore(tag, firstScriptTag);
+            }
+
+            (window as any).onYouTubeIframeAPIReady = () => {
+                playerRef.current = new (window as any).YT.Player('youtube-player', {
+                    videoId: videoId,
+                    playerVars: {
+                        autoplay: 1,
+                        mute: 1,
+                        loop: 1,
+                        playlist: videoId,
+                        controls: 0,
+                        showinfo: 0,
+                        modestbranding: 1,
+                        fs: 0,
+                    },
+                    events: {
+                        'onReady': (event: any) => {
+                             event.target.playVideo();
+                        }
+                    }
+                });
+            };
+        };
+
+        if (document.getElementById('youtube-player')) {
+            loadYouTubeAPI();
+        }
+
+        return () => {
+             // Cleanup if component unmounts
+            if (playerRef.current) {
+                playerRef.current.destroy();
+            }
+            (window as any).onYouTubeIframeAPIReady = null;
+        };
+    }, []);
+
+    const toggleMute = () => {
+        if (!playerRef.current) return;
+        if (playerRef.current.isMuted()) {
+            playerRef.current.unMute();
+            setIsMuted(false);
+        } else {
+            playerRef.current.mute();
+            setIsMuted(true);
+        }
+    };
+
+    return (
+        <section className="py-8 md:py-12 bg-background">
+            <div className="container mx-auto px-4">
+                <div className="relative aspect-w-16 aspect-h-9">
+                    <div id="youtube-player" className="w-full h-full aspect-video rounded-lg shadow-lg overflow-hidden" />
+                    <Button
+                        onClick={toggleMute}
+                        variant="ghost"
+                        size="icon"
+                        className="absolute top-2 right-2 md:top-4 md:right-4 bg-black/50 hover:bg-black/70 text-white rounded-full z-10"
+                    >
+                        {isMuted ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
+                        <span className="sr-only">{isMuted ? 'Unmute' : 'Mute'}</span>
+                    </Button>
+                </div>
+            </div>
+        </section>
+    );
 }
 
 
@@ -768,8 +829,8 @@ const skillsAndLeadershipActivities = [
     description: "",
     images: [
         { src: "https://i.postimg.cc/XNKX9G1W/photo_2025-08-21_23-30-16.jpg", alt: "প্রজাপতি মেলা পুরস্কার", hint: "butterfly fair award" },
-        { src: "https://i.postimg.cc/qqGRrS6q/photo_2025-08-21_23-30-21.jpg", alt: "প্রজাপতি মেলা পুরস্কার", hint: "butterfly fair award" },
-        { src: "https://i.postimg.cc/xCM8xc0K/photo_2025-08-21_23-30-26.jpg", alt: "প্রজাপতি মেলা পুরস্কার", hint: "butterfly fair award" },
+        { src: "https://i.postimg.cc/qqGRrS6q/photo_2025-08-21_23-30_21.jpg", alt: "প্রজাপতি মেলা পুরস্কার", hint: "butterfly fair award" },
+        { src: "https://i.postimg.cc/xCM8xc0K/photo_2025-08-21_23-30_26.jpg", alt: "প্রজাপতি মেলা পুরস্কার", hint: "butterfly fair award" },
     ],
   },
 ];
@@ -1382,3 +1443,6 @@ function PreVoteSection() {
 
 
 
+
+
+    
