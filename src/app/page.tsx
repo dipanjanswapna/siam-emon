@@ -217,11 +217,10 @@ function VideoSection() {
                 <div className="relative w-full overflow-hidden aspect-video">
                     <video
                         className="absolute top-0 left-0 w-full h-full"
-                        src="/siyam-ferdous-emon-2nd-video.mp4"
+                        src="/Siyam%20Ferdous%20emon%202nd%20video.mp4"
                         title="Campaign Video"
                         autoPlay
                         loop
-                        muted
                         controls
                     >
                         Your browser does not support the video tag.
@@ -1372,6 +1371,7 @@ function PreVoteSection() {
 }
 
     
+
 
 
 
