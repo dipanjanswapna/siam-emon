@@ -217,7 +217,7 @@ function VideoSection() {
                 <div className="relative w-full overflow-hidden aspect-video rounded-lg shadow-2xl">
                     <iframe
                         className="absolute top-0 left-0 w-full h-full"
-                        src="https://www.youtube.com/embed/kUrF38w5dRg?si=Rb7jCxOb4Dyi9OC9&autoplay=1&loop=1&playlist=kUrF38w5dRg&controls=1"
+                        src="https://www.youtube.com/embed/kUrF38w5dRg?si=Rb7jCxOb4Dyi9OC9&autoplay=1&loop=1&playlist=kUrF38w5dRg&controls=1&mute=1"
                         title="YouTube video player"
                         frameBorder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -769,8 +769,8 @@ const skillsAndLeadershipActivities = [
     description: "",
     images: [
         { src: "https://i.postimg.cc/XNKX9G1W/photo_2025-08-21_23-30-16.jpg", alt: "প্রজাপতি মেলা পুরস্কার", hint: "butterfly fair award" },
-        { src: "https://i.postimg.cc/qqGRrS6q/photo_2025-08-21_23-30_21.jpg", alt: "প্রজাপতি মেলা পুরস্কার", hint: "butterfly fair award" },
-        { src: "https://i.postimg.cc/xCM8xc0K/photo_2025-08-21_23-30_26.jpg", alt: "প্রজাপতি মেলা পুরস্কার", hint: "butterfly fair award" },
+        { src: "https://i.postimg.cc/qqGRrS6q/photo_2025-08-21_23-30-21.jpg", alt: "প্রজাপতি মেলা পুরস্কার", hint: "butterfly fair award" },
+        { src: "https://i.postimg.cc/xCM8xc0K/photo_2025-08-21_23-30-26.jpg", alt: "প্রজাপতি মেলা পুরস্কার", hint: "butterfly fair award" },
     ],
   },
 ];
@@ -1378,3 +1378,4 @@ function PreVoteSection() {
 
 
     
+
