@@ -107,6 +107,7 @@ export default function Home() {
   return (
     <div className="flex flex-col">
       <NewHeroSection />
+      <VideoSection />
       <AboutSection />
       <NoticeSection />
       <VoteBannerSection />
@@ -207,6 +208,25 @@ function NewHeroSection() {
       </div>
     </section>
   )
+}
+
+function VideoSection() {
+    return (
+        <section className="py-16 md:py-24 bg-background">
+            <div className="container mx-auto px-4">
+                <div className="relative w-full overflow-hidden" style={{ paddingTop: '56.25%' }}>
+                    <iframe
+                        className="absolute top-0 left-0 w-full h-full"
+                        src="https://www.youtube.com/embed/0Yr2EGZI-xc?autoplay=1&mute=1&controls=0&loop=1&playlist=0Yr2EGZI-xc&showinfo=0&rel=0&modestbranding=1"
+                        title="Campaign Video"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                    ></iframe>
+                </div>
+            </div>
+        </section>
+    );
 }
 
 function AboutSection() {
@@ -1348,3 +1368,4 @@ function PreVoteSection() {
 }
 
     
+
