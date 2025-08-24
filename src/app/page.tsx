@@ -214,15 +214,18 @@ function VideoSection() {
     return (
         <section className="py-8 md:py-12 bg-background">
             <div className="container mx-auto px-4">
-                <div className="relative w-full overflow-hidden" style={{ paddingTop: '56.25%' }}>
-                    <iframe
+                <div className="relative w-full overflow-hidden aspect-video">
+                    <video
                         className="absolute top-0 left-0 w-full h-full"
-                        src="https://www.youtube.com/embed/0Yr2EGZI-xc?autoplay=1&controls=1&loop=1&playlist=0Yr2EGZI-xc&showinfo=0&rel=0&modestbranding=1"
+                        src="/siyam-ferdous-emon-2nd-video.mp4"
                         title="Campaign Video"
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowFullScreen
-                    ></iframe>
+                        autoPlay
+                        loop
+                        muted
+                        controls
+                    >
+                        Your browser does not support the video tag.
+                    </video>
                 </div>
             </div>
         </section>
@@ -1369,6 +1372,7 @@ function PreVoteSection() {
 }
 
     
+
 
 
 
