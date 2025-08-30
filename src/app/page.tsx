@@ -111,6 +111,7 @@ export default function Home() {
   return (
     <div className="flex flex-col">
       <NewHeroSection />
+      <VideoSection />
       <AboutSection />
       <NoticeSection />
       <VoteBannerSection />
@@ -129,6 +130,80 @@ export default function Home() {
       <PreVoteSection />
     </div>
   );
+}
+
+function VideoSection() {
+    const [player, setPlayer] = useState<any>(null);
+    const [isMuted, setIsMuted] = useState(true);
+
+    const videoId = "kUrF38w5dRg";
+
+    useEffect(() => {
+        const loadYouTubeAPI = () => {
+            if (!(window as any).YT) {
+                const tag = document.createElement('script');
+                tag.src = "https://www.youtube.com/iframe_api";
+                const firstScriptTag = document.getElementsByTagName('script')[0];
+                firstScriptTag.parentNode!.insertBefore(tag, firstScriptTag);
+            }
+
+            (window as any).onYouTubeIframeAPIReady = () => {
+                const newPlayer = new (window as any).YT.Player('youtube-player', {
+                    videoId: videoId,
+                    playerVars: {
+                        'autoplay': 1,
+                        'mute': 1,
+                        'loop': 1,
+                        'playlist': videoId,
+                        'controls': 0,
+                        'showinfo': 0,
+                        'modestbranding': 1,
+                        'rel': 0,
+                    },
+                    events: {
+                        'onReady': (event: any) => {
+                           event.target.playVideo();
+                           setPlayer(event.target);
+                        }
+                    }
+                });
+            };
+
+             if ((window as any).YT && (window as any).YT.Player) {
+                (window as any).onYouTubeIframeAPIReady();
+            }
+        };
+
+        loadYouTubeAPI();
+
+    }, [videoId]);
+    
+    const handleMuteToggle = () => {
+        if (!player) return;
+
+        if (player.isMuted()) {
+            player.unMute();
+            setIsMuted(false);
+        } else {
+            player.mute();
+            setIsMuted(true);
+        }
+    };
+
+    return (
+        <section className="relative w-full aspect-video bg-black">
+            <div id="youtube-player" className="absolute top-0 left-0 w-full h-full"></div>
+             <Button 
+                variant="secondary"
+                size="icon"
+                onClick={handleMuteToggle}
+                className="absolute top-4 right-4 z-10 bg-black/50 text-white hover:bg-black/70 rounded-full"
+            >
+                {isMuted ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
+                <span className="sr-only">{isMuted ? "Unmute" : "Mute"}</span>
+            </Button>
+        </section>
+    );
 }
 
 function NewHeroSection() {
@@ -418,15 +493,17 @@ function VoteBannerSection() {
 
 function ImageBannerSection() {
     return (
-        <section className="w-full">
-            <div className="relative w-full h-auto aspect-[16/5] md:aspect-[16/4]">
-                <Image 
-                    src="https://i.postimg.cc/CLsswhQ1/Screenshot-2025-08-18-035352-removebg-preview.png"
-                    alt="ভোট দিন আমাকে! আপনার ভোটে গড়ে উঠুক একটি গবেষণা-উদ্যমী ডাকসু"
-                    fill
-                    className="object-contain"
-                    data-ai-hint="vote appeal banner"
-                />
+        <section className="w-full bg-background py-4">
+            <div className="container mx-auto">
+                <div className="relative w-full h-auto aspect-[16/4] md:aspect-[16/3] lg:aspect-[16/2]">
+                    <Image 
+                        src="https://i.postimg.cc/Qd1nSgR7/Screenshot-2025-08-30-194451-removebg-preview.png"
+                        alt="ভোট দিন আমাকে! আপনার ভোটে গড়ে উঠুক একটি গবেষণা-উদ্যমী ডাকসু"
+                        fill
+                        className="object-contain"
+                        data-ai-hint="vote appeal banner"
+                    />
+                </div>
             </div>
         </section>
     );
