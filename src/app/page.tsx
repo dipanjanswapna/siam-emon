@@ -115,7 +115,7 @@ export default function Home() {
       <AboutSection />
       <NoticeSection />
       <VoteBannerSection />
-      <ImageBannerSection />
+      <VoteCallToActionSection />
       <CommitmentSection />
       <ResearchSection />
       <PublicationSection />
@@ -491,18 +491,24 @@ function VoteBannerSection() {
   );
 }
 
-function ImageBannerSection() {
+function VoteCallToActionSection() {
     return (
-        <section className="w-full bg-background py-4">
-            <div className="container mx-auto">
-                <div className="relative w-full h-auto aspect-[16/4] md:aspect-[16/3] lg:aspect-[16/2]">
-                    <Image 
-                        src="https://i.postimg.cc/Qd1nSgR7/Screenshot-2025-08-30-194451-removebg-preview.png"
-                        alt="ভোট দিন আমাকে! আপনার ভোটে গড়ে উঠুক একটি গবেষণা-উদ্যমী ডাকসু"
-                        fill
-                        className="object-contain"
-                        data-ai-hint="vote appeal banner"
-                    />
+        <section className="py-12 md:py-16" style={{ backgroundColor: 'hsl(220 53% 93%)' }}>
+            <div className="container mx-auto px-4 text-center">
+                <h2 className="text-4xl md:text-5xl font-bold font-headline" style={{ color: '#166534' }}>
+                    ভোট দিন আমাকে!
+                </h2>
+                <p className="mt-2 font-body text-lg text-foreground">
+                    আপনার প্রতিনিধি, আপনার কন্ঠস্বর | ডাকসু ২০২৫
+                </p>
+                <div className="mt-6">
+                    <Button 
+                        size="lg"
+                        className="font-headline text-lg text-white font-bold h-14 px-8 rounded-full"
+                        style={{ backgroundColor: 'hsl(271 76% 54%)' }}
+                    >
+                       আপনার ভোটে গড়ে উঠুক একটি গবেষণা-উদ্যমী ডাকসু
+                    </Button>
                 </div>
             </div>
         </section>
