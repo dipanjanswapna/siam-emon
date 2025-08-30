@@ -144,7 +144,9 @@ function VideoSection() {
                 const tag = document.createElement('script');
                 tag.src = "https://www.youtube.com/iframe_api";
                 const firstScriptTag = document.getElementsByTagName('script')[0];
-                firstScriptTag.parentNode!.insertBefore(tag, firstScriptTag);
+                if (firstScriptTag && firstScriptTag.parentNode) {
+                    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+                }
             }
 
             (window as any).onYouTubeIframeAPIReady = () => {
@@ -504,7 +506,7 @@ function VoteCallToActionSection() {
                 <div className="mt-6">
                     <Button 
                         size="lg"
-                        className="font-headline text-lg text-white font-bold h-14 px-8 rounded-full"
+                        className="font-headline text-md sm:text-lg text-white font-bold h-auto py-3 px-6 sm:h-14 sm:px-8 rounded-full w-full sm:w-auto"
                         style={{ backgroundColor: 'hsl(271 76% 54%)' }}
                     >
                        আপনার ভোটে গড়ে উঠুক একটি গবেষণা-উদ্যমী ডাকসু
