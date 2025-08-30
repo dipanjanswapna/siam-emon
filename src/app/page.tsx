@@ -298,8 +298,8 @@ function AboutSection() {
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="relative w-full aspect-[4/5] rounded-lg overflow-hidden shadow-lg group">
             <Image
-              src="https://i.postimg.cc/LXCLpBjm/532463080-3680875555553854-4475665250768894271-n.jpg"
-              alt="সিয়াম ফেরদৌস ইমন"
+              src="https://i.postimg.cc/tTcVFV1Q/539530889-122093783187002829-1661414873762122234-n-1-Picsart-Ai-Image-Enhancer.jpg"
+              alt="সিয়াম ফেরদৌস ইমন - গবেষণা ও প্রকাশনা সম্পাদক পদপ্রার্থী"
               fill
               className="object-contain transform group-hover:scale-105 transition-transform duration-300"
               data-ai-hint="politician portrait"
@@ -926,7 +926,7 @@ const organizationExperience = [
 
 function OrganizerAndEditorSection() {
     const renderCard = (item: typeof organizationExperience[0]) => (
-        <Card key={item.title} className="flex flex-col shadow-lg hover:shadow-primary/20 hover:-translate-y-2 transition-all duration-300 bg-background overflow-hidden h-full">
+         <Card key={item.title} className="flex flex-col shadow-lg hover:shadow-primary/20 hover:-translate-y-2 transition-all duration-300 bg-background overflow-hidden h-full">
              <div className="relative w-full aspect-square">
                 <Image 
                     src={item.image}
