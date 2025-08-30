@@ -8,6 +8,7 @@ import { Menu, Vote } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import Image from "next/image";
 
 const navLinks = [
   { href: "/", label: "হোম" },
@@ -23,7 +24,13 @@ export function Header() {
     <header className="sticky top-0 z-50 p-2 md:p-3">
       <div className="container mx-auto flex h-16 items-center justify-between rounded-full bg-primary/95 px-4 text-primary-foreground shadow-lg backdrop-blur-sm md:px-6">
         <Link href="/" className="flex items-center gap-2">
-          <Vote className="h-8 w-8" />
+           <Image
+                src="https://i.postimg.cc/C5FPWXhs/Screenshot_2025-08-30_121415-Picsart-Ai-Image-Enhancer-removebg-preview.png"
+                alt="সিয়াম ফেরদৌস ইমন Logo"
+                width={32}
+                height={32}
+                className="h-8 w-8"
+            />
           <span className="text-xl font-headline font-bold">
             সিয়াম ফেরদৌস ইমন
           </span>
@@ -64,7 +71,13 @@ export function Header() {
             <SheetContent side="bottom" className="bg-primary text-primary-foreground rounded-t-2xl h-auto">
               <div className="flex flex-col items-center gap-6 p-6 text-center">
                 <Link href="/" className="flex items-center gap-2 mb-4">
-                  <Vote className="h-8 w-8" />
+                  <Image
+                      src="https://i.postimg.cc/C5FPWXhs/Screenshot_2025-08-30_121415-Picsart-Ai-Image-Enhancer-removebg-preview.png"
+                      alt="সিয়াম ফেরদৌস ইমন Logo"
+                      width={32}
+                      height={32}
+                      className="h-8 w-8"
+                  />
                   <span className="text-xl font-headline font-bold">
                     সিয়াম ফেরদৌস ইমন
                   </span>

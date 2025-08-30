@@ -14,7 +14,13 @@ export function Footer() {
           {/* Logo and Subscribe */}
           <div className="md:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-4">
-              <Vote className="h-8 w-8" />
+              <Image
+                  src="https://i.postimg.cc/C5FPWXhs/Screenshot_2025-08-30_121415-Picsart-Ai-Image-Enhancer-removebg-preview.png"
+                  alt="সিয়াম ফেরদৌস ইমন Logo"
+                  width={32}
+                  height={32}
+                  className="h-8 w-8"
+              />
               <span className="text-2xl font-headline font-bold">
                 সিয়াম ফেরদৌস ইমন
               </span>
