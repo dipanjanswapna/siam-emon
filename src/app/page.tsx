@@ -7,7 +7,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { ArrowRight, BookOpenCheck, BrainCircuit, Library, Users, Camera, X, Heart, Megaphone, Flag, Award, FileText, Mic, GraduationCap, HandHeart, BookText, ShieldCheck, MessageSquare, Mail, Icon, ImagePlus, Annoyed, HelpCircle, Vote, Share2, DollarSign, Archive, Laptop, Combine, Trophy, VolumeX, Volume2 } from "lucide-react";
+import { ArrowRight, BookOpen, BookOpenCheck, BrainCircuit, Library, Users, Camera, X, Heart, Megaphone, Flag, Award, FileText, Mic, GraduationCap, HandHeart, BookText, ShieldCheck, MessageSquare, Mail, Icon, ImagePlus, Annoyed, HelpCircle, Vote, Share2, DollarSign, Archive, Laptop, Combine, Trophy, VolumeX, Volume2, FlaskConical, HandCoins, BadgePercent, Presentation, Database, Microscope } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogClose } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -60,7 +60,7 @@ const carouselItems = [
   },
   {
     title: "জাতীয় সম্মেলনে আমার অংশগ্রহণ",
-    subtitle: "গবেষণা ও প্রকাশনার প্রতি প্রতিশ্রুতি",
+    subtitle: "গবেষণা ও প্রকাশনার प्रति প্রতিশ্রুতি",
     description: "২৪তম জাতীয় সম্মেলন এবং বাংলাদেশ জুওলজিক্যাল সোসাইটির বার্ষিক সাধারণ সভায় উপস্থিত থেকে আমি দেশের সেরা গবেষক ও শিক্ষাবিদদের সাথে গবেষণা ও প্রকাশনা খাতের ভবিষ্যৎ নিয়ে আলোচনা করি।",
     image: "https://i.postimg.cc/26MQRS7y/Screenshot-2025-08-18-015837.png",
     imageHint: "national conference"
@@ -89,16 +89,20 @@ const carouselItems = [
 ];
 
 const icons: { [key: string]: React.ElementType } = {
+    BadgePercent,
+    Laptop,
+    HandCoins,
+    Mail,
+    BookOpen,
+    Archive,
+    Presentation,
+    GraduationCap,
+    BrainCircuit,
+    Microscope,
+    FlaskConical,
+    Database,
     DollarSign,
     BookOpenCheck,
-    Archive,
-    Laptop,
-    BrainCircuit,
-    Library,
-    Award,
-    FileText,
-    Mic,
-    GraduationCap,
     Users
 };
 
@@ -216,6 +220,7 @@ function VideoSection() {
     const videoId = 'kUrF38w5dRg';
 
     useEffect(() => {
+        // Function to load the YouTube IFrame Player API script
         const loadYouTubeAPI = () => {
             if (!(window as any).YT) {
                 const tag = document.createElement('script');
@@ -224,21 +229,24 @@ function VideoSection() {
                 firstScriptTag.parentNode!.insertBefore(tag, firstScriptTag);
             }
 
+            // This function creates an <iframe> (and YouTube player)
+            // after the API code downloads.
             (window as any).onYouTubeIframeAPIReady = () => {
                 playerRef.current = new (window as any).YT.Player('youtube-player', {
                     videoId: videoId,
                     playerVars: {
-                        autoplay: 1,
-                        mute: 1,
-                        loop: 1,
-                        playlist: videoId,
-                        controls: 0,
-                        showinfo: 0,
-                        modestbranding: 1,
-                        fs: 0,
+                        autoplay: 1,       // Autoplay the video
+                        mute: 1,           // Start muted
+                        loop: 1,           // Loop the video
+                        playlist: videoId, // Required for loop to work
+                        controls: 0,       // Hide default controls
+                        showinfo: 0,       // Hide video title
+                        modestbranding: 1, // Hide YouTube logo
+                        fs: 0,             // Hide fullscreen button
                     },
                     events: {
                         'onReady': (event: any) => {
+                             // The API will call this function when the video player is ready.
                              event.target.playVideo();
                         }
                     }
@@ -246,21 +254,24 @@ function VideoSection() {
             };
         };
 
+        // Ensure the div for the player exists before trying to load the API
         if (document.getElementById('youtube-player')) {
             loadYouTubeAPI();
         }
 
+        // Cleanup function to destroy the player when the component unmounts
         return () => {
-             // Cleanup if component unmounts
             if (playerRef.current) {
                 playerRef.current.destroy();
             }
+            // Avoid memory leaks
             (window as any).onYouTubeIframeAPIReady = null;
         };
-    }, []);
+    }, [videoId]); // Re-run effect if videoId changes
 
     const toggleMute = () => {
         if (!playerRef.current) return;
+
         if (playerRef.current.isMuted()) {
             playerRef.current.unMute();
             setIsMuted(false);
@@ -273,8 +284,9 @@ function VideoSection() {
     return (
         <section className="py-8 md:py-12 bg-background">
             <div className="container mx-auto px-4">
-                <div className="relative aspect-w-16 aspect-h-9">
-                    <div id="youtube-player" className="w-full h-full aspect-video rounded-lg shadow-lg overflow-hidden" />
+                <div className="relative w-full aspect-video rounded-lg shadow-lg overflow-hidden">
+                    {/* This div will be replaced by the YouTube IFrame */}
+                    <div id="youtube-player" className="w-full h-full" />
                     <Button
                         onClick={toggleMute}
                         variant="ghost"
@@ -348,15 +360,18 @@ function CommitmentSection() {
                 const commitmentsCollection = collection(db, "commitments");
                 const commitmentsSnapshot = await getDocs(commitmentsCollection);
                 const commitmentsList = commitmentsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Commitment));
-                setCommitments(commitmentsList);
+                // Show only top 5, or all if less than 5
+                 const topCommitments = commitmentsList.length > 5 ? commitmentsList.slice(0, 5) : commitmentsList;
+                setCommitments(topCommitments);
+
             } catch (error) {
                 console.error("Error fetching commitments, using fallback.", error);
-                const fallbackCommitments = [
-                    { id: "1", icon: "DollarSign", title: "গবেষণা তহবিল ও স্কলারশিপ", description: "আমি বিভাগভিত্তিক গবেষণা তহবিল এবং আন্তর্জাতিক স্কলারশিপের জন্য ‘রিসার্চ হেল্প ডেস্ক’ চালু করব।" },
-                    { id: "2", icon: "BookOpenCheck", title: "শিক্ষার্থীদের নিজস্ব জার্নাল", description: "আমি ডাকসুর উদ্যোগে একটি স্টুডেন্ট জার্নাল (SJDU) প্রকাশ করব, যেখানে শিক্ষার্থীরা তাদের গবেষণা প্রকাশ করতে পারবে।" },
-                    { id: "3", icon: "Archive", title: "ডিজিটাল আর্কাইভ ও ওপেন অ্যাকসেস", description: "আমি প্রতিটি বিভাগের গবেষণা-প্রবন্ধ ও থিসিসের জন্য ডিজিটাল আর্কাইভ তৈরি এবং আন্তর্জাতিক জার্নালে সহজ অ্যাক্সেস নিশ্চিত করব।" },
-                    { id: "4", icon: "Laptop", title: "প্রশিক্ষণ ও কর্মশালা", description: "আমি একাডেমিক রাইটিং, গবেষণা পদ্ধতি এবং বিভিন্ন সফটওয়্যারের উপর নিয়মিত কর্মশালা আয়োজন করব।" },
-                    { id: "5", icon: "Users", title: "গবেষণায় স্বচ্ছতা ও অংশগ্রহণ", description: "আমি প্রতিটি উদ্যোগ শিক্ষার্থীদের পরামর্শ ও অংশগ্রহণের মাধ্যমে গড়ে তুলব।" },
+                 const fallbackCommitments = [
+                    { id: "1", icon: "BadgePercent", title: "বাজেট বাড়াও, গবেষণা বাঁচাও", description: "নির্বাচিত হলে গবেষণা বাজেট ২% থেকে ২০% বা তার বেশিতে উন্নীত করাই হবে আমার প্রধান লক্ষ্য।" },
+                    { id: "2", icon: "Laptop", title: "একাডেমিক রাইটিং ও সফটওয়্যার ট্রেনিং", description: "R, SPSS, Python, Excel, GIS, MS Word-এর মতো গুরুত্বপূর্ণ সফটওয়্যারের উপর নিয়মিত বিনামূল্যে কর্মশালা আয়োজন করব।" },
+                    { id: "3", icon: "HandCoins", title: "রিসোর্স হেল্পডেস্ক প্রতিষ্ঠা", description: "বিভাগভিত্তিক গবেষণা তহবিল ও আন্তর্জাতিক স্কলারশিপের সহায়তার জন্য একটি বিশেষ ‘রিসোর্স হেল্পডেস্ক’ প্রতিষ্ঠা করব।" },
+                    { id: "4", icon: "Mail", title: "জার্নাল অ্যাক্সেস ও ই-মেইল সক্ষমতা", description: "ইন্সটিটিউশনাল মেইল আইডির সক্ষমতা বৃদ্ধি করব এবং বিশ্বমানের জার্নালগুলোতে বিনামূল্যে অ্যাক্সেস নিশ্চিত করব।" },
+                    { id: "5", icon: "BookOpen", title: "ডাকসুর নিজস্ব স্টুডেন্ট জার্নাল", description: "ডাকসুর উদ্যোগে একটি মানসম্মত 'স্টুডেন্ট জার্নাল' প্রকাশ করব, যেখানে শিক্ষার্থীরা তাদের গবেষণা সহজে প্রকাশ করতে পারবে।" },
                 ];
                 setCommitments(fallbackCommitments);
             } finally {
@@ -385,7 +400,7 @@ function CommitmentSection() {
                              <div className="h-4 w-5/6 bg-muted/50 rounded mt-2 mx-auto animate-pulse"></div>
                         </Card>
                     )) : commitments.map((commitment) => {
-                        const IconComponent = icons[commitment.icon];
+                        const IconComponent = icons[commitment.icon] || BrainCircuit;
                         return (
                             <Card key={commitment.id} className="text-center shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 bg-card">
                                 <CardHeader className="items-center">
@@ -400,6 +415,13 @@ function CommitmentSection() {
                             </Card>
                         );
                     })}
+                </div>
+                 <div className="text-center mt-12">
+                    <Button asChild size="lg">
+                        <Link href="/manifesto">
+                            সকল অঙ্গীকার দেখুন <ArrowRight className="ml-2" />
+                        </Link>
+                    </Button>
                 </div>
             </div>
         </section>
@@ -471,7 +493,7 @@ const researchActivities = [
   {
     icon: Heart,
     title: "আমার গবেষণা",
-    description: "আমি কেবল একজন প্রার্থী নই, বরং একজন সক্রিয় গবেষক। আমি বাংলাদেশ জুওলজিক্যাল সোসাইটির বার্ষিক সাধারণ সভায় নিয়মিত উপস্থিত থেকে দেশের সেরা গবেষক ও শিক্ষাবিদদের সাথে জ্ঞান আদান-প্রদান করি। আমার নিজস্ব গবেষণাগারে নিরলস কাজ করার অভিজ্ঞতা আমাকে শিক্ষার্থীদের বাস্তব সমস্যাগুলো বুঝতে সাহায্য করে।",
+    description: "আমি কেবল একজন প্রার্থী নই, বরং একজন সক্রিয় গবেষক। আমি বাংলাদেশ জুওলজিক্যাল সোসাইটির বার্ষিক সাধারণ সভায় নিয়মিত উপস্থিত থেকে দেশের সেরা গবেষক ও শিক্ষাবিদদের সাথে জ্ঞান আdan-প্রদান করি। আমার নিজস্ব গবেষণাগারে নিরলস কাজ করার অভিজ্ঞতা আমাকে শিক্ষার্থীদের বাস্তব সমস্যাগুলো বুঝতে সাহায্য করে।",
     images: [
       { src: "https://i.postimg.cc/vHRK5YwG/photo-2025-08-18-02-08-33.jpg", alt: "গবেষণাগারে কাজ করছি", hint: "working in lab" },
       { src: "https://i.postimg.cc/9XZXtkTj/photo-2025-08-18-01-30-06.jpg", alt: "গবেষণার সরঞ্জাম", hint: "research equipment" },
@@ -1428,21 +1450,3 @@ function PreVoteSection() {
         </section>
     );
 }
-
-    
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-    
