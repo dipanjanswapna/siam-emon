@@ -90,17 +90,6 @@ export default function RootLayout({
         <Header />
         <PromotionalPopup />
         <main className="flex-grow">{children}</main>
-        <section className="w-full">
-            <div className="relative w-full h-auto aspect-[16/9]">
-                 <Image 
-                    src="https://i.postimg.cc/CLsswhQ1/Screenshot-2025-08-18-035352-removebg-preview.png"
-                    alt="Campaign Banner"
-                    fill
-                    className="object-contain"
-                    data-ai-hint="campaign banner"
-                 />
-            </div>
-        </section>
         <Footer />
         <Toaster />
         <FloatingVoteButton />

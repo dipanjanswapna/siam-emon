@@ -111,10 +111,10 @@ export default function Home() {
   return (
     <div className="flex flex-col">
       <NewHeroSection />
-      <VideoSection />
       <AboutSection />
       <NoticeSection />
       <VoteBannerSection />
+      <ImageBannerSection />
       <CommitmentSection />
       <ResearchSection />
       <PublicationSection />
@@ -214,91 +214,6 @@ function NewHeroSection() {
   )
 }
 
-function VideoSection() {
-    const playerRef = useRef<any>(null);
-    const [isMuted, setIsMuted] = useState(true);
-    const videoId = 'kUrF38w5dRg';
-
-    useEffect(() => {
-        const loadYouTubeAPI = () => {
-            if (!(window as any).YT) {
-                const tag = document.createElement('script');
-                tag.src = "https://www.youtube.com/iframe_api";
-                const firstScriptTag = document.getElementsByTagName('script')[0];
-                if (firstScriptTag && firstScriptTag.parentNode) {
-                    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-                }
-            }
-
-            (window as any).onYouTubeIframeAPIReady = () => {
-                if (document.getElementById('youtube-player')) {
-                    playerRef.current = new (window as any).YT.Player('youtube-player', {
-                        videoId: videoId,
-                        playerVars: {
-                            autoplay: 1,
-                            mute: 1,
-                            loop: 1,
-                            playlist: videoId,
-                            controls: 0,
-                            showinfo: 0,
-                            modestbranding: 1,
-                            fs: 0,
-                        },
-                        events: {
-                            'onReady': (event: any) => {
-                                 event.target.playVideo();
-                            }
-                        }
-                    });
-                }
-            };
-        };
-
-        if (document.getElementById('youtube-player')) {
-            loadYouTubeAPI();
-        }
-
-        return () => {
-            if (playerRef.current && typeof playerRef.current.destroy === 'function') {
-                playerRef.current.destroy();
-            }
-            (window as any).onYouTubeIframeAPIReady = null;
-        };
-    }, [videoId]);
-
-    const toggleMute = () => {
-        if (!playerRef.current) return;
-
-        if (playerRef.current.isMuted()) {
-            playerRef.current.unMute();
-            setIsMuted(false);
-        } else {
-            playerRef.current.mute();
-            setIsMuted(true);
-        }
-    };
-
-    return (
-        <section className="py-8 md:py-12 bg-background">
-            <div className="container mx-auto px-4">
-                <div className="relative w-full aspect-video rounded-lg shadow-lg overflow-hidden">
-                    <div id="youtube-player" className="w-full h-full" />
-                    <Button
-                        onClick={toggleMute}
-                        variant="ghost"
-                        size="icon"
-                        className="absolute top-2 right-2 md:top-4 md:right-4 bg-black/50 hover:bg-black/70 text-white rounded-full z-10"
-                    >
-                        {isMuted ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
-                        <span className="sr-only">{isMuted ? 'Unmute' : 'Mute'}</span>
-                    </Button>
-                </div>
-            </div>
-        </section>
-    );
-}
-
-
 function AboutSection() {
   return (
     <section className="py-8 md:py-12 bg-background">
@@ -355,7 +270,18 @@ function CommitmentSection() {
             try {
                 const commitmentsCollection = collection(db, "commitments");
                 const commitmentsSnapshot = await getDocs(commitmentsCollection);
-                const commitmentsList = commitmentsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Commitment));
+                let commitmentsList = commitmentsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Commitment));
+                
+                 if (commitmentsList.length === 0) {
+                   commitmentsList = [
+                        { id: "1", icon: "BadgePercent", title: "বাজেট বাড়াও, গবেষণা বাঁচাও", description: "নির্বাচিত হলে গবেষণা বাজেট ২% থেকে ২০% বা তার বেশিতে উন্নীত করাই হবে আমার প্রধান লক্ষ্য।" },
+                        { id: "2", icon: "Laptop", title: "একাডেমিক রাইটিং ও সফটওয়্যার ট্রেনিং", description: "R, SPSS, Python, Excel, GIS, MS Word-এর মতো গুরুত্বপূর্ণ সফটওয়্যারের উপর নিয়মিত বিনামূল্যে কর্মশালা আয়োজন করব।" },
+                        { id: "3", icon: "HandCoins", title: "রিসোর্স হেল্পডেস্ক প্রতিষ্ঠা", description: "বিভাগভিত্তিক গবেষণা তহবিল ও আন্তর্জাতিক স্কলারশিপের সহায়তার জন্য একটি বিশেষ ‘রিসোর্স হেল্পডেস্ক’ প্রতিষ্ঠা করব।" },
+                        { id: "4", icon: "Mail", title: "জার্নাল অ্যাক্সেস ও ই-মেইল সক্ষমতা", description: "ইন্সটিটিউশনাল মেইল আইডির সক্ষমতা বৃদ্ধি করব এবং বিশ্বমানের জার্নালগুলোতে বিনামূল্যে অ্যাক্সেস নিশ্চিত করব।" },
+                        { id: "5", icon: "BookOpen", title: "ডাকসুর নিজস্ব স্টুডেন্ট জার্নাল", description: "ডাকসুর উদ্যোগে একটি মানসম্মত 'স্টুডেন্ট জার্নাল' প্রকাশ করব, যেখানে শিক্ষার্থীরা তাদের গবেষণা সহজে প্রকাশ করতে পারবে।" }
+                    ];
+                }
+
                 const topCommitments = commitmentsList.length > 4 ? commitmentsList.slice(0, 4) : commitmentsList;
                 setCommitments(topCommitments);
 
@@ -488,6 +414,22 @@ function VoteBannerSection() {
       </div>
     </section>
   );
+}
+
+function ImageBannerSection() {
+    return (
+        <section className="w-full">
+            <div className="relative w-full h-auto aspect-[16/5] md:aspect-[16/4]">
+                <Image 
+                    src="https://i.postimg.cc/CLsswhQ1/Screenshot-2025-08-18-035352-removebg-preview.png"
+                    alt="ভোট দিন আমাকে! আপনার ভোটে গড়ে উঠুক একটি গবেষণা-উদ্যমী ডাকসু"
+                    fill
+                    className="object-contain"
+                    data-ai-hint="vote appeal banner"
+                />
+            </div>
+        </section>
+    );
 }
 
 const researchActivities = [
@@ -1451,5 +1393,3 @@ function PreVoteSection() {
         </section>
     );
 }
-
-    
