@@ -355,7 +355,6 @@ function CommitmentSection() {
                         { id: "2", icon: "Laptop", title: "একাডেমিক রাইটিং ও সফটওয়্যার ট্রেনিং", description: "R, SPSS, Python, Excel, GIS, MS Word-এর মতো গুরুত্বপূর্ণ সফটওয়্যারের উপর নিয়মিত বিনামূল্যে কর্মশালা আয়োজন করব।" },
                         { id: "3", icon: "HandCoins", title: "রিসোর্স হেল্পডেস্ক প্রতিষ্ঠা", description: "বিভাগভিত্তিক গবেষণা তহবিল ও আন্তর্জাতিক স্কলারশিপের সহায়তার জন্য একটি বিশেষ ‘রিসোর্স হেল্পডেস্ক’ প্রতিষ্ঠা করব।" },
                         { id: "4", icon: "Mail", title: "জার্নাল অ্যাক্সেস ও ই-মেইল সক্ষমতা", description: "ইন্সটিটিউশনাল মেইল আইডির সক্ষমতা বৃদ্ধি করব এবং বিশ্বমানের জার্নালগুলোতে বিনামূল্যে অ্যাক্সেস নিশ্চিত করব।" },
-                        { id: "5", icon: "BookOpen", title: "ডাকসুর নিজস্ব স্টুডেন্ট জার্নাল", description: "ডাকসুর উদ্যোগে একটি মানসম্মত 'স্টুডেন্ট জার্নাল' প্রকাশ করব, যেখানে শিক্ষার্থীরা তাদের গবেষণা সহজে প্রকাশ করতে পারবে।" }
                     ];
                 }
 
@@ -474,19 +473,23 @@ function NoticeSection() {
 
 function VoteBannerSection() {
   return (
-    <section className="bg-primary/20 py-12 md:py-16">
-      <div className="container mx-auto px-4 text-center">
-        <h2 className="text-3xl md:text-5xl font-bold font-headline text-red-600 drop-shadow-md">
+    <section 
+        className="py-12 md:py-16 bg-cover bg-center bg-no-repeat relative"
+        style={{backgroundImage: "url('https://i.postimg.cc/25Cmr4dk/SEAM-VAIAAAAA-Picsart-Ai-Image-Enhancer.jpg')"}}
+    >
+      <div className="absolute inset-0 bg-black/60"></div>
+      <div className="container mx-auto px-4 text-center relative z-10">
+        <h2 className="text-3xl md:text-5xl font-bold font-headline text-red-500 drop-shadow-md">
           Remember, the Last Hope in Ballot no. 9
         </h2>
-        <p className="mt-4 font-body text-xl md:text-2xl text-foreground max-w-3xl mx-auto">
+        <p className="mt-4 font-body text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto">
           নয়(৯) অবহেলা, নয়(৯) বৈষম্য, নয়(৯) বাজেট সংকট। <br/>
           ৯ তারিখ সারাদিন, ৯ নং ব্যালটে গবেষণায় সিয়ামকে ভোট দিন।
         </p>
-        <div className="mt-8 bg-background/70 border-2 border-dashed border-primary rounded-lg p-6 max-w-md mx-auto shadow-xl">
+        <div className="mt-8 bg-background/20 backdrop-blur-sm border-2 border-dashed border-primary rounded-lg p-6 max-w-md mx-auto shadow-xl">
             <h3 className="font-headline text-4xl font-extrabold text-primary">সিয়াম ফেরদৌস ইমন</h3>
-            <p className="font-body text-foreground text-2xl mt-1">ব্যালট নং <span className="font-extrabold text-3xl text-red-600">০৯</span></p>
-            <p className="font-body text-muted-foreground text-xl">গবেষণা ও প্রকাশনা সম্পাদক পদপ্রার্থী</p>
+            <p className="font-body text-white text-2xl mt-1">ব্যালট নং <span className="font-extrabold text-3xl text-red-500">০৯</span></p>
+            <p className="font-body text-gray-200 text-xl">গবেষণা ও প্রকাশনা সম্পাদক পদপ্রার্থী</p>
         </div>
       </div>
     </section>
@@ -1478,3 +1481,6 @@ function PreVoteSection() {
         </section>
     );
 }
+
+
+    
