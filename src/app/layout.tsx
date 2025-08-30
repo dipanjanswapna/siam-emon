@@ -68,7 +68,7 @@ function ImageBannerSection() {
             <div className="container mx-auto">
                 <div className="relative w-full h-auto aspect-[16/4] md:aspect-[16/3] lg:aspect-[16/2]">
                     <Image 
-                        src="https://i.postimg.cc/Qd1nSgR7/Screenshot-2025-08-30-194451-removebg-preview.png"
+                        src="https://i.postimg.cc/CLsswhQ1/Screenshot-2025-08-18-035352-removebg-preview.png"
                         alt="ভোট দিন আমাকে! আপনার ভোটে গড়ে উঠুক একটি গবেষণা-উদ্যমী ডাকসু"
                         fill
                         className="object-contain"
