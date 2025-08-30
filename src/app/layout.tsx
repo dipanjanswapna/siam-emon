@@ -6,6 +6,7 @@ import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
 import { Toaster } from '@/components/ui/toaster';
 import { FloatingFeedbackButton } from '@/components/layout/FloatingFeedbackButton';
+import { FloatingVoteButton } from '@/components/layout/FloatingVoteButton';
 import { PromotionalPopup } from '@/components/layout/PromotionalPopup';
 import Image from 'next/image';
 import Script from 'next/script';
@@ -102,6 +103,7 @@ export default function RootLayout({
         </section>
         <Footer />
         <Toaster />
+        <FloatingVoteButton />
         <FloatingFeedbackButton />
       </body>
     </html>
