@@ -60,7 +60,7 @@ const carouselItems = [
   },
   {
     title: "জাতীয় সম্মেলনে আমার অংশগ্রহণ",
-    subtitle: "গবেষণা ও প্রকাশনার प्रति প্রতিশ্রুতি",
+    subtitle: "গবেষণা ও প্রকাশনার প্রতি প্রতিশ্রুতি",
     description: "২৪তম জাতীয় সম্মেলন এবং বাংলাদেশ জুওলজিক্যাল সোসাইটির বার্ষিক সাধারণ সভায় উপস্থিত থেকে আমি দেশের সেরা গবেষক ও শিক্ষাবিদদের সাথে গবেষণা ও প্রকাশনা খাতের ভবিষ্যৎ নিয়ে আলোচনা করি।",
     image: "https://i.postimg.cc/26MQRS7y/Screenshot-2025-08-18-015837.png",
     imageHint: "national conference"
@@ -220,54 +220,51 @@ function VideoSection() {
     const videoId = 'kUrF38w5dRg';
 
     useEffect(() => {
-        // Function to load the YouTube IFrame Player API script
         const loadYouTubeAPI = () => {
             if (!(window as any).YT) {
                 const tag = document.createElement('script');
                 tag.src = "https://www.youtube.com/iframe_api";
                 const firstScriptTag = document.getElementsByTagName('script')[0];
-                firstScriptTag.parentNode!.insertBefore(tag, firstScriptTag);
+                if (firstScriptTag && firstScriptTag.parentNode) {
+                    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+                }
             }
 
-            // This function creates an <iframe> (and YouTube player)
-            // after the API code downloads.
             (window as any).onYouTubeIframeAPIReady = () => {
-                playerRef.current = new (window as any).YT.Player('youtube-player', {
-                    videoId: videoId,
-                    playerVars: {
-                        autoplay: 1,       // Autoplay the video
-                        mute: 1,           // Start muted
-                        loop: 1,           // Loop the video
-                        playlist: videoId, // Required for loop to work
-                        controls: 0,       // Hide default controls
-                        showinfo: 0,       // Hide video title
-                        modestbranding: 1, // Hide YouTube logo
-                        fs: 0,             // Hide fullscreen button
-                    },
-                    events: {
-                        'onReady': (event: any) => {
-                             // The API will call this function when the video player is ready.
-                             event.target.playVideo();
+                if (document.getElementById('youtube-player')) {
+                    playerRef.current = new (window as any).YT.Player('youtube-player', {
+                        videoId: videoId,
+                        playerVars: {
+                            autoplay: 1,
+                            mute: 1,
+                            loop: 1,
+                            playlist: videoId,
+                            controls: 0,
+                            showinfo: 0,
+                            modestbranding: 1,
+                            fs: 0,
+                        },
+                        events: {
+                            'onReady': (event: any) => {
+                                 event.target.playVideo();
+                            }
                         }
-                    }
-                });
+                    });
+                }
             };
         };
 
-        // Ensure the div for the player exists before trying to load the API
         if (document.getElementById('youtube-player')) {
             loadYouTubeAPI();
         }
 
-        // Cleanup function to destroy the player when the component unmounts
         return () => {
-            if (playerRef.current) {
+            if (playerRef.current && typeof playerRef.current.destroy === 'function') {
                 playerRef.current.destroy();
             }
-            // Avoid memory leaks
             (window as any).onYouTubeIframeAPIReady = null;
         };
-    }, [videoId]); // Re-run effect if videoId changes
+    }, [videoId]);
 
     const toggleMute = () => {
         if (!playerRef.current) return;
@@ -285,7 +282,6 @@ function VideoSection() {
         <section className="py-8 md:py-12 bg-background">
             <div className="container mx-auto px-4">
                 <div className="relative w-full aspect-video rounded-lg shadow-lg overflow-hidden">
-                    {/* This div will be replaced by the YouTube IFrame */}
                     <div id="youtube-player" className="w-full h-full" />
                     <Button
                         onClick={toggleMute}
@@ -360,8 +356,7 @@ function CommitmentSection() {
                 const commitmentsCollection = collection(db, "commitments");
                 const commitmentsSnapshot = await getDocs(commitmentsCollection);
                 const commitmentsList = commitmentsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Commitment));
-                // Show only top 5, or all if less than 5
-                 const topCommitments = commitmentsList.length > 5 ? commitmentsList.slice(0, 5) : commitmentsList;
+                const topCommitments = commitmentsList.length > 4 ? commitmentsList.slice(0, 4) : commitmentsList;
                 setCommitments(topCommitments);
 
             } catch (error) {
@@ -371,7 +366,6 @@ function CommitmentSection() {
                     { id: "2", icon: "Laptop", title: "একাডেমিক রাইটিং ও সফটওয়্যার ট্রেনিং", description: "R, SPSS, Python, Excel, GIS, MS Word-এর মতো গুরুত্বপূর্ণ সফটওয়্যারের উপর নিয়মিত বিনামূল্যে কর্মশালা আয়োজন করব।" },
                     { id: "3", icon: "HandCoins", title: "রিসোর্স হেল্পডেস্ক প্রতিষ্ঠা", description: "বিভাগভিত্তিক গবেষণা তহবিল ও আন্তর্জাতিক স্কলারশিপের সহায়তার জন্য একটি বিশেষ ‘রিসোর্স হেল্পডেস্ক’ প্রতিষ্ঠা করব।" },
                     { id: "4", icon: "Mail", title: "জার্নাল অ্যাক্সেস ও ই-মেইল সক্ষমতা", description: "ইন্সটিটিউশনাল মেইল আইডির সক্ষমতা বৃদ্ধি করব এবং বিশ্বমানের জার্নালগুলোতে বিনামূল্যে অ্যাক্সেস নিশ্চিত করব।" },
-                    { id: "5", icon: "BookOpen", title: "ডাকসুর নিজস্ব স্টুডেন্ট জার্নাল", description: "ডাকসুর উদ্যোগে একটি মানসম্মত 'স্টুডেন্ট জার্নাল' প্রকাশ করব, যেখানে শিক্ষার্থীরা তাদের গবেষণা সহজে প্রকাশ করতে পারবে।" },
                 ];
                 setCommitments(fallbackCommitments);
             } finally {
@@ -391,8 +385,8 @@ function CommitmentSection() {
                         প্রিয় ঢাকা বিশ্ববিদ্যালয়ের সহপাঠীরা, আমরা সবাই জানি—জ্ঞানচর্চা, গবেষণা আর প্রকাশনা ছাড়া প্রকৃত উচ্চশিক্ষার অগ্রগতি সম্ভব নয়। কিন্তু আমাদের অনেক সম্ভাবনাময় গবেষণা কেবল সুযোগ ও প্ল্যাটফর্মের অভাবে থেমে যায়। আমি প্রতিশ্রুতি দিচ্ছি, যদি আপনারা আমাকে ডাকসু ২০২৫-এ গবেষণা ও প্রকাশনা সম্পাদক হিসেবে দায়িত্ব দেন, তবে আমি বিভাগভিত্তিক গবেষণা তহবিল ও আন্তর্জাতিক স্কলারশিপের সহায়তা, ডাকসুর নিজস্ব স্টুডেন্ট জার্নাল প্রকাশ, প্রতিটি থিসিস ও গবেষণার জন্য ডিজিটাল আর্কাইভ, একাডেমিক রাইটিং ও সফটওয়্যার ট্রেনিং কর্মশালা এবং শিক্ষার্থীদের জন্য গবেষণাভিত্তিক কনফারেন্স ও সেমিনার আয়োজন করব। আপনার ভোটে গড়ে উঠুক একটি গবেষণা-উদ্যমী ডাকসু।
                     </p>
                 </div>
-                <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
-                    {isLoading ? Array.from({ length: 5 }).map((_, i) => (
+                <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    {isLoading ? Array.from({ length: 4 }).map((_, i) => (
                         <Card key={i} className="text-center shadow-lg bg-card p-6">
                             <div className="bg-muted/50 p-4 rounded-full w-20 h-20 mx-auto animate-pulse"></div>
                              <div className="h-6 w-3/4 bg-muted/50 rounded mt-4 mx-auto animate-pulse"></div>
@@ -479,11 +473,18 @@ function VoteBannerSection() {
   return (
     <section className="bg-primary/20 py-12 md:py-16">
       <div className="container mx-auto px-4 text-center">
-        <h2 className="text-4xl md:text-5xl font-bold font-headline text-green-700">ভোট দিন আমাকে!</h2>
-        <p className="mt-2 text-lg md:text-xl font-body text-foreground">আপনার প্রতিনিধি, আপনার কন্ঠস্বর | ডাকসু ২০২৫</p>
-        <p className="mt-4 inline-block bg-accent text-accent-foreground font-headline text-2xl md:text-3xl font-bold py-2 px-6 rounded-full shadow-lg transform hover:scale-105 transition-transform duration-300">
-          আপনার ভোটে গড়ে উঠুক একটি গবেষণা-উদ্যমী ডাকসু
+        <h2 className="text-3xl md:text-5xl font-bold font-headline text-red-600 drop-shadow-md">
+          Remember, the Last Hope in Ballot no. 9
+        </h2>
+        <p className="mt-4 font-body text-xl md:text-2xl text-foreground max-w-3xl mx-auto">
+          নয়(৯) অবহেলা, নয়(৯) বৈষম্য, নয়(৯) বাজেট সংকট। <br/>
+          ৯ তারিখ সারাদিন, ৯ নং ব্যালটে গবেষণায় সিয়ামকে ভোট দিন।
         </p>
+        <div className="mt-8 bg-background/70 border-2 border-dashed border-primary rounded-lg p-6 max-w-md mx-auto shadow-xl">
+            <h3 className="font-headline text-4xl font-extrabold text-primary">সিয়াম ফেরদৌস ইমন</h3>
+            <p className="font-body text-foreground text-2xl mt-1">ব্যালট নং <span className="font-extrabold text-3xl text-red-600">০৯</span></p>
+            <p className="font-body text-muted-foreground text-xl">গবেষণা ও প্রকাশনা সম্পাদক পদপ্রার্থী</p>
+        </div>
       </div>
     </section>
   );
@@ -833,7 +834,7 @@ const skillsAndLeadershipActivities = [
     title: "বারোয়ারী ডিবেট কম্পিটিশন, প্রজাপতি মেলা ২০২৩, জাহাঙ্গীরনগর বিশ্ববিদ্যালয়",
     description: "",
     images: [
-       { src: "https://i.postimg.cc/NfgFDsZH/photo_2025-08-21_23-30-00.jpg", alt: "বিতর্ক প্রতিযোগিতা", hint: "debate competition" },
+       { src: "https://i.postimg.cc/NfgFDsZH/photo_2025-08-21_23-30_00.jpg", alt: "বিতর্ক প্রতিযোগিতা", hint: "debate competition" },
        { src: "https://i.postimg.cc/T1xwZfwB/photo_2025-08-21_23-30_31.jpg", alt: "বিতর্ক প্রতিযোগিতা", hint: "debate competition" },
     ],
   },
@@ -842,7 +843,7 @@ const skillsAndLeadershipActivities = [
     title: "Intra Department Football Tournament 2023",
     description: "",
     images: [
-        { src: "https://i.postimg.cc/SNDsv0pt/photo_2025-08-21_23-30-10.jpg", alt: "ফুটবল টুর্নামেন্ট", hint: "football tournament" },
+        { src: "https://i.postimg.cc/SNDsv0pt/photo_2025-08-21_23-30_10.jpg", alt: "ফুটবল টুর্নামেন্ট", hint: "football tournament" },
     ],
   },
   {
@@ -850,7 +851,7 @@ const skillsAndLeadershipActivities = [
     title: "প্রজাপতি মেলা ২০২১, ডিবেট কম্পিটিশন চ্যাম্পিয়ন, বারোয়ারী ডিবেট রানার্সআপ",
     description: "",
     images: [
-        { src: "https://i.postimg.cc/XNKX9G1W/photo_2025-08-21_23-30-16.jpg", alt: "প্রজাপতি মেলা পুরস্কার", hint: "butterfly fair award" },
+        { src: "https://i.postimg.cc/XNKX9G1W/photo_2025-08-21_23-30_16.jpg", alt: "প্রজাপতি মেলা পুরস্কার", hint: "butterfly fair award" },
         { src: "https://i.postimg.cc/qqGRrS6q/photo_2025-08-21_23-30_21.jpg", alt: "প্রজাপতি মেলা পুরস্কার", hint: "butterfly fair award" },
         { src: "https://i.postimg.cc/xCM8xc0K/photo_2025-08-21_23-30_26.jpg", alt: "প্রজাপতি মেলা পুরস্কার", hint: "butterfly fair award" },
     ],
@@ -1450,3 +1451,5 @@ function PreVoteSection() {
         </section>
     );
 }
+
+    
