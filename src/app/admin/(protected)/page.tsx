@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Shield, PlusCircle, Edit, Trash2, BrainCircuit, BookOpenCheck, Library, Award, FileText, Mic, GraduationCap, ImagePlus, LogOut, MessageSquare, Users, Bell, Image as ImageIcon, Settings, Megaphone, Camera } from "lucide-react";
+import { Shield, PlusCircle, Edit, Trash2, BrainCircuit, BookOpenCheck, Library, Award, FileText, Mic, GraduationCap, ImagePlus, LogOut, MessageSquare, Users, Bell, Image as ImageIcon, Settings, Megaphone, Camera, Quote } from "lucide-react";
 import { useState, useEffect } from "react";
 import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc, orderBy, query, serverTimestamp, setDoc, getDoc } from "firebase/firestore";
 import { db, auth } from "@/lib/firebase";
@@ -101,6 +101,14 @@ type GalleryImage = {
     hint: string;
 };
 
+type Testimonial = {
+    id: string;
+    name: string;
+    role: string;
+    image: string;
+    imageHint: string;
+    testimonial: string;
+};
 
 const iconMap = {
     BrainCircuit: <BrainCircuit />,
@@ -121,6 +129,7 @@ function AdminPage() {
     const [notice, setNotice] = useState<Notice>({ id: "live-notice", text: "" });
     const [promotionalPopup, setPromotionalPopup] = useState<PromotionalPopup>({ id: "promotional-popup", enabled: true, imageUrl: "", displayFrequency: "once-per-session" });
     const [galleryImages, setGalleryImages] = useState<GalleryImage[]>([]);
+    const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     
     const [isCommitmentFormOpen, setIsCommitmentFormOpen] = useState(false);
@@ -140,6 +149,10 @@ function AdminPage() {
 
     const [isGalleryImageFormOpen, setIsGalleryImageFormOpen] = useState(false);
     const [currentGalleryImage, setCurrentGalleryImage] = useState<Partial<GalleryImage>>({});
+    
+    const [isTestimonialFormOpen, setIsTestimonialFormOpen] = useState(false);
+    const [currentTestimonial, setCurrentTestimonial] = useState<Partial<Testimonial>>({});
+    const [isEditingTestimonial, setIsEditingTestimonial] = useState(false);
 
     const [signOut] = useSignOut(auth);
     const router = useRouter();
@@ -203,6 +216,13 @@ function AdminPage() {
         setGalleryImages(galleryList);
     };
 
+    const fetchTestimonials = async () => {
+        const testimonialsCollection = collection(db, "testimonials");
+        const testimonialsSnapshot = await getDocs(testimonialsCollection);
+        const testimonialsList = testimonialsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Testimonial));
+        setTestimonials(testimonialsList);
+    };
+
     const loadAllData = async () => {
         setIsLoading(true);
         try {
@@ -215,6 +235,7 @@ function AdminPage() {
                 fetchNotice(),
                 fetchPromotionalPopup(),
                 fetchGalleryImages(),
+                fetchTestimonials(),
             ]);
         } catch (error) {
             console.error("Error loading data: ", error);
@@ -581,6 +602,70 @@ function AdminPage() {
         }
     };
 
+    const handleTestimonialFormSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        const action = isEditingTestimonial ? 'আপডেট' : 'যোগ';
+        try {
+            const testimonialData = {
+                name: currentTestimonial.name,
+                role: currentTestimonial.role,
+                image: currentTestimonial.image,
+                imageHint: currentTestimonial.imageHint,
+                testimonial: currentTestimonial.testimonial,
+            };
+
+            if (isEditingTestimonial && currentTestimonial.id) {
+                const testimonialDoc = doc(db, "testimonials", currentTestimonial.id);
+                await updateDoc(testimonialDoc, testimonialData);
+            } else {
+                await addDoc(collection(db, "testimonials"), testimonialData);
+            }
+            closeTestimonialForm();
+            fetchTestimonials();
+            toast({
+                title: `প্রশংসাপত্র সফলভাবে ${action} হয়েছে`,
+            });
+        } catch (error) {
+            toast({
+                variant: 'destructive',
+                title: `প্রশংসাপত্র ${action} করতে সমস্যা হয়েছে`,
+                description: (error as Error).message,
+            });
+        }
+    };
+
+    const openTestimonialForm = (testimonial?: Testimonial) => {
+        if (testimonial) {
+            setCurrentTestimonial(testimonial);
+            setIsEditingTestimonial(true);
+        } else {
+            setCurrentTestimonial({ name: "", role: "", image: "https://placehold.co/400x400.png", imageHint: "", testimonial: "" });
+            setIsEditingTestimonial(false);
+        }
+        setIsTestimonialFormOpen(true);
+    };
+
+    const closeTestimonialForm = () => {
+        setIsTestimonialFormOpen(false);
+        setCurrentTestimonial({});
+        setIsEditingTestimonial(false);
+    };
+
+    const handleDeleteTestimonial = async (id: string) => {
+        try {
+            await deleteDoc(doc(db, "testimonials", id));
+            fetchTestimonials();
+            toast({
+                title: "প্রশংসাপত্র সফলভাবে মুছে ফেলা হয়েছে",
+            });
+        } catch (error) {
+            toast({
+                variant: 'destructive',
+                title: "প্রশংসাপত্র মুছে ফেলতে সমস্যা হয়েছে",
+                description: (error as Error).message,
+            });
+        }
+    };
 
     const handleSignOut = async () => {
         const success = await signOut();
@@ -821,6 +906,45 @@ function AdminPage() {
                                           />
                                             <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                                                 <Button variant="destructive" size="icon" onClick={() => handleDeleteSocialWork(sw.id)}>
+                                                    <Trash2 className="h-4 w-4" />
+                                                </Button>
+                                            </div>
+                                        </Card>
+                                    ))
+                                )}
+                            </div>
+                        </AccordionContent>
+                    </Card>
+                </AccordionItem>
+                <AccordionItem value="testimonials">
+                    <Card>
+                        <AccordionTrigger className="p-6">
+                            <CardTitle>শিক্ষার্থীদের মতামত ব্যবস্থাপনা</CardTitle>
+                        </AccordionTrigger>
+                        <AccordionContent className="p-6 pt-0">
+                            <div className="flex justify-end mb-4">
+                                <Button onClick={() => openTestimonialForm()}>
+                                    <Quote className="mr-2 h-4 w-4" /> নতুন মতামত যোগ করুন
+                                </Button>
+                            </div>
+                            <div className="space-y-4">
+                                {isLoading ? (
+                                    <p>লোড হচ্ছে...</p>
+                                ) : (
+                                    testimonials.map(t => (
+                                        <Card key={t.id} className="flex items-center justify-between p-4 bg-primary/5">
+                                            <div className="flex items-center gap-4">
+                                                <Image src={t.image} alt={t.name} width={50} height={50} className="rounded-full object-cover" />
+                                                <div>
+                                                    <h3 className="font-bold text-lg">{t.name}</h3>
+                                                    <p className="text-sm text-muted-foreground">{t.testimonial.substring(0, 50)}...</p>
+                                                </div>
+                                            </div>
+                                            <div className="flex items-center gap-2">
+                                                <Button variant="outline" size="icon" onClick={() => openTestimonialForm(t)}>
+                                                    <Edit className="h-4 w-4" />
+                                                </Button>
+                                                <Button variant="destructive" size="icon" onClick={() => handleDeleteTestimonial(t.id)}>
                                                     <Trash2 className="h-4 w-4" />
                                                 </Button>
                                             </div>
@@ -1208,10 +1332,80 @@ function AdminPage() {
                 </form>
             </DialogContent>
         </Dialog>
+
+        {/* Testimonial Form Dialog */}
+        <Dialog open={isTestimonialFormOpen} onOpenChange={setIsTestimonialFormOpen}>
+            <DialogContent className="max-w-lg w-full flex flex-col max-h-[90vh]">
+                <form onSubmit={handleTestimonialFormSubmit} className="flex flex-col flex-grow min-h-0">
+                    <DialogHeader className="flex-shrink-0">
+                        <DialogTitle>{isEditingTestimonial ? 'প্রশংসাপত্র সম্পাদনা করুন' : 'নতুন প্রশংসাপত্র যোগ করুন'}</DialogTitle>
+                        <DialogDescription>
+                            এখানে শিক্ষার্থীর নাম, ভূমিকা, ছবি এবং মতামত যোগ বা পরিবর্তন করুন।
+                        </DialogDescription>
+                    </DialogHeader>
+                    <ScrollArea className="flex-grow my-4 pr-6 -mr-6">
+                        <div className="space-y-4">
+                            <div className="space-y-2">
+                                <Label htmlFor="testim-name">নাম</Label>
+                                <Input
+                                    id="testim-name"
+                                    value={currentTestimonial.name || ''}
+                                    onChange={(e) => setCurrentTestimonial({ ...currentTestimonial, name: e.target.value })}
+                                    required
+                                />
+                            </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="testim-role">ভূমিকা</Label>
+                                <Input
+                                    id="testim-role"
+                                    value={currentTestimonial.role || ''}
+                                    onChange={(e) => setCurrentTestimonial({ ...currentTestimonial, role: e.target.value })}
+                                    required
+                                />
+                            </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="testim-image">ছবির URL</Label>
+                                <Input
+                                    id="testim-image"
+                                    value={currentTestimonial.image || ''}
+                                    onChange={(e) => setCurrentTestimonial({ ...currentTestimonial, image: e.target.value })}
+                                    placeholder="https://placehold.co/400x400.png"
+                                    required
+                                />
+                            </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="testim-image-hint">ছবির Hint (for AI)</Label>
+                                <Input
+                                    id="testim-image-hint"
+                                    value={currentTestimonial.imageHint || ''}
+                                    onChange={(e) => setCurrentTestimonial({ ...currentTestimonial, imageHint: e.target.value })}
+                                    placeholder="e.g., male student"
+                                    required
+                                />
+                            </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="testim-testimonial">প্রশংসাপত্র</Label>
+                                <Textarea
+                                    id="testim-testimonial"
+                                    value={currentTestimonial.testimonial || ''}
+                                    onChange={(e) => setCurrentTestimonial({ ...currentTestimonial, testimonial: e.target.value })}
+                                    rows={4}
+                                    required
+                                />
+                            </div>
+                        </div>
+                    </ScrollArea>
+                    <DialogFooter className="flex-shrink-0 pt-4">
+                        <Button type="submit">{isEditingTestimonial ? 'সংরক্ষণ করুন' : 'যোগ করুন'}</Button>
+                        <DialogClose asChild>
+                            <Button type="button" variant="secondary" onClick={closeTestimonialForm}>বাতিল</Button>
+                        </DialogClose>
+                    </DialogFooter>
+                </form>
+            </DialogContent>
+        </Dialog>
     </div>
   );
 }
 
 export default useAuth(AdminPage);
-
-    

@@ -1098,8 +1098,18 @@ function SocialWorkSection() {
     );
 }
 
-const testimonials = [
+type Testimonial = {
+    id: string;
+    name: string;
+    role: string;
+    image: string;
+    imageHint: string;
+    testimonial: string;
+};
+
+const fallbackTestimonials: Testimonial[] = [
     {
+        id: "fallback-1",
         name: "আফরিন সুলতানা",
         role: "শিক্ষার্থী, অর্থনীতি বিভাগ",
         image: "https://i.postimg.cc/W3fJmG8p/female-student-1.jpg",
@@ -1107,6 +1117,7 @@ const testimonials = [
         testimonial: "সিয়াম ভাই শুধু একজন ভালো সংগঠকই নন, একজন অসাধারণ মানুষও। হলের যেকোনো সমস্যায় আমরা তাকে সবসময় পাশে পেয়েছি। তার মতো একজন নিবেদিতপ্রাণ নেতাই ডাকসুতে প্রয়োজন।"
     },
     {
+        id: "fallback-2",
         name: "তারেক হাসান",
         role: "শিক্ষার্থী, কম্পিউটার বিজ্ঞান ও প্রকৌশল বিভাগ",
         image: "https://i.postimg.cc/t4G2wDk1/male-student-1.jpg",
@@ -1114,6 +1125,7 @@ const testimonials = [
         testimonial: "গবেষণার প্রতি সিয়াম ভাইয়ের আগ্রহ এবং তার পরিকল্পনাগুলো সত্যিই প্রশংসার যোগ্য। তার 'রিসোর্স হেল্পডেস্ক' এবং 'ডিজিটাল আর্কাইভ' এর ধারণাগুলো বাস্তবায়িত হলে আমাদের মতো তরুণ গবেষকরা অনেক উপকৃত হবে।"
     },
     {
+        id: "fallback-3",
         name: "সুমাইয়া আক্তার",
         role: "শিক্ষার্থী, আন্তর্জাতিক সম্পর্ক বিভাগ",
         image: "https://i.postimg.cc/Wb04ZkXp/female-student-2.jpg",
@@ -1121,6 +1133,7 @@ const testimonials = [
         testimonial: "যৌক্তিক আন্দোলনে সিয়াম ভাইয়ের সাহসী ভূমিকা আমাদের সবসময় অনুপ্রাণিত করে। তিনি শুধু কথার নেতা নন, কাজের মাধ্যমে নিজেকে প্রমাণ করেছেন। আমরা তার মতো একজন প্রতিনিধিই চাই।"
     },
     {
+        id: "fallback-4",
         name: "রাকিবুল ইসলাম",
         role: "আবাসিক শিক্ষার্থী, ফজলুল হক মুসলিম হল",
         image: "https://i.postimg.cc/wxM1807v/male-student-2.jpg",
@@ -1128,6 +1141,7 @@ const testimonials = [
         testimonial: "একজন হলের বড় ভাই হিসেবে সিয়াম ইমন ভাইয়ের তুলনা হয় না। পড়াশোনা থেকে শুরু করে ব্যক্তিগত সমস্যা—সবকিছুতেই তিনি আমাদের পরামর্শ দেন। তার মতো একজন অভিভাবক আমাদের প্রয়োজন।"
     },
     {
+        id: "fallback-5",
         name: "ফারহানা চৌধুরী",
         role: "শিক্ষার্থী, প্রাণিবিদ্যা বিভাগ",
         image: "https://i.postimg.cc/8c7pFdR9/female-student-3.jpg",
@@ -1137,10 +1151,30 @@ const testimonials = [
 ];
 
 function TestimonialSection() {
+    const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
     const [api, setApi] = useState<CarouselApi>();
     const [current, setCurrent] = useState(0);
 
     const plugin = useRef(Autoplay({ delay: 5000, stopOnInteraction: true }));
+
+    useEffect(() => {
+        const fetchTestimonials = async () => {
+            setIsLoading(true);
+            try {
+                const testimonialsCollection = collection(db, "testimonials");
+                const testimonialsSnapshot = await getDocs(testimonialsCollection);
+                const testimonialsList = testimonialsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Testimonial));
+                setTestimonials(testimonialsList.length > 0 ? testimonialsList : fallbackTestimonials);
+            } catch (error) {
+                console.error("Error fetching testimonials, using fallback.", error);
+                setTestimonials(fallbackTestimonials);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+        fetchTestimonials();
+    }, []);
 
     useEffect(() => {
         if (!api) return;
@@ -1152,6 +1186,8 @@ function TestimonialSection() {
             api.off("select", onSelect);
         };
     }, [api]);
+    
+    const displayData = isLoading ? Array.from({ length: 5 }).map((_, i) => ({id: `skel-${i}`})) : testimonials;
 
     return (
         <section className="py-16 md:py-24 bg-background">
@@ -1172,24 +1208,39 @@ function TestimonialSection() {
                     className="w-full mt-12"
                 >
                     <CarouselContent className="-ml-4">
-                        {testimonials.map((testimonial, index) => (
-                            <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 pl-4">
-                                <div className="p-1">
+                        {displayData.map((item, index) => (
+                            <CarouselItem key={item.id} className="md:basis-1/2 lg:basis-1/3 pl-4">
+                                <div className="p-1 h-full">
                                     <Card className="shadow-lg h-full flex flex-col items-center text-center p-8 transition-all duration-300 bg-card">
-                                        <div className="relative w-24 h-24 mb-4">
-                                            <Image
-                                                src={testimonial.image}
-                                                alt={testimonial.name}
-                                                fill
-                                                className="rounded-full object-cover border-4 border-primary/50"
-                                                data-ai-hint={testimonial.imageHint}
-                                            />
-                                        </div>
-                                        <CardTitle className="font-headline text-2xl">{testimonial.name}</CardTitle>
-                                        <CardDescription className="font-body text-primary">{testimonial.role}</CardDescription>
-                                        <p className="font-body text-muted-foreground mt-4 text-sm flex-grow">
-                                            "{testimonial.testimonial}"
-                                        </p>
+                                       {isLoading ? (
+                                           <>
+                                                <Skeleton className="w-24 h-24 rounded-full mb-4" />
+                                                <Skeleton className="h-7 w-32 mb-2" />
+                                                <Skeleton className="h-5 w-40 mb-4" />
+                                                <div className="space-y-2 w-full">
+                                                    <Skeleton className="h-4 w-full" />
+                                                    <Skeleton className="h-4 w-full" />
+                                                    <Skeleton className="h-4 w-3/4" />
+                                                </div>
+                                           </>
+                                       ) : (
+                                        <>
+                                            <div className="relative w-24 h-24 mb-4">
+                                                <Image
+                                                    src={(item as Testimonial).image}
+                                                    alt={(item as Testimonial).name}
+                                                    fill
+                                                    className="rounded-full object-cover border-4 border-primary/50"
+                                                    data-ai-hint={(item as Testimonial).imageHint}
+                                                />
+                                            </div>
+                                            <CardTitle className="font-headline text-2xl">{(item as Testimonial).name}</CardTitle>
+                                            <CardDescription className="font-body text-primary">{(item as Testimonial).role}</CardDescription>
+                                            <p className="font-body text-muted-foreground mt-4 text-sm flex-grow">
+                                                "{(item as Testimonial).testimonial}"
+                                            </p>
+                                        </>
+                                       )}
                                     </Card>
                                 </div>
                             </CarouselItem>
