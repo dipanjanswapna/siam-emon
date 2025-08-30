@@ -7,7 +7,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { ArrowRight, BookOpen, BookOpenCheck, BrainCircuit, Library, Users, Camera, X, Heart, Megaphone, Flag, Award, FileText, Mic, GraduationCap, HandHeart, BookText, ShieldCheck, MessageSquare, Mail, Icon, ImagePlus, Annoyed, HelpCircle, Vote, Share2, DollarSign, Archive, Laptop, Combine, Trophy, VolumeX, Volume2, FlaskConical, HandCoins, BadgePercent, Presentation, Database, Microscope } from "lucide-react";
+import { ArrowRight, BookOpen, BookOpenCheck, BrainCircuit, Library, Users, Camera, X, Heart, Megaphone, Flag, Award, FileText, Mic, GraduationCap, HandHeart, BookText, ShieldCheck, MessageSquare, Mail, Icon, ImagePlus, Annoyed, HelpCircle, Vote, Share2, DollarSign, Archive, Laptop, Combine, Trophy, VolumeX, Volume2, FlaskConical, HandCoins, BadgePercent, Presentation, Database, Microscope, Quote } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogClose } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -124,6 +124,7 @@ export default function Home() {
       <SkillsLeadershipServiceSection />
       <OrganizerAndEditorSection />
       <SocialWorkSection />
+      <TestimonialSection />
       <LeadershipSection />
       <FAQSection />
       <FeedbackSection />
@@ -1092,6 +1093,119 @@ function SocialWorkSection() {
                         ))
                     )}
                 </div>
+            </div>
+        </section>
+    );
+}
+
+const testimonials = [
+    {
+        name: "আফরিন সুলতানা",
+        role: "শিক্ষার্থী, অর্থনীতি বিভাগ",
+        image: "https://i.postimg.cc/W3fJmG8p/female-student-1.jpg",
+        imageHint: "female student",
+        testimonial: "সিয়াম ভাই শুধু একজন ভালো সংগঠকই নন, একজন অসাধারণ মানুষও। হলের যেকোনো সমস্যায় আমরা তাকে সবসময় পাশে পেয়েছি। তার মতো একজন নিবেদিতপ্রাণ নেতাই ডাকসুতে প্রয়োজন।"
+    },
+    {
+        name: "তারেক হাসান",
+        role: "শিক্ষার্থী, কম্পিউটার বিজ্ঞান ও প্রকৌশল বিভাগ",
+        image: "https://i.postimg.cc/t4G2wDk1/male-student-1.jpg",
+        imageHint: "male student",
+        testimonial: "গবেষণার প্রতি সিয়াম ভাইয়ের আগ্রহ এবং তার পরিকল্পনাগুলো সত্যিই প্রশংসার যোগ্য। তার 'রিসোর্স হেল্পডেস্ক' এবং 'ডিজিটাল আর্কাইভ' এর ধারণাগুলো বাস্তবায়িত হলে আমাদের মতো তরুণ গবেষকরা অনেক উপকৃত হবে।"
+    },
+    {
+        name: "সুমাইয়া আক্তার",
+        role: "শিক্ষার্থী, আন্তর্জাতিক সম্পর্ক বিভাগ",
+        image: "https://i.postimg.cc/Wb04ZkXp/female-student-2.jpg",
+        imageHint: "student portrait",
+        testimonial: "যৌক্তিক আন্দোলনে সিয়াম ভাইয়ের সাহসী ভূমিকা আমাদের সবসময় অনুপ্রাণিত করে। তিনি শুধু কথার নেতা নন, কাজের মাধ্যমে নিজেকে প্রমাণ করেছেন। আমরা তার মতো একজন প্রতিনিধিই চাই।"
+    },
+    {
+        name: "রাকিবুল ইসলাম",
+        role: "আবাসিক শিক্ষার্থী, ফজলুল হক মুসলিম হল",
+        image: "https://i.postimg.cc/wxM1807v/male-student-2.jpg",
+        imageHint: "student face",
+        testimonial: "একজন হলের বড় ভাই হিসেবে সিয়াম ইমন ভাইয়ের তুলনা হয় না। পড়াশোনা থেকে শুরু করে ব্যক্তিগত সমস্যা—সবকিছুতেই তিনি আমাদের পরামর্শ দেন। তার মতো একজন অভিভাবক আমাদের প্রয়োজন।"
+    },
+    {
+        name: "ফারহানা চৌধুরী",
+        role: "শিক্ষার্থী, প্রাণিবিদ্যা বিভাগ",
+        image: "https://i.postimg.cc/8c7pFdR9/female-student-3.jpg",
+        imageHint: "woman portrait",
+        testimonial: "বিভাগের বড় ভাই হিসেবে সিয়াম ভাইয়ের একাডেমিক গাইডলাইন আমাদের জন্য আশীর্বাদস্বরূপ। তার আয়োজিত কর্মশালাগুলো আমাদের গবেষণার কাজে অনেক সাহায্য করেছে। গবেষণা ও প্রকাশনা সম্পাদক পদে তিনিই সেরা।"
+    }
+];
+
+function TestimonialSection() {
+    const [api, setApi] = useState<CarouselApi>();
+    const [current, setCurrent] = useState(0);
+
+    const plugin = useRef(Autoplay({ delay: 5000, stopOnInteraction: true }));
+
+    useEffect(() => {
+        if (!api) return;
+        
+        const onSelect = () => setCurrent(api.selectedScrollSnap());
+        api.on("select", onSelect);
+        
+        return () => {
+            api.off("select", onSelect);
+        };
+    }, [api]);
+
+    return (
+        <section className="py-16 md:py-24 bg-background">
+            <div className="container mx-auto px-4">
+                <div className="text-center max-w-4xl mx-auto">
+                    <Quote className="mx-auto h-12 w-12 text-primary" />
+                    <h2 className="font-headline text-4xl md:text-5xl font-bold mt-4 text-foreground">
+                       আমার সম্পর্কে শিক্ষার্থীদের কিছু কথা
+                    </h2>
+                </div>
+                <Carousel
+                    setApi={setApi}
+                    plugins={[plugin.current]}
+                    opts={{
+                        align: "center",
+                        loop: true,
+                    }}
+                    className="w-full mt-12"
+                >
+                    <CarouselContent className="-ml-4">
+                        {testimonials.map((testimonial, index) => (
+                            <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 pl-4">
+                                <div className="p-1">
+                                    <Card className="shadow-lg h-full flex flex-col items-center text-center p-8 transition-all duration-300 bg-card">
+                                        <div className="relative w-24 h-24 mb-4">
+                                            <Image
+                                                src={testimonial.image}
+                                                alt={testimonial.name}
+                                                fill
+                                                className="rounded-full object-cover border-4 border-primary/50"
+                                                data-ai-hint={testimonial.imageHint}
+                                            />
+                                        </div>
+                                        <CardTitle className="font-headline text-2xl">{testimonial.name}</CardTitle>
+                                        <CardDescription className="font-body text-primary">{testimonial.role}</CardDescription>
+                                        <p className="font-body text-muted-foreground mt-4 text-sm flex-grow">
+                                            "{testimonial.testimonial}"
+                                        </p>
+                                    </Card>
+                                </div>
+                            </CarouselItem>
+                        ))}
+                    </CarouselContent>
+                    <div className="flex justify-center gap-2 mt-8">
+                        {testimonials.map((_, i) => (
+                          <button
+                            key={i}
+                            onClick={() => api?.scrollTo(i)}
+                            className={`h-2 w-2 rounded-full transition-all duration-300 ${current === i ? 'w-4 bg-primary' : 'bg-muted'}`}
+                            aria-label={`Go to testimonial ${i + 1}`}
+                          />
+                        ))}
+                    </div>
+                </Carousel>
             </div>
         </section>
     );
