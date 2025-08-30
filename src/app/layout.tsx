@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     siteName: 'সিয়াম ফেরদৌস ইমন',
     images: [
       {
-        url: 'https://i.postimg.cc/LXCLpBjm/532463080-3680875555553854-4475665250768894271-n.jpg', // Replace with a representative image
+        url: 'https://i.postimg.cc/FHd9sjB3/20250821-1858-remix-01k36b5fqxfrh8vvnt3vxwnre2.jpg', // Replace with a representative image
         width: 1200,
         height: 630,
         alt: 'সিয়াম ফেরদৌস ইমন এর একটি প্রচারণামূলক ছবি',
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'সিয়াম ফেরদৌস ইমন - গবেষণা ও প্রকাশনা সম্পাদক পদপ্রার্থী | ডাকসু নির্বাচন ২০২৫',
     description: 'সিয়াম ফেরদৌস ইমন, ডাকসু নির্বাচনে গবেষণা ও প্রকাশনা সম্পাদক পদপ্রার্থী। ঢাকা বিশ্ববিদ্যালয় ও ফজলুল হক মুসলিম হলের একজন নিবেদিতপ্রাণ শিক্ষার্থী নেতা।',
-    images: ['https://i.postimg.cc/LXCLpBjm/532463080-3680875555553854-4475665250768894271-n.jpg'], // Replace with a representative image
+    images: ['https://i.postimg.cc/FHd9sjB3/20250821-1858-remix-01k36b5fqxfrh8vvnt3vxwnre2.jpg'], // Replace with a representative image
   },
   robots: {
     index: true,
