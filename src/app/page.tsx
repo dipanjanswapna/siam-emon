@@ -117,6 +117,7 @@ export default function Home() {
       <VoteBannerSection />
       <VoteCallToActionSection />
       <CommitmentSection />
+      <CampaignGallerySection />
       <ResearchSection />
       <PublicationSection />
       <LogicalMovementSection />
@@ -419,6 +420,83 @@ function CommitmentSection() {
                             সকল অঙ্গীকার দেখুন <ArrowRight className="ml-2" />
                         </Link>
                     </Button>
+                </div>
+            </div>
+        </section>
+    );
+}
+
+
+type GalleryImage = {
+    id: string;
+    src: string;
+    alt: string;
+    hint: string;
+};
+
+function CampaignGallerySection() {
+    const [galleryImages, setGalleryImages] = useState<GalleryImage[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchGalleryImages = async () => {
+            setIsLoading(true);
+            try {
+                const galleryCollection = collection(db, "gallery");
+                const gallerySnapshot = await getDocs(galleryCollection);
+                const galleryList = gallerySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as GalleryImage));
+                setGalleryImages(galleryList);
+            } catch (error) {
+                console.error("Error fetching gallery images:", error);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+        fetchGalleryImages();
+    }, []);
+
+    const imagesToDisplay = galleryImages.length > 0 ? [...galleryImages, ...galleryImages] : [];
+
+    return (
+        <section className="py-16 md:py-24 bg-card">
+            <div className="container mx-auto px-4">
+                <div className="text-center max-w-4xl mx-auto">
+                    <Camera className="mx-auto h-12 w-12 text-primary" />
+                    <h2 className="font-headline text-4xl md:text-5xl font-bold mt-4 text-foreground">
+                        নির্বাচনী প্রচারণার একাংশ
+                    </h2>
+                    <p className="mt-4 font-body text-lg text-muted-foreground">
+                        আমার নির্বাচনী প্রচারণার কিছু বিশেষ মুহূর্ত, যা শিক্ষার্থীদের ভালোবাসা ও সমর্থনে পূর্ণ।
+                    </p>
+                </div>
+            </div>
+            <div className="mt-12 w-full overflow-hidden mask-image-lr group">
+                 <div className="animate-scroll group-hover:pause-animation flex gap-4">
+                    {isLoading ? (
+                        Array.from({ length: 12 }).map((_, i) => (
+                            <div key={i} className="flex-shrink-0">
+                                <Skeleton className="w-80 h-56 rounded-lg" />
+                            </div>
+                        ))
+                    ) : (
+                        imagesToDisplay.map((image, index) => (
+                            <div key={`${image.id}-${index}`} className="flex-shrink-0">
+                                <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 w-80">
+                                    <CardContent className="p-0">
+                                        <div className="relative h-56 w-full">
+                                            <Image
+                                                src={image.src}
+                                                alt={image.alt}
+                                                fill
+                                                className="object-cover rounded-md"
+                                                data-ai-hint={image.hint}
+                                            />
+                                        </div>
+                                    </CardContent>
+                                </Card>
+                            </div>
+                        ))
+                    )}
                 </div>
             </div>
         </section>

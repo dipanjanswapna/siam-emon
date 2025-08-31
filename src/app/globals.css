@@ -69,8 +69,8 @@
 
 @layer utilities {
     .animate-scroll {
-        display: inline-block;
-        white-space: nowrap;
+        display: flex;
+        width: max-content;
         animation: scroll 60s linear infinite;
     }
 
