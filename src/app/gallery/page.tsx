@@ -37,9 +37,9 @@ export default function GalleryPage() {
       <div className="container mx-auto px-4 py-16 md:py-24">
         <div className="text-center max-w-4xl mx-auto">
           <Camera className="mx-auto h-12 w-12 text-primary" />
-          <h1 className="font-headline text-5xl md:text-6xl font-bold mt-4 text-foreground">ক্যাম্পেইন এর মুহূর্ত</h1>
+          <h1 className="font-headline text-5xl md:text-6xl font-bold mt-4 text-foreground">নির্বাচনী প্রচারণার একাংশ</h1>
           <p className="font-body text-lg mt-4 text-muted-foreground">
-            সারা বাংলা জুড়ে আমাদের যাত্রার এক ঝলক, জীবনের সব স্তরের মানুষের সাথে সংযোগ স্থাপন।
+            আমার নির্বাচনী প্রচারণার কিছু বিশেষ মুহূর্ত, যা শিক্ষার্থীদের ভালোবাসা ও সমর্থনে পূর্ণ।
           </p>
         </div>
         <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
