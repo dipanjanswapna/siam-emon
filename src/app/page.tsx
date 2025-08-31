@@ -480,7 +480,7 @@ function CampaignGallerySection() {
                         ))
                     ) : (
                         imagesToDisplay.map((image, index) => (
-                            <div key={`${image.id}-${index}`} className="flex-shrink-0">
+                            <Link href="/gallery" key={`${image.id}-${index}`} className="flex-shrink-0">
                                 <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 w-80">
                                     <CardContent className="p-0">
                                         <div className="relative h-56 w-full">
@@ -494,7 +494,7 @@ function CampaignGallerySection() {
                                         </div>
                                     </CardContent>
                                 </Card>
-                            </div>
+                            </Link>
                         ))
                     )}
                 </div>
@@ -558,7 +558,7 @@ function VoteBannerSection() {
     >
       <div className="absolute inset-0 bg-black/60"></div>
       <div className="container mx-auto px-4 text-center relative z-10">
-        <h2 className="text-3xl md:text-5xl font-bold font-headline text-red-500 drop-shadow-md">
+        <h2 className="text-3xl md:text-5xl font-bold font-headline text-white drop-shadow-md">
           Remember, the Last Hope in Ballot no. 9
         </h2>
         <p className="mt-4 font-body text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto">
