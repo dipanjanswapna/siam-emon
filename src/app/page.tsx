@@ -137,7 +137,7 @@ function VideoSection() {
     const [player, setPlayer] = useState<any>(null);
     const [isMuted, setIsMuted] = useState(true);
 
-    const videoId = "kUrF38w5dRg";
+    const videoId = "R8BGvAqQl1Y";
 
     useEffect(() => {
         const loadYouTubeAPI = () => {
@@ -1647,6 +1647,8 @@ function PreVoteSection() {
     );
 }
 
+
+    
 
     
 
