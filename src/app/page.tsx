@@ -1053,7 +1053,7 @@ function SocialWorkSection() {
     const imagesToDisplay = socialWorks.length > 0 ? [...socialWorks, ...socialWorks] : [];
 
     return (
-        <section className="py-16 md:py-24 bg-card">
+        <section className="py-16 md:py-24 bg-primary/5">
             <div className="container mx-auto px-4">
                 <div className="text-center max-w-4xl mx-auto">
                     <HandHeart className="mx-auto h-12 w-12 text-primary" />
