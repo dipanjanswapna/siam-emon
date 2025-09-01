@@ -970,7 +970,7 @@ function MediaSection() {
                 >
                     <CarouselContent className="-ml-4">
                         {mediaItems.map((item, index) => (
-                            <CarouselItem key={index} className="md:basis-1/2 lg:basis-2/5 pl-4">
+                            <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 pl-4">
                                 <div className="p-1 h-full">
                                      <Card className="shadow-lg overflow-hidden h-full flex flex-col">
                                         <CardContent className="p-4 md:p-6 flex flex-col flex-grow">
@@ -1801,6 +1801,7 @@ function PreVoteSection() {
     
 
     
+
 
 
 
