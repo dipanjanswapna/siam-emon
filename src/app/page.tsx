@@ -471,7 +471,7 @@ function CampaignGallerySection() {
                     </p>
                 </div>
             </div>
-            <div className="mt-12 w-full overflow-hidden mask-image-lr group">
+            <div className="mt-12 w-full overflow-x-hidden mask-image-lr group">
                  <div className="animate-scroll group-hover:pause-animation flex gap-4">
                     {isLoading ? (
                         Array.from({ length: 12 }).map((_, i) => (
@@ -528,7 +528,7 @@ function NoticeSection() {
 
     if (isLoading) {
         return (
-            <section className="bg-gradient-to-r from-red-500 to-pink-500 py-3 text-white overflow-hidden">
+            <section className="bg-gradient-to-r from-red-500 to-pink-500 py-3 text-white overflow-x-hidden">
                 <div className="relative flex items-center whitespace-nowrap">
                     <p className="text-lg font-headline">নোটিশ লোড হচ্ছে...</p>
                 </div>
@@ -537,8 +537,8 @@ function NoticeSection() {
     }
 
     return (
-        <section className="bg-gradient-to-r from-red-500 to-pink-500 py-3 text-white overflow-hidden">
-            <div className="relative flex items-center whitespace-nowrap">
+        <section className="bg-gradient-to-r from-red-500 to-pink-500 py-3 text-white overflow-x-hidden">
+            <div className="relative flex items-center whitespace-nowrap w-full">
                 <p className="animate-scroll text-lg font-headline">
                     {noticeText}
                 </p>
@@ -1213,17 +1213,17 @@ function SocialWorkSection() {
                     </p>
                 </div>
             </div>
-            <div className="mt-12 w-full overflow-hidden mask-image-lr group">
-                 <div className="animate-scroll group-hover:pause-animation">
+            <div className="mt-12 w-full overflow-x-hidden mask-image-lr group">
+                 <div className="animate-scroll group-hover:pause-animation flex gap-4">
                     {isLoading ? (
                         Array.from({ length: 12 }).map((_, i) => (
-                            <div key={i} className="inline-block p-4">
+                            <div key={i} className="flex-shrink-0 p-4">
                                 <Skeleton className="w-56 h-40 rounded-lg" />
                             </div>
                         ))
                     ) : (
                         imagesToDisplay.map((work, index) => (
-                            <div key={`${work.id}-${index}`} className="inline-block p-4">
+                            <div key={`${work.id}-${index}`} className="flex-shrink-0 p-4">
                                 <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300">
                                     <CardContent className="p-4">
                                         <div className="relative h-40 w-56">
