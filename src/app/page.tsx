@@ -787,7 +787,7 @@ const logicalMovementActivities = [
     images: [
       { src: "https://i.postimg.cc/DZ8nTsg9/photo_2025-08-21_01-07_09.jpg", alt: "আন্দোলনে অংশগ্রহণ", hint: "protest movement" },
       { src: "https://i.postimg.cc/XJm37J1p/photo_2025-08-21_01-07_12.jpg", alt: "ছাত্রদের সমাবেশ", hint: "student gathering" },
-      { src: "https://i.postimg.cc/bwpPv4gH/photo_2025-08-21_01-06_54.jpg", alt: "ছাত্রদের সমাবেশ", hint: "student gathering" },
+      { src: "https://i.postimg.cc/bwpPv4gH/photo_2025-08-21_01-06-54.jpg", alt: "ছাত্রদের সমাবেশ", hint: "student gathering" },
       { src: "https://i.postimg.cc/CMnSrGdD/photo_2025-08-21_01-07_05.jpg", alt: "ছাত্রদের সমাবেশ", hint: "student gathering" },
       { src: "https://i.postimg.cc/VLj1mzqk/photo_2025-08-21_01-07_01.jpg", alt: "ছাত্রদের সমাবেশ", hint: "student gathering" },
     ],
@@ -935,13 +935,13 @@ const mediaItems = [
         type: 'video',
         title: 'Banglanews24-এ আমার সাক্ষাৎকার',
         description: 'ঢাকা বিশ্ববিদ্যালয় কেন্দ্রীয় ছাত্র সংসদ (ডাকসু) নির্বাচন নিয়ে আমার ভাবনা ও পরিকল্পনা তুলে ধরেছি।',
-        embedHtml: `<div style="position: relative; padding-bottom: 177.78%; height: 0; overflow: hidden; max-width: 100%;"><iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fbanglanews24%2Fvideos%2F1483287379763393%2F&show_text=true&app_id=" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe></div>`
+        embedHtml: `<div style="position: relative; padding-bottom: 84%; height: 0; overflow: hidden; max-width: 100%;"><iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fbanglanews24%2Fvideos%2F1483287379763393%2F&show_text=true&app_id=" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe></div>`
     },
     {
         type: 'post',
         title: 'দৈনিক জনকণ্ঠে প্রকাশিত প্রতিবেদন',
         description: 'ডাকসু নির্বাচনে আমার প্রার্থিতা এবং শিক্ষার্থীদের জন্য আমার অঙ্গীকার নিয়ে দৈনিক জনকণ্ঠে প্রকাশিত একটি বিশেষ প্রতিবেদন।',
-        embedHtml: `<div style="position: relative; padding-bottom: 120%; height: 0; overflow: hidden; max-width: 100%;"><iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fdailyjanakanthabd%2Fposts%2Fpfbid02sVDcBrVpA4RcGW7sqhXM8nRV4eoKw5U8TbQRqaQfmrX9MCPPNV996qYo7G6zFWH4l&show_text=true&app_id=" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe></div>`
+        embedHtml: `<div style="position: relative; padding-bottom: 100%; height: 0; overflow: hidden; max-width: 100%;"><iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fdailyjanakanthabd%2Fposts%2Fpfbid02sVDcBrVpA4RcGW7sqhXM8nRV4eoKw5U8TbQRqaQfmrX9MCPPNV996qYo7G6zFWH4l&show_text=true&app_id=" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe></div>`
     }
 ];
 
@@ -1791,16 +1791,4 @@ function PreVoteSection() {
     );
 }
 
-
     
-
-    
-
-    
-
-
-
-
-
-
-
