@@ -528,7 +528,7 @@ function NoticeSection() {
 
     if (isLoading) {
         return (
-            <section className="bg-gradient-to-r from-red-500 to-pink-500 py-3 text-white overflow-x-hidden">
+            <section className="bg-gradient-to-r from-red-500 to-pink-500 py-3 text-white w-full overflow-x-hidden">
                 <div className="relative flex items-center whitespace-nowrap">
                     <p className="text-lg font-headline">নোটিশ লোড হচ্ছে...</p>
                 </div>
@@ -537,7 +537,7 @@ function NoticeSection() {
     }
 
     return (
-        <section className="bg-gradient-to-r from-red-500 to-pink-500 py-3 text-white overflow-x-hidden w-full">
+        <section className="bg-gradient-to-r from-red-500 to-pink-500 py-3 text-white w-full overflow-x-hidden">
             <div className="relative flex items-center whitespace-nowrap w-full overflow-x-hidden">
                 <p className="animate-scroll text-lg font-headline">
                     {noticeText}
@@ -935,15 +935,16 @@ const mediaItems = [
         type: 'video',
         title: 'Banglanews24-এ আমার সাক্ষাৎকার',
         description: 'ঢাকা বিশ্ববিদ্যালয় কেন্দ্রীয় ছাত্র সংসদ (ডাকসু) নির্বাচন নিয়ে আমার ভাবনা ও পরিকল্পনা তুলে ধরেছি।',
-        embedHtml: `<iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fbanglanews24%2Fvideos%2F1483287379763393%2F&show_text=true&app_id=" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>`
+        embedHtml: `<div style="position: relative; padding-bottom: 177.78%; height: 0; overflow: hidden; max-width: 100%;"><iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fbanglanews24%2Fvideos%2F1483287379763393%2F&show_text=true&app_id=" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe></div>`
     },
     {
         type: 'post',
         title: 'দৈনিক জনকণ্ঠে প্রকাশিত প্রতিবেদন',
         description: 'ডাকসু নির্বাচনে আমার প্রার্থিতা এবং শিক্ষার্থীদের জন্য আমার অঙ্গীকার নিয়ে দৈনিক জনকণ্ঠে প্রকাশিত একটি বিশেষ প্রতিবেদন।',
-        embedHtml: `<iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fdailyjanakanthabd%2Fposts%2Fpfbid02sVDcBrVpA4RcGW7sqhXM8nRV4eoKw5U8TbQRqaQfmrX9MCPPNV996qYo7G6zFWH4l&show_text=true&app_id=" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>`
+        embedHtml: `<div style="position: relative; padding-bottom: 120%; height: 0; overflow: hidden; max-width: 100%;"><iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fdailyjanakanthabd%2Fposts%2Fpfbid02sVDcBrVpA4RcGW7sqhXM8nRV4eoKw5U8TbQRqaQfmrX9MCPPNV996qYo7G6zFWH4l&show_text=true&app_id=" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe></div>`
     }
 ];
+
 
 function MediaSection() {
     const [api, setApi] = React.useState<CarouselApi>();
@@ -977,14 +978,9 @@ function MediaSection() {
                                             <h3 className="font-headline text-xl md:text-2xl font-bold">{item.title}</h3>
                                             <p className="font-body text-muted-foreground mt-2 mb-4 text-sm md:text-base flex-grow">{item.description}</p>
                                             <div 
-                                                className="relative w-full mt-auto"
-                                                style={{paddingBottom: item.type === 'video' ? '125%' : '100%'}}
-                                            >
-                                                <div 
-                                                    className="absolute top-0 left-0 w-full h-full"
-                                                    dangerouslySetInnerHTML={{ __html: item.embedHtml }}
-                                                />
-                                            </div>
+                                                className="w-full mt-auto"
+                                                dangerouslySetInnerHTML={{ __html: item.embedHtml }}
+                                            />
                                         </CardContent>
                                     </Card>
                                 </div>
@@ -1098,7 +1094,7 @@ const organizationExperience = [
         title: "President",
         description: "Animal Genetics & Molecular Biology Club- AGMBC, গবেষণা রিলেটেড ক্লাব",
         image: "https://i.postimg.cc/6pgtWmgz/451374210-3661627947435304-7044717898982288749-n.jpg",
-        link: "https://www.facebook.com/profile.php?id=61562612316669"
+        link: "https://www.facebook.com/profile.php?id=615562612316669"
     },
     {
         title: "Co-Founder",
@@ -1801,6 +1797,7 @@ function PreVoteSection() {
     
 
     
+
 
 
 
