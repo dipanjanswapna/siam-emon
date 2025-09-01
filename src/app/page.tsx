@@ -935,13 +935,13 @@ const mediaItems = [
         type: 'video',
         title: 'Banglanews24-এ আমার সাক্ষাৎকার',
         description: 'ঢাকা বিশ্ববিদ্যালয় কেন্দ্রীয় ছাত্র সংসদ (ডাকসু) নির্বাচন নিয়ে আমার ভাবনা ও পরিকল্পনা তুলে ধরেছি।',
-        embedHtml: `<iframe src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Fbanglanews24%2Fvideos%2F1483287379763393%2F&show_text=true&width=476&t=0" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>`
+        embedHtml: `<iframe src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Fbanglanews24%2Fvideos%2F1483287379763393%2F&show_text=true&width=476&t=0" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>`
     },
     {
         type: 'post',
         title: 'দৈনিক জনকণ্ঠে প্রকাশিত প্রতিবেদন',
         description: 'ডাকসু নির্বাচনে আমার প্রার্থিতা এবং শিক্ষার্থীদের জন্য আমার অঙ্গীকার নিয়ে দৈনিক জনকণ্ঠে প্রকাশিত একটি বিশেষ প্রতিবেদন।',
-        embedHtml: `<iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fdailyjanakanthabd%2Fposts%2Fpfbid02sVDcBrVpA4RcGW7sqhXM8nRV4eoKw5U8TbQRqaQfmrX9MCPPNV996qYo7G6zFWH4l&show_text=true&width=500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>`
+        embedHtml: `<iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fdailyjanakanthabd%2Fposts%2Fpfbid02sVDcBrVpA4RcGW7sqhXM8nRV4eoKw5U8TbQRqaQfmrX9MCPPNV996qYo7G6zFWH4l&show_text=true&width=500" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>`
     }
 ];
 
@@ -977,9 +977,14 @@ function MediaSection() {
                                             <h3 className="font-headline text-2xl font-bold">{item.title}</h3>
                                             <p className="font-body text-muted-foreground mt-2 mb-4">{item.description}</p>
                                             <div 
-                                                className="aspect-video w-full flex items-center justify-center bg-black rounded-lg overflow-hidden"
-                                                 dangerouslySetInnerHTML={{ __html: item.embedHtml.replace(/width="\d+"/g, 'width="100%"').replace(/height="\d+"/g, 'height="100%"') }}
-                                            />
+                                                className="relative w-full"
+                                                style={{paddingBottom: item.type === 'video' ? '124.16%' : '99.6%'}}
+                                            >
+                                                <div 
+                                                    className="absolute top-0 left-0 w-full h-full"
+                                                    dangerouslySetInnerHTML={{ __html: item.embedHtml }}
+                                                />
+                                            </div>
                                         </CardContent>
                                     </Card>
                                 </div>
@@ -1796,3 +1801,4 @@ function PreVoteSection() {
     
 
     
+
