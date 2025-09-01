@@ -112,10 +112,10 @@ export default function Home() {
     <div className="flex flex-col">
       <NewHeroSection />
       <VideoSection />
+      <ElectionCountdown />
       <AboutSection />
       <NoticeSection />
       <VoteBannerSection />
-      <ElectionCountdown />
       <VoteCallToActionSection />
       <CommitmentSection />
       <CampaignGallerySection />
@@ -618,7 +618,6 @@ function ElectionCountdown() {
             switch(interval) {
                 case 'days': label = 'দিন'; break;
                 case 'hours': label = 'ঘণ্টা'; break;
-
                 case 'minutes': label = 'মিনিট'; break;
                 case 'seconds': label = 'সেকেন্ড'; break;
             }
@@ -1879,5 +1878,7 @@ function PreVoteSection() {
         </section>
     );
 }
+
+    
 
     
