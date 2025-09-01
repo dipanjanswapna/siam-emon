@@ -538,7 +538,7 @@ function NoticeSection() {
 
     return (
         <section className="bg-gradient-to-r from-red-500 to-pink-500 py-3 text-white overflow-x-hidden w-full">
-            <div className="relative flex items-center whitespace-nowrap w-full">
+            <div className="relative flex items-center whitespace-nowrap w-full overflow-x-hidden">
                 <p className="animate-scroll text-lg font-headline">
                     {noticeText}
                 </p>
@@ -935,13 +935,13 @@ const mediaItems = [
         type: 'video',
         title: 'Banglanews24-এ আমার সাক্ষাৎকার',
         description: 'ঢাকা বিশ্ববিদ্যালয় কেন্দ্রীয় ছাত্র সংসদ (ডাকসু) নির্বাচন নিয়ে আমার ভাবনা ও পরিকল্পনা তুলে ধরেছি।',
-        embedHtml: `<iframe src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Fbanglanews24%2Fvideos%2F1483287379763393%2F&show_text=true&width=476&t=0" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>`
+        embedHtml: `<iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fbanglanews24%2Fvideos%2F1483287379763393%2F&show_text=true&app_id=" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>`
     },
     {
         type: 'post',
         title: 'দৈনিক জনকণ্ঠে প্রকাশিত প্রতিবেদন',
         description: 'ডাকসু নির্বাচনে আমার প্রার্থিতা এবং শিক্ষার্থীদের জন্য আমার অঙ্গীকার নিয়ে দৈনিক জনকণ্ঠে প্রকাশিত একটি বিশেষ প্রতিবেদন।',
-        embedHtml: `<iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fdailyjanakanthabd%2Fposts%2Fpfbid02sVDcBrVpA4RcGW7sqhXM8nRV4eoKw5U8TbQRqaQfmrX9MCPPNV996qYo7G6zFWH4l&show_text=true&width=500" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>`
+        embedHtml: `<iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fdailyjanakanthabd%2Fposts%2Fpfbid02sVDcBrVpA4RcGW7sqhXM8nRV4eoKw5U8TbQRqaQfmrX9MCPPNV996qYo7G6zFWH4l&show_text=true&app_id=" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>`
     }
 ];
 
@@ -991,8 +991,8 @@ function MediaSection() {
                             </CarouselItem>
                         ))}
                     </CarouselContent>
-                    <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none hidden md:flex z-10" />
-                    <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none hidden md:flex z-10" />
+                    <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none z-10" />
+                    <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none z-10" />
                 </Carousel>
             </div>
         </section>
@@ -1801,6 +1801,7 @@ function PreVoteSection() {
     
 
     
+
 
 
 
