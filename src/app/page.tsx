@@ -7,7 +7,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { ArrowRight, BookOpen, BookOpenCheck, BrainCircuit, Library, Users, Camera, X, Heart, Megaphone, Flag, Award, FileText, Mic, GraduationCap, HandHeart, BookText, ShieldCheck, MessageSquare, Mail, Icon, ImagePlus, Annoyed, HelpCircle, Vote, Share2, DollarSign, Archive, Laptop, Combine, Trophy, VolumeX, Volume2, FlaskConical, HandCoins, BadgePercent, Presentation, Database, Microscope, Quote, Tv } from "lucide-react";
+import { ArrowRight, BookOpen, BookOpenCheck, BrainCircuit, Library, Users, Camera, X, Heart, Megaphone, Flag, Award, FileText, Mic, GraduationCap, HandHeart, BookText, ShieldCheck, MessageSquare, Mail, Icon, ImagePlus, Annoyed, HelpCircle, Vote, Share2, DollarSign, Archive, Laptop, Combine, Trophy, VolumeX, Volume2, FlaskConical, HandCoins, BadgePercent, Presentation, Database, Microscope, Quote, Tv, Timer } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogClose } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -115,6 +115,7 @@ export default function Home() {
       <AboutSection />
       <NoticeSection />
       <VoteBannerSection />
+      <ElectionCountdown />
       <VoteCallToActionSection />
       <CommitmentSection />
       <CampaignGallerySection />
@@ -576,6 +577,94 @@ function VoteBannerSection() {
   );
 }
 
+function ElectionCountdown() {
+    const [timeLeft, setTimeLeft] = useState<{
+        days?: number,
+        hours?: number,
+        minutes?: number,
+        seconds?: number
+    }>({});
+    const [isClient, setIsClient] = useState(false);
+
+    useEffect(() => {
+        setIsClient(true);
+        const calculateTimeLeft = () => {
+            const difference = +new Date("2025-09-09T00:00:00") - +new Date();
+            let timeLeftData = {};
+
+            if (difference > 0) {
+                timeLeftData = {
+                    days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+                    hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+                    minutes: Math.floor((difference / 1000 / 60) % 60),
+                    seconds: Math.floor((difference / 1000) % 60)
+                };
+            }
+            return timeLeftData;
+        };
+
+        setTimeLeft(calculateTimeLeft());
+        const timer = setInterval(() => {
+            setTimeLeft(calculateTimeLeft());
+        }, 1000);
+
+        return () => clearInterval(timer);
+    }, []);
+
+    const timerComponents = Object.keys(timeLeft).length ? (
+        Object.entries(timeLeft).map(([interval, value]) => {
+            const displayValue = value.toLocaleString('bn-BD').padStart(2, '০');
+            let label;
+            switch(interval) {
+                case 'days': label = 'দিন'; break;
+                case 'hours': label = 'ঘণ্টা'; break;
+
+                case 'minutes': label = 'মিনিট'; break;
+                case 'seconds': label = 'সেকেন্ড'; break;
+            }
+
+            return (
+                <div key={interval} className="flex flex-col items-center">
+                    <div className="text-4xl md:text-6xl font-bold font-headline text-primary bg-primary/10 rounded-lg p-4 w-24 text-center shadow-inner">
+                        {displayValue}
+                    </div>
+                    <div className="mt-2 text-lg font-semibold text-muted-foreground">{label}</div>
+                </div>
+            );
+        })
+    ) : null;
+    
+    if (!isClient) {
+        return (
+            <section className="py-12 md:py-16 bg-background">
+                 <div className="container mx-auto px-4 text-center">
+                     <Skeleton className="h-10 w-3/4 mx-auto" />
+                     <div className="mt-8 flex justify-center gap-4 md:gap-8">
+                         <div className="flex flex-col items-center"><Skeleton className="h-24 w-24" /><Skeleton className="h-6 w-16 mt-2" /></div>
+                         <div className="flex flex-col items-center"><Skeleton className="h-24 w-24" /><Skeleton className="h-6 w-16 mt-2" /></div>
+                         <div className="flex flex-col items-center"><Skeleton className="h-24 w-24" /><Skeleton className="h-6 w-16 mt-2" /></div>
+                         <div className="flex flex-col items-center"><Skeleton className="h-24 w-24" /><Skeleton className="h-6 w-16 mt-2" /></div>
+                     </div>
+                 </div>
+            </section>
+        );
+    }
+
+    return (
+        <section className="py-12 md:py-16 bg-background">
+            <div className="container mx-auto px-4 text-center">
+                <h2 className="text-3xl md:text-4xl font-bold font-headline text-foreground flex justify-center items-center gap-3">
+                    <Timer className="w-8 h-8 text-primary" />
+                    ভোটের দিনের কাউন্টডাউন
+                </h2>
+                <div className="mt-8 flex flex-wrap justify-center gap-4 md:gap-8">
+                    {timerComponents}
+                </div>
+            </div>
+        </section>
+    );
+}
+
 function VoteCallToActionSection() {
     return (
         <section className="py-12 md:py-16 bg-background">
@@ -787,7 +876,7 @@ const logicalMovementActivities = [
     images: [
       { src: "https://i.postimg.cc/DZ8nTsg9/photo_2025-08-21_01-07_09.jpg", alt: "আন্দোলনে অংশগ্রহণ", hint: "protest movement" },
       { src: "https://i.postimg.cc/XJm37J1p/photo_2025-08-21_01-07_12.jpg", alt: "ছাত্রদের সমাবেশ", hint: "student gathering" },
-      { src: "https://i.postimg.cc/bwpPv4gH/photo_2025-08-21_01-06-54.jpg", alt: "ছাত্রদের সমাবেশ", hint: "student gathering" },
+      { src: "https://i.postimg.cc/bwpPv4gH/photo_2025-08-21_01-06_54.jpg", alt: "ছাত্রদের সমাবেশ", hint: "student gathering" },
       { src: "https://i.postimg.cc/CMnSrGdD/photo_2025-08-21_01-07_05.jpg", alt: "ছাত্রদের সমাবেশ", hint: "student gathering" },
       { src: "https://i.postimg.cc/VLj1mzqk/photo_2025-08-21_01-07_01.jpg", alt: "ছাত্রদের সমাবেশ", hint: "student gathering" },
     ],
@@ -935,7 +1024,7 @@ const mediaItems = [
         type: 'video',
         title: 'Banglanews24-এ আমার সাক্ষাৎকার',
         description: 'ঢাকা বিশ্ববিদ্যালয় কেন্দ্রীয় ছাত্র সংসদ (ডাকসু) নির্বাচন নিয়ে আমার ভাবনা ও পরিকল্পনা তুলে ধরেছি।',
-        embedHtml: `<div style="position: relative; padding-bottom: 84%; height: 0; overflow: hidden; max-width: 100%;"><iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fbanglanews24%2Fvideos%2F1483287379763393%2F&show_text=true&app_id=" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe></div>`
+        embedHtml: `<div style="position: relative; padding-bottom: 150%; height: 0; overflow: hidden; max-width: 100%;"><iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fbanglanews24%2Fvideos%2F1483287379763393%2F&show_text=true&app_id=" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe></div>`
     },
     {
         type: 'post',
