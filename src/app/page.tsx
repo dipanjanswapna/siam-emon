@@ -7,7 +7,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { ArrowRight, BookOpen, BookOpenCheck, BrainCircuit, Library, Users, Camera, X, Heart, Megaphone, Flag, Award, FileText, Mic, GraduationCap, HandHeart, BookText, ShieldCheck, MessageSquare, Mail, Icon, ImagePlus, Annoyed, HelpCircle, Vote, Share2, DollarSign, Archive, Laptop, Combine, Trophy, VolumeX, Volume2, FlaskConical, HandCoins, BadgePercent, Presentation, Database, Microscope, Quote } from "lucide-react";
+import { ArrowRight, BookOpen, BookOpenCheck, BrainCircuit, Library, Users, Camera, X, Heart, Megaphone, Flag, Award, FileText, Mic, GraduationCap, HandHeart, BookText, ShieldCheck, MessageSquare, Mail, Icon, ImagePlus, Annoyed, HelpCircle, Vote, Share2, DollarSign, Archive, Laptop, Combine, Trophy, VolumeX, Volume2, FlaskConical, HandCoins, BadgePercent, Presentation, Database, Microscope, Quote, Tv } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogClose } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -122,6 +122,7 @@ export default function Home() {
       <PublicationSection />
       <LogicalMovementSection />
       <AcademicAchievementSection />
+      <MediaSection />
       <SkillsLeadershipServiceSection />
       <OrganizerAndEditorSection />
       <SocialWorkSection />
@@ -577,7 +578,7 @@ function VoteBannerSection() {
 
 function VoteCallToActionSection() {
     return (
-        <section className="py-12 md:py-16" style={{ backgroundColor: 'hsl(220 53% 93%)' }}>
+        <section className="py-12 md:py-16 bg-background">
             <div className="container mx-auto px-4 text-center">
                 <h2 className="text-4xl md:text-5xl font-bold font-headline" style={{ color: '#166534' }}>
                     ভোট দিন আমাকে!
@@ -927,6 +928,70 @@ function AcademicAchievementSection() {
       </section>
     </>
   );
+}
+
+const mediaItems = [
+    {
+        type: 'video',
+        title: 'Banglanews24-এ আমার সাক্ষাৎকার',
+        description: 'ঢাকা বিশ্ববিদ্যালয় কেন্দ্রীয় ছাত্র সংসদ (ডাকসু) নির্বাচন নিয়ে আমার ভাবনা ও পরিকল্পনা তুলে ধরেছি।',
+        embedHtml: `<iframe src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Fbanglanews24%2Fvideos%2F1483287379763393%2F&show_text=true&width=476&t=0" width="476" height="591" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>`
+    },
+    {
+        type: 'post',
+        title: 'দৈনিক জনকণ্ঠে প্রকাশিত প্রতিবেদন',
+        description: 'ডাকসু নির্বাচনে আমার প্রার্থিতা এবং শিক্ষার্থীদের জন্য আমার অঙ্গীকার নিয়ে দৈনিক জনকণ্ঠে প্রকাশিত একটি বিশেষ প্রতিবেদন।',
+        embedHtml: `<iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fdailyjanakanthabd%2Fposts%2Fpfbid02sVDcBrVpA4RcGW7sqhXM8nRV4eoKw5U8TbQRqaQfmrX9MCPPNV996qYo7G6zFWH4l&show_text=true&width=500" width="500" height="498" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>`
+    }
+];
+
+function MediaSection() {
+    const [api, setApi] = React.useState<CarouselApi>();
+    const plugin = React.useRef(Autoplay({ delay: 8000, stopOnInteraction: true }));
+
+    return (
+        <section className="bg-primary/5 py-16 md:py-24">
+            <div className="container mx-auto px-4">
+                <div className="text-center max-w-4xl mx-auto">
+                    <Tv className="mx-auto h-12 w-12 text-primary" />
+                    <h2 className="font-headline text-4xl md:text-5xl font-bold mt-4 text-foreground">
+                        গণমাধ্যমে আমি
+                    </h2>
+                    <p className="mt-4 font-body text-lg text-muted-foreground">
+                        বিভিন্ন গণমাধ্যমে আমার সাক্ষাৎকার, প্রতিবেদন এবং ডাকসু নির্বাচন নিয়ে আমার ভাবনার প্রতিফলন।
+                    </p>
+                </div>
+
+                <Carousel
+                    setApi={setApi}
+                    plugins={[plugin.current]}
+                    opts={{ align: "start", loop: true }}
+                    className="w-full mt-12"
+                >
+                    <CarouselContent>
+                        {mediaItems.map((item, index) => (
+                            <CarouselItem key={index} className="md:basis-1/2">
+                                <div className="p-4">
+                                     <Card className="shadow-lg overflow-hidden">
+                                        <CardContent className="p-6">
+                                            <h3 className="font-headline text-2xl font-bold">{item.title}</h3>
+                                            <p className="font-body text-muted-foreground mt-2 mb-4">{item.description}</p>
+                                            <div 
+                                                className="aspect-video w-full flex items-center justify-center bg-black rounded-lg overflow-hidden"
+                                                 dangerouslySetInnerHTML={{ __html: item.embedHtml.replace('width="476"','width="100%"').replace('width="500"','width="100%"') }}
+                                            />
+                                        </CardContent>
+                                    </Card>
+                                </div>
+                            </CarouselItem>
+                        ))}
+                    </CarouselContent>
+                    <CarouselPrevious className="absolute left-[-20px] top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none hidden md:flex" />
+                    <CarouselNext className="absolute right-[-20px] top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none hidden md:flex" />
+                </Carousel>
+            </div>
+        </section>
+    );
 }
 
 const skillsAndLeadershipActivities = [
