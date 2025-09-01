@@ -112,9 +112,9 @@ export default function Home() {
     <div className="flex flex-col">
       <NewHeroSection />
       <VideoSection />
+      <NoticeSection />
       <ElectionCountdown />
       <AboutSection />
-      <NoticeSection />
       <VoteBannerSection />
       <VoteCallToActionSection />
       <CommitmentSection />
@@ -624,10 +624,10 @@ function ElectionCountdown() {
 
             return (
                 <div key={interval} className="flex flex-col items-center">
-                    <div className="text-4xl md:text-6xl font-bold font-headline text-primary bg-primary/10 rounded-lg p-4 w-24 text-center shadow-inner">
+                    <div className="text-3xl md:text-6xl font-bold font-headline text-primary bg-primary/10 rounded-lg p-2 md:p-4 w-20 md:w-24 text-center shadow-inner">
                         {displayValue}
                     </div>
-                    <div className="mt-2 text-lg font-semibold text-muted-foreground">{label}</div>
+                    <div className="mt-2 text-base md:text-lg font-semibold text-muted-foreground">{label}</div>
                 </div>
             );
         })
@@ -656,7 +656,7 @@ function ElectionCountdown() {
                     <Timer className="w-8 h-8 text-primary" />
                     ভোটের দিনের কাউন্টডাউন
                 </h2>
-                <div className="mt-8 flex flex-wrap justify-center gap-4 md:gap-8">
+                <div className="mt-8 flex flex-row flex-wrap justify-center gap-2 md:gap-8">
                     {timerComponents}
                 </div>
             </div>
