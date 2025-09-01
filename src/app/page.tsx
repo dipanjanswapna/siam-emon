@@ -965,20 +965,20 @@ function MediaSection() {
                 <Carousel
                     setApi={setApi}
                     plugins={[plugin.current]}
-                    opts={{ align: "start", loop: true }}
+                    opts={{ align: "center", loop: true }}
                     className="w-full mt-12"
                 >
-                    <CarouselContent>
+                    <CarouselContent className="-ml-4">
                         {mediaItems.map((item, index) => (
-                            <CarouselItem key={index} className="md:basis-1/2">
-                                <div className="p-2">
-                                     <Card className="shadow-lg overflow-hidden">
-                                        <CardContent className="p-4 md:p-6">
+                            <CarouselItem key={index} className="md:basis-1/2 lg:basis-2/5 pl-4">
+                                <div className="p-1 h-full">
+                                     <Card className="shadow-lg overflow-hidden h-full flex flex-col">
+                                        <CardContent className="p-4 md:p-6 flex flex-col flex-grow">
                                             <h3 className="font-headline text-xl md:text-2xl font-bold">{item.title}</h3>
-                                            <p className="font-body text-muted-foreground mt-2 mb-4 text-sm md:text-base">{item.description}</p>
+                                            <p className="font-body text-muted-foreground mt-2 mb-4 text-sm md:text-base flex-grow">{item.description}</p>
                                             <div 
-                                                className="relative w-full"
-                                                style={{paddingBottom: item.type === 'video' ? '124.16%' : '120%'}}
+                                                className="relative w-full mt-auto"
+                                                style={{paddingBottom: item.type === 'video' ? '125%' : '100%'}}
                                             >
                                                 <div 
                                                     className="absolute top-0 left-0 w-full h-full"
@@ -1801,5 +1801,6 @@ function PreVoteSection() {
     
 
     
+
 
 
