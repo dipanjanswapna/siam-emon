@@ -459,7 +459,7 @@ function CampaignGallerySection() {
     const imagesToDisplay = galleryImages.length > 0 ? [...galleryImages, ...galleryImages] : [];
 
     return (
-        <section className="py-16 md:py-24 bg-card">
+        <section className="py-16 md:py-24 bg-card w-full overflow-x-hidden">
             <div className="container mx-auto px-4">
                 <div className="text-center max-w-4xl mx-auto">
                     <Camera className="mx-auto h-12 w-12 text-primary" />
@@ -991,8 +991,8 @@ function MediaSection() {
                             </CarouselItem>
                         ))}
                     </CarouselContent>
-                    <CarouselPrevious className="absolute left-[-20px] top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none hidden md:flex" />
-                    <CarouselNext className="absolute right-[-20px] top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none hidden md:flex" />
+                    <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none hidden md:flex z-10" />
+                    <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none hidden md:flex z-10" />
                 </Carousel>
             </div>
         </section>
@@ -1801,6 +1801,7 @@ function PreVoteSection() {
     
 
     
+
 
 
 
