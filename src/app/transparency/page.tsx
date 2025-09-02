@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Scale, FileText, BarChart, Users, CheckCircle, Clock, BookOpen, DollarSign, Laptop, Archive } from "lucide-react";
+import { Scale, FileText, Users, CheckCircle, Clock, BookOpen, DollarSign, Laptop, Archive, Landmark, Goal } from "lucide-react";
 import FinancialSummaryForm from "@/components/transparency/financial-summary-form";
 import Link from "next/link";
 
@@ -11,7 +11,7 @@ const manifestoPledges = [
   {
     title: "গবেষণা তহবিল ও স্কলারশিপ",
     status: "পরিকল্পনাধীন",
-    statusColor: "bg-blue-500",
+    statusColor: "bg-blue-500 hover:bg-blue-600",
     icon: DollarSign,
     updates: [
       "বিভাগভিত্তিক গবেষণা তহবিল সংগ্রহের জন্য নীতিমালা তৈরি করছি।",
@@ -21,7 +21,7 @@ const manifestoPledges = [
   {
     title: "স্টুডেন্ট জার্নাল প্রকাশ",
     status: "পরিকল্পনাধীন",
-    statusColor: "bg-blue-500",
+    statusColor: "bg-blue-500 hover:bg-blue-600",
     icon: BookOpen,
     updates: [
       "জার্নালের সম্পাদকীয় বোর্ড গঠনের জন্য আলোচনা করছি।",
@@ -31,7 +31,7 @@ const manifestoPledges = [
   {
     title: "ডিজিটাল আর্কাইভ ও ওপেন অ্যাকসেস",
     status: "কাজ চলছে",
-    statusColor: "bg-yellow-500",
+    statusColor: "bg-yellow-500 hover:bg-yellow-600",
     icon: Archive,
     updates: [
       "ডিজিটাল আর্কাইভের জন্য সফটওয়্যার নির্বাচন করেছি।",
@@ -41,7 +41,7 @@ const manifestoPledges = [
     {
     title: "প্রশিক্ষণ ও কর্মশালা",
     status: "কাজ চলছে",
-    statusColor: "bg-yellow-500",
+    statusColor: "bg-yellow-500 hover:bg-yellow-600",
     icon: Laptop,
     updates: [
       "একাডেমিক রাইটিং-এর উপর প্রথম কর্মশালা সফলভাবে আয়োজন করেছি।",
@@ -63,20 +63,22 @@ export default function TransparencyPage() {
           </p>
         </header>
 
-        <main className="mt-16 space-y-16">
+        <main className="mt-16 space-y-12">
           
-          {/* Financial Transparency */}
-          <section id="financial-transparency">
-            <div className="text-center max-w-4xl mx-auto">
-                <BarChart className="mx-auto h-12 w-12 text-primary" />
-                <h2 className="font-headline text-4xl md:text-5xl font-bold mt-4 text-foreground">আমার আর্থিক স্বচ্ছতা</h2>
-                <p className="font-body text-lg mt-4 text-muted-foreground">
+          <Card id="financial-transparency" className="shadow-lg">
+            <CardHeader className="text-center">
+                <div className="flex justify-center items-center gap-4">
+                  <Landmark className="h-10 w-10 text-primary" />
+                  <CardTitle className="font-headline text-4xl">আর্থিক স্বচ্ছতা</CardTitle>
+                </div>
+                <CardDescription className="font-body text-lg mt-2">
                   আমার নির্বাচনী প্রচারণার জন্য প্রতিটি অর্থ কোথা থেকে আসছে এবং কোথায় ব্যয় হচ্ছে, তার একটি বিস্তারিত ও নিয়মিত হালনাগাদকৃত তালিকা এখানে প্রকাশ করা হবে।
-                </p>
-            </div>
-             <div className="mt-12 grid lg:grid-cols-5 gap-8">
+                </CardDescription>
+            </CardHeader>
+            <CardContent>
+             <div className="mt-8 grid lg:grid-cols-5 gap-8 items-start">
                 <div className="lg:col-span-3">
-                    <Card className="shadow-lg">
+                    <Card className="shadow-inner bg-primary/5">
                         <CardHeader>
                             <CardTitle className="font-headline">প্রার্থীর আর্থিক সম্পদের AI সারসংক্ষেপ</CardTitle>
                             <CardDescription className="font-body">যেকোনো প্রার্থীর (আমার সহ) ঘোষিত আর্থিক সম্পদের একটি সহজ সারসংক্ষেপ পেতে এই AI-চালিত টুল ব্যবহার করুন। নীচে প্রকাশের সম্পূর্ণ পাঠ্যটি আটকান।</CardDescription>
@@ -87,13 +89,12 @@ export default function TransparencyPage() {
                     </Card>
                 </div>
                 <div className="lg:col-span-2">
-                    <Card className="shadow-lg h-full bg-primary/5">
+                    <Card className="shadow-inner bg-primary/5 h-full">
                         <CardHeader>
                             <CardTitle className="font-headline">আমার ব্যয়ের বিবরণ ও ফান্ডিং উৎস</CardTitle>
                         </CardHeader>
                         <CardContent className="font-body text-muted-foreground space-y-4">
                            <p>আমার প্রচারণার সকল আয়-ব্যয়ের হিসাব শীঘ্রই এখানে প্রকাশ করা হবে। আমি স্বচ্ছতায় বিশ্বাসী।</p>
-                           {/* Example data - will be updated dynamically */}
                            <div className="space-y-2 text-sm">
                                <div className="flex justify-between"><span>মোট অনুদান:</span> <strong>৳ ০.০০</strong></div>
                                <div className="flex justify-between"><span>মোট ব্যয়:</span> <strong>৳ ০.০০</strong></div>
@@ -103,29 +104,33 @@ export default function TransparencyPage() {
                     </Card>
                 </div>
             </div>
-          </section>
+            </CardContent>
+          </Card>
 
-          {/* Manifesto Tracking */}
-          <section id="manifesto-tracking">
-            <div className="text-center max-w-4xl mx-auto">
-                <FileText className="mx-auto h-12 w-12 text-primary" />
-                <h2 className="font-headline text-4xl md:text-5xl font-bold mt-4 text-foreground">আমার প্রতিশ্রুতির বাস্তবায়ন</h2>
-                <p className="font-body text-lg mt-4 text-muted-foreground">
+          <Card id="manifesto-tracking" className="shadow-lg">
+             <CardHeader className="text-center">
+                <div className="flex justify-center items-center gap-4">
+                  <Goal className="h-10 w-10 text-primary" />
+                  <CardTitle className="font-headline text-4xl">আমার প্রতিশ্রুতির বাস্তবায়ন</CardTitle>
+                </div>
+                <CardDescription className="font-body text-lg mt-2">
                     আমার ইশতেহারে যে সকল প্রতিশ্রুতি আমি দিয়েছি, সেগুলোর বাস্তবায়ন প্রক্রিয়া এই সেকশনে অনুসরণ করুন। প্রতিটি প্রতিশ্রুতির বর্তমান অবস্থা আমি নিয়মিত আপডেট করব।
-                </p>
-            </div>
-            <div className="mt-12 max-w-4xl mx-auto">
+                </CardDescription>
+            </CardHeader>
+            <CardContent className="mt-8 max-w-4xl mx-auto">
               <Accordion type="single" collapsible className="w-full">
                 {manifestoPledges.map((pledge, index) => (
                   <AccordionItem key={index} value={`item-${index}`} className="border-b-0">
-                     <Card className="mb-4 shadow-md bg-card">
+                     <Card className="mb-4 shadow-md bg-card hover:bg-primary/5">
                        <AccordionTrigger className="p-6 text-left hover:no-underline">
                           <div className="flex items-center justify-between w-full">
                             <div className="flex items-center gap-4">
-                               <pledge.icon className={`h-8 w-8 p-1.5 rounded-full text-white ${pledge.statusColor}`} />
-                               <h3 className="font-headline text-xl font-bold text-foreground">{pledge.title}</h3>
+                               <div className={`flex-shrink-0 p-1.5 rounded-full text-white ${pledge.statusColor}`}>
+                                  <pledge.icon className="h-6 w-6" />
+                               </div>
+                               <h3 className="font-headline text-xl font-bold text-foreground text-left">{pledge.title}</h3>
                             </div>
-                            <Badge variant="secondary" className={`${pledge.statusColor} text-white`}>{pledge.status}</Badge>
+                            <Badge className={`${pledge.statusColor} text-white`}>{pledge.status}</Badge>
                           </div>
                        </AccordionTrigger>
                        <AccordionContent className="px-6 pb-6">
@@ -142,27 +147,28 @@ export default function TransparencyPage() {
                   </AccordionItem>
                 ))}
               </Accordion>
-            </div>
-          </section>
+            </CardContent>
+          </Card>
           
-          {/* Team and Leadership */}
-          <section id="team">
-             <div className="text-center max-w-4xl mx-auto">
-                <Users className="mx-auto h-12 w-12 text-primary" />
-                <h2 className="font-headline text-4xl md:text-5xl font-bold mt-4 text-foreground">আমার দল ও নেতৃত্ব</h2>
-                <p className="font-body text-lg mt-4 text-muted-foreground">
+          <Card id="team" className="shadow-lg">
+            <CardHeader className="text-center">
+                <div className="flex justify-center items-center gap-4">
+                    <Users className="h-10 w-10 text-primary" />
+                    <CardTitle className="font-headline text-4xl">আমার দল ও নেতৃত্ব</CardTitle>
+                </div>
+                <CardDescription className="font-body text-lg mt-2">
                   আমার নেতৃত্বকে আরও মানবিক এবং জবাবদিহিমূলক করতে আমি এবং আমার দলের সদস্যদের সংক্ষিপ্ত পরিচিতি, তাদের ভূমিকা এবং যোগাযোগের তথ্য এখানে থাকবে।
-                </p>
-                <Button asChild className="mt-6" size="lg">
-                    <Link href="/about#team">আমার টিমের সাথে পরিচিত হোন</Link>
-                </Button>
-            </div>
-          </section>
+                </CardDescription>
+                <div className="pt-4">
+                  <Button asChild size="lg">
+                      <Link href="/about#team">আমার টিমের সাথে পরিচিত হোন</Link>
+                  </Button>
+                </div>
+            </CardHeader>
+          </Card>
 
         </main>
       </div>
     </div>
   );
 }
-
-    
