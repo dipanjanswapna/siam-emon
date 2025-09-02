@@ -4,7 +4,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Handshake, Mail, Phone, Users, MessageSquare, Facebook, Instagram, Youtube, Edit } from "lucide-react";
+import { Handshake, Mail, Phone, Users, MessageSquare, Facebook, Instagram, Youtube, Edit, MapPin } from "lucide-react";
 import Link from "next/link";
 import { Checkbox } from "@/components/ui/checkbox";
 
@@ -72,25 +72,54 @@ export default function GetInvolvedPage() {
           <div className="space-y-12 order-1 lg:order-2">
              <Card className="shadow-lg">
                 <CardHeader>
-                    <CardTitle className="font-headline flex items-center gap-3"><Mail className="w-8 h-8 text-primary"/> সরাসরি যোগাযোগ</CardTitle>
-                    <CardDescription className="font-body">আমাদের টিমের সাথে সরাসরি যোগাযোগের জন্য একটি ইমেইল ঠিকানা বা ফোন নম্বর দেওয়া হলো।</CardDescription>
+                    <CardTitle className="font-headline flex items-center gap-3"><MessageSquare className="w-8 h-8 text-primary"/> সরাসরি যোগাযোগ</CardTitle>
+                    <CardDescription className="font-body">আমাদের টিমের সাথে সরাসরি যোগাযোগের জন্য নিচে বিভিন্ন মাধ্যম দেওয়া হলো।</CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-4">
-                    <div className="flex items-center gap-4">
-                        <Phone className="w-5 h-5 text-muted-foreground" />
-                        <span className="font-body text-foreground">(১২৩) ৪৫৬-৭৮৯০</span>
-                    </div>
-                     <div className="flex items-center gap-4">
-                        <Mail className="w-5 h-5 text-muted-foreground" />
-                        <span className="font-body text-foreground">contact@siamfermousemon.com</span>
-                    </div>
+                <CardContent className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-6">
+                    {/* Phone Contact */}
+                    <Card className="text-center p-6 bg-green-500/5 border-green-500/20 flex flex-col items-center justify-between">
+                        <div className="p-4 bg-green-500/20 rounded-lg">
+                           <Phone className="w-8 h-8 text-green-700" />
+                        </div>
+                        <h3 className="font-headline text-xl font-bold mt-4">জরুরি যোগাযোগ</h3>
+                        <p className="font-body text-muted-foreground mt-2 flex-grow">যেকোনো জরুরি বিষয়ে সরাসরি ফোন করুন</p>
+                        <Button className="mt-4 bg-green-600 hover:bg-green-700 w-full">এখনই কল করুন</Button>
+                    </Card>
+                    {/* Email Contact */}
+                    <Card className="text-center p-6 bg-blue-500/5 border-blue-500/20 flex flex-col items-center justify-between">
+                         <div className="p-4 bg-blue-500/20 rounded-lg">
+                           <Mail className="w-8 h-8 text-blue-700" />
+                        </div>
+                        <h3 className="font-headline text-xl font-bold mt-4">ইমেইল সাপোর্ট</h3>
+                        <p className="font-body text-muted-foreground mt-2 flex-grow">বিস্তারিত জিজ্ঞাসার জন্য ইমেইল করুন</p>
+                        <Button className="mt-4 bg-blue-600 hover:bg-blue-700 w-full">ইমেইল পাঠান</Button>
+                    </Card>
+                    {/* In-person */}
+                     <Card className="text-center p-6 bg-red-500/5 border-red-500/20 flex flex-col items-center justify-between">
+                         <div className="p-4 bg-red-500/20 rounded-lg">
+                           <MapPin className="w-8 h-8 text-red-700" />
+                        </div>
+                        <h3 className="font-headline text-xl font-bold mt-4">সরাসরি দেখা</h3>
+                        <p className="font-body text-muted-foreground mt-2 flex-grow">আমাদের অফিসে এসে সরাসরি কথা বলুন</p>
+                        <Button className="mt-4 bg-red-600 hover:bg-red-700 w-full">ঠিকানা দেখুন</Button>
+                    </Card>
+                    <Card className="text-center p-6 bg-primary/5 border-primary/20 flex flex-col items-center justify-between">
+                         <div className="p-4 bg-primary/20 rounded-lg">
+                           <Edit className="w-8 h-8 text-primary" />
+                        </div>
+                        <h3 className="font-headline text-xl font-bold mt-4">আপনার মতামত জানান</h3>
+                        <p className="font-body text-muted-foreground mt-2 flex-grow">আপনার মূল্যবান মতামত, পরামর্শ বা প্রশ্ন পাঠান।</p>
+                        <Button asChild className="mt-4 w-full">
+                           <Link href="/#feedback-form">মতামত ফর্ম</Link>
+                        </Button>
+                    </Card>
                 </CardContent>
             </Card>
 
             <Card className="shadow-lg">
                 <CardHeader>
-                     <CardTitle className="font-headline flex items-center gap-3"><MessageSquare className="w-8 h-8 text-primary"/> আমাদের অনুসরণ করুন</CardTitle>
-                     <CardDescription className="font-body">আমাদের ফেসবুক, টুইটার এবং ইনস্টাগ্রাম পেজের লিংক এখানে দেওয়া হবে। ফলো করে আপনারা আমাদের সব আপডেট এবং কার্যক্রম সম্পর্কে জানতে পারবেন।</CardDescription>
+                     <CardTitle className="font-headline flex items-center gap-3"><Users className="w-8 h-8 text-primary"/> আমাদের অনুসরণ করুন</CardTitle>
+                     <CardDescription className="font-body">আমাদের ফেসবুক, ইউটিউব এবং ইনস্টাগ্রাম পেজ ফলো করে সব আপডেট এবং কার্যক্রম সম্পর্কে জানতে পারবেন।</CardDescription>
                 </CardHeader>
                 <CardContent className="flex justify-center items-center gap-6">
                     <Link href="https://www.facebook.com/siam.emon.52" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-accent transition-colors">
@@ -105,18 +134,6 @@ export default function GetInvolvedPage() {
                         <Instagram className="h-10 w-10" />
                         <span className="sr-only">ইনস্টাগ্রাম</span>
                     </Link>
-                </CardContent>
-            </Card>
-
-             <Card className="shadow-lg">
-                <CardHeader>
-                     <CardTitle className="font-headline flex items-center gap-3"><Edit className="w-8 h-8 text-primary"/> আপনার মতামত জানান</CardTitle>
-                     <CardDescription className="font-body">আপনার মূল্যবান মতামত, পরামর্শ বা প্রশ্ন সরাসরি আমাদের কাছে পাঠান।</CardDescription>
-                </CardHeader>
-                <CardContent>
-                   <Button asChild className="w-full" size="lg">
-                     <Link href="/#feedback-form">মতামত ফর্ম</Link>
-                   </Button>
                 </CardContent>
             </Card>
 
