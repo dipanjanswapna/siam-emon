@@ -116,7 +116,7 @@ export default function AboutPage() {
                     <li className="flex items-start gap-3">
                       <CheckCircle className="w-5 h-5 text-green-500 mt-1 flex-shrink-0" />
                       <span>
-                        <span className="font-bold text-foreground">প্রযুক্তি ও শিক্ষার মেলবন্ধন:</span> আমি শিক্ষাব্যস্থায় প্রযুক্তিগত আধুনিকায়ন আনতে আগ্রহী। অনলাইন রিসোর্স অ্যাক্সেস, ডিজিটাল লাইব্রেরি এবং প্রোগ্রামিং ও ডেটা অ্যানালাইসিসের মতো কর্মশালা আয়োজনের মাধ্যমে শিক্ষার্থীদের প্রযুক্তিগত দক্ষতা বাড়াতে চাই।
+                        <span className="font-bold text-foreground">প্রযুক্তি ও শিক্ষার মেলবন্ধন:</span> আমি শিক্ষাব্যস্থায় প্রযুক্তিগত আধুনিকায়ন আনতে আগ্রহী। অনলাইন রিসোর্স অ্যাক্সেস, ডিজিটাল লাইব্রেরি এবং প্রোগ্রামING ও ডেটা অ্যানালাইসিসের মতো কর্মশালা আয়োজনের মাধ্যমে শিক্ষার্থীদের প্রযুক্তিগত দক্ষতা বাড়াতে চাই।
                       </span>
                     </li>
                     <li className="flex items-start gap-3">
@@ -206,6 +206,34 @@ export default function AboutPage() {
                     ))
                 )}
             </div>
+        </section>
+
+        <section id="full-panel" className="py-16 md:py-24 bg-primary/5 rounded-lg">
+            <div className="text-center max-w-4xl mx-auto">
+                <h1 className="font-headline text-5xl md:text-6xl font-bold mt-4 text-foreground">আমাদের সম্পূর্ণ দল</h1>
+                 <div className="w-24 h-1 bg-red-500 mx-auto mt-2 mb-8"></div>
+            </div>
+             <div className="max-w-5xl mx-auto">
+                 <Card className="shadow-2xl overflow-hidden">
+                     <CardContent className="p-0">
+                        <div className="relative w-full aspect-[16/9]">
+                             <Image
+                                src="https://i.postimg.cc/k4xrgGBh/team-panel.png"
+                                alt="স্বতন্ত্র শিক্ষার্থী ঐক্য - সম্পূর্ণ প্রার্থী দল"
+                                fill
+                                className="object-cover"
+                                data-ai-hint="political team banner"
+                             />
+                        </div>
+                     </CardContent>
+                 </Card>
+                  <div className="text-center mt-6">
+                    <h3 className="font-headline text-2xl font-bold text-green-600">স্বতন্ত্র শিক্ষার্থী ঐক্য - সম্পূর্ণ প্রার্থী দল</h3>
+                    <p className="font-body text-muted-foreground mt-2 max-w-3xl mx-auto">
+                        বিভিন্ন বিভাগ ও অনুষদের প্রতিনিধিত্বকারী আমাদের এই দল শিক্ষার্থীদের সার্বিক কল্যাণে প্রতিশ্রুতিবদ্ধ।
+                    </p>
+                </div>
+             </div>
         </section>
 
       </div>
