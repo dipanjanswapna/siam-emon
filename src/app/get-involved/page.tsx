@@ -83,7 +83,9 @@ export default function GetInvolvedPage() {
                         </div>
                         <h3 className="font-headline text-xl font-bold mt-4">জরুরি যোগাযোগ</h3>
                         <p className="font-body text-muted-foreground mt-2 flex-grow">যেকোনো জরুরি বিষয়ে সরাসরি ফোন করুন</p>
-                        <Button className="mt-4 bg-green-600 hover:bg-green-700 w-full">এখনই কল করুন</Button>
+                        <Button asChild className="mt-4 bg-green-600 hover:bg-green-700 w-full">
+                          <Link href="tel:+8801623593673">এখনই কল করুন</Link>
+                        </Button>
                     </Card>
                     {/* Email Contact */}
                     <Card className="text-center p-6 bg-blue-500/5 border-blue-500/20 flex flex-col items-center justify-between">
@@ -92,7 +94,9 @@ export default function GetInvolvedPage() {
                         </div>
                         <h3 className="font-headline text-xl font-bold mt-4">ইমেইল সাপোর্ট</h3>
                         <p className="font-body text-muted-foreground mt-2 flex-grow">বিস্তারিত জিজ্ঞাসার জন্য ইমেইল করুন</p>
-                        <Button className="mt-4 bg-blue-600 hover:bg-blue-700 w-full">ইমেইল পাঠান</Button>
+                        <Button asChild className="mt-4 bg-blue-600 hover:bg-blue-700 w-full">
+                           <Link href="mailto:siam.emon.52@gmail.com">ইমেইল পাঠান</Link>
+                        </Button>
                     </Card>
                     {/* In-person */}
                      <Card className="text-center p-6 bg-red-500/5 border-red-500/20 flex flex-col items-center justify-between">
@@ -101,7 +105,9 @@ export default function GetInvolvedPage() {
                         </div>
                         <h3 className="font-headline text-xl font-bold mt-4">সরাসরি দেখা</h3>
                         <p className="font-body text-muted-foreground mt-2 flex-grow">আমাদের অফিসে এসে সরাসরি কথা বলুন</p>
-                        <Button className="mt-4 bg-red-600 hover:bg-red-700 w-full">ঠিকানা দেখুন</Button>
+                        <Button asChild className="mt-4 bg-red-600 hover:bg-red-700 w-full">
+                          <Link href="https://maps.app.goo.gl/uRRjPGuT9xcq8CZA6" target="_blank" rel="noopener noreferrer">ঠিকানা দেখুন</Link>
+                        </Button>
                     </Card>
                     <Card className="text-center p-6 bg-primary/5 border-primary/20 flex flex-col items-center justify-between">
                          <div className="p-4 bg-primary/20 rounded-lg">
