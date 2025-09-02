@@ -142,6 +142,23 @@ export default function ManifestoPage() {
             </p>
           </section>
 
+          <section id="cta-support" className="text-center rounded-lg p-12 bg-gradient-to-r from-green-600 to-red-600 text-white">
+                <h2 className="font-headline text-4xl md:text-5xl font-bold">
+                    আমাদের ইশতেহার বাস্তবায়নে আপনার সহযোগিতা প্রয়োজন
+                </h2>
+                <p className="font-body text-lg mt-4 max-w-3xl mx-auto">
+                    এই পরিকল্পনাগুলো বাস্তবায়নের জন্য আমাদের দরকার আপনাদের ভোট, সমর্থন এবং সক্রিয় অংশগ্রহণ।
+                </p>
+                <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <Button asChild size="lg" className="bg-white text-green-700 hover:bg-gray-200 font-headline text-lg">
+                        <Link href="/#pre-vote">আমাদের সমর্থন করুন</Link>
+                    </Button>
+                    <Button asChild size="lg" variant="outline" className="bg-transparent border-white text-white hover:bg-white/10 font-headline text-lg">
+                        <Link href="/#feedback-form">প্রশ্ন ও মতামত দিন</Link>
+                    </Button>
+                </div>
+            </section>
+
         </main>
       </div>
     </div>
