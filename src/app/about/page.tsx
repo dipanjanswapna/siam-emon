@@ -218,7 +218,7 @@ export default function AboutPage() {
                      <CardContent className="p-0">
                         <div className="relative w-full aspect-[16/9]">
                              <Image
-                                src="https://i.postimg.cc/k4xrgGBh/team-panel.png"
+                                src="https://i.postimg.cc/kXmRMQyY/image.png"
                                 alt="স্বতন্ত্র শিক্ষার্থী ঐক্য - সম্পূর্ণ প্রার্থী দল"
                                 fill
                                 className="object-cover"
@@ -240,7 +240,6 @@ export default function AboutPage() {
     </div>
   );
 }
-
     
 
     
