@@ -23,7 +23,7 @@ const keyPledges = [
   {
     icon: Mail,
     title: "জার্নাল অ্যাক্সেস ও ই-মেইল সক্ষমতা",
-    description: "ইন্সটিটিউশনাল মেইল আইডির সক্ষমতা বৃদ্ধি করব এবং বিশ্বমানের জার্নালগুলোতে বিনামূল্যে অ্যাক্সেস নিশ্চিত করব।"
+    description: "ইন্সটিটিউশনাল মেইল ಐডর সক্ষমতা বৃদ্ধি করব এবং বিশ্বমানের জার্নালগুলোতে বিনামূল্যে অ্যাক্সেস নিশ্চিত করব।"
   },
   {
     icon: BookOpen,
@@ -78,7 +78,7 @@ export default function ManifestoPage() {
              সিয়াম ফেরদৌস ইমন, গবেষণা ও প্রকাশনা সম্পাদক পদপ্রার্থী হিসেবে আমি বিশ্বাস করি, একটি উন্নত ও আধুনিক ঢাকা বিশ্ববিদ্যালয় গড়ার মূল ভিত্তি হলো গবেষণা ও প্রকাশনার অবাধ সুযোগ। আমি শুধু স্বপ্ন দেখাই না, স্বপ্ন বাস্তবায়নের জন্য সুনির্দিষ্ট পরিকল্পনা নিয়ে আপনাদের সামনে حاضر হয়েছি। আপনাদের ভোটে নির্বাচিত হলে, আমি এই অঙ্গীকারগুলো বাস্তবায়নে দৃঢ়প্রতিজ্ঞ থাকব।
           </p>
            <Button asChild variant="accent" size="lg" className="mt-8 font-headline text-lg">
-                <Link href="#">
+                <Link href="https://drive.google.com/file/d/1CFsCGTggXtmQCZM48fPg_HzLk2Mi68Y7/view?usp=drive_link" target="_blank" rel="noopener noreferrer">
                     <Download className="mr-2 h-5 w-5" />
                     সম্পূর্ণ ইশতেহার ডাউনলোড করুন
                 </Link>
@@ -86,6 +86,22 @@ export default function ManifestoPage() {
         </header>
 
         <main className="mt-16 space-y-16">
+          <section id="manifesto-pdf" className="mb-16">
+            <div className="text-center max-w-4xl mx-auto">
+                <h2 className="font-headline text-4xl font-bold text-foreground">সম্পূর্ণ ইশতেহার</h2>
+                <p className="font-body text-lg mt-2 text-muted-foreground">
+                    আমার বিস্তারিত পরিকল্পনা এবং অঙ্গীকারগুলো জানতে সম্পূর্ণ ইশতেহারটি দেখুন।
+                </p>
+            </div>
+            <div className="mt-8 relative w-full h-[80vh] max-w-4xl mx-auto shadow-lg">
+                <iframe
+                    src="https://drive.google.com/file/d/1CFsCGTggXtmQCZM48fPg_HzLk2Mi68Y7/preview"
+                    className="w-full h-full border-2 border-border rounded-lg"
+                    allow="autoplay"
+                ></iframe>
+            </div>
+          </section>
+
           <section id="pledges">
             <Card className="shadow-lg bg-card">
               <CardHeader className="text-center">
