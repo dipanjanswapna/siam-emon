@@ -68,6 +68,8 @@ export function Footer() {
                 <div className="text-primary-foreground/80 text-center md:text-left">
                     <span>© ২০২৪ সর্বস্বত্ব সংরক্ষিত | </span>
                     <Link href="/admin" className="hover:underline">সিয়াম ফেরদৌস ইমন ক্যাম্পেইন</Link>
+                    <span> | </span>
+                    <Link href="https://www.facebook.com/dipanjanswapna2/" target="_blank" rel="noopener noreferrer" className="hover:underline">Developed by PRANGONS ECOSYSTEM</Link>
                 </div>
                 <div className="flex items-center gap-6 mt-4 md:mt-0">
                     <Link href="https://www.facebook.com/siam.emon.52" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/80 hover:text-primary-foreground">
