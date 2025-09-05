@@ -624,14 +624,14 @@ function ElectionCountdown() {
 
             return (
                 <div key={interval} className="flex flex-col items-center">
-                    <div className="text-3xl md:text-6xl font-bold font-headline text-primary bg-primary/10 rounded-lg p-2 md:p-4 w-20 md:w-24 text-center shadow-inner">
+                    <div className="text-4xl md:text-7xl font-bold font-headline text-primary bg-background/80 backdrop-blur-sm rounded-lg p-3 md:p-5 w-24 md:w-32 text-center shadow-lg hover:scale-105 transition-transform duration-300">
                         {displayValue}
                     </div>
-                    <div className="mt-2 text-base md:text-lg font-semibold text-muted-foreground">{label}</div>
+                    <div className="mt-2 text-md md:text-xl font-semibold text-white drop-shadow-md">{label}</div>
                 </div>
             );
         })
-    ) : null;
+    ) : <p className="text-4xl font-bold text-white">ভোটের উৎসব শুরু!</p>;
     
     if (!isClient) {
         return (
@@ -650,15 +650,17 @@ function ElectionCountdown() {
     }
 
     return (
-        <section className="py-12 md:py-16 bg-background">
-            <div className="container mx-auto px-4 text-center">
-                <h2 className="text-3xl md:text-4xl font-bold font-headline text-foreground flex justify-center items-center gap-3">
-                    <Timer className="w-8 h-8 text-primary" />
-                    ভোটের দিনের কাউন্টডাউন
+        <section className="py-16 md:py-20 bg-gradient-to-r from-blue-500 via-primary to-accent">
+            <div className="container mx-auto px-4 text-center text-white">
+                <h2 className="text-4xl md:text-5xl font-bold font-headline drop-shadow-lg flex justify-center items-center gap-3">
+                    <Timer className="w-10 h-10 animate-bounce" />
+                    ঐতিহাসিক দিনের অপেক্ষা
                 </h2>
-                <div className="mt-8 flex flex-row flex-wrap justify-center gap-2 md:gap-8">
+                <p className="mt-4 text-xl md:text-2xl max-w-3xl mx-auto drop-shadow-sm">গবেষণার নতুন দিগন্ত উন্মোচনের আর মাত্র...</p>
+                <div className="mt-8 flex flex-row flex-wrap justify-center gap-4 md:gap-8">
                     {timerComponents}
                 </div>
+                 <p className="mt-8 text-xl md:text-2xl font-semibold animate-pulse">প্রতিটি সেকেন্ড গুরুত্বপূর্ণ! আপনার ভোটেই আসবে পরিবর্তন।</p>
             </div>
         </section>
     );
@@ -1182,7 +1184,7 @@ const organizationExperience = [
         title: "President",
         description: "Animal Genetics & Molecular Biology Club- AGMBC, গবেষণা রিলেটেড ক্লাব",
         image: "https://i.postimg.cc/6pgtWmgz/451374210-3661627947435304-7044717898982288749-n.jpg",
-        link: "https://www.facebook.com/profile.php?id=615562612316669"
+        link: "https://www.facebook.com/profile.php?id=61556261231666"
     },
     {
         title: "Co-Founder",
