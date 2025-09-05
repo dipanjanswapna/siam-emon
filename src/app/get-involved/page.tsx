@@ -145,6 +145,33 @@ export default function GetInvolvedPage() {
 
           </div>
         </div>
+
+        <section id="campaign-office-map" className="mt-16">
+          <Card className="shadow-lg">
+            <CardHeader className="text-center">
+              <CardTitle className="font-headline text-4xl flex items-center justify-center gap-3">
+                <MapPin className="w-10 h-10 text-primary"/>
+                আমাদের ক্যাম্পেইন অফিস
+              </CardTitle>
+              <CardDescription className="font-body text-lg text-muted-foreground">সরাসরি দেখা করতে বা আমাদের কার্যক্রমে অংশ নিতে চলে আসুন।</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="aspect-video w-full rounded-lg overflow-hidden border">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3651.905613342377!2d90.39122391544636!3d23.75069398458925!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b8bd552c2b3b%3A0x4e70f11784d943b8!2sUniversity%20of%20Dhaka!5e0!3m2!1sen!2sbd!4v1694008008013!5m2!1sen!2sbd"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen={true}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Campaign Office Location"
+                ></iframe>
+              </div>
+            </CardContent>
+          </Card>
+        </section>
+
       </div>
     </div>
   );
