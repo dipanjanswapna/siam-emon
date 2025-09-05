@@ -1,8 +1,10 @@
+
 "use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, Vote } from "lucide-react";
+import { useState } from "react";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -20,6 +22,8 @@ const navLinks = [
 
 export function Header() {
   const pathname = usePathname();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
 
   return (
     <header className="sticky top-0 z-50 p-2 md:p-3">
@@ -62,7 +66,7 @@ export function Header() {
 
         {/* Mobile Navigation */}
         <div className="md:hidden">
-          <Sheet>
+          <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="hover:bg-primary-foreground/10">
                 <Menu className="h-6 w-6" />
@@ -71,7 +75,7 @@ export function Header() {
             </SheetTrigger>
             <SheetContent side="bottom" className="bg-primary text-primary-foreground rounded-t-2xl h-auto">
               <div className="flex flex-col items-center gap-6 p-6 text-center">
-                <Link href="/" className="flex items-center gap-2 mb-4">
+                <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-2 mb-4">
                   <Image
                       src="https://i.postimg.cc/C5FPWXhs/Screenshot_2025-08-30_121415-Picsart-Ai-Image-Enhancer-removebg-preview.png"
                       alt="সিয়াম ফেরদৌস ইমন Logo"
@@ -87,6 +91,7 @@ export function Header() {
                   <Link
                     key={link.href}
                     href={link.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
                     className={cn(
                       "font-headline text-xl font-medium transition-colors hover:text-primary-foreground/80",
                       pathname === link.href ? "text-primary-foreground" : "text-primary-foreground/60"
