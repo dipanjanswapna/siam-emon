@@ -390,7 +390,7 @@ function VoterSearchAdSection() {
                             <SearchCheck className="w-24 h-24 text-primary" />
                         </div>
                         <div className="md:col-span-2">
-                            <h2 className="font-headline text-3xl md:text-4xl font-bold text-foreground">আপনার ভোটার তথ্য খুঁজুন</h2>
+                            <h2 className="font-headline text-3xl md:text-4xl font-bold text-foreground">আপনার <span className="text-red-600">ভোটার তথ্য</span> খুঁজুন</h2>
                             <p className="font-body text-lg mt-2 text-muted-foreground">
                                 ডাকসু নির্বাচনের জন্য আপনার ভোটার নম্বর এবং কেন্দ্র সহজেই খুঁজে নিন। ঢাকা বিশ্ববিদ্যালয় আইসিটি সেল দ্বারা পরিচালিত পোর্টালে আপনার তথ্য যাচাই করুন।
                             </p>
@@ -664,7 +664,7 @@ function VoteBannerSection() {
           ৯ তারিখ সারাদিন, ৯ নং ব্যালটে গবেষণায় সিয়ামকে ভোট দিন।
         </p>
         <div className="mt-8 bg-background/20 backdrop-blur-sm border-2 border-dashed border-primary rounded-lg p-6 max-w-md mx-auto shadow-xl">
-            <h3 className="font-headline text-4xl font-extrabold text-primary">সিয়াম ফেরদৌস ইমন</h3>
+            <h3 className="font-headline text-4xl font-extrabold text-primary">সিয়াম ফেরদৌস ইমন</h3>
             <p className="font-body text-white text-2xl mt-1">ব্যালট নং <span className="font-extrabold text-3xl text-red-500">০৯</span></p>
             <p className="font-body text-gray-200 text-xl">গবেষণা ও প্রকাশনা সম্পাদক পদপ্রার্থী</p>
         </div>
@@ -973,7 +973,7 @@ const logicalMovementActivities = [
     images: [
       { src: "https://i.postimg.cc/DZ8nTsg9/photo_2025-08-21_01-07_09.jpg", alt: "আন্দোলনে অংশগ্রহণ", hint: "protest movement" },
       { src: "https://i.postimg.cc/XJm37J1p/photo_2025-08-21_01-07_12.jpg", alt: "ছাত্রদের সমাবেশ", hint: "student gathering" },
-      { src: "https://i.postimg.cc/bwpPv4gH/photo_2025-08-21_01-06-54.jpg", alt: "ছাত্রদের সমাবেশ", hint: "student gathering" },
+      { src: "https://i.postimg.cc/bwpPv4gH/photo_2025-08-21_01-06_54.jpg", alt: "ছাত্রদের সমাবেশ", hint: "student gathering" },
       { src: "https://i.postimg.cc/CMnSrGdD/photo_2025-08-21_01-07_05.jpg", alt: "ছাত্রদের সমাবেশ", hint: "student gathering" },
       { src: "https://i.postimg.cc/VLj1mzqk/photo_2025-08-21_01-07_01.jpg", alt: "ছাত্রদের সমাবেশ", hint: "student gathering" },
     ],
@@ -1476,7 +1476,7 @@ const fallbackTestimonials: Testimonial[] = [
         role: "শিক্ষার্থী, প্রাণিবিদ্যা বিভাগ",
         image: "https://i.postimg.cc/8c7pFdR9/female-student-3.jpg",
         imageHint: "woman portrait",
-        testimonial: "বিভাগের বড় ভাই হিসেবে সিয়াম ভাইয়ের একাডেমিক গাইডলাইন আমাদের জন্য আশীর্বাদস্বরূপ। তার আয়োজিত কর্মশালাগুলো আমাদের গবেষণার কাজে অনেক সাহায্য করেছে। গবেষণা ও প্রকাশনা সম্পাদক পদে তিনিই সেরা।"
+        testimonial: "বিভাগের বড় ভাই হিসেবে সিয়াম ইমন ভাইয়ের একাডেমিক গাইডলাইন আমাদের জন্য আশীর্বাদস্বরূপ। তার আয়োজিত কর্মশালাগুলো আমাদের গবেষণার কাজে অনেক সাহায্য করেছে। গবেষণা ও প্রকাশনা সম্পাদক পদে তিনিই সেরা।"
     }
 ];
 
