@@ -106,6 +106,25 @@ const icons: { [key: string]: React.ElementType } = {
     Users
 };
 
+const actionPlanImages = [
+    { src: "https://i.postimg.cc/59qqmzhY/Whats-App-Image-2025-09-05-at-02-12-22-9537f431.jpg", alt: "কর্মপরিকল্পনা ১", hint: "action plan" },
+    { src: "https://i.postimg.cc/Gm9Fr5HG/Whats-App-Image-2025-09-05-at-02-12-19-73b305df.jpg", alt: "কর্মপরিকল্পনা ২", hint: "action plan" },
+    { src: "https://i.postimg.cc/kgZx5vbZ/Whats-App-Image-2025-09-05-at-02-12-19-a4b2ad89.jpg", alt: "কর্মপরিকল্পনা ৩", hint: "action plan" },
+    { src: "https://i.postimg.cc/k5bWRRN5/Whats-App-Image-2025-09-05-at-02-12-20-6fcd5737.jpg", alt: "কর্মপরিকল্পনা ৪", hint: "action plan" },
+    { src: "https://i.postimg.cc/yxVRGfMJ/Whats-App-Image-2025-09-05-at-02-12-21-3e47bf26.jpg", alt: "কর্মপরিকল্পনা ৫", hint: "action plan" },
+    { src: "https://i.postimg.cc/wMVXTKXc/Whats-App-Image-2025-09-05-at-02-12-23-ac331255.jpg", alt: "কর্মপরিকল্পনা ৬", hint: "action plan" },
+    { src: "https://i.postimg.cc/vHY72ByP/Whats-App-Image-2025-09-05-at-02-12-25-78f78f2b.jpg", alt: "কর্মপরিকল্পনা ৭", hint: "action plan" },
+    { src: "https://i.postimg.cc/yxvRCmKL/Whats-App-Image-2025-09-05-at-02-12-22-33ef4f9c.jpg", alt: "কর্মপরিকল্পনা ৮", hint: "action plan" },
+    { src: "https://i.postimg.cc/3rBmGTG2/Whats-App-Image-2025-09-05-at-02-12-22-b88166e9.jpg", alt: "কর্মপরিকল্পনা ৯", hint: "action plan" },
+    { src: "https://i.postimg.cc/Z59dXvML/Whats-App-Image-2025-09-05-at-02-12-17-efb3723a.jpg", alt: "কর্মপরিকল্পনা ১০", hint: "action plan" },
+    { src: "https://i.postimg.cc/85gMRkwm/Whats-App-Image-2025-09-05-at-02-12-20-851d1226.jpg", alt: "কর্মপরিকল্পনা ১১", hint: "action plan" },
+    { src: "https://i.postimg.cc/kXg8FpNz/Whats-App-Image-2025-09-05-at-02-12-16-7b3644d3.jpg", alt: "কর্মপরিকল্পনা ১২", hint: "action plan" },
+    { src: "https://i.postimg.cc/J4YXT5Pn/Whats-App-Image-2025-09-05-at-02-12-18-04f147d5.jpg", alt: "কর্মপরিকল্পনা ১৩", hint: "action plan" },
+    { src: "https://i.postimg.cc/wv5J0KG8/Whats-App-Image-2025-09-05-at-02-12-21-2cb96834.jpg", alt: "কর্মপরিকল্পনা ১৪", hint: "action plan" },
+    { src: "https://i.postimg.cc/SRqLhQMx/Whats-App-Image-2025-09-05-at-02-12-24-2aafe777.jpg", alt: "কর্মপরিকল্পনা ১৫", hint: "action plan" },
+    { src: "https://i.postimg.cc/MK97CSKz/Whats-App-Image-2025-09-05-at-02-12-18-fcea5278.jpg", alt: "কর্মপরিকল্পনা ১৬", hint: "action plan" },
+];
+
 
 export default function Home() {
   return (
@@ -118,6 +137,7 @@ export default function Home() {
       <VoteBannerSection />
       <VoteCallToActionSection />
       <VoterSearchAdSection />
+      <ActionPlanSection />
       <CommitmentSection />
       <CampaignGallerySection />
       <ResearchSection />
@@ -382,6 +402,36 @@ function VoterSearchAdSection() {
                         </div>
                     </div>
                 </Card>
+            </div>
+        </section>
+    );
+}
+
+function ActionPlanSection() {
+    return (
+        <section id="action-plan" className="py-16 md:py-24 bg-primary/5">
+            <div className="container mx-auto px-4">
+                <div className="text-center max-w-4xl mx-auto">
+                    <FileText className="mx-auto h-12 w-12 text-primary" />
+                    <h2 className="font-headline text-4xl font-bold text-foreground mt-4">আমাদের কর্মপরিকল্পনা</h2>
+                    <p className="font-body text-lg mt-2 text-muted-foreground">
+                        আমাদের লক্ষ্য এবং প্রতিশ্রুতিগুলো বাস্তবায়নের জন্য একটি বিস্তারিত কর্মপরিকল্পনা।
+                    </p>
+                </div>
+                <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {actionPlanImages.map((image, index) => (
+                        <div key={index}>
+                            <Image
+                                src={image.src}
+                                alt={image.alt}
+                                width={900}
+                                height={1600}
+                                className="w-full h-auto rounded-lg"
+                                data-ai-hint={image.hint}
+                            />
+                        </div>
+                    ))}
+                </div>
             </div>
         </section>
     );
@@ -1932,4 +1982,5 @@ function PreVoteSection() {
     
 
     
+
 
