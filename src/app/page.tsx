@@ -299,15 +299,33 @@ function AboutSection() {
   return (
     <section className="py-8 md:py-12 bg-background">
       <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div className="relative w-full aspect-[4/5] rounded-lg overflow-hidden shadow-lg group">
-            <Image
-              src="https://i.postimg.cc/tTcVFV1Q/539530889-122093783187002829-1661414873762122234-n-1-Picsart-Ai-Image-Enhancer.jpg"
-              alt="সিয়াম ফেরদৌস ইমন - গবেষণা ও প্রকাশনা সম্পাদক পদপ্রার্থী"
-              fill
-              className="object-contain transform group-hover:scale-105 transition-transform duration-300"
-              data-ai-hint="politician portrait"
-            />
+        <div className="grid md:grid-cols-2 gap-12 items-start">
+          <div className="flex flex-col items-center">
+            <div className="relative w-full aspect-[4/5] rounded-lg overflow-hidden shadow-lg group">
+                <Image
+                src="https://i.postimg.cc/tTcVFV1Q/539530889-122093783187002829-1661414873762122234-n-1-Picsart-Ai-Image-Enhancer.jpg"
+                alt="সিয়াম ফেরদৌস ইমন - গবেষণা ও প্রকাশনা সম্পাদক পদপ্রার্থী"
+                fill
+                className="object-contain transform group-hover:scale-105 transition-transform duration-300"
+                data-ai-hint="politician portrait"
+                />
+            </div>
+             <div className="mt-6 text-center w-full max-w-sm">
+                <div className="bg-yellow-200/80 text-yellow-900 font-bold py-2 px-4 rounded-md">
+                    গবেষণা ও প্রকাশনা সম্পাদক
+                </div>
+                <h3 className="font-headline text-4xl font-bold text-teal-800 my-4">
+                    সিয়াম ফেরদৌস ইমন
+                </h3>
+                <div className="rounded-lg overflow-hidden shadow-lg">
+                    <div className="bg-teal-700 text-white font-bold py-2">
+                        ব্যালট নম্বর
+                    </div>
+                    <div className="bg-teal-100 text-teal-800 text-6xl font-bold py-4">
+                        ০৯
+                    </div>
+                </div>
+            </div>
           </div>
           <div className="text-center md:text-left">
             <h2 className="font-headline text-4xl md:text-5xl font-bold text-foreground mb-6">আমার পরিচিতি</h2>
@@ -1880,6 +1898,8 @@ function PreVoteSection() {
         </section>
     );
 }
+
+    
 
     
 
