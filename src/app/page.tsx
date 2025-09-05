@@ -299,9 +299,9 @@ function AboutSection() {
   return (
     <section className="py-8 md:py-12 bg-background">
       <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-2 gap-12 items-start">
-          <div className="flex flex-col items-center">
-            <div className="relative w-full aspect-[4/5] rounded-lg overflow-hidden shadow-lg group">
+        <div className="grid md:grid-cols-5 gap-12 items-center">
+          <div className="md:col-span-2 flex flex-col items-center">
+            <div className="relative w-full max-w-sm mx-auto aspect-[4/5] rounded-lg overflow-hidden shadow-lg group">
                 <Image
                 src="https://i.postimg.cc/tTcVFV1Q/539530889-122093783187002829-1661414873762122234-n-1-Picsart-Ai-Image-Enhancer.jpg"
                 alt="সিয়াম ফেরদৌস ইমন - গবেষণা ও প্রকাশনা সম্পাদক পদপ্রার্থী"
@@ -327,7 +327,7 @@ function AboutSection() {
                 </div>
             </div>
           </div>
-          <div className="text-center md:text-left">
+          <div className="md:col-span-3 text-center md:text-left">
             <h2 className="font-headline text-4xl md:text-5xl font-bold text-foreground mb-6">আমার পরিচিতি</h2>
             <div className="font-body text-lg md:text-xl space-y-4 text-muted-foreground">
               <p>
