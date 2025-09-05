@@ -15,20 +15,11 @@ export function Footer() {
         <div className="container relative mx-auto px-4 py-12 md:px-6">
             <div className="grid gap-12 md:grid-cols-3">
                 
-                {/* Column 1: Logo and About */}
+                {/* Column 1: About */}
                 <div className="md:col-span-1">
-                    <Link href="/" className="flex items-center gap-2 mb-4">
-                        <Image
-                            src="https://i.postimg.cc/C5FPWXhs/Screenshot_2025-08-30_121415-Picsart-Ai-Image-Enhancer-removebg-preview.png"
-                            alt="সিয়াম ফেরদৌস ইমন Logo"
-                            width={40}
-                            height={40}
-                            className="h-10 w-10"
-                        />
-                        <span className="text-2xl font-headline font-bold">
-                            সিয়াম ফেরদৌস ইমন
-                        </span>
-                    </Link>
+                     <h3 className="text-2xl font-headline font-bold mb-4">
+                        সিয়াম ফেরদৌস ইমন
+                    </h3>
                     <p className="font-body text-sm text-primary-foreground/80 mb-6">
                         ঢাকা বিশ্ববিদ্যালয়ের ছাত্রসমাজের অধিকার ও গবেষণার সুযোগ নিশ্চিত করতে আমি অঙ্গীকারবদ্ধ। একটি উন্নত, সমৃদ্ধ এবং অন্তর্ভুক্তিমূলক ভবিষ্যতের জন্য আমাদের সাথে যোগ দিন।
                     </p>
