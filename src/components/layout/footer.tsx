@@ -33,6 +33,9 @@ export function Footer() {
                         <li><Link href="/about" className="hover:underline text-primary-foreground/80">আমাদের সম্পর্কে</Link></li>
                         <li><Link href="/manifesto" className="hover:underline text-primary-foreground/80">ইশতেহার</Link></li>
                         <li><Link href="/transparency" className="hover:underline text-primary-foreground/80">স্বচ্ছতা</Link></li>
+                        <li><Link href="/voting-guide" className="hover:underline text-primary-foreground/80">ভোট প্রদান নির্দেশিকা</Link></li>
+                        <li><Link href="/news-updates" className="hover:underline text-primary-foreground/80">সংবাদ ও আপডেট</Link></li>
+                        <li><Link href="/privacy-policy" className="hover:underline text-primary-foreground/80">গোপনীয়তা নীতি</Link></li>
                     </ul>
                 </div>
 
