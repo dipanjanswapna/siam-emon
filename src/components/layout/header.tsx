@@ -18,8 +18,6 @@ const navLinks = [
   { href: "/gallery", label: "গ্যালারি" },
   { href: "/transparency", label: "স্বচ্ছতা" },
   { href: "/voter-registration", label: "ভোটার অনুসন্ধান" },
-  { href: "/news-updates", label: "সংবাদ" },
-  { href: "/voting-guide", label: "ভোট নির্দেশিকা" },
 ];
 
 export function Header() {
