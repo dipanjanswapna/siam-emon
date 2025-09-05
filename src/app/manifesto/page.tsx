@@ -102,12 +102,12 @@ function ActionPlanSection() {
                     {actionPlanImages.map((image, index) => (
                         <Card key={index} className="overflow-hidden group shadow-lg">
                              <CardContent className="p-0">
-                                <div className="relative w-full aspect-[4/5]">
+                                <div className="relative w-full aspect-[9/16] bg-card">
                                     <Image
                                         src={image.src}
                                         alt={image.alt}
                                         fill
-                                        className="object-cover transform group-hover:scale-105 transition-transform duration-300"
+                                        className="object-contain transform group-hover:scale-105 transition-transform duration-300"
                                         data-ai-hint={image.hint}
                                     />
                                 </div>
