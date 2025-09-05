@@ -100,12 +100,13 @@ function ActionPlanSection() {
                 </div>
                 <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {actionPlanImages.map((image, index) => (
-                        <div key={index} className="relative w-full aspect-[9/16] bg-card/50 overflow-hidden rounded-lg">
+                        <div key={index}>
                             <Image
                                 src={image.src}
                                 alt={image.alt}
-                                fill
-                                className="object-contain"
+                                width={900}
+                                height={1600}
+                                className="w-full h-auto rounded-lg"
                                 data-ai-hint={image.hint}
                             />
                         </div>
