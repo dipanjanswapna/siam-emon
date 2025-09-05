@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 
 export function FloatingVoteButton() {
   return (
-    <Link href="/#pre-vote" passHref className="fixed bottom-24 left-6 z-50">
+    <Link href="/#pre-vote" passHref className="fixed bottom-20 right-6 z-50">
       <Button
         variant="ghost"
         className="h-20 w-20 p-0 rounded-full"
