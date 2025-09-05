@@ -100,19 +100,15 @@ function ActionPlanSection() {
                 </div>
                 <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {actionPlanImages.map((image, index) => (
-                        <Card key={index} className="overflow-hidden group shadow-lg">
-                             <CardContent className="p-0">
-                                <div className="relative w-full aspect-[9/16] bg-card">
-                                    <Image
-                                        src={image.src}
-                                        alt={image.alt}
-                                        fill
-                                        className="object-contain transform group-hover:scale-105 transition-transform duration-300"
-                                        data-ai-hint={image.hint}
-                                    />
-                                </div>
-                            </CardContent>
-                        </Card>
+                        <div key={index} className="relative w-full aspect-[9/16] bg-card/50 overflow-hidden rounded-lg">
+                            <Image
+                                src={image.src}
+                                alt={image.alt}
+                                fill
+                                className="object-contain"
+                                data-ai-hint={image.hint}
+                            />
+                        </div>
                     ))}
                 </div>
             </div>
