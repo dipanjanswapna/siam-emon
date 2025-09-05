@@ -418,7 +418,7 @@ function ActionPlanSection() {
                         আমাদের লক্ষ্য এবং প্রতিশ্রুতিগুলো বাস্তবায়নের জন্য একটি বিস্তারিত কর্মপরিকল্পনা।
                     </p>
                 </div>
-                <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     {actionPlanImages.map((image, index) => (
                         <div key={index}>
                             <Image
@@ -808,10 +808,10 @@ const researchActivities = [
         { src: "https://i.postimg.cc/c4MqPXWK/photo-2025-08-21-01-06-05.jpg", alt: "বক্তব্য রাখার মুহূর্ত", hint: "giving speech" },
         { src: "https://i.postimg.cc/DyKkCR9k/photo-2025-08-21-01-06-07.jpg", alt: "উপস্থিত শিক্ষার্থীদের একাংশ", hint: "student audience" },
         { src: "https://i.postimg.cc/fRTPps5F/photo-2025-08-21-01-04-50.jpg", alt: "আলোচনা সভা", hint: "panel discussion" },
-        { src: "https://i.postimg.cc/SRhTrbJg/photo-2025-08-21-01-04-05.jpg", alt: "প্রশ্নোত্তর পর্ব", hint: "q&a session" },
-        { src: "https://i.postimg.cc/fyfHqqdD/photo-2025-08-21-01-04-12.jpg", alt: "শিক্ষার্থীদের সাথে গ্রুপ ছবি", hint: "group photo students" },
-        { src: "https://i.postimg.cc/d1dNrVt7/photo-2025-08-21-01-04-17.jpg", alt: "সেমিনারের একটি মুহূর্ত", hint: "seminar moment" },
-        { src: "https://i.postimg.cc/fbVrWvGf/photo-2025-08-21-01-04-27.jpg", alt: "অংশগ্রহণকারীদের সাথে আলোচনা", hint: "discussion participants" }
+        { src: "https://i.postimg.cc/SRhTrbJg/photo-2025-08-21-01-04-12.jpg", alt: "প্রশ্নোত্তর পর্ব", hint: "q&a session" },
+        { src: "https://i.postimg.cc/fyfHqqdD/photo-2025-08-21-01-04-17.jpg", alt: "শিক্ষার্থীদের সাথে গ্রুপ ছবি", hint: "group photo students" },
+        { src: "https://i.postimg.cc/d1dNrVt7/photo-2025-08-21-01-04-27.jpg", alt: "সেমিনারের একটি মুহূর্ত", hint: "seminar moment" },
+        { src: "https://i.postimg.cc/fbVrWvGf/photo-2025-08-21-01-04-05.jpg", alt: "অংশগ্রহণকারীদের সাথে আলোচনা", hint: "discussion participants" }
     ],
   },
     {
@@ -973,7 +973,7 @@ const logicalMovementActivities = [
     images: [
       { src: "https://i.postimg.cc/DZ8nTsg9/photo_2025-08-21_01-07_09.jpg", alt: "আন্দোলনে অংশগ্রহণ", hint: "protest movement" },
       { src: "https://i.postimg.cc/XJm37J1p/photo_2025-08-21_01-07_12.jpg", alt: "ছাত্রদের সমাবেশ", hint: "student gathering" },
-      { src: "https://i.postimg.cc/bwpPv4gH/photo_2025-08-21_01-06_54.jpg", alt: "ছাত্রদের সমাবেশ", hint: "student gathering" },
+      { src: "https://i.postimg.cc/bwpPv4gH/photo_2025-08-21_01-06-54.jpg", alt: "ছাত্রদের সমাবেশ", hint: "student gathering" },
       { src: "https://i.postimg.cc/CMnSrGdD/photo_2025-08-21_01-07_05.jpg", alt: "ছাত্রদের সমাবেশ", hint: "student gathering" },
       { src: "https://i.postimg.cc/VLj1mzqk/photo_2025-08-21_01-07_01.jpg", alt: "ছাত্রদের সমাবেশ", hint: "student gathering" },
     ],
@@ -1984,3 +1984,6 @@ function PreVoteSection() {
     
 
 
+
+
+    
