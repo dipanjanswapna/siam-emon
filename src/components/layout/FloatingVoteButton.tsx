@@ -5,14 +5,14 @@ import { Button } from "@/components/ui/button";
 
 export function FloatingVoteButton() {
   return (
-    <Link href="/#pre-vote" passHref className="fixed bottom-24 right-6 z-50">
+    <Link href="/#pre-vote" passHref className="fixed bottom-6 right-24 z-50">
       <Button
         variant="ghost"
         className="h-20 w-20 p-0 rounded-full"
         aria-label="প্রি-ভোটে অংশ নিন"
       >
         <Image
-          src="https://i.postimg.cc/C5FPWXhs/Screenshot-2025-08-30-121415-Picsart-Ai-Image-Enhancer-removebg-preview.png"
+          src="https://i.postimg.cc/C5FPWXhs/Screenshot_2025-08-30_121415-Picsart-Ai-Image-Enhancer-removebg-preview.png"
           alt="প্রি-ভোট দিন"
           width={80}
           height={80}

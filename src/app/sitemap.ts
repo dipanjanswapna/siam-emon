@@ -29,5 +29,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       priority: 0.5,
     },
+     {
+      url: `${baseUrl}/voter-registration`,
+      lastModified: new Date(),
+      priority: 0.7,
+    },
   ]
 }

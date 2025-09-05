@@ -15,6 +15,7 @@ const navLinks = [
   { href: "/manifesto", label: "ইশতেহার" },
   { href: "/gallery", label: "গ্যালারি" },
   { href: "/transparency", label: "স্বচ্ছতা" },
+  { href: "/voter-registration", label: "ভোটার নিবন্ধন" },
 ];
 
 export function Header() {
