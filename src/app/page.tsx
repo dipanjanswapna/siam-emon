@@ -301,7 +301,7 @@ function AboutSection() {
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-5 gap-12 items-center">
           <div className="md:col-span-2 flex flex-col items-center">
-            <div className="relative w-full max-w-sm mx-auto aspect-[4/5] rounded-lg overflow-hidden shadow-lg group">
+            <div className="relative w-full max-w-xs mx-auto aspect-[4/5] rounded-lg overflow-hidden shadow-lg group">
                 <Image
                 src="https://i.postimg.cc/tTcVFV1Q/539530889-122093783187002829-1661414873762122234-n-1-Picsart-Ai-Image-Enhancer.jpg"
                 alt="সিয়াম ফেরদৌস ইমন - গবেষণা ও প্রকাশনা সম্পাদক পদপ্রার্থী"
@@ -310,18 +310,18 @@ function AboutSection() {
                 data-ai-hint="politician portrait"
                 />
             </div>
-             <div className="mt-6 text-center w-full max-w-sm">
-                <div className="bg-yellow-200/80 text-yellow-900 font-bold py-2 px-4 rounded-md">
+             <div className="mt-6 text-center w-full max-w-xs">
+                <div className="bg-yellow-200/80 text-yellow-900 font-bold py-1.5 px-3 rounded-md text-sm">
                     গবেষণা ও প্রকাশনা সম্পাদক
                 </div>
-                <h3 className="font-headline text-4xl font-bold text-teal-800 my-4">
+                <h3 className="font-headline text-3xl font-bold text-teal-800 my-2">
                     সিয়াম ফেরদৌস ইমন
                 </h3>
                 <div className="rounded-lg overflow-hidden shadow-lg">
-                    <div className="bg-teal-700 text-white font-bold py-2">
+                    <div className="bg-teal-700 text-white font-bold py-1.5 text-sm">
                         ব্যালট নম্বর
                     </div>
-                    <div className="bg-teal-100 text-teal-800 text-6xl font-bold py-4">
+                    <div className="bg-teal-100 text-teal-800 text-5xl font-bold py-2">
                         ০৯
                     </div>
                 </div>
