@@ -7,7 +7,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { ArrowRight, BookOpen, BookOpenCheck, BrainCircuit, Library, Users, Camera, X, Heart, Megaphone, Flag, Award, FileText, Mic, GraduationCap, HandHeart, BookText, ShieldCheck, MessageSquare, Mail, Icon, ImagePlus, Annoyed, HelpCircle, Vote, Share2, DollarSign, Archive, Laptop, Combine, Trophy, VolumeX, Volume2, FlaskConical, HandCoins, BadgePercent, Presentation, Database, Microscope, Quote, Tv, Timer } from "lucide-react";
+import { ArrowRight, BookOpen, BookOpenCheck, BrainCircuit, Library, Users, Camera, X, Heart, Megaphone, Flag, Award, FileText, Mic, GraduationCap, HandHeart, BookText, ShieldCheck, MessageSquare, Mail, Icon, ImagePlus, Annoyed, HelpCircle, Vote, Share2, DollarSign, Archive, Laptop, Combine, Trophy, VolumeX, Volume2, FlaskConical, HandCoins, BadgePercent, Presentation, Database, Microscope, Quote, Tv, Timer, SearchCheck } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogClose } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -117,6 +117,7 @@ export default function Home() {
       <AboutSection />
       <VoteBannerSection />
       <VoteCallToActionSection />
+      <VoterSearchAdSection />
       <CommitmentSection />
       <CampaignGallerySection />
       <ResearchSection />
@@ -358,6 +359,33 @@ type Commitment = {
     title: string;
     description: string;
 };
+
+function VoterSearchAdSection() {
+    return (
+        <section className="py-12 md:py-16 bg-background">
+            <div className="container mx-auto px-4">
+                <Card className="shadow-lg bg-primary/5 border-primary/20">
+                    <div className="grid md:grid-cols-3 items-center text-center md:text-left p-8 gap-8">
+                        <div className="md:col-span-1 flex justify-center">
+                            <SearchCheck className="w-24 h-24 text-primary" />
+                        </div>
+                        <div className="md:col-span-2">
+                            <h2 className="font-headline text-3xl md:text-4xl font-bold text-foreground">আপনার ভোটার তথ্য খুঁজুন</h2>
+                            <p className="font-body text-lg mt-2 text-muted-foreground">
+                                ডাকসু নির্বাচনের জন্য আপনার ভোটার নম্বর এবং কেন্দ্র সহজেই খুঁজে নিন। ঢাকা বিশ্ববিদ্যালয় আইসিটি সেল দ্বারা পরিচালিত পোর্টালে আপনার তথ্য যাচাই করুন।
+                            </p>
+                            <Button asChild size="lg" className="mt-6 font-headline text-lg">
+                                <Link href="/voter-registration">
+                                    এখনই খুঁজুন
+                                </Link>
+                            </Button>
+                        </div>
+                    </div>
+                </Card>
+            </div>
+        </section>
+    );
+}
 
 function CommitmentSection() {
     const [commitments, setCommitments] = useState<Commitment[]>([]);
@@ -1904,3 +1932,4 @@ function PreVoteSection() {
     
 
     
+
