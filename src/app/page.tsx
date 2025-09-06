@@ -7,7 +7,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { ArrowRight, BookOpen, BookOpenCheck, BrainCircuit, Library, Users, Camera, X, Heart, Megaphone, Flag, Award, FileText, Mic, GraduationCap, HandHeart, BookText, ShieldCheck, MessageSquare, Mail, Icon, ImagePlus, Annoyed, HelpCircle, Vote, Share2, DollarSign, Archive, Laptop, Combine, Trophy, VolumeX, Volume2, FlaskConical, HandCoins, BadgePercent, Presentation, Database, Microscope, Quote, Tv, Timer, SearchCheck } from "lucide-react";
+import { ArrowRight, BookOpen, BookOpenCheck, BrainCircuit, Library, Users, Camera, X, Heart, Megaphone, Flag, Award, FileText, Mic, GraduationCap, HandHeart, BookText, ShieldCheck, MessageSquare, Mail, Icon, ImagePlus, Annoyed, HelpCircle, Vote, Share2, DollarSign, Archive, Laptop, Combine, Trophy, VolumeX, Volume2, FlaskConical, HandCoins, BadgePercent, Presentation, Database, Microscope, Quote, Tv, Timer, SearchCheck, Phone } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogClose } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -153,6 +153,7 @@ export default function Home() {
       <FAQSection />
       <FeedbackSection />
       <PreVoteSection />
+      <SupportSection />
     </div>
   );
 }
@@ -1977,14 +1978,41 @@ function PreVoteSection() {
     );
 }
 
-    
+function SupportSection() {
+    return (
+        <section className="py-16 md:py-24 bg-background">
+            <div className="container mx-auto px-4">
+                <Card className="max-w-4xl mx-auto rounded-lg p-8 md:p-12 text-center text-white" style={{background: 'linear-gradient(to right, #b91c1c, #dc2626)'}}>
+                    <div className="flex justify-center mb-4">
+                        <div className="bg-white/20 p-3 rounded-full">
+                           <Phone className="w-8 h-8 text-white" />
+                        </div>
+                    </div>
+                    <h2 className="font-headline text-3xl md:text-4xl font-bold">কোনো প্রশ্ন আছে?</h2>
+                    <p className="font-body text-lg mt-2 opacity-90">যেকোনো সময় আমাদের স্টুডেন্ট অ্যাডভাইজরের সাথে কথা বলুন।</p>
+                    <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+                        <Button asChild size="lg" variant="destructive" className="bg-white text-red-600 hover:bg-gray-200 font-bold">
+                            <Link href="tel:+8801623593673">এখনই কল করুন</Link>
+                        </Button>
+                        <Button asChild size="lg" variant="outline" className="bg-transparent border-white text-white hover:bg-white/10 font-bold">
+                           <Link href="/#feedback-form">মতামত ফর্ম</Link>
+                        </Button>
+                    </div>
+                </Card>
+            </div>
+        </section>
+    );
+}
 
     
 
     
 
+    
+
 
 
 
     
+
 
