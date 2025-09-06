@@ -413,7 +413,7 @@ function ActionPlanSection() {
             <div className="container mx-auto px-4">
                 <div className="text-center max-w-4xl mx-auto">
                     <FileText className="mx-auto h-12 w-12 text-primary" />
-                    <h2 className="font-headline text-4xl font-bold text-foreground mt-4">আমাদের কর্মপরিকল্পনা</h2>
+                    <h2 className="font-headline text-4xl font-bold text-foreground mt-4">আমাদের <span className="text-red-600">কর্মপরিকল্পনা</span></h2>
                     <p className="font-body text-lg mt-2 text-muted-foreground">
                         আমাদের লক্ষ্য এবং প্রতিশ্রুতিগুলো বাস্তবায়নের জন্য একটি বিস্তারিত কর্মপরিকল্পনা।
                     </p>
@@ -482,7 +482,7 @@ function CommitmentSection() {
         <section className="py-16 md:py-24 bg-primary/10">
             <div className="container mx-auto px-4">
                 <div className="text-center max-w-4xl mx-auto">
-                    <h2 className="font-headline text-4xl md:text-5xl font-bold text-foreground">আমার অঙ্গীকার</h2>
+                    <h2 className="font-headline text-4xl md:text-5xl font-bold text-foreground">আমার <span className="text-red-600">অঙ্গীকার</span></h2>
                     <p className="font-body text-lg mt-4 text-muted-foreground">
                         প্রিয় ঢাকা বিশ্ববিদ্যালয়ের সহপাঠীরা, আমরা সবাই জানি—জ্ঞানচর্চা, গবেষণা আর প্রকাশনা ছাড়া প্রকৃত উচ্চশিক্ষার অগ্রগতি সম্ভব নয়। কিন্তু আমাদের অনেক সম্ভাবনাময় গবেষণা কেবল সুযোগ ও প্ল্যাটফর্মের অভাবে থেমে যায়। আমি প্রতিশ্রুতি দিচ্ছি, যদি আপনারা আমাকে ডাকসু ২০২৫-এ গবেষণা ও প্রকাশনা সম্পাদক হিসেবে দায়িত্ব দেন, তবে আমি বিভাগভিত্তিক গবেষণা তহবিল ও আন্তর্জাতিক স্কলারশিপের সহায়তা, ডাকসুর নিজস্ব স্টুডেন্ট জার্নাল প্রকাশ, প্রতিটি থিসিস ও গবেষণার জন্য ডিজিটাল আর্কাইভ, একাডেমিক রাইটিং ও সফটওয়্যার ট্রেনিং কর্মশালা এবং শিক্ষার্থীদের জন্য গবেষণাভিত্তিক কনফারেন্স ও সেমিনার আয়োজন করব। আপনার ভোটে গড়ে উঠুক একটি গবেষণা-উদ্যমী ডাকসু।
                     </p>
@@ -561,7 +561,7 @@ function CampaignGallerySection() {
                 <div className="text-center max-w-4xl mx-auto">
                     <Camera className="mx-auto h-12 w-12 text-primary" />
                     <h2 className="font-headline text-4xl md:text-5xl font-bold mt-4 text-foreground">
-                        নির্বাচনী প্রচারণার একাংশ
+                        <span className="text-red-600">নির্বাচনী প্রচারণার</span> একাংশ
                     </h2>
                     <p className="mt-4 font-body text-lg text-muted-foreground">
                         আমার নির্বাচনী প্রচারণার কিছু বিশেষ মুহূর্ত, যা শিক্ষার্থীদের ভালোবাসা ও সমর্থনে পূর্ণ।
@@ -833,7 +833,7 @@ function ResearchSection() {
       <div className="container mx-auto px-4">
         <div className="text-center max-w-4xl mx-auto">
           <Camera className="mx-auto h-12 w-12 text-primary" />
-          <h1 className="font-headline text-5xl md:text-6xl font-bold mt-4 text-foreground">আমার গবেষণা ও কার্যক্রম</h1>
+          <h1 className="font-headline text-5xl md:text-6xl font-bold mt-4 text-foreground">আমার <span className="text-red-600">গবেষণা ও কার্যক্রম</span></h1>
           <p className="font-body text-lg mt-4 text-muted-foreground">
             জ্ঞানভিত্তিক সমাজ গঠনে আমার গবেষণা, ওয়ার্কশপ এবং বিভিন্ন কার্যক্রমের ঝলক।
           </p>
@@ -902,7 +902,7 @@ function PublicationSection() {
       <div className="container mx-auto px-4">
         <div className="text-center max-w-4xl mx-auto">
           <BookOpenCheck className="mx-auto h-12 w-12 text-primary" />
-          <h1 className="font-headline text-5xl md:text-6xl font-bold mt-4 text-foreground">প্রকাশনায় আমি</h1>
+          <h1 className="font-headline text-5xl md:text-6xl font-bold mt-4 text-foreground"><span className="text-red-600">প্রকাশনায়</span> আমি</h1>
           <p className="font-body text-lg mt-4 text-muted-foreground">
             জ্ঞানচর্চা ও সৃজনশীলতার প্রসারে প্রকাশনা জগতে আমার উদ্যোগ ও কার্যক্রম।
           </p>
@@ -987,7 +987,7 @@ function LogicalMovementSection() {
       <div className="container mx-auto px-4">
         <div className="text-center max-w-4xl mx-auto">
           <Flag className="mx-auto h-12 w-12 text-primary" />
-          <h1 className="font-headline text-5xl md:text-6xl font-bold mt-4 text-foreground">যৌক্তিক আন্দোলনে আমি</h1>
+          <h1 className="font-headline text-5xl md:text-6xl font-bold mt-4 text-foreground"><span className="text-red-600">যৌক্তিক আন্দোলনে</span> আমি</h1>
           <p className="font-body text-lg mt-4 text-muted-foreground">
             শিক্ষার্থীদের অধিকার এবং বিভিন্ন সামাজিক ন্যায্যতার দাবিতে আমার অংশগ্রহণের ঝলক।
           </p>
@@ -1067,7 +1067,7 @@ function AcademicAchievementSection() {
       <section className="py-16 md:py-24 bg-card">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-4xl mx-auto">
-            <h2 className="font-headline text-4xl md:text-5xl font-bold text-foreground">আমার একাডেমিক অর্জন</h2>
+            <h2 className="font-headline text-4xl md:text-5xl font-bold text-foreground">আমার <span className="text-red-600">একাডেমিক</span> অর্জন</h2>
             <p className="mt-4 font-body text-lg text-muted-foreground">
               আমার শিক্ষাজীবনের কিছু উল্লেখযোগ্য সাফল্য এবং অর্জন নিচে তুলে ধরা হলো।
             </p>
@@ -1142,7 +1142,7 @@ function MediaSection() {
                 <div className="text-center max-w-4xl mx-auto">
                     <Tv className="mx-auto h-12 w-12 text-primary" />
                     <h2 className="font-headline text-4xl md:text-5xl font-bold mt-4 text-foreground">
-                        গণমাধ্যমে আমি
+                        <span className="text-red-600">গণমাধ্যমে</span> আমি
                     </h2>
                     <p className="mt-4 font-body text-lg text-muted-foreground">
                         বিভিন্ন গণমাধ্যমে আমার সাক্ষাৎকার, প্রতিবেদন এবং ডাকসু নির্বাচন নিয়ে আমার ভাবনার প্রতিফলন।
@@ -1226,7 +1226,7 @@ function SkillsLeadershipServiceSection() {
                 <div className="text-center max-w-4xl mx-auto">
                     <Combine className="mx-auto h-12 w-12 text-primary" />
                     <h2 className="font-headline text-4xl md:text-5xl font-bold mt-4 text-foreground">
-                        আমার দক্ষতা, নেতৃত্ব ও সেবা
+                        আমার <span className="text-red-600">দক্ষতা, নেতৃত্ব ও সেবা</span>
                     </h2>
                     <p className="mt-4 font-body text-lg text-muted-foreground">
                        আমি বিশ্বাস করি, একজন শিক্ষার্থীর প্রকৃত বিকাশ শুধু একাডেমিক পড়াশোনার মধ্যে সীমাবদ্ধ থাকে না, বরং তার পূর্ণতা আসে সহশিক্ষা কার্যক্রমের মাধ্যমে। আমার বিশ্ববিদ্যালয় জীবনজুড়ে আমি সেই চেষ্টাই করেছি—একদিকে যেমন যৌক্তিক আন্দোলনে রাজপথে থেকেছি, তেমনই সহপাঠী ও অনুজদের জন্য কর্মশালা ও সম্মেলন আয়োজন করেছি। ভর্তিচ্ছুদের স্বপ্নপূরণের পথে সঙ্গী হতে কলম ধরেছি, আবার গবেষণার জগতে তরুণদের উৎসাহিত করতে নতুন নতুন প্ল্যাটফর্ম তৈরির চেষ্টা করেছি। আমার এই পথচলা মূলত দক্ষতা, নেতৃত্ব ও সেবার এক সমন্বয়, যার মাধ্যমে আমি ঢাকা বিশ্ববিদ্যালয়ের প্রতিটি শিক্ষার্থীর জন্য একটি সমৃদ্ধ ক্যাম্পাস জীবন নিশ্চিত করতে চাই।
@@ -1388,7 +1388,7 @@ function SocialWorkSection() {
                 <div className="text-center max-w-4xl mx-auto">
                     <HandHeart className="mx-auto h-12 w-12 text-primary" />
                     <h2 className="font-headline text-4xl md:text-5xl font-bold mt-4 text-foreground">
-                        আমার সামাজিক কাজ
+                        আমার <span className="text-red-600">সামাজিক</span> কাজ
                     </h2>
                     <p className="mt-4 font-body text-lg text-muted-foreground">
                         সমাজের প্রতি দায়বদ্ধতা থেকে আমার বিভিন্ন সামাজিক ও মানবিক কার্যক্রমের কিছু মুহূর্ত।
@@ -1525,7 +1525,7 @@ function TestimonialSection() {
                 <div className="text-center max-w-4xl mx-auto">
                     <Quote className="mx-auto h-12 w-12 text-primary" />
                     <h2 className="font-headline text-4xl md:text-5xl font-bold mt-4 text-foreground">
-                       আমার সম্পর্কে শিক্ষার্থীদের কিছু কথা
+                       আমার সম্পর্কে <span className="text-red-600">শিক্ষার্থীদের কিছু কথা</span>
                     </h2>
                 </div>
                 <Carousel
@@ -1929,7 +1929,7 @@ function PreVoteSection() {
             <div className="container mx-auto px-4">
                 <div className="max-w-4xl mx-auto text-center">
                     <Vote className="mx-auto h-16 w-16 text-primary animate-pulse" />
-                    <h2 className="font-headline text-4xl md:text-5xl font-bold mt-4 text-foreground">প্রি-ভোটিং: আপনার সমর্থনই আমার শক্তি</h2>
+                    <h2 className="font-headline text-4xl md:text-5xl font-bold mt-4 text-foreground"><span className="text-red-600">প্রি-ভোটিং:</span> আপনার সমর্থনই আমার শক্তি</h2>
                     <p className="font-body text-lg mt-4 text-muted-foreground">
                         মূল নির্বাচনের আগে আপনার মূল্যবান ভোট দিয়ে আমাকে সমর্থন জানান এবং এই পরিবর্তনের যাত্রায় আমার সঙ্গী হোন।
                     </p>
@@ -1987,3 +1987,4 @@ function PreVoteSection() {
 
 
     
+
