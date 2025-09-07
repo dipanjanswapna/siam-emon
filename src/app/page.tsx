@@ -32,7 +32,7 @@ const carouselItems = [
   },
   {
     title: "Dean's Award 2025 , জীব বিজ্ঞান অনুষদ",
-    subtitle: "শিক্ষায় অবদানের জন্য সম্মাননা",
+    subtitle: "অ্যাকাডেমিক এক্সিলেন্সের জন্য সম্মাননা",
     description: "ছাত্র-শিক্ষক সম্পর্ক উন্নয়ন, গবেষণা ও প্রকাশনায় অবদান এবং সার্বিক একাডেমিক উৎকর্ষতা সাধনের জন্য আমাকে এই সম্মাননায় ভূষিত করা হয়েছে।",
     image: "https://i.postimg.cc/7LwWCm7D/Screenshot-2025-08-18-014212.png",
     imageHint: "receiving award"
@@ -2014,5 +2014,6 @@ function SupportSection() {
 
 
     
+
 
 
