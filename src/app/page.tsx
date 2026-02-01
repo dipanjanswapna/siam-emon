@@ -11,11 +11,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
-import { collection, addDoc, serverTimestamp, doc, getDoc, setDoc, updateDoc, increment } from "firebase/firestore";
+import { collection, addDoc, serverTimestamp, doc, getDoc, getDocs, setDoc, updateDoc, increment } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { useToast } from "@/hooks/use-toast";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Skeleton } from "@/components/ui/skeleton";
+import useEmblaCarousel from "embla-carousel-react";
+import Autoplay from "embla-carousel-autoplay";
 
 
 export default function Home() {
@@ -39,41 +41,101 @@ export default function Home() {
 }
 
 function HeroSection() {
-  return (
-    <section className="relative bg-card py-12 md:py-20 text-center text-white">
-        <div className="absolute inset-0 bg-black/50 z-0">
-          <Image
-            src="https://i.postimg.cc/DydxCq5b/manisha-banner.jpg"
-            alt="ডাঃ মনীষা চক্রবর্ত্তী"
-            fill
-            className="object-cover"
-            priority
-            data-ai-hint="political candidate banner"
-          />
-           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent"></div>
-        </div>
-      <div className="container relative z-10 mx-auto px-4">
-        <div className="max-w-4xl mx-auto">
-          <Image src="https://i.postimg.cc/P5tTsbT9/moi-logo-white.png" alt="মই প্রতীক" width={100} height={100} className="mx-auto mb-4" data-ai-hint="ladder logo" />
-          <h1 className="text-4xl md:text-6xl font-bold font-headline drop-shadow-lg">ডাঃ মনীষা চক্রবর্ত্তী</h1>
-          <p className="mt-4 text-xl md:text-2xl font-semibold text-primary-foreground/90 drop-shadow-md">
-            বরিশাল-৫ আসনে গণতান্ত্রিক যুক্তফ্রন্ট সমর্থিত বাসদ মনোনীত প্রার্থী
-          </p>
-          <p className="mt-6 text-lg md:text-xl max-w-3xl mx-auto font-body drop-shadow-md">
-            সংসদকে শ্রমজীবী মানুষের অধিকার আদায়ের প্রতিষ্ঠানে পরিণত করতে ডাঃ মনীষা চক্রবর্ত্তীকে মই মার্কায় আপনার সমর্থন দিন।
-          </p>
-          <div className="mt-8 flex gap-4 justify-center">
-            <Button asChild size="lg" className="font-headline text-lg">
-              <Link href="/manifesto">আমাদের ইশতেহার</Link>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="text-white border-white hover:bg-white/10 hover:text-white">
-              <Link href="/get-involved">যুক্ত হোন</Link>
-            </Button>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
+    const [heroImages, setHeroImages] = useState<any[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [logoUrl, setLogoUrl] = useState<string | null>(null);
+
+    const [emblaRef] = useEmblaCarousel({ loop: true, align: 'start' }, [Autoplay({ delay: 5000 })]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            setIsLoading(true);
+            try {
+                const heroImagesCollection = collection(db, "heroImages");
+                const heroImagesSnapshot = await getDocs(heroImagesCollection);
+                const heroImagesList = heroImagesSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+                const settingsDoc = await getDoc(doc(db, "siteSettings", "branding"));
+                if (settingsDoc.exists() && settingsDoc.data().logoUrl) {
+                    setLogoUrl(settingsDoc.data().logoUrl);
+                }
+
+                if (heroImagesList.length > 0) {
+                    setHeroImages(heroImagesList);
+                } else {
+                    setHeroImages([{
+                        id: '1',
+                        src: 'https://i.postimg.cc/DydxCq5b/manisha-banner.jpg',
+                        alt: 'ডাঃ মনীষা চক্রবর্ত্তী',
+                        hint: 'political candidate banner'
+                    }]);
+                }
+            } catch (error) {
+                console.error("Error fetching hero data: ", error);
+                setHeroImages([{
+                    id: '1',
+                    src: 'https://i.postimg.cc/DydxCq5b/manisha-banner.jpg',
+                    alt: 'ডাঃ মনীষা চক্রবর্ত্তী',
+                    hint: 'political candidate banner'
+                }]);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+        fetchData();
+    }, []);
+
+    return (
+        <section className="relative text-center text-white h-80 md:h-96">
+            {isLoading ? (
+                <Skeleton className="w-full h-full" />
+            ) : (
+                <div className="overflow-hidden h-full" ref={emblaRef}>
+                    <div className="flex h-full">
+                        {heroImages.map((image, index) => (
+                            <div className="relative flex-[0_0_100%] h-full" key={image.id}>
+                                <Image
+                                    src={image.src}
+                                    alt={image.alt}
+                                    fill
+                                    className="object-cover"
+                                    priority={index === 0}
+                                    data-ai-hint={image.hint}
+                                />
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            )}
+
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-transparent" />
+
+            <div className="container absolute inset-0 z-10 mx-auto px-4 flex flex-col justify-center items-center">
+                <div className="max-w-4xl mx-auto">
+                    {logoUrl ? (
+                         <Image src={logoUrl} alt="মই প্রতীক" width={100} height={100} className="mx-auto mb-4 drop-shadow-lg" data-ai-hint="ladder logo" />
+                    ) : (
+                        <Image src="https://i.postimg.cc/P5tTsbT9/moi-logo-white.png" alt="মই প্রতীক" width={100} height={100} className="mx-auto mb-4 drop-shadow-lg" data-ai-hint="ladder logo" />
+                    )}
+                    <h1 className="text-4xl md:text-6xl font-bold font-headline drop-shadow-lg">ডাঃ মনীষা চক্রবর্ত্তী</h1>
+                    <p className="mt-4 text-xl md:text-2xl font-semibold text-primary-foreground/90 drop-shadow-md">
+                        বরিশাল-৫ আসনে গণতান্ত্রিক যুক্তফ্রন্ট সমর্থিত বাসদ মনোনীত প্রার্থী
+                    </p>
+                    <p className="mt-6 text-lg md:text-xl max-w-3xl mx-auto font-body drop-shadow-md">
+                        সংসদকে শ্রমজীবী মানুষের অধিকার আদায়ের প্রতিষ্ঠানে পরিণত করতে ডাঃ মনীষা চক্রবর্ত্তীকে মই মার্কায় আপনার সমর্থন দিন।
+                    </p>
+                    <div className="mt-8 flex gap-4 justify-center">
+                        <Button asChild size="lg" className="font-headline text-lg">
+                            <Link href="/manifesto">আমাদের ইশতেহার</Link>
+                        </Button>
+                        <Button asChild size="lg" variant="outline" className="text-white border-white hover:bg-white/10 hover:text-white">
+                            <Link href="/get-involved">যুক্ত হোন</Link>
+                        </Button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
 }
 
 

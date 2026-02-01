@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Shield, PlusCircle, Edit, Trash2, BrainCircuit, BookOpenCheck, Library, Award, FileText, Mic, GraduationCap, ImagePlus, LogOut, MessageSquare, Users, Bell, Image as ImageIcon, Settings, Megaphone, Camera, Quote } from "lucide-react";
+import { Shield, PlusCircle, Edit, Trash2, BrainCircuit, BookOpenCheck, Library, Award, FileText, Mic, GraduationCap, ImagePlus, LogOut, MessageSquare, Users, Bell, Image as ImageIcon, Settings, Megaphone, Camera, Quote, Wallpaper } from "lucide-react";
 import { useState, useEffect } from "react";
 import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc, orderBy, query, serverTimestamp, setDoc, getDoc } from "firebase/firestore";
 import { db, auth } from "@/lib/firebase";
@@ -110,6 +110,19 @@ type Testimonial = {
     testimonial: string;
 };
 
+type HeroImage = {
+    id: string;
+    src: string;
+    alt: string;
+    hint: string;
+};
+
+type BrandingSettings = {
+    id: string;
+    logoUrl: string;
+};
+
+
 const iconMap = {
     BrainCircuit: <BrainCircuit />,
     BookOpenCheck: <BookOpenCheck />,
@@ -130,6 +143,8 @@ function AdminPage() {
     const [promotionalPopup, setPromotionalPopup] = useState<PromotionalPopup>({ id: "promotional-popup", enabled: true, imageUrl: "", displayFrequency: "once-per-session" });
     const [galleryImages, setGalleryImages] = useState<GalleryImage[]>([]);
     const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+    const [heroImages, setHeroImages] = useState<HeroImage[]>([]);
+    const [brandingSettings, setBrandingSettings] = useState<BrandingSettings>({ id: "branding", logoUrl: "" });
     const [isLoading, setIsLoading] = useState(true);
     
     const [isCommitmentFormOpen, setIsCommitmentFormOpen] = useState(false);
@@ -153,6 +168,9 @@ function AdminPage() {
     const [isTestimonialFormOpen, setIsTestimonialFormOpen] = useState(false);
     const [currentTestimonial, setCurrentTestimonial] = useState<Partial<Testimonial>>({});
     const [isEditingTestimonial, setIsEditingTestimonial] = useState(false);
+
+    const [isHeroImageFormOpen, setIsHeroImageFormOpen] = useState(false);
+    const [currentHeroImage, setCurrentHeroImage] = useState<Partial<HeroImage>>({});
 
     const [signOut] = useSignOut(auth);
     const router = useRouter();
@@ -223,6 +241,20 @@ function AdminPage() {
         setTestimonials(testimonialsList);
     };
 
+    const fetchHeroImages = async () => {
+        const heroImagesCollection = collection(db, "heroImages");
+        const heroImagesSnapshot = await getDocs(heroImagesCollection);
+        const heroImagesList = heroImagesSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as HeroImage));
+        setHeroImages(heroImagesList);
+    };
+
+    const fetchBrandingSettings = async () => {
+        const docSnap = await getDoc(doc(db, "siteSettings", "branding"));
+        if (docSnap.exists()) {
+            setBrandingSettings({ id: "branding", ...docSnap.data() } as BrandingSettings);
+        }
+    };
+
     const loadAllData = async () => {
         setIsLoading(true);
         try {
@@ -236,6 +268,8 @@ function AdminPage() {
                 fetchPromotionalPopup(),
                 fetchGalleryImages(),
                 fetchTestimonials(),
+                fetchHeroImages(),
+                fetchBrandingSettings(),
             ]);
         } catch (error) {
             console.error("Error loading data: ", error);
@@ -667,6 +701,49 @@ function AdminPage() {
         }
     };
 
+    const handleHeroImageFormSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        try {
+            await addDoc(collection(db, "heroImages"), currentHeroImage);
+            closeHeroImageForm();
+            fetchHeroImages();
+            toast({ title: "হিরো ছবি সফলভাবে যোগ হয়েছে" });
+        } catch (error) {
+            toast({ variant: 'destructive', title: "ছবি যোগ করতে সমস্যা হয়েছে", description: (error as Error).message });
+        }
+    };
+
+    const openHeroImageForm = () => {
+        setCurrentHeroImage({ src: "https://placehold.co/1200x300.png", alt: "", hint: "" });
+        setIsHeroImageFormOpen(true);
+    };
+
+    const closeHeroImageForm = () => {
+        setIsHeroImageFormOpen(false);
+        setCurrentHeroImage({});
+    };
+
+    const handleDeleteHeroImage = async (id: string) => {
+        try {
+            await deleteDoc(doc(db, "heroImages", id));
+            fetchHeroImages();
+            toast({ title: "হিরো ছবি সফলভাবে মুছে ফেলা হয়েছে" });
+        } catch (error) {
+            toast({ variant: 'destructive', title: "ছবি মুছে ফেলতে সমস্যা হয়েছে", description: (error as Error).message });
+        }
+    };
+
+    const handleBrandingSettingsSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        try {
+            const settingsDoc = doc(db, "siteSettings", "branding");
+            await setDoc(settingsDoc, { logoUrl: brandingSettings.logoUrl }, { merge: true });
+            toast({ title: "ব্র্যান্ডিং সেটিংস আপডেট হয়েছে" });
+        } catch (error) {
+            toast({ variant: 'destructive', title: "সেটিংস আপডেট করতে সমস্যা হয়েছে", description: (error as Error).message });
+        }
+    };
+
     const handleSignOut = async () => {
         const success = await signOut();
         if (success) {
@@ -697,6 +774,67 @@ function AdminPage() {
 
         <main className="mt-16">
             <Accordion type="multiple" className="w-full space-y-4">
+                <AccordionItem value="branding-settings">
+                    <Card>
+                        <AccordionTrigger className="p-6">
+                            <CardTitle>ব্র্যান্ডিং</CardTitle>
+                        </AccordionTrigger>
+                        <AccordionContent className="p-6 pt-0">
+                            <form onSubmit={handleBrandingSettingsSubmit} className="space-y-4">
+                                <div className="space-y-2">
+                                    <Label htmlFor="logo-url">লোগো URL</Label>
+                                    <Input
+                                        id="logo-url"
+                                        value={brandingSettings.logoUrl}
+                                        onChange={(e) => setBrandingSettings({ ...brandingSettings, logoUrl: e.target.value })}
+                                        placeholder="https://example.com/logo.png"
+                                    />
+                                    {brandingSettings.logoUrl && <Image src={brandingSettings.logoUrl} alt="logo preview" width={50} height={50} className="mt-2 bg-slate-200 p-1 rounded" />}
+                                </div>
+                                <Button type="submit">
+                                    <Settings className="mr-2 h-4 w-4" /> লোগো সেভ করুন
+                                </Button>
+                            </form>
+                        </AccordionContent>
+                    </Card>
+                </AccordionItem>
+                <AccordionItem value="hero-carousel">
+                    <Card>
+                        <AccordionTrigger className="p-6">
+                            <CardTitle>হিরো ক্যারোসেল ব্যবস্থাপনা</CardTitle>
+                        </AccordionTrigger>
+                        <AccordionContent className="p-6 pt-0">
+                            <div className="flex justify-end mb-4">
+                                <Button onClick={openHeroImageForm}>
+                                    <Wallpaper className="mr-2 h-4 w-4" /> নতুন ছবি যোগ করুন
+                                </Button>
+                            </div>
+                            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                                {isLoading ? (
+                                    <p>লোড হচ্ছে...</p>
+                                ) : (
+                                    heroImages.map(hi => (
+                                        <Card key={hi.id} className="relative group overflow-hidden">
+                                          <Image
+                                            src={hi.src}
+                                            alt={hi.alt}
+                                            width={300}
+                                            height={100}
+                                            className="object-cover w-full h-auto aspect-[3/1]"
+                                            data-ai-hint={hi.hint}
+                                          />
+                                            <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                                <Button variant="destructive" size="icon" onClick={() => handleDeleteHeroImage(hi.id)}>
+                                                    <Trash2 className="h-4 w-4" />
+                                                </Button>
+                                            </div>
+                                        </Card>
+                                    ))
+                                )}
+                            </div>
+                        </AccordionContent>
+                    </Card>
+                </AccordionItem>
                  <AccordionItem value="site-settings">
                     <Card>
                         <AccordionTrigger className="p-6">
@@ -740,7 +878,7 @@ function AdminPage() {
                                     </Select>
                                 </div>
                                 <Button type="submit">
-                                    <Settings className="mr-2 h-4 w-4" /> সেটিংস সেভ করুন
+                                    <Settings className="mr-2 h-4 w-4" /> পপআপ সেভ করুন
                                 </Button>
                             </form>
                         </AccordionContent>
@@ -1274,6 +1412,56 @@ function AdminPage() {
                 </form>
             </DialogContent>
         </Dialog>
+
+        {/* Hero Image Form Dialog */}
+        <Dialog open={isHeroImageFormOpen} onOpenChange={setIsHeroImageFormOpen}>
+            <DialogContent>
+                <DialogHeader>
+                    <DialogTitle>নতুন হিরো ছবি যোগ করুন</DialogTitle>
+                    <DialogDescription>
+                        এখানে ক্যারোসেলের জন্য ছবির URL, alt টেক্সট এবং AI hint যোগ করুন।
+                    </DialogDescription>
+                </DialogHeader>
+                <form onSubmit={handleHeroImageFormSubmit} className="space-y-4">
+                    <div className="space-y-2">
+                        <Label htmlFor="hero-src">ছবির URL</Label>
+                        <Input
+                            id="hero-src"
+                            value={currentHeroImage.src || ''}
+                            onChange={(e) => setCurrentHeroImage({ ...currentHeroImage, src: e.target.value })}
+                             placeholder="https://placehold.co/1200x300.png"
+                            required
+                        />
+                    </div>
+                    <div className="space-y-2">
+                        <Label htmlFor="hero-alt">ছবির বর্ণনা (Alt Text)</Label>
+                        <Input
+                            id="hero-alt"
+                            value={currentHeroImage.alt || ''}
+                            onChange={(e) => setCurrentHeroImage({ ...currentHeroImage, alt: e.target.value })}
+                             placeholder="e.g., নির্বাচনী ব্যানার"
+                            required
+                        />
+                    </div>
+                     <div className="space-y-2">
+                        <Label htmlFor="hero-hint">ছবির Hint (for AI)</Label>
+                        <Input
+                            id="hero-hint"
+                            value={currentHeroImage.hint || ''}
+                            onChange={(e) => setCurrentHeroImage({ ...currentHeroImage, hint: e.target.value })}
+                             placeholder="e.g. political banner"
+                            required
+                        />
+                    </div>
+                    <DialogFooter>
+                        <Button type="submit">যোগ করুন</Button>
+                        <DialogClose asChild>
+                            <Button type="button" variant="secondary" onClick={closeHeroImageForm}>বাতিল</Button>
+                        </DialogClose>
+                    </DialogFooter>
+                </form>
+            </DialogContent>
+        </Dialog>
         
         {/* Team Member Form Dialog */}
         <Dialog open={isTeamMemberFormOpen} onOpenChange={setIsTeamMemberFormOpen}>
@@ -1409,5 +1597,3 @@ function AdminPage() {
 }
 
 export default useAuth(AdminPage);
-
-    
