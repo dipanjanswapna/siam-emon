@@ -1,5 +1,6 @@
 
 import type {Metadata} from 'next';
+import { Hind_Siliguri } from 'next/font/google';
 import './globals.css';
 import { cn } from "@/lib/utils";
 import { Header } from '@/components/layout/header';
@@ -10,6 +11,13 @@ import { FloatingVoteButton } from '@/components/layout/FloatingVoteButton';
 import { PromotionalPopup } from '@/components/layout/PromotionalPopup';
 import Image from 'next/image';
 import Script from 'next/script';
+
+const hindSiliguri = Hind_Siliguri({
+  subsets: ['bengali'],
+  weight: ['400', '700'],
+  variable: '--font-hind-siliguri',
+});
+
 
 export const metadata: Metadata = {
   title: {
@@ -86,7 +94,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="bn" suppressHydrationWarning>
+    <html lang="bn" suppressHydrationWarning className={hindSiliguri.variable}>
       <head>
         <meta name="google-site-verification" content="GSWYRx1SJSZQ8-RBsRO33orlxaiVDcr6lgrR3cognH8" />
         <Script async src="https://www.googletagmanager.com/gtag/js?id=G-TS85T6ZB8Q"></Script>
@@ -101,7 +109,7 @@ export default function RootLayout({
         </Script>
         <Script src="https://www.powr.io/powr.js?platform=html" strategy="lazyOnload"></Script>
       </head>
-      <body className={cn("font-body antialiased min-h-screen flex flex-col")}>
+      <body className={cn("antialiased min-h-screen flex flex-col")}>
         <Header />
         <PromotionalPopup />
         <main className="flex-grow">{children}</main>
