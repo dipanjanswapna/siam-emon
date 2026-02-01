@@ -3,7 +3,7 @@
 
 import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { GraduationCap, Briefcase, Award, CheckCircle, HeartHand, Users, UserCheck } from "lucide-react";
+import { GraduationCap, Briefcase, Award, CheckCircle, HeartHandshake, Users, UserCheck } from "lucide-react";
 import { useState, useEffect } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/lib/firebase";
@@ -85,7 +85,7 @@ export default function AboutPage() {
               
                <section>
                  <h3 className="font-headline text-3xl font-bold text-foreground flex items-center justify-center gap-3 text-center">
-                   <HeartHand className="w-8 h-8 text-primary" />
+                   <HeartHandshake className="w-8 h-8 text-primary" />
                    গরিবের ডাক্তার
                  </h3>
                  <div className="font-body text-lg mt-4 text-muted-foreground space-y-4 text-left">
