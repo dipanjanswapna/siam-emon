@@ -6,7 +6,7 @@ import Link from "next/link";
 import React, { useState, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { ArrowRight, Users, Camera, Mail, ShieldCheck, MessageSquare, HelpCircle, Vote, Share2, Timer, Phone, Newspaper, HeartHandshake } from "lucide-react";
+import { ArrowRight, Users, Camera, Mail, ShieldCheck, MessageSquare, HelpCircle, Vote, Share2, Timer, Phone, Newspaper, HeartHandshake, Megaphone } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -19,6 +19,7 @@ import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
+import { motion } from "framer-motion";
 
 type DotButtonPropType = {
   selected: boolean;
@@ -37,24 +38,56 @@ const DotButton: React.FC<DotButtonPropType> = (props) => {
   );
 };
 
+const animationVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeInOut" } },
+};
 
 export default function Home() {
   return (
     <div className="flex flex-col">
-      <HeroSection />
-      <NoticeSection />
-      <ElectionCountdown />
-      <AboutSection />
-      <NewsSection />
-      <SocialWorkSection />
-      <VoteBannerSection />
-      <CampaignGallerySection />
-      <TestimonialSection />
-      <LeadershipSection />
-      <FAQSection />
-      <FeedbackSection />
-      <PreVoteSection />
-      <SupportSection />
+      <motion.div initial="hidden" animate="visible" variants={animationVariants}>
+        <HeroSection />
+      </motion.div>
+      <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={animationVariants}>
+        <NoticeSection />
+      </motion.div>
+      <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={animationVariants}>
+        <ElectionCountdown />
+      </motion.div>
+      <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={animationVariants}>
+        <AboutSection />
+      </motion.div>
+      <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={animationVariants}>
+        <NewsSection />
+      </motion.div>
+      <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={animationVariants}>
+        <SocialWorkSection />
+      </motion.div>
+      <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={animationVariants}>
+        <VoteBannerSection />
+      </motion.div>
+      <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={animationVariants}>
+        <CampaignGallerySection />
+      </motion.div>
+      <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={animationVariants}>
+        <TestimonialSection />
+      </motion.div>
+      <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={animationVariants}>
+        <LeadershipSection />
+      </motion.div>
+      <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={animationVariants}>
+        <FAQSection />
+      </motion.div>
+      <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={animationVariants}>
+        <FeedbackSection />
+      </motion.div>
+      <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={animationVariants}>
+        <PreVoteSection />
+      </motion.div>
+      <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={animationVariants}>
+        <SupportSection />
+      </motion.div>
     </div>
   );
 }
@@ -63,29 +96,55 @@ function HeroSection() {
     return (
         <section className="bg-card py-16 md:py-20 text-center">
             <div className="container mx-auto px-4">
-                <div className="max-w-4xl mx-auto">
+                <motion.div 
+                    className="max-w-4xl mx-auto"
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                >
                     <Image src="https://i.postimg.cc/pX41BjTS/image.png" alt="ডাঃ মনীষা চক্রবর্ত্তী লোগো" width={80} height={80} className="mx-auto mb-4 rounded-full" />
-                    <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold font-headline text-foreground drop-shadow-lg mt-4">ডাঃ মনীষা চক্রবর্ত্তী</h1>
-                    <p className="mt-4 text-lg sm:text-xl md:text-2xl font-semibold text-primary drop-shadow-md">
+                    <motion.h1 
+                        className="text-4xl sm:text-5xl md:text-6xl font-bold font-headline text-foreground drop-shadow-lg mt-4"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.2 }}
+                    >
+                        ডাঃ মনীষা চক্রবর্ত্তী
+                    </motion.h1>
+                    <motion.p 
+                        className="mt-4 text-lg sm:text-xl md:text-2xl font-semibold text-primary drop-shadow-md"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.4 }}
+                    >
                         বরিশাল-৫ আসনে গণতান্ত্রিক যুক্তফ্রন্ট সমর্থিত বাসদ মনোনীত প্রার্থী
-                    </p>
-                    <p className="mt-6 text-base sm:text-lg max-w-3xl mx-auto font-body text-muted-foreground">
+                    </motion.p>
+                    <motion.p 
+                        className="mt-6 text-base sm:text-lg max-w-3xl mx-auto font-body text-muted-foreground"
+                         initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.6 }}
+                    >
                         সংসদকে শ্রমজীবী মানুষের অধিকার আদায়ের প্রতিষ্ঠানে পরিণত করতে ডাঃ মনীষা চক্রবর্ত্তীকে মই মার্কায় আপনার সমর্থন দিন।
-                    </p>
-                    <div className="mt-8 flex flex-wrap justify-center gap-4">
+                    </motion.p>
+                    <motion.div 
+                        className="mt-8 flex flex-wrap justify-center gap-4"
+                         initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.8 }}
+                    >
                         <Button asChild size="lg" className="font-headline text-lg">
                             <Link href="/manifesto">আমাদের ইশতেহার</Link>
                         </Button>
                         <Button asChild size="lg" variant="secondary">
                             <Link href="/get-involved">যুক্ত হোন</Link>
                         </Button>
-                    </div>
-                </div>
+                    </motion.div>
+                </motion.div>
             </div>
         </section>
     );
 }
-
 
 function NoticeSection() {
     const [noticeText, setNoticeText] = useState("");
@@ -114,21 +173,23 @@ function NoticeSection() {
 
     if (isLoading) {
         return (
-             <section className="bg-destructive py-3 text-white w-full overflow-x-hidden">
+             <section className="bg-accent/80 py-4">
                 <div className="container mx-auto px-4">
-                    <Skeleton baseColor="#A00" highlightColor="#C00" />
+                     <SkeletonTheme baseColor="hsl(var(--accent))" highlightColor="#ff7f7f">
+                        <Skeleton height={28}/>
+                     </SkeletonTheme>
                 </div>
             </section>
         );
     }
+    
+    if (!noticeText) return null;
 
     return (
-        <section className="bg-destructive py-3 text-white w-full overflow-x-hidden">
-            <div className="relative flex items-center whitespace-nowrap w-full overflow-x-hidden">
-                <p className="animate-scroll text-lg font-headline">
-                    {noticeText}
-                </p>
-                 <p className="animate-scroll text-lg font-headline" aria-hidden="true">
+        <section className="bg-accent/90 backdrop-blur-sm py-3 text-white w-full">
+            <div className="container mx-auto px-4 flex items-center justify-center gap-4">
+                <Megaphone className="h-6 w-6 flex-shrink-0" />
+                <p className="text-lg font-headline text-center font-bold">
                     {noticeText}
                 </p>
             </div>
