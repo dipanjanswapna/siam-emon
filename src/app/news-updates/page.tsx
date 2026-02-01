@@ -7,39 +7,39 @@ import Link from "next/link";
 
 const newsItems = [
   {
-    category: "ক্যাম্পেইন আপডেট",
-    title: "ব্যাপক উৎসাহ ও উদ্দীপনার মধ্য দিয়ে নির্বাচনী প্রচারণা শুরু",
-    date: "সেপ্টেম্বর ১, ২০২৫",
-    description: "আজ থেকে আনুষ্ঠানিকভাবে ডাকসু নির্বাচনের প্রচারণা শুরু হয়েছে। সিয়াম ফেরদৌস ইমন তার সমর্থকদের নিয়ে ক্যাম্পাসের বিভিন্ন স্থানে গণসংযোগ করেন এবং শিক্ষার্থীদের সাথে মতবিনিময় করেন।",
-    image: "https://i.postimg.cc/XJm37J1p/photo_2025-08-21_01-07_12.jpg",
-    imageHint: "campaign launch",
+    category: "নির্বাচনী সমাবেশ",
+    title: "কাশীপুর বাজারে নির্বাচনী সমাবেশ অনুষ্ঠিত",
+    date: "১ ফেব্রুয়ারী",
+    description: "আজ ১ ফেব্রুয়ারী काशीপুর বাজারে বাংলাদেশের সমাজতান্ত্রিক দল- বাসদ মনোনীত এবং গণতান্ত্রিক যুক্তফ্রন্ট সমর্থিত বরিশাল- ৫ আসনে সংসদ সদস্য পদপ্রার্থী ডা. মনীষা চক্রবর্তী নির্বাচনী সমাবেশ অনুষ্ঠিত।",
+    image: "https://i.postimg.cc/Gpd2g0x3/news-1.jpg",
+    imageHint: "political rally market",
     link: "#"
   },
   {
-    category: "প্রেস রিলিজ",
-    title: "গবেষণা বাজেট বৃদ্ধির দাবিতে সিয়াম ফেরদৌস ইমনের ইশতেহার প্রকাশ",
-    date: "আগস্ট ৩০, ২০২৫",
-    description: "আজ এক সংবাদ সম্মেলনের মাধ্যমে গবেষণা ও প্রকাশনা সম্পাদক পদপ্রার্থী সিয়াম ফেরদৌস ইমন তার নির্বাচনী ইশতেহার প্রকাশ করেছেন। ইশতেহারে তিনি নির্বাচিত হলে ডাকসুর গবেষণা বাজেট ২০% এ উন্নীত করার অঙ্গীকার করেন।",
-    image: "https://i.postimg.cc/SRhTrbJg/photo-2025-08-21-01-04-12.jpg",
-    imageHint: "press conference",
-    link: "/manifesto"
+    category: "নির্বাচনী সমাবেশ",
+    title: "রূপাতলি অঞ্চলে নির্বাচনী সমাবেশ অনুষ্ঠিত",
+    date: "৩০ জানুয়ারী",
+    description: "আজ ৩০ জানুয়ারী রূপাতলি অঞ্চলে বাংলাদেশের সমাজতান্ত্রিক দল- বাসদ মনোনীত এবং গণতান্ত্রিক যুক্তফ্রন্ট সমর্থিত বরিশাল- ৫ আসনে সংসদ সদস্য পদপ্রার্থী ডা. মনীষা চক্রবর্তীর নির্বাচনী সমাবেশ অনুষ্ঠিত।",
+    image: "https://i.postimg.cc/C5YgZpLz/news-2.jpg",
+    imageHint: "community meeting outdoors",
+    link: "#"
   },
     {
-    category: "বিশেষ ঘোষণা",
-    title: "শিক্ষার্থীদের জন্য বিনামূল্যে একাডেমিক রাইটিং কর্মশালার আয়োজন",
-    date: "আগস্ট ২৮, ২০২৫",
-    description: "ডাকসু নির্বাচন উপলক্ষে সিয়াম ফেরদৌস ইমনের উদ্যোগে আগামী সপ্তাহে শিক্ষার্থীদের জন্য একটি বিনামূল্যে একাডেমিক রাইটিং কর্মশালার আয়োজন করা হয়েছে। কর্মশালায় অংশগ্রহণের জন্য রেজিস্ট্রেশন চলছে।",
-    image: "https://i.postimg.cc/4ypCf1hS/photo-2025-08-21-01-06-17.jpg",
-    imageHint: "workshop announcement",
+    category: "গণসংযোগ",
+    title: "বরিশাল জেলা বার লাইব্রেরিতে প্রচারণা",
+    date: "২৭ জানুয়ারী",
+    description: "আজ সকাল ১১ টায় বরিশাল জেলা বার লাইব্রেরি থেকে প্রচারণা শুরু করেন ডা. মনীষা চক্রবর্তী। নেতৃবৃন্দ নির্বাচনের সুষ্ঠু পরিবেশ নিশ্চিত করার দাবি জানান।",
+    image: "https://i.postimg.cc/Pq2Y5YVp/news-3.jpg",
+    imageHint: "candidate speaking indoors",
     link: "#"
   },
    {
-    category: "সাক্ষাৎকার",
-    title: "গণমাধ্যমের মুখোমুখি সিয়াম ফেরদৌস ইমন",
-    date: "আগস্ট ২৫, ২০২৫",
-    description: "একটি বেসরকারি টেলিভিশনে ডাকসু নির্বাচন নিয়ে আলোচনায় সিয়াম ফেরদৌস ইমন তার বিভিন্ন পরিকল্পনা ও ভাবনার কথা তুলে ধরেন। তিনি একটি ছাত্রবান্ধব ও গবেষণামুখী ডাকসু গঠনের প্রত্যয় ব্যক্ত করেন।",
-    image: "https://i.postimg.cc/KYTxK34X/photo_2025-08-21_17-43_25.jpg",
-    imageHint: "tv interview",
+    category: "সংবাদ সম্মেলন",
+    title: "নারী বিদ্বেষী আচরণের বিরুদ্ধে সোচ্চার নেতৃবৃন্দ",
+    date: "৩০ জানুয়ারী",
+    description: "রূপাতলির সমাবেশে নেতৃবৃন্দ বলেন, নির্বাচনী আচরণবিধিতে নারী বিদ্বেষী আচরণ নিষিদ্ধ হলেও কিছু প্রার্থী তা লঙ্ঘন করছেন। জনগণ এর সঠিক জবাব দেবে।",
+    image: "https://i.postimg.cc/L6Rk561p/manisha-portrait.jpg",
+    imageHint: "candidate portrait",
     link: "#"
   }
 ];
@@ -52,7 +52,7 @@ export default function NewsUpdatesPage() {
           <Rss className="mx-auto h-12 w-12 text-primary" />
           <h1 className="font-headline text-5xl md:text-6xl font-bold mt-4 text-foreground">সংবাদ ও আপডেট</h1>
           <p className="font-body text-lg mt-4 text-muted-foreground">
-            আমার নির্বাচনী প্রচারণা, কার্যক্রম এবং বিভিন্ন গুরুত্বপূর্ণ ঘোষণার সর্বশেষ আপডেট এখানে পাবেন।
+            ডাঃ মনীষা চক্রবর্ত্তীর নির্বাচনী প্রচারণা, কার্যক্রম এবং বিভিন্ন গুরুত্বপূর্ণ ঘোষণার সর্বশেষ আপডেট এখানে পাবেন।
           </p>
         </header>
 
@@ -63,7 +63,7 @@ export default function NewsUpdatesPage() {
               className="fade-in-up"
               style={{ animationDelay: `${index * 150}ms` }}
             >
-              <Card className="h-full flex flex-col overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <Card className="h-full flex flex-col overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 bg-card">
                 <div className="relative w-full aspect-video">
                   <Image
                     src={item.image}

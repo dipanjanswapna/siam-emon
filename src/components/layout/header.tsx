@@ -10,13 +10,35 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import Image from "next/image";
 
+function LadderIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <path d="M8 3v18" />
+      <path d="M16 3v18" />
+      <path d="M8 7h8" />
+      <path d="M8 12h8" />
+      <path d="M8 17h8" />
+    </svg>
+  );
+}
+
 const navLinks = [
   { href: "/", label: "হোম" },
   { href: "/about", label: "সম্পর্কে" },
   { href: "/manifesto", label: "ইশতেহার" },
   { href: "/gallery", label: "গ্যালারি" },
-  { href: "/transparency", label: "স্বচ্ছতা" },
-  { href: "/voter-registration", label: "ভোটার অনুসন্ধান" },
+  { href: "/news-updates", label: "সংবাদ" },
 ];
 
 export function Header() {
@@ -28,15 +50,9 @@ export function Header() {
       <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
         <div className="flex items-center">
           <Link href="/" className="flex items-center gap-2">
-              <Image
-                  src="https://i.postimg.cc/C5FPWXhs/Screenshot_2025-08-30_121415-Picsart-Ai-Image-Enhancer-removebg-preview.png"
-                  alt="সিয়াম ফেরদৌস ইমন Logo"
-                  width={40}
-                  height={40}
-                  className="h-10 w-10"
-              />
+              <LadderIcon className="h-8 w-8" />
               <span className="font-bold font-headline text-xl sm:inline-block">
-                সিয়াম ফেরদৌস ইমন
+                ডাঃ মনীষা চক্রবর্ত্তী
               </span>
           </Link>
         </div>
@@ -58,7 +74,7 @@ export function Header() {
               ))}
             </nav>
             <div className="hidden md:flex items-center pl-4">
-                 <Button asChild variant="secondary" className="font-headline bg-destructive-foreground text-destructive hover:bg-destructive-foreground/90">
+                 <Button asChild variant="outline" className="font-headline border-white/50 text-white hover:bg-white/10 hover:text-white">
                     <Link href="/get-involved">যুক্ত হোন</Link>
                 </Button>
             </div>
@@ -75,15 +91,9 @@ export function Header() {
                 <SheetContent side="left" className="bg-destructive text-destructive-foreground border-l-0">
                   <div className="flex flex-col gap-6 p-6">
                     <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-2 mb-4">
-                      <Image
-                          src="https://i.postimg.cc/C5FPWXhs/Screenshot_2025-08-30_121415-Picsart-Ai-Image-Enhancer-removebg-preview.png"
-                          alt="সিয়াম ফেরদৌস ইমন Logo"
-                          width={40}
-                          height={40}
-                          className="h-10 w-10"
-                      />
+                      <LadderIcon className="h-8 w-8" />
                       <span className="text-xl font-headline font-bold">
-                        সিয়াম ফেরদৌস ইমন
+                        ডাঃ মনীষা চক্রবর্ত্তী
                       </span>
                     </Link>
                     {[...navLinks, { href: "/get-involved", label: "যুক্ত হোন" }].map((link) => (

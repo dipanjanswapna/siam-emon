@@ -12,25 +12,25 @@
 
 @layer base {
   :root {
-    --background: 142 76% 15%;
-    --foreground: 0 0% 98%;
-    --card: 142 70% 20%;
+    --background: 120 60% 15%; /* Dark Green */
+    --foreground: 0 0% 98%; /* White */
+    --card: 120 60% 20%;
     --card-foreground: 0 0% 98%;
-    --popover: 142 70% 20%;
+    --popover: 120 60% 10%;
     --popover-foreground: 0 0% 98%;
-    --primary: 142.1 76.2% 40%;
+    --primary: 120 65% 40%; /* Brighter Green */
     --primary-foreground: 0 0% 98%;
-    --secondary: 142 60% 25%;
+    --secondary: 120 50% 25%;
     --secondary-foreground: 0 0% 98%;
-    --muted: 142 60% 25%;
-    --muted-foreground: 210 40% 80%;
-    --accent: 0 84.2% 60.2%;
+    --muted: 120 50% 25%;
+    --muted-foreground: 120 30% 75%;
+    --accent: 0 72% 51%; /* Red */
     --accent-foreground: 0 0% 98%;
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 72% 51%; /* Red */
     --destructive-foreground: 0 0% 98%;
-    --border: 142 70% 25%;
-    --input: 142 70% 25%;
-    --ring: 142.1 76.2% 40%;
+    --border: 120 60% 25%;
+    --input: 120 60% 25%;
+    --ring: 120 65% 45%;
     --radius: 0.5rem;
 
     --chart-1: hsl(var(--primary));
@@ -41,31 +41,26 @@
   }
  
   .dark {
-    --background: 142 76% 15%;
+     /* Using the same dark theme for both */
+    --background: 120 60% 15%;
     --foreground: 0 0% 98%;
-    --card: 142 70% 20%;
+    --card: 120 60% 20%;
     --card-foreground: 0 0% 98%;
-    --popover: 142 70% 20%;
+    --popover: 120 60% 10%;
     --popover-foreground: 0 0% 98%;
-    --primary: 142.1 76.2% 40%;
+    --primary: 120 65% 40%;
     --primary-foreground: 0 0% 98%;
-    --secondary: 142 60% 25%;
+    --secondary: 120 50% 25%;
     --secondary-foreground: 0 0% 98%;
-    --muted: 142 60% 25%;
-    --muted-foreground: 210 40% 80%;
-    --accent: 0 84.2% 60.2%;
+    --muted: 120 50% 25%;
+    --muted-foreground: 120 30% 75%;
+    --accent: 0 72% 51%;
     --accent-foreground: 0 0% 98%;
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 98%;
-    --border: 142 70% 25%;
-    --input: 142 70% 25%;
-    --ring: 142.1 76.2% 40%;
-
-    --chart-1: hsl(var(--primary));
-    --chart-2: hsl(var(--accent));
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
+    --border: 120 60% 25%;
+    --input: 120 60% 25%;
+    --ring: 120 65% 45%;
   }
 }
 
