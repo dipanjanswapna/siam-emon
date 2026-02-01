@@ -61,37 +61,22 @@ export default function Home() {
 
 function HeroSection() {
     return (
-        <section className="relative text-center text-white h-80 md:h-96">
-            <div className="overflow-hidden h-full">
-                <div className="relative flex-[0_0_100%] h-full">
-                    <Image
-                        src={'https://i.postimg.cc/DydxCq5b/manisha-banner.jpg'}
-                        alt={'ডাঃ মনীষা চক্রবর্ত্তী'}
-                        fill
-                        className="object-cover"
-                        priority
-                        data-ai-hint={'political candidate banner'}
-                    />
-                </div>
-            </div>
-
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-transparent" />
-
-            <div className="container absolute inset-0 z-10 mx-auto px-4 flex flex-col justify-center items-center">
+        <section className="bg-card py-16 md:py-20 text-center">
+            <div className="container mx-auto px-4">
                 <div className="max-w-4xl mx-auto">
-                    <div className="text-6xl mb-4">🪜</div>
-                    <h1 className="text-4xl md:text-6xl font-bold font-headline drop-shadow-lg mt-4">ডাঃ মনীষা চক্রবর্ত্তী</h1>
-                    <p className="mt-4 text-xl md:text-2xl font-semibold text-primary-foreground/90 drop-shadow-md">
+                    <Image src="https://i.postimg.cc/pX05kCjD/moi-logo.png" alt="মই প্রতীক" width={64} height={64} className="mx-auto mb-4" />
+                    <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold font-headline text-foreground drop-shadow-lg mt-4">ডাঃ মনীষা চক্রবর্ত্তী</h1>
+                    <p className="mt-4 text-lg sm:text-xl md:text-2xl font-semibold text-primary drop-shadow-md">
                         বরিশাল-৫ আসনে গণতান্ত্রিক যুক্তফ্রন্ট সমর্থিত বাসদ মনোনীত প্রার্থী
                     </p>
-                    <p className="mt-6 text-lg md:text-xl max-w-3xl mx-auto font-body drop-shadow-md">
+                    <p className="mt-6 text-base sm:text-lg max-w-3xl mx-auto font-body text-muted-foreground">
                         সংসদকে শ্রমজীবী মানুষের অধিকার আদায়ের প্রতিষ্ঠানে পরিণত করতে ডাঃ মনীষা চক্রবর্ত্তীকে মই মার্কায় আপনার সমর্থন দিন।
                     </p>
                     <div className="mt-8 flex flex-wrap justify-center gap-4">
                         <Button asChild size="lg" className="font-headline text-lg">
                             <Link href="/manifesto">আমাদের ইশতেহার</Link>
                         </Button>
-                        <Button asChild size="lg" variant="outline" className="text-white border-white hover:bg-white/10 hover:text-white">
+                        <Button asChild size="lg" variant="secondary">
                             <Link href="/get-involved">যুক্ত হোন</Link>
                         </Button>
                     </div>
@@ -433,23 +418,20 @@ function SocialWorkSection() {
 function VoteBannerSection() {
   return (
     <section 
-        className="py-12 md:py-16 bg-cover bg-center bg-no-repeat relative"
-        style={{backgroundImage: "url('https://i.postimg.cc/t4G2wDk1/male-student-1.jpg')"}}
-        data-ai-hint="political rally crowd"
+        className="py-12 md:py-16 bg-primary/10"
     >
-      <div className="absolute inset-0 bg-black/70"></div>
-      <div className="container mx-auto px-4 text-center relative z-10">
-        <h2 className="text-3xl md:text-5xl font-bold font-headline text-white drop-shadow-md">
+      <div className="container mx-auto px-4 text-center">
+        <h2 className="text-3xl md:text-5xl font-bold font-headline text-foreground drop-shadow-md">
           বরিশালকে পাল্টাতে মই মার্কায় ভোট চাই!
         </h2>
-        <p className="mt-4 font-body text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto">
+        <p className="mt-4 font-body text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">
           আগামী ১২ই ফেব্রুয়ারী, একটি শোষণ বৈষম্যহীন ও সাম্প্রদায়িক সম্প্রীতির বরিশাল গড়তে মই মার্কায় ভোট দিন।
         </p>
-        <div className="mt-8 bg-background/20 backdrop-blur-sm border-2 border-dashed border-primary rounded-lg p-6 max-w-md mx-auto shadow-xl">
+        <div className="mt-8 bg-card backdrop-blur-sm border-2 border-dashed border-primary rounded-lg p-6 max-w-md mx-auto shadow-xl">
             <h3 className="font-headline text-4xl font-extrabold text-primary">ডাঃ মনীষা চক্রবর্ত্তী</h3>
             <div className="flex justify-center items-center gap-4 mt-2">
-                 <div className="text-5xl">🪜</div>
-                 <p className="font-body text-white text-2xl">মই মার্কা</p>
+                 <Image src="https://i.postimg.cc/pX05kCjD/moi-logo.png" alt="মই প্রতীক" width={50} height={50} />
+                 <p className="font-body text-foreground text-2xl">মই মার্কা</p>
             </div>
         </div>
       </div>
@@ -760,7 +742,7 @@ const faqItems = [
     },
     {
         question: "নির্বাচন কবে অনুষ্ঠিত হবে?",
-        answer: "আসন্ন ত্রয়োদশ জাতীয় সংসদ নির্বাচন আগামী ১২ই ফেব্রুয়ারী অনুষ্ঠিত হবে।"
+        answer: "আসন্ন ত্রয়োদש জাতীয় সংসদ নির্বাচন আগামী ১২ই ফেব্রুয়ারী অনুষ্ঠিত হবে।"
     }
 ];
 
@@ -935,14 +917,14 @@ function PreVoteSection() {
                         </CardHeader>
                         <CardContent className="space-y-4 text-left">
                            <div className="flex items-center justify-between p-3 bg-card rounded-lg">
-                               <p className="font-bold">বিকাশ:</p>
+                               <p className="font-bold">বিকাশ :</p>
                                <div className="flex flex-col items-end">
                                    <p>01723709155</p>
                                    <p>01586225082</p>
                                </div>
                            </div>
                            <div className="flex items-center justify-between p-3 bg-card rounded-lg">
-                               <p className="font-bold">নগদ:</p>
+                               <p className="font-bold">নগদ :</p>
                                <p>01684509990</p>
                            </div>
                         </CardContent>

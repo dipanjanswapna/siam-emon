@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from "next/link";
@@ -27,7 +28,7 @@ export function Header() {
         <div className="flex items-center">
            <Link href="/" className="flex items-center gap-2">
               <Image src="https://i.postimg.cc/pX05kCjD/moi-logo.png" alt="মই প্রতীক" width={32} height={32} />
-              <span className="font-bold font-headline text-xl sm:inline-block">
+              <span className="font-bold font-headline text-lg sm:text-xl">
                 ডাঃ মনীষা চক্রবর্ত্তী
               </span>
           </Link>
