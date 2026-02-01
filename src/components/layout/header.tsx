@@ -1,9 +1,8 @@
-
 "use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, Vote } from "lucide-react";
+import { Menu } from "lucide-react";
 import { useState } from "react";
 
 import { cn } from "@/lib/utils";
@@ -24,10 +23,9 @@ export function Header() {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-
   return (
-    <header className="sticky top-0 z-50 p-2 md:p-3">
-      <div className="container mx-auto flex h-16 items-center justify-between rounded-full bg-primary/95 px-4 text-primary-foreground shadow-lg backdrop-blur-sm md:px-6">
+    <header className="sticky top-0 z-50 bg-foreground text-background">
+      <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
         <Link href="/" className="flex items-center gap-2">
            <Image
                 src="https://i.postimg.cc/C5FPWXhs/Screenshot_2025-08-30_121415-Picsart-Ai-Image-Enhancer-removebg-preview.png"
@@ -48,8 +46,8 @@ export function Header() {
               key={link.href}
               href={link.href}
               className={cn(
-                "font-headline text-md font-medium transition-colors hover:bg-primary-foreground/10 rounded-full px-4 py-2",
-                pathname === link.href ? "bg-primary-foreground text-primary" : ""
+                "font-headline text-md font-medium transition-colors hover:text-background px-4 py-2",
+                pathname === link.href ? "text-accent" : "text-background/80"
               )}
             >
               {link.label}
@@ -58,7 +56,7 @@ export function Header() {
         </nav>
         
         <div className="hidden md:flex items-center gap-4">
-             <Button asChild variant="secondary" className="font-headline bg-primary-foreground text-primary hover:bg-primary-foreground/90">
+             <Button asChild variant="outline" className="font-headline border-background/50 text-background/80 hover:bg-background hover:text-foreground">
                 <Link href="/get-involved">যুক্ত হোন</Link>
             </Button>
         </div>
@@ -68,13 +66,13 @@ export function Header() {
         <div className="md:hidden">
           <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="hover:bg-primary-foreground/10">
+              <Button variant="ghost" size="icon" className="hover:bg-background/10">
                 <Menu className="h-6 w-6" />
                 <span className="sr-only">নেভিগেশন মেনু খুলুন</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="bottom" className="bg-primary text-primary-foreground rounded-t-2xl h-auto">
-              <div className="flex flex-col items-center gap-6 p-6 text-center">
+            <SheetContent side="left" className="bg-foreground text-background p-0 w-3/4">
+              <div className="flex flex-col gap-6 p-6">
                 <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-2 mb-4">
                   <Image
                       src="https://i.postimg.cc/C5FPWXhs/Screenshot_2025-08-30_121415-Picsart-Ai-Image-Enhancer-removebg-preview.png"
@@ -93,8 +91,8 @@ export function Header() {
                     href={link.href}
                     onClick={() => setIsMobileMenuOpen(false)}
                     className={cn(
-                      "font-headline text-xl font-medium transition-colors hover:text-primary-foreground/80",
-                      pathname === link.href ? "text-primary-foreground" : "text-primary-foreground/60"
+                      "font-headline text-xl font-medium transition-colors hover:text-background",
+                      pathname === link.href ? "text-accent" : "text-background/70"
                     )}
                   >
                     {link.label}
