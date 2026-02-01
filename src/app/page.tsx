@@ -113,9 +113,9 @@ function HeroSection() {
             <div className="container absolute inset-0 z-10 mx-auto px-4 flex flex-col justify-center items-center">
                 <div className="max-w-4xl mx-auto">
                     {logoUrl ? (
-                         <Image src={logoUrl} alt="মই প্রতীক" width={100} height={100} className="mx-auto mb-4 drop-shadow-lg" data-ai-hint="ladder logo" />
+                         <Image src={logoUrl} alt="মই প্রতীক" width={100} height={100} className="mx-auto mb-4 drop-shadow-lg rounded-md" data-ai-hint="ladder logo" />
                     ) : (
-                        <Image src="https://i.postimg.cc/P5tTsbT9/moi-logo-white.png" alt="মই প্রতীক" width={100} height={100} className="mx-auto mb-4 drop-shadow-lg" data-ai-hint="ladder logo" />
+                        <Image src="https://i.postimg.cc/pX05kCjD/moi-logo.png" alt="মই প্রতীক" width={100} height={100} className="mx-auto mb-4 drop-shadow-lg rounded-md" data-ai-hint="ladder logo" />
                     )}
                     <h1 className="text-4xl md:text-6xl font-bold font-headline drop-shadow-lg">ডাঃ মনীষা চক্রবর্ত্তী</h1>
                     <p className="mt-4 text-xl md:text-2xl font-semibold text-primary-foreground/90 drop-shadow-md">

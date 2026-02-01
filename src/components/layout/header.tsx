@@ -1,4 +1,3 @@
-
 "use client";
 
 import Link from "next/link";
@@ -12,29 +11,6 @@ import Image from "next/image";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { Skeleton } from "../ui/skeleton";
-
-function LadderIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      {...props}
-    >
-      <path d="M8 3v18" />
-      <path d="M16 3v18" />
-      <path d="M8 7h8" />
-      <path d="M8 12h8" />
-      <path d="M8 17h8" />
-    </svg>
-  );
-}
 
 const navLinks = [
   { href: "/", label: "হোম" },
@@ -58,11 +34,11 @@ export function Header() {
             if (settingsDoc.exists() && settingsDoc.data().logoUrl) {
                 setLogoUrl(settingsDoc.data().logoUrl);
             } else {
-                 setLogoUrl("https://i.postimg.cc/P5tTsbT9/moi-logo-white.png");
+                 setLogoUrl("https://i.postimg.cc/pX05kCjD/moi-logo.png");
             }
         } catch (error) {
             console.error("Failed to fetch logo, using fallback.", error);
-            setLogoUrl("https://i.postimg.cc/P5tTsbT9/moi-logo-white.png");
+            setLogoUrl("https://i.postimg.cc/pX05kCjD/moi-logo.png");
         } finally {
             setIsLoadingLogo(false);
         }
@@ -76,11 +52,9 @@ export function Header() {
         <div className="flex items-center">
            <Link href="/" className="flex items-center gap-2">
               {isLoadingLogo ? (
-                  <Skeleton className="h-8 w-8 rounded-full" />
-              ) : logoUrl ? (
-                  <Image src={logoUrl} alt="Campaign Logo" width={32} height={32} className="h-8 w-8" />
+                  <Skeleton className="h-8 w-8 rounded-md" />
               ) : (
-                  <LadderIcon className="h-8 w-8" />
+                logoUrl && <Image src={logoUrl} alt="Campaign Logo" width={32} height={32} className="h-8 w-8 rounded-md" />
               )}
               <span className="font-bold font-headline text-xl sm:inline-block">
                 ডাঃ মনীষা চক্রবর্ত্তী
@@ -123,11 +97,9 @@ export function Header() {
                   <div className="flex flex-col gap-6 p-6">
                     <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-2 mb-4">
                       {isLoadingLogo ? (
-                        <Skeleton className="h-8 w-8 rounded-full" />
-                      ) : logoUrl ? (
-                          <Image src={logoUrl} alt="Campaign Logo" width={32} height={32} className="h-8 w-8" />
+                        <Skeleton className="h-8 w-8 rounded-md" />
                       ) : (
-                          <LadderIcon className="h-8 w-8" />
+                        logoUrl && <Image src={logoUrl} alt="Campaign Logo" width={32} height={32} className="h-8 w-8 rounded-md" />
                       )}
                       <span className="text-xl font-headline font-bold">
                         ডাঃ মনীষা চক্রবর্ত্তী

@@ -12,11 +12,11 @@ export function FloatingVoteButton() {
         aria-label="নির্বাচনী তহবিলে সহযোগিতা করুন"
       >
         <Image
-          src="https://i.postimg.cc/P5tTsbT9/moi-logo-white.png"
+          src="https://i.postimg.cc/pX05kCjD/moi-logo.png"
           alt="মই মার্কায় সমর্থন দিন"
           width={80}
           height={80}
-          className="rounded-full object-contain bg-destructive p-2"
+          className="rounded-full object-contain"
         />
       </Button>
     </Link>
