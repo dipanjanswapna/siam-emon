@@ -1,7 +1,6 @@
-
 "use client";
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useAuthState, useSignOut } from 'react-firebase-hooks/auth';
 import { auth } from '@/lib/firebase';
 import { useRouter } from 'next/navigation';
@@ -17,9 +16,14 @@ export function useAuth(Component: React.ComponentType<any>) {
     const [signOut] = useSignOut(auth);
     const router = useRouter();
     const { toast } = useToast();
+    const [isClient, setIsClient] = useState(false);
 
     useEffect(() => {
-      if (loading) return;
+        setIsClient(true);
+    }, []);
+
+    useEffect(() => {
+      if (loading || !isClient) return; // Wait for client mount and auth state
 
       if (!user) {
         router.push('/admin/login');
@@ -38,9 +42,10 @@ export function useAuth(Component: React.ComponentType<any>) {
         }
         handleSignOut();
       }
-    }, [user, loading, router, toast, signOut]);
+    }, [user, loading, router, toast, signOut, isClient]);
 
-    if (loading || !user || user.uid !== ADMIN_UID) {
+    // Show skeleton on server, on initial client render, and while loading auth state.
+    if (!isClient || loading) {
       return (
         <div className="p-8 space-y-4">
             <Skeleton className="h-12 w-1/2" />
@@ -59,6 +64,15 @@ export function useAuth(Component: React.ComponentType<any>) {
       return <Component {...props} />;
     }
 
-    return null;
+    // If not loading, not an admin, and no user, useEffect will redirect.
+    // Show skeleton in the meantime to prevent flash of content.
+    return (
+      <div className="p-8 space-y-4">
+          <Skeleton className="h-12 w-1/2" />
+          <Skeleton className="h-32 w-full" />
+          <Skeleton className="h-32 w-full" />
+          <Skeleton className="h-32 w-full" />
+      </div>
+    );
   };
 }
