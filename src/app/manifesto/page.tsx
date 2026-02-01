@@ -89,7 +89,7 @@ const actionPlanImages = [
 
 function ActionPlanSection() {
     return (
-        <section id="action-plan" className="py-16 md:py-24 bg-primary/5">
+        <section id="action-plan" className="py-16 md:py-24 bg-card">
             <div className="container mx-auto px-4">
                 <div className="text-center max-w-4xl mx-auto">
                     <FileText className="mx-auto h-12 w-12 text-primary" />
@@ -162,7 +162,7 @@ export default function ManifestoPage() {
               </CardHeader>
               <CardContent className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {keyPledges.map((pledge) => (
-                  <Card key={pledge.title} className="flex flex-col items-center text-center p-6 rounded-lg bg-primary/5 hover:bg-primary/10 transition-colors shadow-sm hover:shadow-md">
+                  <Card key={pledge.title} className="flex flex-col items-center text-center p-6 rounded-lg bg-background hover:bg-secondary transition-colors shadow-sm hover:shadow-md">
                     <div className="bg-primary/20 p-4 rounded-full mb-4">
                       <pledge.icon className="h-10 w-10 text-primary" />
                     </div>
@@ -184,9 +184,9 @@ export default function ManifestoPage() {
               <p>৯ নং ব্যালটে সিয়াম</p>
               <p>৯ নং ব্যালটে গবেষণা ও প্রকাশনা</p>
             </div>
-            <div className="mt-8 bg-primary/10 border-2 border-dashed border-primary rounded-lg p-6 max-w-md mx-auto">
+            <div className="mt-8 bg-card border-2 border-dashed border-primary rounded-lg p-6 max-w-md mx-auto">
                 <h3 className="font-headline text-3xl font-extrabold text-primary">সিয়াম ফেরদৌস ইমন</h3>
-                <p className="font-body text-foreground text-xl mt-1">ব্যালট নং <span className="font-extrabold text-2xl text-red-600">০৯</span></p>
+                <p className="font-body text-foreground text-xl mt-1">ব্যালট নং <span className="font-extrabold text-2xl text-destructive">০৯</span></p>
                 <p className="font-body text-muted-foreground text-lg">গবেষণা ও প্রকাশনা সম্পাদক পদপ্রার্থী</p>
             </div>
             <p className="mt-8 font-body text-lg text-muted-foreground">
@@ -194,7 +194,7 @@ export default function ManifestoPage() {
             </p>
           </section>
 
-          <section id="cta-support" className="text-center rounded-lg p-12 bg-gradient-to-r from-green-600 to-red-600 text-white">
+          <section id="cta-support" className="text-center rounded-lg p-12 bg-gradient-to-r from-primary to-destructive text-white">
                 <h2 className="font-headline text-4xl md:text-5xl font-bold">
                     আমাদের ইশতেহার বাস্তবায়নে আপনার সহযোগিতা প্রয়োজন
                 </h2>
@@ -202,7 +202,7 @@ export default function ManifestoPage() {
                     এই পরিকল্পনাগুলো বাস্তবায়নের জন্য আমাদের দরকার আপনাদের ভোট, সমর্থন এবং সক্রিয় অংশগ্রহণ।
                 </p>
                 <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-                    <Button asChild size="lg" className="bg-white text-green-700 hover:bg-gray-200 font-headline text-lg">
+                    <Button asChild size="lg" className="bg-white text-primary hover:bg-gray-200 font-headline text-lg">
                         <Link href="/#pre-vote">আমাদের সমর্থন করুন</Link>
                     </Button>
                     <Button asChild size="lg" variant="outline" className="bg-transparent border-white text-white hover:bg-white/10 font-headline text-lg">

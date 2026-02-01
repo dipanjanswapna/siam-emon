@@ -133,7 +133,7 @@ function ElectionResultSection() {
                 <Card className="shadow-lg max-w-4xl mx-auto bg-card">
                     <CardHeader>
                         <CardTitle className="font-headline text-3xl md:text-4xl text-center text-foreground">
-                            আমার সমর্থকদের প্রতি <span className="text-red-600">কৃতজ্ঞতা</span>
+                            আমার সমর্থকদের প্রতি <span className="text-destructive">কৃতজ্ঞতা</span>
                         </CardTitle>
                     </CardHeader>
                     <CardContent className="font-body text-muted-foreground space-y-4 text-lg">
@@ -376,17 +376,17 @@ function AboutSection() {
                 />
             </div>
              <div className="mt-6 text-center w-full max-w-xs">
-                <div className="bg-yellow-200/80 text-yellow-900 font-bold py-1.5 px-3 rounded-md text-sm">
+                <div className="bg-primary/20 text-primary font-bold py-1.5 px-3 rounded-md text-sm">
                     গবেষণা ও প্রকাশনা সম্পাদক
                 </div>
-                <h3 className="font-headline text-3xl font-bold text-teal-800 my-2">
+                <h3 className="font-headline text-3xl font-bold text-foreground my-2">
                     সিয়াম ফেরদৌস ইমন
                 </h3>
                 <div className="rounded-lg overflow-hidden shadow-lg">
-                    <div className="bg-teal-700 text-white font-bold py-1.5 text-sm">
+                    <div className="bg-primary text-primary-foreground font-bold py-1.5 text-sm">
                         ব্যালট নম্বর
                     </div>
-                    <div className="bg-teal-100 text-teal-800 text-5xl font-bold py-2">
+                    <div className="bg-card text-destructive text-5xl font-bold py-2">
                         ০৯
                     </div>
                 </div>
@@ -399,7 +399,7 @@ function AboutSection() {
                 আমি <span className="text-primary font-bold">সিয়াম ফেরদৌস ইমন</span>, ঢাকা বিশ্ববিদ্যালয়ের ২০১৮-১৯ সেশনের প্রাণিবিদ্যা বিভাগের মাস্টার্সে (Genetics and Molecular Biology Branch) অধ্যয়নরত এবং ফজলুল হক মুসলিম হলের নিয়মিত আবাসিক শিক্ষার্থী। আমি বিগত ৬ বছর ধরে বিশ্ববিদ্যালয় জীবনে বিভিন্ন <span className="text-accent font-semibold">ছাত্রকল্যাণমূলক কার্যক্রম</span>, যোক্তিক ও ন্যায্য দাবি আদায়ের পাশাপাশি <span className="text-accent font-semibold">গবেষণা ও একাডেমিক কর্মকাণ্ডের</span> সাথে শুরু থেকে সক্রিয় আছি।
               </p>
               <p>
-                আপনাদের ভালোবাসা, সহযোগিতা ও আস্থার জোরেই আমি আসন্ন ঢাকা বিশ্ববিদ্যালয়ের কেন্দ্রীয় ছাত্র সংসদ (ডাকসু) নির্বাচনে <span className="bg-primary/20 text-red-600 font-bold p-1 rounded">গবেষণা ও প্রকাশনা সম্পাদক পদে</span> প্রার্থী হওয়ার সিদ্ধান্ত নিয়েছি।
+                আপনাদের ভালোবাসা, সহযোগিতা ও আস্থার জোরেই আমি আসন্ন ঢাকা বিশ্ববিদ্যালয়ের কেন্দ্রীয় ছাত্র সংসদ (ডাকসু) নির্বাচনে <span className="bg-destructive/20 text-destructive font-bold p-1 rounded">গবেষণা ও প্রকাশনা সম্পাদক পদে</span> প্রার্থী হওয়ার সিদ্ধান্ত নিয়েছি।
               </p>
               <p>
               আমি প্রতিশ্রুতি দিচ্ছি, যদি আপনারা আমাকে ডাকসু ২০২৫-এ গবেষণা ও প্রকাশনা সম্পাদক হিসেবে দায়িত্ব দেন, তবে আমি আপনাদের জন্য একটি কার্যকর এবং ছাত্রবান্ধব পরিবেশ তৈরি করতে কাজ করে যাবো।
@@ -428,13 +428,13 @@ function VoterSearchAdSection() {
     return (
         <section className="py-12 md:py-16 bg-background">
             <div className="container mx-auto px-4">
-                <Card className="shadow-lg bg-primary/5 border-primary/20">
+                <Card className="shadow-lg bg-card border-border">
                     <div className="grid md:grid-cols-3 items-center text-center md:text-left p-8 gap-8">
                         <div className="md:col-span-1 flex justify-center">
                             <SearchCheck className="w-24 h-24 text-primary" />
                         </div>
                         <div className="md:col-span-2">
-                            <h2 className="font-headline text-3xl md:text-4xl font-bold text-foreground">আপনার <span className="text-red-600">ভোটার তথ্য</span> খুঁজুন</h2>
+                            <h2 className="font-headline text-3xl md:text-4xl font-bold text-foreground">আপনার <span className="text-destructive">ভোটার তথ্য</span> খুঁজুন</h2>
                             <p className="font-body text-lg mt-2 text-muted-foreground">
                                 ডাকসু নির্বাচনের জন্য আপনার ভোটার নম্বর এবং কেন্দ্র সহজেই খুঁজে নিন। ঢাকা বিশ্ববিদ্যালয় আইসিটি সেল দ্বারা পরিচালিত পোর্টালে আপনার তথ্য যাচাই করুন।
                             </p>
@@ -453,11 +453,11 @@ function VoterSearchAdSection() {
 
 function ActionPlanSection() {
     return (
-        <section id="action-plan" className="py-16 md:py-24 bg-primary/5">
+        <section id="action-plan" className="py-16 md:py-24 bg-card">
             <div className="container mx-auto px-4">
                 <div className="text-center max-w-4xl mx-auto">
                     <FileText className="mx-auto h-12 w-12 text-primary" />
-                    <h2 className="font-headline text-4xl font-bold text-foreground mt-4">আমাদের <span className="text-red-600">কর্মপরিকল্পনা</span></h2>
+                    <h2 className="font-headline text-4xl font-bold text-foreground mt-4">আমাদের <span className="text-destructive">কর্মপরিকল্পনা</span></h2>
                     <p className="font-body text-lg mt-2 text-muted-foreground">
                         আমাদের লক্ষ্য এবং প্রতিশ্রুতিগুলো বাস্তবায়নের জন্য একটি বিস্তারিত কর্মপরিকল্পনা।
                     </p>
@@ -523,17 +523,17 @@ function CommitmentSection() {
     }, []);
 
     return (
-        <section className="py-16 md:py-24 bg-primary/10">
+        <section className="py-16 md:py-24 bg-card">
             <div className="container mx-auto px-4">
                 <div className="text-center max-w-4xl mx-auto">
-                    <h2 className="font-headline text-4xl md:text-5xl font-bold text-foreground">আমার <span className="text-red-600">অঙ্গীকার</span></h2>
+                    <h2 className="font-headline text-4xl md:text-5xl font-bold text-foreground">আমার <span className="text-destructive">অঙ্গীকার</span></h2>
                     <p className="font-body text-lg mt-4 text-muted-foreground">
                         প্রিয় ঢাকা বিশ্ববিদ্যালয়ের সহপাঠীরা, আমরা সবাই জানি—জ্ঞানচর্চা, গবেষণা আর প্রকাশনা ছাড়া প্রকৃত উচ্চশিক্ষার অগ্রগতি সম্ভব নয়। কিন্তু আমাদের অনেক সম্ভাবনাময় গবেষণা কেবল সুযোগ ও প্ল্যাটফর্মের অভাবে থেমে যায়। আমি প্রতিশ্রুতি দিচ্ছি, যদি আপনারা আমাকে ডাকসু ২০২৫-এ গবেষণা ও প্রকাশনা সম্পাদক হিসেবে দায়িত্ব দেন, তবে আমি বিভাগভিত্তিক গবেষণা তহবিল ও আন্তর্জাতিক স্কলারশিপের সহায়তা, ডাকসুর নিজস্ব স্টুডেন্ট জার্নাল প্রকাশ, প্রতিটি থিসিস ও গবেষণার জন্য ডিজিটাল আর্কাইভ, একাডেমিক রাইটিং ও সফটওয়্যার ট্রেনিং কর্মশালা এবং শিক্ষার্থীদের জন্য গবেষণাভিত্তিক কনফারেন্স ও সেমিনার আয়োজন করব। আপনার ভোটে গড়ে উঠুক একটি গবেষণা-উদ্যমী ডাকসু।
                     </p>
                 </div>
                 <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                     {isLoading ? Array.from({ length: 4 }).map((_, i) => (
-                        <Card key={i} className="text-center shadow-lg bg-card p-6">
+                        <Card key={i} className="text-center shadow-lg bg-background p-6">
                             <div className="bg-muted/50 p-4 rounded-full w-20 h-20 mx-auto animate-pulse"></div>
                              <div className="h-6 w-3/4 bg-muted/50 rounded mt-4 mx-auto animate-pulse"></div>
                              <div className="h-4 w-full bg-muted/50 rounded mt-4 mx-auto animate-pulse"></div>
@@ -542,7 +542,7 @@ function CommitmentSection() {
                     )) : commitments.map((commitment) => {
                         const IconComponent = icons[commitment.icon] || BrainCircuit;
                         return (
-                            <Card key={commitment.id} className="text-center shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 bg-card">
+                            <Card key={commitment.id} className="text-center shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 bg-background">
                                 <CardHeader className="items-center">
                                     <div className="bg-primary/20 p-4 rounded-full">
                                         {IconComponent ? <IconComponent className="h-10 w-10 text-primary" /> : null}
@@ -605,7 +605,7 @@ function CampaignGallerySection() {
                 <div className="text-center max-w-4xl mx-auto">
                     <Camera className="mx-auto h-12 w-12 text-primary" />
                     <h2 className="font-headline text-4xl md:text-5xl font-bold mt-4 text-foreground">
-                        <span className="text-red-600">নির্বাচনী প্রচারণার</span> একাংশ
+                        <span className="text-destructive">নির্বাচনী প্রচারণার</span> একাংশ
                     </h2>
                     <p className="mt-4 font-body text-lg text-muted-foreground">
                         আমার নির্বাচনী প্রচারণার কিছু বিশেষ মুহূর্ত, যা শিক্ষার্থীদের ভালোবাসা ও সমর্থনে পূর্ণ।
@@ -669,7 +669,7 @@ function NoticeSection() {
 
     if (isLoading) {
         return (
-            <section className="bg-gradient-to-r from-red-500 to-pink-500 py-3 text-white w-full overflow-x-hidden">
+            <section className="bg-gradient-to-r from-destructive to-pink-500 py-3 text-white w-full overflow-x-hidden">
                 <div className="relative flex items-center whitespace-nowrap">
                     <p className="text-lg font-headline">নোটিশ লোড হচ্ছে...</p>
                 </div>
@@ -678,7 +678,7 @@ function NoticeSection() {
     }
 
     return (
-        <section className="bg-gradient-to-r from-red-500 to-pink-500 py-3 text-white w-full overflow-x-hidden">
+        <section className="bg-gradient-to-r from-destructive to-pink-500 py-3 text-white w-full overflow-x-hidden">
             <div className="relative flex items-center whitespace-nowrap w-full overflow-x-hidden">
                 <p className="animate-scroll text-lg font-headline">
                     {noticeText}
@@ -709,7 +709,7 @@ function VoteBannerSection() {
         </p>
         <div className="mt-8 bg-background/20 backdrop-blur-sm border-2 border-dashed border-primary rounded-lg p-6 max-w-md mx-auto shadow-xl">
             <h3 className="font-headline text-4xl font-extrabold text-primary">সিয়াম ফেরদৌস ইমন</h3>
-            <p className="font-body text-white text-2xl mt-1">ব্যালট নং <span className="font-extrabold text-3xl text-red-500">০৯</span></p>
+            <p className="font-body text-white text-2xl mt-1">ব্যালট নং <span className="font-extrabold text-3xl text-destructive">০৯</span></p>
             <p className="font-body text-gray-200 text-xl">গবেষণা ও প্রকাশনা সম্পাদক পদপ্রার্থী</p>
         </div>
       </div>
@@ -810,7 +810,7 @@ function VoteCallToActionSection() {
     return (
         <section className="py-12 md:py-16 bg-background">
             <div className="container mx-auto px-4 text-center">
-                <h2 className="text-4xl md:text-5xl font-bold font-headline" style={{ color: '#166534' }}>
+                <h2 className="text-4xl md:text-5xl font-bold font-headline text-primary">
                     ভোট দিন আমাকে!
                 </h2>
                 <p className="mt-2 font-body text-lg text-foreground">
@@ -819,8 +819,8 @@ function VoteCallToActionSection() {
                 <div className="mt-6">
                     <Button 
                         size="lg"
-                        className="font-headline text-md sm:text-lg text-white font-bold h-auto py-3 px-6 sm:h-14 sm:px-8 rounded-full w-full sm:w-auto"
-                        style={{ backgroundColor: 'hsl(271 76% 54%)' }}
+                        variant="accent"
+                        className="font-headline text-md sm:text-lg font-bold h-auto py-3 px-6 sm:h-14 sm:px-8 rounded-full w-full sm:w-auto"
                     >
                        আপনার ভোটে গড়ে উঠুক একটি গবেষণা-উদ্যমী ডাকসু
                     </Button>
@@ -873,18 +873,18 @@ const researchActivities = [
 function ResearchSection() {
   
   return (
-    <section className="bg-primary/5 py-16 md:py-24">
+    <section className="bg-card py-16 md:py-24">
       <div className="container mx-auto px-4">
         <div className="text-center max-w-4xl mx-auto">
           <Camera className="mx-auto h-12 w-12 text-primary" />
-          <h1 className="font-headline text-5xl md:text-6xl font-bold mt-4 text-foreground">আমার <span className="text-red-600">গবেষণা ও কার্যক্রম</span></h1>
+          <h1 className="font-headline text-5xl md:text-6xl font-bold mt-4 text-foreground">আমার <span className="text-destructive">গবেষণা ও কার্যক্রম</span></h1>
           <p className="font-body text-lg mt-4 text-muted-foreground">
             জ্ঞানভিত্তিক সমাজ গঠনে আমার গবেষণা, ওয়ার্কশপ এবং বিভিন্ন কার্যক্রমের ঝলক।
           </p>
         </div>
         <div className="mt-16 space-y-8">
           {researchActivities.map((activity, index) => (
-            <div key={index} className="grid md:grid-cols-2 gap-8 items-center bg-card p-6 rounded-lg shadow-md">
+            <div key={index} className="grid md:grid-cols-2 gap-8 items-center bg-background p-6 rounded-lg shadow-md">
               <div className="order-2 md:order-1">
                 <div className="flex items-center gap-3 mb-4">
                   <activity.icon className="w-8 h-8 text-primary" />
@@ -942,18 +942,18 @@ const publicationActivities = [
 function PublicationSection() {
 
   return (
-    <section className="bg-card py-16 md:py-24">
+    <section className="bg-background py-16 md:py-24">
       <div className="container mx-auto px-4">
         <div className="text-center max-w-4xl mx-auto">
           <BookOpenCheck className="mx-auto h-12 w-12 text-primary" />
-          <h1 className="font-headline text-5xl md:text-6xl font-bold mt-4 text-foreground"><span className="text-red-600">প্রকাশনায়</span> আমি</h1>
+          <h1 className="font-headline text-5xl md:text-6xl font-bold mt-4 text-foreground"><span className="text-destructive">প্রকাশনায়</span> আমি</h1>
           <p className="font-body text-lg mt-4 text-muted-foreground">
             জ্ঞানচর্চা ও সৃজনশীলতার প্রসারে প্রকাশনা জগতে আমার উদ্যোগ ও কার্যক্রম।
           </p>
         </div>
         <div className="mt-16 space-y-8">
           {publicationActivities.map((activity, index) => (
-            <div key={index} className="grid md:grid-cols-2 gap-8 items-center bg-primary/5 p-6 rounded-lg shadow-md">
+            <div key={index} className="grid md:grid-cols-2 gap-8 items-center bg-card p-6 rounded-lg shadow-md">
               <div className="order-2 md:order-1">
                 <div className="flex items-center gap-3 mb-4">
                    <activity.icon className="w-8 h-8 text-primary" />
@@ -1027,18 +1027,18 @@ const logicalMovementActivities = [
 function LogicalMovementSection() {
 
   return (
-    <section className="bg-primary/5 py-16 md:py-24">
+    <section className="bg-card py-16 md:py-24">
       <div className="container mx-auto px-4">
         <div className="text-center max-w-4xl mx-auto">
           <Flag className="mx-auto h-12 w-12 text-primary" />
-          <h1 className="font-headline text-5xl md:text-6xl font-bold mt-4 text-foreground"><span className="text-red-600">যৌক্তিক আন্দোলনে</span> আমি</h1>
+          <h1 className="font-headline text-5xl md:text-6xl font-bold mt-4 text-foreground"><span className="text-destructive">যৌক্তিক আন্দোলনে</span> আমি</h1>
           <p className="font-body text-lg mt-4 text-muted-foreground">
             শিক্ষার্থীদের অধিকার এবং বিভিন্ন সামাজিক ন্যায্যতার দাবিতে আমার অংশগ্রহণের ঝলক।
           </p>
         </div>
         <div className="mt-16 space-y-8">
           {logicalMovementActivities.map((activity, index) => (
-            <div key={index} className="grid md:grid-cols-2 gap-8 items-center bg-card p-6 rounded-lg shadow-md">
+            <div key={index} className="grid md:grid-cols-2 gap-8 items-center bg-background p-6 rounded-lg shadow-md">
               <div className="order-2 md:order-1">
                 <div className="flex items-center gap-3 mb-4">
                    <activity.icon className="w-8 h-8 text-primary" />
@@ -1108,31 +1108,31 @@ function AcademicAchievementSection() {
 
   return (
     <>
-      <section className="py-16 md:py-24 bg-card">
+      <section className="py-16 md:py-24 bg-background">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-4xl mx-auto">
-            <h2 className="font-headline text-4xl md:text-5xl font-bold text-foreground">আমার <span className="text-red-600">একাডেমিক</span> অর্জন</h2>
+            <h2 className="font-headline text-4xl md:text-5xl font-bold text-foreground">আমার <span className="text-destructive">একাডেমিক</span> অর্জন</h2>
             <p className="mt-4 font-body text-lg text-muted-foreground">
               আমার শিক্ষাজীবনের কিছু উল্লেখযোগ্য সাফল্য এবং অর্জন নিচে তুলে ধরা হলো।
             </p>
           </div>
           <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {isLoading ? Array.from({length: 4}).map((_, i) => (
-                <Card key={i} className="flex flex-col shadow-lg bg-background overflow-hidden">
-                    <div className="relative w-full aspect-video bg-muted/50 animate-pulse"></div>
+                <Card key={i} className="flex flex-col shadow-lg bg-card overflow-hidden">
+                    <div className="relative w-full aspect-video bg-muted animate-pulse"></div>
                     <CardHeader className="items-center text-center">
-                        <div className="bg-muted/50 p-3 rounded-full -mt-10 mb-2 border-4 border-background z-10 w-16 h-16 animate-pulse"></div>
-                        <div className="h-6 w-3/4 bg-muted/50 rounded animate-pulse"></div>
+                        <div className="bg-muted p-3 rounded-full -mt-10 mb-2 border-4 border-card z-10 w-16 h-16 animate-pulse"></div>
+                        <div className="h-6 w-3/4 bg-muted rounded animate-pulse"></div>
                     </CardHeader>
                     <CardContent className="text-center flex-grow">
-                        <div className="h-4 w-full bg-muted/50 rounded animate-pulse"></div>
-                        <div className="h-4 w-5/6 bg-muted/50 rounded mt-2 animate-pulse"></div>
+                        <div className="h-4 w-full bg-muted rounded animate-pulse"></div>
+                        <div className="h-4 w-5/6 bg-muted rounded mt-2 animate-pulse"></div>
                     </CardContent>
                 </Card>
             )) : achievements.map((achievement) => {
                const IconComponent = icons[achievement.icon] || Award;
                return (
-               <Card key={achievement.id} className="flex flex-col shadow-lg hover:shadow-primary/20 hover:-translate-y-2 transition-all duration-300 bg-background overflow-hidden">
+               <Card key={achievement.id} className="flex flex-col shadow-lg hover:shadow-primary/20 hover:-translate-y-2 transition-all duration-300 bg-card overflow-hidden">
                  <div className="relative w-full aspect-video">
                    <Image 
                      src={achievement.image}
@@ -1143,7 +1143,7 @@ function AcademicAchievementSection() {
                    />
                  </div>
                 <CardHeader className="items-center text-center">
-                  <div className="bg-primary/10 p-3 rounded-full -mt-10 mb-2 border-4 border-background z-10">
+                  <div className="bg-primary/10 p-3 rounded-full -mt-10 mb-2 border-4 border-card z-10">
                     <IconComponent className="h-8 w-8 text-primary" />
                   </div>
                   <CardTitle className="font-headline text-xl mt-2">{achievement.title}</CardTitle>
@@ -1181,12 +1181,12 @@ function MediaSection() {
     const plugin = React.useRef(Autoplay({ delay: 8000, stopOnInteraction: true }));
 
     return (
-        <section className="bg-primary/5 py-16 md:py-24">
+        <section className="bg-card py-16 md:py-24">
             <div className="container mx-auto px-4">
                 <div className="text-center max-w-4xl mx-auto">
                     <Tv className="mx-auto h-12 w-12 text-primary" />
                     <h2 className="font-headline text-4xl md:text-5xl font-bold mt-4 text-foreground">
-                        <span className="text-red-600">গণমাধ্যমে</span> আমি
+                        <span className="text-destructive">গণমাধ্যমে</span> আমি
                     </h2>
                     <p className="mt-4 font-body text-lg text-muted-foreground">
                         বিভিন্ন গণমাধ্যমে আমার সাক্ষাৎকার, প্রতিবেদন এবং ডাকসু নির্বাচন নিয়ে আমার ভাবনার প্রতিফলন।
@@ -1203,7 +1203,7 @@ function MediaSection() {
                         {mediaItems.map((item, index) => (
                             <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 pl-4">
                                 <div className="p-1 h-full">
-                                     <Card className="shadow-lg overflow-hidden h-full flex flex-col">
+                                     <Card className="shadow-lg overflow-hidden h-full flex flex-col bg-background">
                                         <CardContent className="p-4 md:p-6 flex flex-col flex-grow">
                                             <h3 className="font-headline text-xl md:text-2xl font-bold">{item.title}</h3>
                                             <p className="font-body text-muted-foreground mt-2 mb-4 text-sm md:text-base flex-grow">{item.description}</p>
@@ -1265,12 +1265,12 @@ const skillsAndLeadershipActivities = [
 
 function SkillsLeadershipServiceSection() {
     return (
-        <section className="bg-primary/5 py-16 md:py-24">
+        <section className="bg-card py-16 md:py-24">
             <div className="container mx-auto px-4">
                 <div className="text-center max-w-4xl mx-auto">
                     <Combine className="mx-auto h-12 w-12 text-primary" />
                     <h2 className="font-headline text-4xl md:text-5xl font-bold mt-4 text-foreground">
-                        আমার <span className="text-red-600">দক্ষতা, নেতৃত্ব ও সেবা</span>
+                        আমার <span className="text-destructive">দক্ষতা, নেতৃত্ব ও সেবা</span>
                     </h2>
                     <p className="mt-4 font-body text-lg text-muted-foreground">
                        আমি বিশ্বাস করি, একজন শিক্ষার্থীর প্রকৃত বিকাশ শুধু একাডেমিক পড়াশোনার মধ্যে সীমাবদ্ধ থাকে না, বরং তার পূর্ণতা আসে সহশিক্ষা কার্যক্রমের মাধ্যমে। আমার বিশ্ববিদ্যালয় জীবনজুড়ে আমি সেই চেষ্টাই করেছি—একদিকে যেমন যৌক্তিক আন্দোলনে রাজপথে থেকেছি, তেমনই সহপাঠী ও অনুজদের জন্য কর্মশালা ও সম্মেলন আয়োজন করেছি। ভর্তিচ্ছুদের স্বপ্নপূরণের পথে সঙ্গী হতে কলম ধরেছি, আবার গবেষণার জগতে তরুণদের উৎসাহিত করতে নতুন নতুন প্ল্যাটফর্ম তৈরির চেষ্টা করেছি। আমার এই পথচলা মূলত দক্ষতা, নেতৃত্ব ও সেবার এক সমন্বয়, যার মাধ্যমে আমি ঢাকা বিশ্ববিদ্যালয়ের প্রতিটি শিক্ষার্থীর জন্য একটি সমৃদ্ধ ক্যাম্পাস জীবন নিশ্চিত করতে চাই।
@@ -1278,7 +1278,7 @@ function SkillsLeadershipServiceSection() {
                 </div>
                 <div className="mt-16 space-y-8">
                   {skillsAndLeadershipActivities.map((activity, index) => (
-                    <div key={index} className="grid md:grid-cols-2 gap-8 items-center bg-card p-6 rounded-lg shadow-md">
+                    <div key={index} className="grid md:grid-cols-2 gap-8 items-center bg-background p-6 rounded-lg shadow-md">
                       <div className="order-2 md:order-1">
                         <div className="flex items-center gap-3 mb-4">
                           <activity.icon className="w-8 h-8 text-primary" />
@@ -1427,12 +1427,12 @@ function SocialWorkSection() {
     const imagesToDisplay = socialWorks.length > 0 ? [...socialWorks, ...socialWorks] : [];
 
     return (
-        <section className="py-16 md:py-24 bg-primary/5 w-full overflow-x-hidden">
+        <section className="py-16 md:py-24 bg-background w-full overflow-x-hidden">
             <div className="container mx-auto px-4">
                 <div className="text-center max-w-4xl mx-auto">
                     <HandHeart className="mx-auto h-12 w-12 text-primary" />
                     <h2 className="font-headline text-4xl md:text-5xl font-bold mt-4 text-foreground">
-                        আমার <span className="text-red-600">সামাজিক</span> কাজ
+                        আমার <span className="text-destructive">সামাজিক</span> কাজ
                     </h2>
                     <p className="mt-4 font-body text-lg text-muted-foreground">
                         সমাজের প্রতি দায়বদ্ধতা থেকে আমার বিভিন্ন সামাজিক ও মানবিক কার্যক্রমের কিছু মুহূর্ত।
@@ -1569,7 +1569,7 @@ function TestimonialSection() {
                 <div className="text-center max-w-4xl mx-auto">
                     <Quote className="mx-auto h-12 w-12 text-primary" />
                     <h2 className="font-headline text-4xl md:text-5xl font-bold mt-4 text-foreground">
-                       আমার সম্পর্কে <span className="text-red-600">শিক্ষার্থীদের কিছু কথা</span>
+                       আমার সম্পর্কে <span className="text-destructive">শিক্ষার্থীদের কিছু কথা</span>
                     </h2>
                 </div>
                 <Carousel
@@ -1649,7 +1649,7 @@ function LeadershipSection() {
             <div className="container mx-auto px-4">
                 <div className="text-center max-w-4xl mx-auto">
                     <h1 className="font-headline text-4xl md:text-5xl font-bold text-foreground">
-                        পদ নয়, <span className="text-red-600">দায়িত্বই আমার আসল পরিচয়।</span>
+                        পদ নয়, <span className="text-destructive">দায়িত্বই আমার আসল পরিচয়।</span>
                     </h1>
                     <p className="font-body text-lg mt-4 text-muted-foreground">
                        প্রযুক্তি, শিক্ষা, গবেষণা ও আন্দোলন—এই চারটি স্তম্ভের ওপর দাঁড়িয়ে আমি আমার নেতৃত্বের প্রস্তুতি সম্পন্ন করেছি।
@@ -1860,7 +1860,7 @@ function FeedbackSection() {
                   <Label htmlFor="message" className="font-headline">আপনার সমস্যার বিস্তারিত বিবরণ...</Label>
                   <Textarea id="message" placeholder="আপনার মতামত বা সমস্যার বিস্তারিত এখানে লিখুন..." rows={6} value={formData.message} onChange={handleInputChange} required />
                 </div>
-                <Button type="submit" size="lg" className="w-full font-headline text-xl bg-green-600 hover:bg-green-700" disabled={isSubmitting}>
+                <Button type="submit" size="lg" className="w-full font-headline text-xl bg-primary hover:bg-primary/90" disabled={isSubmitting}>
                   {isSubmitting ? 'জমা হচ্ছে...' : 'জমা দিন'}
                 </Button>
               </form>
@@ -1969,16 +1969,16 @@ function PreVoteSection() {
     };
 
     return (
-        <section id="pre-vote" className="py-16 md:py-24 bg-primary/10">
+        <section id="pre-vote" className="py-16 md:py-24 bg-card">
             <div className="container mx-auto px-4">
                 <div className="max-w-4xl mx-auto text-center">
                     <Vote className="mx-auto h-16 w-16 text-primary animate-pulse" />
-                    <h2 className="font-headline text-4xl md:text-5xl font-bold mt-4 text-foreground"><span className="text-red-600">প্রি-ভোটিং:</span> আপনার সমর্থনই আমার শক্তি</h2>
+                    <h2 className="font-headline text-4xl md:text-5xl font-bold mt-4 text-foreground"><span className="text-destructive">প্রি-ভোটিং:</span> আপনার সমর্থনই আমার শক্তি</h2>
                     <p className="font-body text-lg mt-4 text-muted-foreground">
                         মূল নির্বাচনের আগে আপনার মূল্যবান ভোট দিয়ে আমাকে সমর্থন জানান এবং এই পরিবর্তনের যাত্রায় আমার সঙ্গী হোন।
                     </p>
                     
-                    <Card className="mt-8 shadow-2xl bg-card max-w-md mx-auto">
+                    <Card className="mt-8 shadow-2xl bg-background max-w-md mx-auto">
                         <CardContent className="p-6">
                             <p className="font-body text-muted-foreground">মোট প্রাপ্ত ভোট:</p>
                              <div className="text-6xl font-bold font-headline text-primary my-4 min-h-[72px] flex items-center justify-center">
@@ -2001,7 +2001,7 @@ function PreVoteSection() {
                                 {hasVoted ? 'ভোট দিয়েছেন' : 'আমাকে ভোট দিন'}
                             </Button>
                             {hasVoted && (
-                                <p className="text-green-600 font-semibold mt-3">আপনার ভোট সফলভাবে গৃহীত হয়েছে!</p>
+                                <p className="text-primary font-semibold mt-3">আপনার ভোট সফলভাবে গৃহীত হয়েছে!</p>
                             )}
                         </CardContent>
                     </Card>
@@ -2025,7 +2025,7 @@ function SupportSection() {
     return (
         <section className="py-16 md:py-24 bg-background">
             <div className="container mx-auto px-4">
-                <Card className="max-w-4xl mx-auto rounded-lg p-8 md:p-12 text-center text-white" style={{background: 'linear-gradient(to right, #b91c1c, #dc2626)'}}>
+                <Card className="max-w-4xl mx-auto rounded-lg p-8 md:p-12 text-center text-white" style={{background: 'linear-gradient(to right, hsl(var(--primary)), hsl(var(--destructive)))'}}>
                     <div className="flex justify-center mb-4">
                         <div className="bg-white/20 p-3 rounded-full">
                            <Phone className="w-8 h-8 text-white" />
@@ -2034,7 +2034,7 @@ function SupportSection() {
                     <h2 className="font-headline text-3xl md:text-4xl font-bold">কোনো প্রশ্ন আছে?</h2>
                     <p className="font-body text-lg mt-2 opacity-90">যেকোনো সময় আমাদের স্টুডেন্ট অ্যাডভাইজরের সাথে কথা বলুন।</p>
                     <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-                        <Button asChild size="lg" variant="destructive" className="bg-white text-red-600 hover:bg-gray-200 font-bold">
+                        <Button asChild size="lg" variant="secondary" className="bg-white text-primary hover:bg-gray-200 font-bold">
                             <Link href="tel:+8801623593673">এখনই কল করুন</Link>
                         </Button>
                         <Button asChild size="lg" variant="outline" className="bg-transparent border-white text-white hover:bg-white/10 font-bold">
@@ -2046,18 +2046,3 @@ function SupportSection() {
         </section>
     );
 }
-
-    
-
-    
-
-    
-
-
-
-
-    
-
-
-
-

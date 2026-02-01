@@ -24,7 +24,7 @@ export default function GetInvolvedPage() {
           
           {/* Volunteer Form */}
           <div className="order-2 lg:order-1">
-            <Card className="shadow-lg bg-primary/5">
+            <Card className="shadow-lg bg-card">
               <CardHeader>
                 <CardTitle className="font-headline flex items-center gap-3"><Users className="w-8 h-8 text-primary"/> স্বেচ্ছাসেবক হিসেবে নিবন্ধন করুন</CardTitle>
                 <CardDescription className="font-body">আপনার আগ্রহ এবং দক্ষতা অনুযায়ী বিভিন্ন কাজে অংশগ্রহণের সুযোগ রয়েছে। আপনার সামান্য সময় ও প্রচেষ্টাও একটি বড় পরিবর্তন আনতে পারে।</CardDescription>
@@ -77,13 +77,13 @@ export default function GetInvolvedPage() {
                 </CardHeader>
                 <CardContent className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-6">
                     {/* Phone Contact */}
-                    <Card className="text-center p-6 bg-green-500/5 border-green-500/20 flex flex-col items-center justify-between">
-                        <div className="p-4 bg-green-500/20 rounded-lg">
-                           <Phone className="w-8 h-8 text-green-700" />
+                    <Card className="text-center p-6 bg-primary/5 border-primary/20 flex flex-col items-center justify-between">
+                        <div className="p-4 bg-primary/20 rounded-lg">
+                           <Phone className="w-8 h-8 text-primary" />
                         </div>
                         <h3 className="font-headline text-xl font-bold mt-4">জরুরি যোগাযোগ</h3>
                         <p className="font-body text-muted-foreground mt-2 flex-grow">যেকোনো জরুরি বিষয়ে সরাসরি ফোন করুন</p>
-                        <Button asChild className="mt-4 bg-green-600 hover:bg-green-700 w-full">
+                        <Button asChild className="mt-4 bg-primary hover:bg-primary/90 w-full">
                           <Link href="tel:+8801623593673">এখনই কল করুন</Link>
                         </Button>
                     </Card>
@@ -99,23 +99,23 @@ export default function GetInvolvedPage() {
                         </Button>
                     </Card>
                     {/* In-person */}
-                     <Card className="text-center p-6 bg-red-500/5 border-red-500/20 flex flex-col items-center justify-between">
-                         <div className="p-4 bg-red-500/20 rounded-lg">
-                           <MapPin className="w-8 h-8 text-red-700" />
+                     <Card className="text-center p-6 bg-destructive/5 border-destructive/20 flex flex-col items-center justify-between">
+                         <div className="p-4 bg-destructive/20 rounded-lg">
+                           <MapPin className="w-8 h-8 text-destructive" />
                         </div>
                         <h3 className="font-headline text-xl font-bold mt-4">সরাসরি দেখা</h3>
                         <p className="font-body text-muted-foreground mt-2 flex-grow">আমাদের অফিসে এসে সরাসরি কথা বলুন</p>
-                        <Button asChild className="mt-4 bg-red-600 hover:bg-red-700 w-full">
-                          <Link href="https://maps.app.goo.gl/uRRjPGuT9xcq8CZA6" target="_blank" rel="noopener noreferrer">ঠিকানা দেখুন</Link>
+                        <Button asChild className="mt-4 bg-destructive hover:bg-destructive/90 w-full">
+                          <Link href="https://maps.app.goo.gl/1o2paoHFcAHdyrAK9" target="_blank" rel="noopener noreferrer">ঠিকানা দেখুন</Link>
                         </Button>
                     </Card>
-                    <Card className="text-center p-6 bg-primary/5 border-primary/20 flex flex-col items-center justify-between">
-                         <div className="p-4 bg-primary/20 rounded-lg">
-                           <Edit className="w-8 h-8 text-primary" />
+                    <Card className="text-center p-6 bg-secondary text-secondary-foreground flex flex-col items-center justify-between">
+                         <div className="p-4 bg-foreground/10 rounded-lg">
+                           <Edit className="w-8 h-8 text-foreground" />
                         </div>
                         <h3 className="font-headline text-xl font-bold mt-4">আপনার মতামত জানান</h3>
                         <p className="font-body text-muted-foreground mt-2 flex-grow">আপনার মূল্যবান মতামত, পরামর্শ বা প্রশ্ন পাঠান।</p>
-                        <Button asChild className="mt-4 w-full">
+                        <Button asChild variant="secondary" className="mt-4 w-full">
                            <Link href="/#feedback-form">মতামত ফর্ম</Link>
                         </Button>
                     </Card>
@@ -158,7 +158,7 @@ export default function GetInvolvedPage() {
             <CardContent>
               <div className="aspect-video w-full rounded-lg overflow-hidden border">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3651.905613342377!2d90.39122391544636!3d23.75069398458925!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjPCsDQ1JzAyLjUiTiA5MMKwMjMnMzcuOCJF!5e0!3m2!1sen!2sbd!4v1724915786193!5m2!1sen!2sbd"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3651.905613342377!2d90.39122391544636!3d23.75069398458925!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b8bd552c2b3b%3A0x4e70f1178462d615!2sDhaka%20University%20Central%20Students%20Union%20(DUCSU)!5e0!3m2!1sen!2sbd!4v1724915786193!5m2!1sen!2sbd"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}

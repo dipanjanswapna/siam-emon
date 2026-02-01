@@ -93,16 +93,16 @@ export default function VotingGuidePage() {
             </div>
             <div className="grid md:grid-cols-2 gap-8">
               <div className="fade-in-up" style={{ animationDelay: '500ms' }}>
-                <Card className="shadow-lg bg-green-500/5 border-green-500/20 h-full">
+                <Card className="shadow-lg bg-primary/5 border-primary/20 h-full">
                   <CardHeader className="flex flex-row items-center gap-4">
-                    <CheckSquare className="h-8 w-8 text-green-600" />
-                    <CardTitle className="font-headline text-2xl text-green-800">করণীয়</CardTitle>
+                    <CheckSquare className="h-8 w-8 text-primary" />
+                    <CardTitle className="font-headline text-2xl text-primary">করণীয়</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <ul className="space-y-3 font-body text-muted-foreground">
                       {dosAndDonts.dos.map((item, index) => (
                         <li key={index} className="flex items-start gap-3">
-                          <CheckSquare className="h-5 w-5 text-green-600 mt-1 flex-shrink-0" />
+                          <CheckSquare className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
                           <span>{item}</span>
                         </li>
                       ))}
@@ -111,16 +111,16 @@ export default function VotingGuidePage() {
                 </Card>
               </div>
               <div className="fade-in-up" style={{ animationDelay: '600ms' }}>
-                <Card className="shadow-lg bg-red-500/5 border-red-500/20 h-full">
+                <Card className="shadow-lg bg-destructive/5 border-destructive/20 h-full">
                    <CardHeader className="flex flex-row items-center gap-4">
-                    <XCircle className="h-8 w-8 text-red-600" />
-                    <CardTitle className="font-headline text-2xl text-red-800">বর্জনীয়</CardTitle>
+                    <XCircle className="h-8 w-8 text-destructive" />
+                    <CardTitle className="font-headline text-2xl text-destructive">বর্জনীয়</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <ul className="space-y-3 font-body text-muted-foreground">
                       {dosAndDonts.donts.map((item, index) => (
                         <li key={index} className="flex items-start gap-3">
-                          <XCircle className="h-5 w-5 text-red-600 mt-1 flex-shrink-0" />
+                          <XCircle className="h-5 w-5 text-destructive mt-1 flex-shrink-0" />
                           <span>{item}</span>
                         </li>
                       ))}

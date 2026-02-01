@@ -40,8 +40,8 @@ const manifestoPledges = [
   },
     {
     title: "প্রশিক্ষণ ও কর্মশালা",
-    status: "কাজ চলছে",
-    statusColor: "bg-yellow-500 hover:bg-yellow-600",
+    status: "সম্পন্ন",
+    statusColor: "bg-primary hover:bg-primary/90",
     icon: Laptop,
     updates: [
       "একাডেমিক রাইটিং-এর উপর প্রথম কর্মশালা সফলভাবে আয়োজন করেছি।",
@@ -78,7 +78,7 @@ export default function TransparencyPage() {
             <CardContent>
              <div className="mt-8 grid lg:grid-cols-5 gap-8 items-start">
                 <div className="lg:col-span-3">
-                    <Card className="shadow-inner bg-primary/5">
+                    <Card className="shadow-inner bg-card">
                         <CardHeader>
                             <CardTitle className="font-headline">প্রার্থীর আর্থিক সম্পদের AI সারসংক্ষেপ</CardTitle>
                             <CardDescription className="font-body">যেকোনো প্রার্থীর (আমার সহ) ঘোষিত আর্থিক সম্পদের একটি সহজ সারসংক্ষেপ পেতে এই AI-চালিত টুল ব্যবহার করুন। নীচে প্রকাশের সম্পূর্ণ পাঠ্যটি আটকান।</CardDescription>
@@ -89,7 +89,7 @@ export default function TransparencyPage() {
                     </Card>
                 </div>
                 <div className="lg:col-span-2">
-                    <Card className="shadow-inner bg-primary/5 h-full">
+                    <Card className="shadow-inner bg-card h-full">
                         <CardHeader>
                             <CardTitle className="font-headline">আমার ব্যয়ের বিবরণ ও ফান্ডিং উৎস</CardTitle>
                         </CardHeader>
@@ -121,7 +121,7 @@ export default function TransparencyPage() {
               <Accordion type="single" collapsible className="w-full">
                 {manifestoPledges.map((pledge, index) => (
                   <AccordionItem key={index} value={`item-${index}`} className="border-b-0">
-                     <Card className="mb-4 shadow-md bg-card hover:bg-primary/5">
+                     <Card className="mb-4 shadow-md bg-card hover:bg-secondary">
                        <AccordionTrigger className="p-6 text-left hover:no-underline">
                           <div className="flex items-center justify-between w-full">
                             <div className="flex items-center gap-4">

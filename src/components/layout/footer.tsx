@@ -64,7 +64,7 @@ export function Footer() {
                     <Link href="/admin" className="hover:underline">সিয়াম ফেরদৌস ইমন ক্যাম্পেইন</Link>
                     <span> | </span>
                     <Link href="https://www.facebook.com/dipanjanswapna2/" target="_blank" rel="noopener noreferrer" className="hover:underline">
-                        Developed by <span className="text-yellow-400 font-bold inline-block hover:animate-bounce">PRANGONS ECOSYSTEM</span>
+                        Developed by <span className="text-primary font-bold inline-block hover:animate-bounce">PRANGONS ECOSYSTEM</span>
                     </Link>
                 </div>
                 <div className="flex items-center gap-6 mt-4 md:mt-0">
