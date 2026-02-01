@@ -88,13 +88,13 @@ export default function GetInvolvedPage() {
                         </Button>
                     </Card>
                     {/* Email Contact */}
-                    <Card className="text-center p-6 bg-blue-500/5 border-blue-500/20 flex flex-col items-center justify-between">
-                         <div className="p-4 bg-blue-500/20 rounded-lg">
-                           <Mail className="w-8 h-8 text-blue-700" />
+                    <Card className="text-center p-6 bg-secondary/20 border-secondary/20 flex flex-col items-center justify-between">
+                         <div className="p-4 bg-secondary/30 rounded-lg">
+                           <Mail className="w-8 h-8 text-secondary-foreground" />
                         </div>
                         <h3 className="font-headline text-xl font-bold mt-4">ইমেইল সাপোর্ট</h3>
                         <p className="font-body text-muted-foreground mt-2 flex-grow">বিস্তারিত জিজ্ঞাসার জন্য ইমেইল করুন</p>
-                        <Button asChild className="mt-4 bg-blue-600 hover:bg-blue-700 w-full">
+                        <Button asChild variant="secondary" className="mt-4 w-full">
                            <Link href="mailto:siam.emon.52@gmail.com">ইমেইল পাঠান</Link>
                         </Button>
                     </Card>
@@ -105,17 +105,17 @@ export default function GetInvolvedPage() {
                         </div>
                         <h3 className="font-headline text-xl font-bold mt-4">সরাসরি দেখা</h3>
                         <p className="font-body text-muted-foreground mt-2 flex-grow">আমাদের অফিসে এসে সরাসরি কথা বলুন</p>
-                        <Button asChild className="mt-4 bg-destructive hover:bg-destructive/90 w-full">
-                          <Link href="https://maps.app.goo.gl/1o2paoHFcAHdyrAK9" target="_blank" rel="noopener noreferrer">ঠিকানা দেখুন</Link>
+                        <Button asChild variant="destructive" className="mt-4 w-full">
+                          <Link href="https://maps.app.goo.gl/uRRjPGuT9xcq8CZA6" target="_blank" rel="noopener noreferrer">ঠিকানা দেখুন</Link>
                         </Button>
                     </Card>
-                    <Card className="text-center p-6 bg-secondary text-secondary-foreground flex flex-col items-center justify-between">
+                    <Card className="text-center p-6 bg-muted flex flex-col items-center justify-between">
                          <div className="p-4 bg-foreground/10 rounded-lg">
-                           <Edit className="w-8 h-8 text-foreground" />
+                           <Edit className="w-8 h-8 text-muted-foreground" />
                         </div>
                         <h3 className="font-headline text-xl font-bold mt-4">আপনার মতামত জানান</h3>
                         <p className="font-body text-muted-foreground mt-2 flex-grow">আপনার মূল্যবান মতামত, পরামর্শ বা প্রশ্ন পাঠান।</p>
-                        <Button asChild variant="secondary" className="mt-4 w-full">
+                        <Button asChild variant="outline" className="mt-4 w-full">
                            <Link href="/#feedback-form">মতামত ফর্ম</Link>
                         </Button>
                     </Card>
@@ -158,7 +158,7 @@ export default function GetInvolvedPage() {
             <CardContent>
               <div className="aspect-video w-full rounded-lg overflow-hidden border">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3651.905613342377!2d90.39122391544636!3d23.75069398458925!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b8bd552c2b3b%3A0x4e70f1178462d615!2sDhaka%20University%20Central%20Students%20Union%20(DUCSU)!5e0!3m2!1sen!2sbd!4v1724915786193!5m2!1sen!2sbd"
+                  src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3651.905613342377!2d90.39122391544636!3d23.75069398458925!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjPCsDQ1JzAyLjUiTiA5MMKwMjMnMzcuOCJF!5e0!3m2!1sen!2sbd!4v1724915786193!5m2!1sen!2sbd"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}

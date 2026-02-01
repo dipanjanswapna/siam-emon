@@ -128,7 +128,7 @@ function VideoSection() {
     };
 
     return (
-        <section className="relative w-full aspect-video bg-black">
+        <section className="relative w-full aspect-video bg-black py-12 md:py-16">
             <div id="youtube-player" className="absolute top-0 left-0 w-full h-full"></div>
              <Button 
                 variant="secondary"
@@ -422,7 +422,7 @@ function NoticeSection() {
 
     if (isLoading) {
         return (
-            <section className="bg-gradient-to-r from-destructive to-pink-500 py-3 text-white w-full overflow-x-hidden">
+            <section className="bg-gradient-to-r from-destructive to-red-500 py-3 text-white w-full overflow-x-hidden">
                 <div className="relative flex items-center whitespace-nowrap">
                     <p className="text-lg font-headline">নোটিশ লোড হচ্ছে...</p>
                 </div>
@@ -431,7 +431,7 @@ function NoticeSection() {
     }
 
     return (
-        <section className="bg-gradient-to-r from-destructive to-pink-500 py-3 text-white w-full overflow-x-hidden">
+        <section className="bg-gradient-to-r from-destructive to-red-500 py-3 text-white w-full overflow-x-hidden">
             <div className="relative flex items-center whitespace-nowrap w-full overflow-x-hidden">
                 <p className="animate-scroll text-lg font-headline">
                     {noticeText}
@@ -563,7 +563,7 @@ function VoteCallToActionSection() {
     return (
         <section className="py-12 md:py-16 bg-background">
             <div className="container mx-auto px-4 text-center">
-                <h2 className="text-4xl md:text-5xl font-bold font-headline text-primary">
+                <h2 className="text-4xl md:text-5xl font-bold font-headline text-destructive">
                     ভোট দিন আমাকে!
                 </h2>
                 <p className="mt-2 font-body text-lg text-foreground">

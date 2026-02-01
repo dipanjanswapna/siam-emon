@@ -108,25 +108,25 @@ export default function AboutPage() {
                   </p>
                   <ul className="space-y-3">
                     <li className="flex items-start gap-3">
-                      <CheckCircle className="w-5 h-5 text-green-500 mt-1 flex-shrink-0" />
+                      <CheckCircle className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
                       <span>
                         <span className="font-bold text-foreground">একটি গবেষণামুখী সংস্কৃতি তৈরি:</span> আমি ঢাকা বিশ্ববিদ্যালয়ে গবেষণার সংস্কৃতিকে আরও বেগবান করতে চাই। শিক্ষার্থীরা যাতে নতুন জ্ঞান ও উদ্ভাবনের নেশায় গবেষণা করে, সেজন্য গবেষণাগারে আধুনিক সরঞ্জাম নিশ্চিত করা এবং আন্তর্জাতিক সেমিনারে অংশগ্রহণের সুযোগ তৈরি করব।
                       </span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <CheckCircle className="w-5 h-5 text-green-500 mt-1 flex-shrink-0" />
+                      <CheckCircle className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
                       <span>
                         <span className="font-bold text-foreground">প্রযুক্তি ও শিক্ষার মেলবন্ধন:</span> আমি শিক্ষাব্যস্থায় প্রযুক্তিগত আধুনিকায়ন আনতে আগ্রহী। অনলাইন রিসোর্স অ্যাক্সেস, ডিজিটাল লাইব্রেরি এবং প্রোগ্রামING ও ডেটা অ্যানালাইসিসের মতো কর্মশালা আয়োজনের মাধ্যমে শিক্ষার্থীদের প্রযুক্তিগত দক্ষতা বাড়াতে চাই।
                       </span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <CheckCircle className="w-5 h-5 text-green-500 mt-1 flex-shrink-0" />
+                      <CheckCircle className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
                       <span>
                         <span className="font-bold text-foreground">ছাত্র-শিক্ষক সম্পর্ক উন্নয়ন:</span> আমি নিয়মিত আলোচনার মাধ্যমে শিক্ষক ও শিক্ষার্থীদের মধ্যে একটি শক্তিশালী সেতুবন্ধন তৈরি করতে চাই, যাতে শিক্ষার্থীরা তাদের সমস্যাগুলো সহজে শিক্ষকদের কাছে তুলে ধরতে পারে।
                       </span>
                     </li>
                      <li className="flex items-start gap-3">
-                      <CheckCircle className="w-5 h-5 text-green-500 mt-1 flex-shrink-0" />
+                      <CheckCircle className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
                       <span>
                         <span className="font-bold text-foreground">একটি দায়িত্বশীল নেতৃত্ব:</span> আমি এমন একটি ছাত্র সংসদ গড়ে তুলতে চাই যা স্বচ্ছ, দায়বদ্ধ এবং শিক্ষার্থীদের প্রতি সর্বদা প্রতিশ্রুতিবদ্ধ থাকবে।
                       </span>
@@ -208,10 +208,10 @@ export default function AboutPage() {
             </div>
         </section>
 
-        <section id="full-panel" className="py-16 md:py-24 bg-primary/5 rounded-lg">
+        <section id="full-panel" className="py-16 md:py-24 bg-card rounded-lg">
             <div className="text-center max-w-4xl mx-auto">
                 <h1 className="font-headline text-5xl md:text-6xl font-bold mt-4 text-foreground">আমাদের সম্পূর্ণ দল</h1>
-                 <div className="w-24 h-1 bg-red-500 mx-auto mt-2 mb-8"></div>
+                 <div className="w-24 h-1 bg-destructive mx-auto mt-2 mb-8"></div>
             </div>
              <div className="max-w-5xl mx-auto">
                  <Card className="shadow-2xl overflow-hidden">
@@ -228,7 +228,7 @@ export default function AboutPage() {
                      </CardContent>
                  </Card>
                   <div className="text-center mt-6">
-                    <h3 className="font-headline text-2xl font-bold text-green-600">স্বতন্ত্র শিক্ষার্থী ঐক্য - সম্পূর্ণ প্রার্থী দল</h3>
+                    <h3 className="font-headline text-2xl font-bold text-primary">স্বতন্ত্র শিক্ষার্থী ঐক্য - সম্পূর্ণ প্রার্থী দল</h3>
                     <p className="font-body text-muted-foreground mt-2 max-w-3xl mx-auto">
                         বিভিন্ন বিভাগ ও অনুষদের প্রতিনিধিত্বকারী আমাদের এই দল শিক্ষার্থীদের সার্বিক কল্যাণে প্রতিশ্রুতিবদ্ধ।
                     </p>
