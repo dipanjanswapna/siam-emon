@@ -3,24 +3,34 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from 'next/link';
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 type PromotionalPopupData = {
     enabled: boolean;
     imageUrl: string;
     displayFrequency: 'every-load' | 'once-per-session' | 'once-per-day';
+    title: string;
+    description: string;
+    buttonText: string;
+    buttonLink: string;
+    showOnMobile: boolean;
+    showOnDesktop: boolean;
 };
 
 export function PromotionalPopup() {
     const [popupData, setPopupData] = useState<PromotionalPopupData | null>(null);
     const [isOpen, setIsOpen] = useState(false);
-    const [isReady, setIsReady] = useState(false);
+    const [isClient, setIsClient] = useState(false);
+    const isMobile = useIsMobile();
 
     useEffect(() => {
+        setIsClient(true);
         const fetchPopupData = async () => {
             try {
                 const popupDoc = await getDoc(doc(db, "siteSettings", "promotional-popup"));
@@ -36,8 +46,11 @@ export function PromotionalPopup() {
     }, []);
 
     useEffect(() => {
-        setIsReady(true);
-        if (!popupData?.enabled) return;
+        if (!isClient || !popupData?.enabled) return;
+
+        if ((isMobile && !popupData.showOnMobile) || (!isMobile && !popupData.showOnDesktop)) {
+            return;
+        }
 
         const handlePopupVisibility = () => {
             const now = new Date().getTime();
@@ -67,7 +80,6 @@ export function PromotionalPopup() {
                     }
                     break;
                 default:
-                    // Default to once per session if frequency is not set
                     const defaultSessionSeen = sessionStorage.getItem("hasSeenPromotionalPopup");
                      if (!defaultSessionSeen) {
                         setIsOpen(true);
@@ -77,41 +89,51 @@ export function PromotionalPopup() {
             }
         };
 
-        handlePopupVisibility();
+        const timer = setTimeout(handlePopupVisibility, 2000); 
 
-    }, [popupData]);
+        return () => clearTimeout(timer);
+
+    }, [popupData, isMobile, isClient]);
 
     const handleClose = () => {
         setIsOpen(false);
     };
     
-    if (!isReady || !isOpen || !popupData || !popupData.enabled || !popupData.imageUrl) {
+    if (!isClient || !isOpen || !popupData || !popupData.enabled || !popupData.imageUrl) {
         return null;
     }
 
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
-            <DialogContent className="p-0 bg-transparent border-none shadow-none w-[95vw] max-w-md sm:max-w-xl md:max-w-md">
-                 <DialogHeader className="sr-only">
-                    <DialogTitle>Promotional Offer</DialogTitle>
-                </DialogHeader>
-                <div className="relative w-full aspect-[4/5]">
-                    <Image
-                        src={popupData.imageUrl}
-                        alt="Promotional Banner"
-                        fill
-                        className="object-contain rounded-lg"
-                    />
+            <DialogContent className="p-0 bg-card border-border shadow-2xl w-[90vw] max-w-md rounded-xl overflow-hidden">
+                <div className="relative">
+                    <Button
+                        variant="destructive"
+                        size="icon"
+                        onClick={handleClose}
+                        className="absolute top-2 right-2 z-10 rounded-full h-8 w-8 bg-black/50 hover:bg-black/70 text-white"
+                    >
+                        <X className="h-5 w-5" />
+                        <span className="sr-only">বন্ধ করুন</span>
+                    </Button>
+                    <div className="relative w-full aspect-square">
+                        <Image
+                            src={popupData.imageUrl}
+                            alt={popupData.title || "Promotional Banner"}
+                            fill
+                            className="object-cover"
+                        />
+                    </div>
+                    <div className="p-6 text-center">
+                        {popupData.title && <h2 className="text-2xl font-bold font-headline text-foreground">{popupData.title}</h2>}
+                        {popupData.description && <p className="text-muted-foreground mt-2 font-body">{popupData.description}</p>}
+                        {popupData.buttonText && popupData.buttonLink && (
+                             <Button asChild className="mt-4 font-headline text-lg" size="lg">
+                                <Link href={popupData.buttonLink}>{popupData.buttonText}</Link>
+                            </Button>
+                        )}
+                    </div>
                 </div>
-                 <Button
-                    variant="destructive"
-                    size="icon"
-                    onClick={handleClose}
-                    className="absolute top-1 right-1 z-50 rounded-full h-8 w-8 hover:bg-destructive/80"
-                >
-                    <X className="h-5 w-5" />
-                    <span className="sr-only">বন্ধ করুন</span>
-                </Button>
             </DialogContent>
         </Dialog>
     );

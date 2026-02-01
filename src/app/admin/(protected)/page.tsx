@@ -1,3 +1,4 @@
+
 "use client";
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -6,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Shield, PlusCircle, Edit, Trash2, LogOut, MessageSquare, Users, Bell, Camera, Quote, Newspaper } from "lucide-react";
+import { Shield, PlusCircle, Edit, Trash2, LogOut, MessageSquare, Users, Bell, Camera, Quote, Newspaper, Megaphone, Settings } from "lucide-react";
 import { useState, useEffect } from "react";
 import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc, orderBy, query, serverTimestamp, setDoc } from "firebase/firestore";
 import { db, auth } from "@/lib/firebase";
@@ -19,6 +20,13 @@ import {
   DialogFooter,
   DialogClose,
 } from "@/components/ui/dialog";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 import Image from "next/image";
 import { useAuth } from "@/hooks/use-auth";
 import { useSignOut } from "react-firebase-hooks/auth";
@@ -53,6 +61,19 @@ type Notice = {
     text: string;
 };
 
+type PromotionalPopup = {
+    id: string;
+    enabled: boolean;
+    imageUrl: string;
+    displayFrequency: 'every-load' | 'once-per-session' | 'once-per-day';
+    title: string;
+    description: string;
+    buttonText: string;
+    buttonLink: string;
+    showOnMobile: boolean;
+    showOnDesktop: boolean;
+};
+
 type GalleryImage = {
     id: string;
     src: string;
@@ -85,6 +106,18 @@ function AdminPage() {
     const [feedbacks, setFeedbacks] = useState<Feedback[]>([]);
     const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
     const [notice, setNotice] = useState<Notice>({ id: "live-notice", text: "" });
+    const [promotionalPopup, setPromotionalPopup] = useState<PromotionalPopup>({ 
+        id: "promotional-popup", 
+        enabled: true, 
+        imageUrl: "", 
+        displayFrequency: "once-per-session",
+        title: "",
+        description: "",
+        buttonText: "",
+        buttonLink: "",
+        showOnMobile: true,
+        showOnDesktop: true,
+    });
     const [galleryImages, setGalleryImages] = useState<GalleryImage[]>([]);
     const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
     const [news, setNews] = useState<News[]>([]);
@@ -132,6 +165,25 @@ function AdminPage() {
             setNotice({ id: noticeDoc.id, ...noticeDoc.data() } as Notice);
         }
     };
+    
+    const fetchPromotionalPopup = async () => {
+        const popupDoc = await getDoc(doc(db, "siteSettings", "promotional-popup"));
+        if (popupDoc.exists()) {
+            const data = popupDoc.data();
+             setPromotionalPopup({
+                id: popupDoc.id,
+                enabled: data.enabled ?? true,
+                imageUrl: data.imageUrl ?? "",
+                displayFrequency: data.displayFrequency ?? "once-per-session",
+                title: data.title ?? "",
+                description: data.description ?? "",
+                buttonText: data.buttonText ?? "",
+                buttonLink: data.buttonLink ?? "",
+                showOnMobile: data.showOnMobile ?? true,
+                showOnDesktop: data.showOnDesktop ?? true,
+            });
+        }
+    };
 
     const fetchGalleryImages = async () => {
         const galleryCollection = collection(db, "gallery");
@@ -162,6 +214,7 @@ function AdminPage() {
                 fetchFeedbacks(), 
                 fetchTeamMembers(),
                 fetchNotice(),
+                fetchPromotionalPopup(),
                 fetchGalleryImages(),
                 fetchTestimonials(),
                 fetchNews(),
@@ -278,6 +331,34 @@ function AdminPage() {
             toast({
                 variant: 'destructive',
                 title: 'নোটিশ আপডেট করতে সমস্যা হয়েছে',
+                description: (error as Error).message,
+            });
+        }
+    };
+    
+    const handlePromotionalPopupFormSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        try {
+            const popupDoc = doc(db, "siteSettings", "promotional-popup");
+            await setDoc(popupDoc, { 
+                enabled: promotionalPopup.enabled, 
+                imageUrl: promotionalPopup.imageUrl,
+                displayFrequency: promotionalPopup.displayFrequency,
+                title: promotionalPopup.title,
+                description: promotionalPopup.description,
+                buttonText: promotionalPopup.buttonText,
+                buttonLink: promotionalPopup.buttonLink,
+                showOnMobile: promotionalPopup.showOnMobile,
+                showOnDesktop: promotionalPopup.showOnDesktop
+            }, { merge: true });
+            fetchPromotionalPopup();
+            toast({
+                title: 'প্রমোশনাল পপআপ সফলভাবে আপডেট হয়েছে',
+            });
+        } catch (error) {
+            toast({
+                variant: 'destructive',
+                title: 'পপআপ আপডেট করতে সমস্যা হয়েছে',
                 description: (error as Error).message,
             });
         }
@@ -502,6 +583,86 @@ function AdminPage() {
 
         <main className="mt-16">
             <Accordion type="multiple" className="w-full space-y-4">
+                 <AccordionItem value="site-settings">
+                    <Card>
+                        <AccordionTrigger className="p-6">
+                            <CardTitle className="flex items-center gap-2"><Megaphone />প্রমোশনাল পপআপ</CardTitle>
+                        </AccordionTrigger>
+                        <AccordionContent className="p-6 pt-0">
+                            <form onSubmit={handlePromotionalPopupFormSubmit} className="space-y-6">
+                                <div className="space-y-2">
+                                     <div className="flex items-center space-x-2">
+                                        <Switch
+                                            id="popup-enabled"
+                                            checked={promotionalPopup.enabled}
+                                            onCheckedChange={(checked) => setPromotionalPopup({ ...promotionalPopup, enabled: checked })}
+                                        />
+                                        <Label htmlFor="popup-enabled">প্রমোশনাল পপআপ সক্রিয় করুন</Label>
+                                    </div>
+                                </div>
+                                 <div className="space-y-2">
+                                    <Label htmlFor="popup-image-url">পপআপ ছবির URL</Label>
+                                    <Input
+                                        id="popup-image-url"
+                                        value={promotionalPopup.imageUrl}
+                                        onChange={(e) => setPromotionalPopup({ ...promotionalPopup, imageUrl: e.target.value })}
+                                        placeholder="https://example.com/image.jpg"
+                                    />
+                                </div>
+                                <div className="space-y-2">
+                                    <Label htmlFor="popup-title">শিরোনাম</Label>
+                                    <Input id="popup-title" value={promotionalPopup.title || ''} onChange={(e) => setPromotionalPopup({ ...promotionalPopup, title: e.target.value })} placeholder="পপআপের জন্য আকর্ষণীয় শিরোনাম" />
+                                </div>
+                                <div className="space-y-2">
+                                    <Label htmlFor="popup-description">বিবরণ</Label>
+                                    <Textarea id="popup-description" value={promotionalPopup.description || ''} onChange={(e) => setPromotionalPopup({ ...promotionalPopup, description: e.target.value })} placeholder="সংক্ষিপ্ত বিবরণ যোগ করুন" />
+                                </div>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div className="space-y-2">
+                                        <Label htmlFor="popup-button-text">বাটনের লেখা</Label>
+                                        <Input id="popup-button-text" value={promotionalPopup.buttonText || ''} onChange={(e) => setPromotionalPopup({ ...promotionalPopup, buttonText: e.target.value })} placeholder="যেমন: আরও জানুন" />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <Label htmlFor="popup-button-link">বাটনের লিঙ্ক</Label>
+                                        <Input id="popup-button-link" value={promotionalPopup.buttonLink || ''} onChange={(e) => setPromotionalPopup({ ...promotionalPopup, buttonLink: e.target.value })} placeholder="/manifesto" />
+                                    </div>
+                                </div>
+                                <div className="space-y-2">
+                                    <Label htmlFor="display-frequency">কতবার দেখানো হবে?</Label>
+                                    <Select
+                                        value={promotionalPopup.displayFrequency}
+                                        onValueChange={(value: 'every-load' | 'once-per-session' | 'once-per-day') => setPromotionalPopup({ ...promotionalPopup, displayFrequency: value })}
+                                    >
+                                        <SelectTrigger id="display-frequency">
+                                            <SelectValue placeholder="Select frequency" />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            <SelectItem value="every-load">প্রতিবার পেজ লোডে</SelectItem>
+                                            <SelectItem value="once-per-session">প্রতি সেশনে একবার</SelectItem>
+                                            <SelectItem value="once-per-day">প্রতিদিন একবার</SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                </div>
+                                <div className="space-y-2">
+                                    <Label>কোথায় দেখাবেন?</Label>
+                                    <div className="flex items-center gap-4">
+                                        <div className="flex items-center space-x-2">
+                                            <Switch id="show-on-desktop" checked={promotionalPopup.showOnDesktop} onCheckedChange={(checked) => setPromotionalPopup({ ...promotionalPopup, showOnDesktop: checked })} />
+                                            <Label htmlFor="show-on-desktop">ডেস্কটপ</Label>
+                                        </div>
+                                        <div className="flex items-center space-x-2">
+                                            <Switch id="show-on-mobile" checked={promotionalPopup.showOnMobile} onCheckedChange={(checked) => setPromotionalPopup({ ...promotionalPopup, showOnMobile: checked })} />
+                                            <Label htmlFor="show-on-mobile">মোবাইল</Label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <Button type="submit">
+                                    <Settings className="mr-2 h-4 w-4" /> সেটিংস সেভ করুন
+                                </Button>
+                            </form>
+                        </AccordionContent>
+                    </Card>
+                </AccordionItem>
                 <AccordionItem value="notice-bar">
                     <Card>
                         <AccordionTrigger className="p-6">
