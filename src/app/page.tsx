@@ -237,7 +237,7 @@ function AboutSection() {
           <div className="grid md:grid-cols-2">
             <div className="relative min-h-[300px] md:min-h-0">
               <Image
-                src="https://i.postimg.cc/L6Rk561p/manisha-portrait.jpg"
+                src="https://i.postimg.cc/9f0fGsnr/image.png"
                 alt="ডাঃ মনীষা চক্রবর্ত্তী"
                 fill
                 className="object-cover"
@@ -960,3 +960,6 @@ function SupportSection() {
         </section>
     );
 }
+
+
+    
