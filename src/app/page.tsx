@@ -130,14 +130,6 @@ function HeroSection() {
                     >
                         বরিশাল-৫ আসনে গণতান্ত্রিক যুক্তফ্রন্ট সমর্থিত বাসদ মনোনীত প্রার্থী
                     </motion.p>
-                    <motion.p 
-                        className="mt-6 text-base sm:text-lg max-w-3xl mx-auto font-body"
-                         initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: 0.6 }}
-                    >
-                        সংসদকে শ্রমজীবী মানুষের অধিকার আদায়ের প্রতিষ্ঠানে পরিণত করতে ডাঃ মনীষা চক্রবর্ত্তীকে মই মার্কায় আপনার সমর্থন দিন।
-                    </motion.p>
                     <motion.div 
                         className="mt-8 flex flex-wrap justify-center gap-4"
                          initial={{ opacity: 0, y: 20 }}
@@ -165,9 +157,9 @@ function NoticeSection() {
         const fetchNotice = async () => {
             setIsLoading(true);
             try {
-                const noticeSnapshot = await getDocs(collection(db, "notices"));
-                if (!noticeSnapshot.empty) {
-                    const noticeDoc = noticeSnapshot.docs[0];
+                const noticeDocRef = doc(db, "notices", "live-notice");
+                const noticeDoc = await getDoc(noticeDocRef);
+                if (noticeDoc.exists() && noticeDoc.data().text) {
                     setNoticeText(noticeDoc.data().text);
                 } else {
                     setNoticeText("বরিশালকে পাল্টাতে মই মার্কায় ভোট চাই!");
@@ -184,9 +176,9 @@ function NoticeSection() {
 
     if (isLoading) {
         return (
-             <section className="bg-accent/80 py-4">
+             <section className="bg-destructive py-4">
                 <div className="container mx-auto px-4">
-                     <SkeletonTheme baseColor="hsl(var(--accent))" highlightColor="#ff7f7f">
+                     <SkeletonTheme baseColor="hsl(var(--destructive))" highlightColor="#ff7f7f">
                         <Skeleton height={28}/>
                      </SkeletonTheme>
                 </div>
@@ -195,18 +187,25 @@ function NoticeSection() {
     }
     
     if (!noticeText) return null;
+    
+    const noticeElement = (
+        <span className="text-lg font-headline font-bold mx-8 flex items-center gap-3">
+            <Megaphone className="h-5 w-5 flex-shrink-0" /> {noticeText}
+        </span>
+    );
 
     return (
-        <section className="bg-accent/90 backdrop-blur-sm py-3 text-white w-full">
-            <div className="container mx-auto px-4 flex items-center justify-center gap-4">
-                <Megaphone className="h-6 w-6 flex-shrink-0" />
-                <p className="text-lg font-headline text-center font-bold">
-                    {noticeText}
-                </p>
+        <section className="bg-destructive py-3 text-white w-full overflow-x-hidden">
+            <div className="pause-on-hover flex whitespace-nowrap">
+                <div className="animate-scroll flex">
+                    {noticeElement}
+                    {noticeElement}
+                </div>
             </div>
         </section>
     );
 }
+
 
 function ElectionCountdown() {
     const [timeLeft, setTimeLeft] = useState<{
@@ -1032,6 +1031,3 @@ function SupportSection() {
         </section>
     );
 }
-
-
-    
