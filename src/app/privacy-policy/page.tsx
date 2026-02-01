@@ -19,13 +19,13 @@ export default function PrivacyPolicyPage() {
           <Card className="shadow-lg fade-in-up" style={{ animationDelay: '200ms' }}>
             <CardHeader>
               <CardTitle className="font-headline flex items-center gap-3 text-2xl"><FileText/>আমাদের গোপনীয়তা নীতি</CardTitle>
-               <CardDescription>শেষ আপডেট: সেপ্টেম্বর ১, ২০২৫</CardDescription>
+               <CardDescription>শেষ আপডেট: জানুয়ারী ৩০, ২০২৪</CardDescription>
             </CardHeader>
             <CardContent className="font-body text-muted-foreground space-y-6">
                 <section className="space-y-2">
                     <h2 className="font-headline text-xl font-bold text-foreground">ভূমিকা</h2>
                     <p>
-                        এই ওয়েবসাইটটি (seamferdousemon.vercel.app) সিয়াম ফেরদৌস ইমনের নির্বাচনী প্রচারণার জন্য তৈরি করা হয়েছে। আমরা আপনার গোপনীয়তাকে সম্মান করি এবং আপনার ব্যক্তিগত তথ্য সুরক্ষিত রাখতে প্রতিশ্রুতিবদ্ধ। এই নীতিটি ব্যাখ্যা করে যে আমরা কোন তথ্য সংগ্রহ করি এবং কীভাবে তা ব্যবহার করি।
+                        এই ওয়েবসাইটটি ডাঃ মনীষা চক্রবর্ত্তীর নির্বাচনী প্রচারণার জন্য তৈরি করা হয়েছে। আমরা আপনার গোপনীয়তাকে সম্মান করি এবং আপনার ব্যক্তিগত তথ্য সুরক্ষিত রাখতে প্রতিশ্রুতিবদ্ধ। এই নীতিটি ব্যাখ্যা করে যে আমরা কোন তথ্য সংগ্রহ করি এবং কীভাবে তা ব্যবহার করি।
                     </p>
                 </section>
                 <section className="space-y-2">
@@ -35,7 +35,7 @@ export default function PrivacyPolicyPage() {
                     </p>
                     <ul className="list-disc pl-6 space-y-1">
                         <li>
-                            <strong>ব্যক্তিগত তথ্য:</strong> যখন আপনি আমাদের 'মতামত দিন' বা 'স্বেচ্ছাসেবক' ফর্ম পূরণ করেন, তখন আমরা আপনার নাম, ইমেইল, ফোন নম্বর, বিভাগ, হল এবং শিক্ষাবর্ষের মতো তথ্য সংগ্রহ করতে পারি।
+                            <strong>ব্যক্তিগত তথ্য:</strong> যখন আপনি আমাদের 'মতামত দিন' বা 'স্বেচ্ছাসেবক' ফর্ম পূরণ করেন, তখন আমরা আপনার নাম, ইমেইল, এবং ফোন নম্বরের মতো তথ্য সংগ্রহ করতে পারি।
                         </li>
                         <li>
                             <strong>স্বয়ংক্রিয়ভাবে সংগৃহীত তথ্য:</strong> আপনি যখন আমাদের ওয়েবসাইট ভিজিট করেন, তখন আমরা আপনার আইপি অ্যাড্রেস, ব্রাউজারের ধরন, এবং ভিজিটের সময় போன்ற কিছু সাধারণ তথ্য সংগ্রহ করি। এই তথ্যগুলো গুগল অ্যানালিটিক্স-এর মাধ্যমে সংগ্রহ করা হয় এবং ওয়েবসাইটের পারফরম্যান্স উন্নত করতে ব্যবহৃত হয়।

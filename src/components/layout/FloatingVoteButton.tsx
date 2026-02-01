@@ -9,7 +9,7 @@ export function FloatingVoteButton() {
       <Button
         variant="ghost"
         className="h-20 w-20 p-0 rounded-full animate-pulse"
-        aria-label="সমর্থন জানান"
+        aria-label="নির্বাচনী তহবিলে সহযোগিতা করুন"
       >
         <Image
           src="https://i.postimg.cc/P5tTsbT9/moi-logo-white.png"

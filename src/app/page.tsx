@@ -6,7 +6,7 @@ import Link from "next/link";
 import React, { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { ArrowRight, BookOpenCheck, Users, Camera, Mail, ShieldCheck, MessageSquare, HelpCircle, Vote, Share2, Timer, Phone, Newspaper } from "lucide-react";
+import { ArrowRight, Users, Camera, Mail, ShieldCheck, MessageSquare, HelpCircle, Vote, Share2, Timer, Phone, Newspaper } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -383,6 +383,11 @@ function NewsSection() {
                         </Card>
                     ))}
                 </div>
+                 <div className="text-center mt-8">
+                    <Button asChild>
+                        <Link href="/news-updates">সকল সংবাদ দেখুন</Link>
+                    </Button>
+                </div>
             </div>
         </section>
     )
@@ -520,6 +525,7 @@ type Testimonial = {
 function TestimonialSection() {
     const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [emblaRef] = useEmblaCarousel({ loop: true, align: 'start' });
 
     useEffect(() => {
         const fetchTestimonials = async () => {
@@ -559,6 +565,32 @@ function TestimonialSection() {
                 setTestimonials(dbTestimonials.length > 0 ? dbTestimonials : fallbackTestimonials);
             } catch (error) {
                 console.error("Error fetching testimonials, using fallback.", error);
+                 setTestimonials([
+                    {
+                        id: "fallback-1",
+                        name: "কমরেড বজলুর রশিদ ফিরোজ",
+                        role: "সাধারণ সম্পাদক, বাসদ কেন্দ্রীয় কমিটি",
+                        image: "https://i.postimg.cc/t4G2wDk1/male-student-1.jpg",
+                        imageHint: "male leader",
+                        testimonial: "মহান মুক্তিযুদ্ধের চেতনায় একটি অসাম্প্রদায়িক বাংলাদেশ গড়তে মনীষার মতো নেত্রীর বিকল্প নেই।"
+                    },
+                    {
+                        id: "fallback-2",
+                        name: "ইমাম হোসেন খোকন",
+                        role: "সদস্য, বাসদ কেন্দ্রীয় কমিটি বর্ধিত ফোরাম",
+                        image: "https://i.postimg.cc/wxM1807v/male-student-2.jpg",
+                        imageHint: "political activist",
+                        testimonial: "ডাঃ মনীষা বরিশালের জনগণের কন্ঠস্বর। তার লড়াই-সংগ্রাম আমাদের সকলের জন্য অনুপ্রেরণা।"
+                    },
+                    {
+                        id: "fallback-3",
+                        name: "প্রশান্ত দাস হরি",
+                        role: "সাধারণ সম্পাদক, বাংলাদেশের কমিউনিস্ট পার্টি, ঝালকাঠি",
+                        image: "https://i.postimg.cc/sgg5G5wX/political-leader-3.jpg",
+                        imageHint: "senior man",
+                        testimonial: "নারী বিদ্বেষের বিরুদ্ধে এবং শ্রমজীবী মানুষের পক্ষে এমন সোচ্চার কণ্ঠ আমাদের সংসদে প্রয়োজন।"
+                    },
+                ]);
             } finally {
                 setIsLoading(false);
             }
@@ -575,38 +607,44 @@ function TestimonialSection() {
                        সহযোদ্ধাদের <span className="text-destructive">কিছু কথা</span>
                     </h2>
                 </div>
-                <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
-                   {isLoading ? (
-                       Array.from({ length: 3 }).map((_, i) => (
-                           <Card key={i} className="bg-card p-6 text-center">
-                               <Skeleton className="w-24 h-24 rounded-full mx-auto mb-4" />
-                               <Skeleton className="h-6 w-32 mx-auto mb-2" />
-                               <Skeleton className="h-4 w-40 mx-auto mb-4" />
-                               <div className="space-y-2 w-full">
-                                   <Skeleton className="h-4 w-full" />
-                                   <Skeleton className="h-4 w-5/6 mx-auto" />
+                <div className="mt-12 overflow-hidden" ref={emblaRef}>
+                    <div className="flex">
+                       {isLoading ? (
+                           Array.from({ length: 3 }).map((_, i) => (
+                               <div className="flex-[0_0_100%] md:flex-[0_0_33.33%] p-4" key={i}>
+                                   <Card className="bg-card p-6 text-center h-full">
+                                       <Skeleton className="w-24 h-24 rounded-full mx-auto mb-4" />
+                                       <Skeleton className="h-6 w-32 mx-auto mb-2" />
+                                       <Skeleton className="h-4 w-40 mx-auto mb-4" />
+                                       <div className="space-y-2 w-full">
+                                           <Skeleton className="h-4 w-full" />
+                                           <Skeleton className="h-4 w-5/6 mx-auto" />
+                                       </div>
+                                   </Card>
                                </div>
-                           </Card>
-                       ))
-                   ) : (
-                       testimonials.map((testimonial) => (
-                           <Card key={testimonial.id} className="bg-card p-6 text-center shadow-lg">
-                               <Image
-                                   src={testimonial.image}
-                                   alt={testimonial.name}
-                                   width={96}
-                                   height={96}
-                                   className="rounded-full mx-auto mb-4 border-4 border-primary/50 object-cover"
-                                   data-ai-hint={testimonial.imageHint}
-                               />
-                               <CardTitle className="font-headline text-2xl">{testimonial.name}</CardTitle>
-                               <CardDescription className="font-body text-primary">{testimonial.role}</CardDescription>
-                               <p className="font-body text-muted-foreground mt-4 text-sm">
-                                   "{testimonial.testimonial}"
-                               </p>
-                           </Card>
-                       ))
-                   )}
+                           ))
+                       ) : (
+                           testimonials.map((testimonial) => (
+                               <div className="flex-[0_0_100%] md:flex-[0_0_33.33%] p-4" key={testimonial.id}>
+                                   <Card className="bg-card p-6 text-center shadow-lg h-full flex flex-col">
+                                       <Image
+                                           src={testimonial.image}
+                                           alt={testimonial.name}
+                                           width={96}
+                                           height={96}
+                                           className="rounded-full mx-auto mb-4 border-4 border-primary/50 object-cover"
+                                           data-ai-hint={testimonial.imageHint}
+                                       />
+                                       <CardTitle className="font-headline text-2xl">{testimonial.name}</CardTitle>
+                                       <CardDescription className="font-body text-primary">{testimonial.role}</CardDescription>
+                                       <p className="font-body text-muted-foreground mt-4 text-sm flex-grow">
+                                           "{testimonial.testimonial}"
+                                       </p>
+                                   </Card>
+                               </div>
+                           ))
+                       )}
+                    </div>
                 </div>
             </div>
         </section>
@@ -617,7 +655,6 @@ const leadershipPoints = [
     { icon: ShieldCheck, text: "মুক্তিযুদ্ধ এবং গণঅভ্যুত্থানের চেতনায় একটি বৈষম্যহীন, গণতান্ত্রিক ও অসাম্প্রদায়িক দেশ গঠন।" },
     { icon: Users, text: "শ্রমজীবী মানুষের অধিকার আদায়ের জন্য সংসদকে একটি কার্যকর প্রতিষ্ঠানে পরিণত করা।" },
     { icon: MessageSquare, text: "নারী বিদ্বেষী ও সাম্প্রদায়িক সকল অপশক্তির বিরুদ্ধে সোচ্চার থাকা এবং প্রতিরোধ গড়ে তোলা।" },
-    { icon: BookOpenCheck, text: "সাম্রাজ্যবাদী আগ্রাসন রুখে দিয়ে দেশের সম্পদ ও সার্বভৌমত্ব রক্ষা করা।" },
 ];
 
 function LeadershipSection() {
@@ -629,7 +666,7 @@ function LeadershipSection() {
                        আমার <span className="text-destructive">লক্ষ্য ও উদ্দেশ্য</span>
                     </h1>
                 </div>
-                <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
                     {leadershipPoints.map((point, index) => (
                         <div key={index} className="flex items-start gap-4">
                             <div className="flex-shrink-0 bg-primary/10 text-primary p-3 rounded-full">
@@ -913,48 +950,30 @@ function PreVoteSection() {
             <div className="container mx-auto px-4">
                 <div className="max-w-4xl mx-auto text-center">
                     <Vote className="mx-auto h-16 w-16 text-primary animate-pulse" />
-                    <h2 className="font-headline text-4xl md:text-5xl font-bold mt-4 text-foreground"><span className="text-destructive">আপনার সমর্থন জানান</span></h2>
+                    <h2 className="font-headline text-4xl md:text-5xl font-bold mt-4 text-foreground"><span className="text-destructive">নির্বাচনী তহবিলে সহযোগিতা করুন</span></h2>
                     <p className="font-body text-lg mt-4 text-muted-foreground">
-                        মূল নির্বাচনের আগে আপনার সমর্থন জানিয়ে এই পরিবর্তনের যাত্রায় আমাদের সঙ্গী হোন।
+                        গণমানুষের দেওয়া টাকায় নির্বাচন করতে চাওয়া ডাঃ মনীষা চক্রবর্ত্তীর নির্বাচনী তহবিলে আপনার সহযোগিতা পাঠান।
                     </p>
                     
-                    <Card className="mt-8 shadow-2xl bg-background max-w-md mx-auto">
-                        <CardContent className="p-6">
-                            <p className="font-body text-muted-foreground">মোট প্রাপ্ত সমর্থন:</p>
-                             <div className="text-6xl font-bold font-headline text-primary my-4 min-h-[72px] flex items-center justify-center">
-                                {isLoading ? (
-                                    <div className="flex space-x-2">
-                                        <div className="h-4 w-4 bg-primary rounded-full animate-bounce [animation-delay:-0.3s]"></div>
-                                        <div className="h-4 w-4 bg-primary rounded-full animate-bounce [animation-delay:-0.15s]"></div>
-                                        <div className="h-4 w-4 bg-primary rounded-full animate-bounce"></div>
-                                    </div>
-                                ) : (
-                                    voteCount.toLocaleString('bn-BD')
-                                )}
-                            </div>
-                            <Button 
-                                size="lg" 
-                                className="w-full font-headline text-xl h-14" 
-                                onClick={handleVote}
-                                disabled={hasVoted || isLoading}
-                            >
-                                {hasVoted ? 'সমর্থন দিয়েছেন' : 'সমর্থন দিন'}
-                            </Button>
-                            {hasVoted && (
-                                <p className="text-primary font-semibold mt-3">আপনার সমর্থন সফলভাবে গৃহীত হয়েছে!</p>
-                            )}
+                    <Card className="mt-8 shadow-2xl bg-background max-w-lg mx-auto">
+                        <CardHeader>
+                            <CardTitle>সহযোগিতা পাঠানোর মাধ্যম</CardTitle>
+                        </CardHeader>
+                        <CardContent className="space-y-4 text-left">
+                           <div className="flex items-center justify-between p-3 bg-card rounded-lg">
+                               <p className="font-bold">বিকাশ:</p>
+                               <div className="flex flex-col items-end">
+                                   <p>01723709155</p>
+                                   <p>01586225082</p>
+                               </div>
+                           </div>
+                           <div className="flex items-center justify-between p-3 bg-card rounded-lg">
+                               <p className="font-bold">নগদ:</p>
+                               <p>01684509990</p>
+                           </div>
                         </CardContent>
                     </Card>
 
-                    <div className="mt-8">
-                        <h3 className="font-headline text-xl font-semibold text-foreground">বন্ধুদের সাথে শেয়ার করুন</h3>
-                        <div className="flex justify-center gap-4 mt-4">
-                            <Button variant="outline" size="lg" onClick={handleShare}>
-                                <Share2 className="h-5 w-5" />
-                                এখনই শেয়ার করুন
-                            </Button>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>

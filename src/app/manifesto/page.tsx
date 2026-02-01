@@ -1,121 +1,28 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { CheckCircle, BookOpen, Library, Users, Award, Calendar, Target, Download, DollarSign, Laptop, Archive, FlaskConical, Mail, Database, Presentation, BadgePercent, GraduationCap, Microscope, BrainCircuit, HandCoins, Vote, FileText } from "lucide-react";
+import { CheckCircle, Download, Vote, FileText, ShieldCheck, Users, MessageSquare } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
 const keyPledges = [
   {
-    icon: BadgePercent,
-    title: "বাজেট বাড়াও, গবেষণা বাঁচাও",
-    description: "নির্বাচিত হলে গবেষণা বাজেট ২% থেকে ২০% বা তার বেশিতে উন্নীত করাই হবে আমার প্রধান লক্ষ্য। এক বছরে সম্ভব না হলেও, বর্তমান বাজেটকে দ্বিগুণ বা তিনগুণ করতে সর্বোচ্চ চাপ প্রয়োগ করে আদায় করব।"
+    icon: ShieldCheck,
+    title: "শোষণমুক্ত সমাজ",
+    description: "মুক্তিযুদ্ধের চেতনায় একটি শোষণ, বৈষম্যহীন, গণতান্ত্রিক ও অসাম্প্রদায়িক সমাজ ও দেশ গঠন করা।"
   },
   {
-    icon: Laptop,
-    title: "একাডেমিক রাইটিং ও সফটওয়্যার ট্রেনিং",
-    description: "R, SPSS, Python, Excel, GIS, MS Word-এর মতো গুরুত্বপূর্ণ সফটওয়্যারের উপর নিয়মিত বিনামূল্যে কর্মশালা আয়োজন ও হাতে-কলমে প্রশিক্ষণের ব্যবস্থা করব।"
+    icon: Users,
+    title: "শ্রমজীবী মানুষের অধিকার",
+    description: "সংসদকে শ্রমজীবী মানুষের অধিকার আদায়ের কার্যকর প্রতিষ্ঠানে পরিণত করা।"
   },
   {
-    icon: HandCoins,
-    title: "রিসোর্স হেল্পডেস্ক প্রতিষ্ঠা",
-    description: "বিভাগভিত্তিক গবেষণা তহবিল ও আন্তর্জাতিক স্কলারশিপের সহায়তার জন্য একটি বিশেষ ‘রিসোর্স হেল্পডেস্ক’ প্রতিষ্ঠা করব।"
+    icon: MessageSquare,
+    title: "নারী অধিকার ও সাম্প্রদায়িক সম্প্রীতি",
+    description: "নারী বিদ্বেষী ও সাম্প্রদায়িক সকল অপশক্তির বিরুদ্ধে সোচ্চার থাকা এবং প্রতিরোধ গড়ে তোলা।"
   },
-  {
-    icon: Mail,
-    title: "জার্নাল অ্যাক্সেস ও ই-মেইল সক্ষমতা",
-    description: "ইন্সটিটিউশনাল মেইল ஐডর সক্ষমতা বৃদ্ধি করব এবং বিশ্বমানের জার্নালগুলোতে বিনামূল্যে অ্যাক্সেস নিশ্চিত করব।"
-  },
-  {
-    icon: BookOpen,
-    title: "ডাকসুর নিজস্ব স্টুডেন্ট জার্নাল",
-    description: "ডাকসুর উদ্যোগে একটি মানসম্মত 'স্টুডেন্ট জার্নাল' প্রকাশ করব, যেখানে শিক্ষার্থীরা তাদের গবেষণা সহজে প্রকাশ করতে পারবে।"
-  },
-  {
-    icon: Archive,
-    title: "ডিজিটাল আর্কাইভ প্রতিষ্ঠা",
-    description: "প্রতিটি থিসিস ও গবেষণাপত্রের জন্য ডিজিটাল আর্কাইভ তৈরি করব, যেন মূল্যবান কাজগুলো হারিয়ে না যায়।"
-  },
-  {
-    icon: Presentation,
-    title: "কনফারেন্স ও সেমিনার আয়োজন",
-    description: "শিক্ষার্থীদের জন্য গবেষণাভিত্তিক স্টুডেন্ট কনফারেন্স, ইয়ুথ কনফারেন্স ও সেমিনার আয়োজন করে তৃতীয়/চতুর্থ বর্ষ থেকেই গবেষণায় যুক্ত করব।"
-  },
-  {
-    icon: GraduationCap,
-    title: "সার্টিফিকেট ভেরিফিকেশন ফি কমানো",
-    description: "স্কলারশিপে আবেদনের জন্য সার্টিফিকেট তোলা ও ভেরিফিকেশনের আকাশচুম্বী ফি সহনীয় পর্যায়ে নিয়ে আসব।"
-  },
-  {
-    icon: BrainCircuit,
-    title: "কোর্সে গবেষণা টুলস অন্তর্ভুক্তকরণ",
-    description: "একাডেমিক ও প্র্যাকটিক্যাল কোর্সে সময়োপযোগী ও ঐচ্ছিক গবেষণা টুলস প্রশিক্ষণ অন্তর্ভুক্ত করার উদ্যোগ নেব।"
-  },
-  {
-    icon: Microscope,
-    title: "ছাড়পোকা দমনে সায়েন্টিফিক সমাধান",
-    description: "আবাসিক হলগুলোতে ছাড়পোকার স্থায়ী সমাধানের জন্য গবেষণা টিম গঠন করে একটি সায়েন্টিফিক ও গবেষণালব্ধ সমাধান করব।"
-  },
-  {
-    icon: FlaskConical,
-    title: "খাবার ও পানির মান গবেষণা",
-    description: "বিশ্ববিদ্যালয়ের খাবার পানি ও ক্যান্টিনের খাবারের উপর নিয়মিত গবেষণা ও পরীক্ষা চালিয়ে ডাকসুর ওয়েবসাইটে তথ্য আপডেট করব।"
-  },
-  {
-    icon: Database,
-    title: "One Stop Lab Solution প্রতিষ্ঠা",
-    description: "অনুষদভিত্তিক 'One Stop Lab Solution' প্রতিষ্ঠা করব, যেখানে গবেষণার জন্য প্রয়োজনীয় সকল মেশিনারিজ ও কেমিক্যালস থাকবে।"
-  }
 ];
 
-const actionPlanImages = [
-    { src: "https://i.postimg.cc/59qqmzhY/Whats-App-Image-2025-09-05-at-02-12-22-9537f431.jpg", alt: "কর্মপরিকল্পনা ১", hint: "action plan" },
-    { src: "https://i.postimg.cc/Gm9Fr5HG/Whats-App-Image-2025-09-05-at-02-12-19-73b305df.jpg", alt: "কর্মপরিকল্পনা ২", hint: "action plan" },
-    { src: "https://i.postimg.cc/kgZx5vbZ/Whats-App-Image-2025-09-05-at-02-12-19-a4b2ad89.jpg", alt: "কর্মপরিকল্পনা ৩", hint: "action plan" },
-    { src: "https://i.postimg.cc/k5bWRRN5/Whats-App-Image-2025-09-05-at-02-12-20-6fcd5737.jpg", alt: "কর্মপরিকল্পনা ৪", hint: "action plan" },
-    { src: "https://i.postimg.cc/yxVRGfMJ/Whats-App-Image-2025-09-05-at-02-12-21-3e47bf26.jpg", alt: "কর্মপরিকল্পনা ৫", hint: "action plan" },
-    { src: "https://i.postimg.cc/wMVXTKXc/Whats-App-Image-2025-09-05-at-02-12-23-ac331255.jpg", alt: "কর্মপরিকল্পনা ৬", hint: "action plan" },
-    { src: "https://i.postimg.cc/vHY72ByP/Whats-App-Image-2025-09-05-at-02-12-25-78f78f2b.jpg", alt: "কর্মপরিকল্পনা ৭", hint: "action plan" },
-    { src: "https://i.postimg.cc/yxvRCmKL/Whats-App-Image-2025-09-05-at-02-12-22-33ef4f9c.jpg", alt: "কর্মপরিকল্পনা ৮", hint: "action plan" },
-    { src: "https://i.postimg.cc/3rBmGTG2/Whats-App-Image-2025-09-05-at-02-12-22-b88166e9.jpg", alt: "কর্মপরিকল্পনা ৯", hint: "action plan" },
-    { src: "https://i.postimg.cc/Z59dXvML/Whats-App-Image-2025-09-05-at-02-12-17-efb3723a.jpg", alt: "কর্মপরিকল্পনা ১০", hint: "action plan" },
-    { src: "https://i.postimg.cc/85gMRkwm/Whats-App-Image-2025-09-05-at-02-12-20-851d1226.jpg", alt: "কর্মপরিকল্পনা ১১", hint: "action plan" },
-    { src: "https://i.postimg.cc/kXg8FpNz/Whats-App-Image-2025-09-05-at-02-12-16-7b3644d3.jpg", alt: "কর্মপরিকল্পনা ১২", hint: "action plan" },
-    { src: "https://i.postimg.cc/J4YXT5Pn/Whats-App-Image-2025-09-05-at-02-12-18-04f147d5.jpg", alt: "কর্মপরিকল্পনা ১৩", hint: "action plan" },
-    { src: "https://i.postimg.cc/wv5J0KG8/Whats-App-Image-2025-09-05-at-02-12-21-2cb96834.jpg", alt: "কর্মপরিকল্পনা ১৪", hint: "action plan" },
-    { src: "https://i.postimg.cc/SRqLhQMx/Whats-App-Image-2025-09-05-at-02-12-24-2aafe777.jpg", alt: "কর্মপরিকল্পনা ১৫", hint: "action plan" },
-    { src: "https://i.postimg.cc/MK97CSKz/Whats-App-Image-2025-09-05-at-02-12-18-fcea5278.jpg", alt: "কর্মপরিকল্পনা ১৬", hint: "action plan" },
-];
-
-function ActionPlanSection() {
-    return (
-        <section id="action-plan" className="py-16 md:py-24 bg-card">
-            <div className="container mx-auto px-4">
-                <div className="text-center max-w-4xl mx-auto">
-                    <FileText className="mx-auto h-12 w-12 text-primary" />
-                    <h2 className="font-headline text-4xl font-bold text-foreground mt-4">আমাদের কর্মপরিকল্পনা</h2>
-                    <p className="font-body text-lg mt-2 text-muted-foreground">
-                        আমাদের লক্ষ্য এবং প্রতিশ্রুতিগুলো বাস্তবায়নের জন্য একটি বিস্তারিত কর্মপরিকল্পনা।
-                    </p>
-                </div>
-                <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {actionPlanImages.map((image, index) => (
-                        <div key={index}>
-                            <Image
-                                src={image.src}
-                                alt={image.alt}
-                                width={900}
-                                height={1600}
-                                className="w-full h-auto rounded-lg"
-                                data-ai-hint={image.hint}
-                            />
-                        </div>
-                    ))}
-                </div>
-            </div>
-        </section>
-    );
-}
 
 export default function ManifestoPage() {
   return (
@@ -123,12 +30,12 @@ export default function ManifestoPage() {
       <div className="container mx-auto px-4 py-16 md:py-24">
         
         <header className="text-center max-w-4xl mx-auto">
-          <h1 className="font-headline text-5xl md:text-6xl font-bold text-foreground">আমার অঙ্গীকার: একটি গবেষণা-উদ্যমী ডাকসু</h1>
+          <h1 className="font-headline text-5xl md:text-6xl font-bold text-foreground">আমাদের অঙ্গীকার</h1>
           <p className="font-body text-lg mt-4 text-muted-foreground">
-             সিয়াম ফেরদৌস ইমন, গবেষণা ও প্রকাশনা সম্পাদক পদপ্রার্থী হিসেবে আমি বিশ্বাস করি, একটি উন্নত ও আধুনিক ঢাকা বিশ্ববিদ্যালয় গড়ার মূল ভিত্তি হলো গবেষণা ও প্রকাশনার অবাধ সুযোগ। আমি শুধু স্বপ্ন দেখাই না, স্বপ্ন বাস্তবায়নের জন্য সুনির্দিষ্ট পরিকল্পনা নিয়ে আপনাদের সামনে حاضر হয়েছি। আপনাদের ভোটে নির্বাচিত হলে, আমি এই অঙ্গীকারগুলো বাস্তবায়নে দৃঢ়প্রতিজ্ঞ থাকব।
+             ডাঃ মনীষা চক্রবর্ত্তী এবং বাংলাদেশের সমাজতান্ত্রিক দল (বাসদ) জনগণের অধিকার প্রতিষ্ঠার আন্দোলনের অংশ হিসেবে আসন্ন নির্বাচনকে দেখছে। আমাদের লক্ষ্য একটি শোষণমুক্ত ও বৈষম্যহীন বাংলাদেশ গড়া।
           </p>
            <Button asChild variant="accent" size="lg" className="mt-8 font-headline text-lg">
-                <Link href="https://drive.google.com/file/d/1CFsCGTggXtmQCZM48fPg_HzLk2Mi68Y7/view?usp=drive_link" target="_blank" rel="noopener noreferrer">
+                <Link href="#" target="_blank" rel="noopener noreferrer">
                     <Download className="mr-2 h-5 w-5" />
                     সম্পূর্ণ ইশতেহার ডাউনলোড করুন
                 </Link>
@@ -136,29 +43,11 @@ export default function ManifestoPage() {
         </header>
 
         <main className="mt-16 space-y-16">
-          <section id="manifesto-pdf" className="mb-16">
-            <div className="text-center max-w-4xl mx-auto">
-                <h2 className="font-headline text-4xl font-bold text-foreground">সম্পূর্ণ ইশতেহার</h2>
-                <p className="font-body text-lg mt-2 text-muted-foreground">
-                    আমার বিস্তারিত পরিকল্পনা এবং অঙ্গীকারগুলো জানতে সম্পূর্ণ ইশতেহারটি দেখুন।
-                </p>
-            </div>
-            <div className="mt-8 relative w-full h-[80vh] max-w-4xl mx-auto shadow-lg">
-                <iframe
-                    src="https://drive.google.com/file/d/1CFsCGTggXtmQCZM48fPg_HzLk2Mi68Y7/preview"
-                    className="w-full h-full border-2 border-border rounded-lg"
-                    allow="autoplay"
-                ></iframe>
-            </div>
-          </section>
-
-          <ActionPlanSection />
-
+          
           <section id="pledges">
             <Card className="shadow-lg bg-card">
               <CardHeader className="text-center">
-                <CardTitle className="font-headline text-4xl">আমার প্রধান অঙ্গীকারসমূহ</CardTitle>
-                <CardDescription className="font-body">আমার প্রতিটি প্রতিশ্রুতি শিক্ষার্থীদের প্রত্যক্ষ কল্যাণে এবং একটি গবেষণা-বান্ধব পরিবেশ তৈরির লক্ষ্যে নিবেদিত।</CardDescription>
+                <CardTitle className="font-headline text-4xl">মূল প্রতিশ্রুতিসমূহ</CardTitle>
               </CardHeader>
               <CardContent className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {keyPledges.map((pledge) => (
@@ -173,24 +62,34 @@ export default function ManifestoPage() {
               </CardContent>
             </Card>
           </section>
+
+           <section id="maatir-bank" className="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <Image src="https://i.postimg.cc/Pq2Y5YVp/news-3.jpg" alt="মাটির ব্যাংক" width={600} height={400} className="rounded-lg shadow-lg" data-ai-hint="clay piggy bank" />
+                </div>
+                <div>
+                     <h2 className="font-headline text-4xl font-bold text-foreground">ভোট দিন, ভোটের খরচ জোগান</h2>
+                     <p className="font-body text-lg mt-4 text-muted-foreground">
+                        সাধারণ মানুষের মধ্যে একটি ধারণা রয়েছে নির্বাচন মানেই টাকার খেলা। বাসদ এই রাজনীতির সম্পূর্ণ বিপরীত অবস্থানে রয়েছে। জনগণের স্বার্থে যদি নির্বাচন হয়, তবে সেই নির্বাচনের খরচও জনগণই বহন করবে। তাই আমাদের নির্বাচনী শ্লোগান "ভোট দিন, ভোটের খরচ যোগান, জনগণের পক্ষের সৎ, যোগ্য ও নীতিবান প্রার্থীকে নির্বাচিত করুন।”
+                     </p>
+                     <p className="font-body text-lg mt-2 text-muted-foreground">
+                        ইতিমধ্যে বরিশালের বিভিন্ন রিকশা গ্যারেজ, হোটেল ও বাসাবাড়িতে নির্বাচনী অর্থ সংগ্রহের জন্য শতাধিক মাটির ব্যাংক সরবরাহ করা হয়েছে। গণমানুষের অর্থায়নে নির্বাচন করছে বাসদ।
+                     </p>
+                </div>
+           </section>
           
           <section id="conclusion" className="text-center max-w-4xl mx-auto border-t pt-12">
             <Vote className="mx-auto h-16 w-16 text-primary" />
             <h2 className="font-headline text-3xl font-bold text-foreground mt-6">
-              ৯ তারিখ সারাদিন, গবেষণায় ৯ নং ব্যালটে ভোট দিন
+              আগামী ১২ই ফেব্রুয়ারী, মই মার্কায় ভোট দিন
             </h2>
-            <div className="mt-4 space-y-2 font-body text-lg text-muted-foreground">
-              <p>৯ তারিখ ডাকসু</p>
-              <p>৯ নং ব্যালটে সিয়াম</p>
-              <p>৯ নং ব্যালটে গবেষণা ও প্রকাশনা</p>
-            </div>
             <div className="mt-8 bg-card border-2 border-dashed border-primary rounded-lg p-6 max-w-md mx-auto">
-                <h3 className="font-headline text-3xl font-extrabold text-primary">সিয়াম ফেরদৌস ইমন</h3>
-                <p className="font-body text-foreground text-xl mt-1">ব্যালট নং <span className="font-extrabold text-2xl text-destructive">০৯</span></p>
-                <p className="font-body text-muted-foreground text-lg">গবেষণা ও প্রকাশনা সম্পাদক পদপ্রার্থী</p>
+                <h3 className="font-headline text-3xl font-extrabold text-primary">ডাঃ মনীষা চক্রবর্ত্তী</h3>
+                <p className="font-body text-foreground text-xl mt-1">ব্যালট নং <span className="font-extrabold text-2xl text-destructive">XX</span></p>
+                <p className="font-body text-muted-foreground text-lg">সংসদ সদস্য পদপ্রার্থী, বরিশাল-৫</p>
             </div>
             <p className="mt-8 font-body text-lg text-muted-foreground">
-                আপনার মূল্যবান ভোটটি দিয়ে আমার এই যাত্রায় সঙ্গী হোন। আসুন, আমরা সবাই মিলে একটি জ্ঞানভিত্তিক, প্রগতিশীল এবং উন্নত ঢাকা বিশ্ববিদ্যালয় গড়ে তুলি।
+                আপনার মূল্যবান ভোটটি দিয়ে আমাদের এই যাত্রায় সঙ্গী হোন। আসুন, আমরা সবাই মিলে একটি শোষণমুক্ত, বৈষম্যহীন, গণতান্ত্রিক ও অসাম্প্রদায়িক বাংলাদেশ গড়ে তুলি।
             </p>
           </section>
 
@@ -203,7 +102,7 @@ export default function ManifestoPage() {
                 </p>
                 <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
                     <Button asChild size="lg" className="bg-white text-primary hover:bg-gray-200 font-headline text-lg">
-                        <Link href="/#pre-vote">আমাদের সমর্থন করুন</Link>
+                        <Link href="/#pre-vote">তহবিলে সহযোগিতা করুন</Link>
                     </Button>
                     <Button asChild size="lg" variant="outline" className="bg-transparent border-white text-white hover:bg-white/10 font-headline text-lg">
                         <Link href="/#feedback-form">প্রশ্ন ও মতামত দিন</Link>

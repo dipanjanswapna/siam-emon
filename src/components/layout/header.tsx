@@ -1,10 +1,10 @@
+
 "use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu } from "lucide-react";
 import { useState, useEffect } from "react";
-
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -57,9 +57,12 @@ export function Header() {
             const settingsDoc = await getDoc(doc(db, "siteSettings", "branding"));
             if (settingsDoc.exists() && settingsDoc.data().logoUrl) {
                 setLogoUrl(settingsDoc.data().logoUrl);
+            } else {
+                 setLogoUrl("https://i.postimg.cc/P5tTsbT9/moi-logo-white.png");
             }
         } catch (error) {
-            console.error("Failed to fetch logo", error);
+            console.error("Failed to fetch logo, using fallback.", error);
+            setLogoUrl("https://i.postimg.cc/P5tTsbT9/moi-logo-white.png");
         } finally {
             setIsLoadingLogo(false);
         }
@@ -72,13 +75,13 @@ export function Header() {
       <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
         <div className="flex items-center">
            <Link href="/" className="flex items-center gap-2">
-                    {isLoadingLogo ? (
-                        <Skeleton className="h-8 w-8 rounded-full" />
-                    ) : logoUrl ? (
-                        <Image src={logoUrl} alt="Campaign Logo" width={32} height={32} className="h-8 w-8" />
-                    ) : (
-                        <LadderIcon className="h-8 w-8" />
-                    )}
+              {isLoadingLogo ? (
+                  <Skeleton className="h-8 w-8 rounded-full" />
+              ) : logoUrl ? (
+                  <Image src={logoUrl} alt="Campaign Logo" width={32} height={32} className="h-8 w-8" />
+              ) : (
+                  <LadderIcon className="h-8 w-8" />
+              )}
               <span className="font-bold font-headline text-xl sm:inline-block">
                 ডাঃ মনীষা চক্রবর্ত্তী
               </span>

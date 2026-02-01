@@ -7,6 +7,8 @@ import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
 import { Toaster } from '@/components/ui/toaster';
 import { FloatingFeedbackButton } from '@/components/layout/FloatingFeedbackButton';
+import { FloatingVoteButton } from '@/components/layout/FloatingVoteButton';
+import { PromotionalPopup } from '@/components/layout/PromotionalPopup';
 import Script from 'next/script';
 
 const hindSiliguri = Hind_Siliguri({
@@ -29,11 +31,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'ডাঃ মনীষা চক্রবর্ত্তী - বরিশাল-৫ | ১৩শ জাতীয় সংসদ নির্বাচন',
     description: 'সংসদকে শ্রমজীবী মানুষের অধিকার আদায়ের প্রতিষ্ঠানে পরিণত করতে ডাঃ মনীষা চক্রবর্ত্তীকে মই মার্কায় আপনার সমর্থন দিন।',
-    url: 'https://seamferdousemon.vercel.app/', // To be replaced with actual domain
+    url: 'https://drmonishacr.web.app/', // To be replaced
     siteName: 'ডাঃ মনীষা চক্রবর্ত্তী',
     images: [
       {
-        url: 'https://i.postimg.cc/qR3tQ508/manisha-chakrabarty-og.jpg', // Replace with a representative image
+        url: 'https://i.postimg.cc/qR3tQ508/manisha-chakrabarty-og.jpg', // To be replaced
         width: 1200,
         height: 630,
         alt: 'ডাঃ মনীষা চক্রবর্ত্তী',
@@ -46,7 +48,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'ডাঃ মনীষা চক্রবর্ত্তী - বরিশাল-৫ | ১৩শ জাতীয় সংসদ নির্বাচন',
     description: 'সংসদকে শ্রমজীবী মানুষের অধিকার আদায়ের প্রতিষ্ঠানে পরিণত করতে ডাঃ মনীষা চক্রবর্ত্তীকে মই মার্কায় আপনার সমর্থন দিন।',
-    images: ['https://i.postimg.cc/qR3tQ508/manisha-chakrabarty-og.jpg'], // Replace with a representative image
+    images: ['https://i.postimg.cc/qR3tQ508/manisha-chakrabarty-og.jpg'], // To be replaced
   },
   robots: {
     index: true,
@@ -61,9 +63,10 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: '/favicon.ico', // To be replaced
-    shortcut: '/favicon.ico', // To be replaced
-    apple: '/favicon.ico', // To be replaced
+    shortcut: '/favicon.ico',
+    apple: '/favicon.ico',
   },
+  manifest: '/site.webmanifest', // To be replaced
 };
 
 export default function RootLayout({
@@ -78,9 +81,11 @@ export default function RootLayout({
       </head>
       <body className={cn("antialiased min-h-screen flex flex-col")}>
         <Header />
+        <PromotionalPopup />
         <main className="flex-grow">{children}</main>
         <Footer />
         <Toaster />
+        <FloatingVoteButton />
         <FloatingFeedbackButton />
       </body>
     </html>

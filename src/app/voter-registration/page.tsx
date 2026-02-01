@@ -6,44 +6,28 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Vote } from "lucide-react";
 
-export default function VoterSearchPage() {
+export default function VoterRegistrationPage() {
   return (
     <div className="bg-background">
       <div className="container mx-auto px-4 py-16 md:py-24">
         <Card className="shadow-lg max-w-5xl mx-auto">
              <CardHeader className="text-center">
-                <CardTitle className="font-headline text-4xl md:text-5xl">ভোটার অনুসন্ধান</CardTitle>
+                <CardTitle className="font-headline text-4xl md:text-5xl">ভোটার রেজিস্ট্রেশন</CardTitle>
                  <CardDescription className="font-body text-lg mt-2 text-muted-foreground">
-                   সৌজন্যে: ঢাকা বিশ্ববিদ্যালয় আইসিটি সেল
+                   আপনার ভোট প্রদানের জন্য প্রয়োজনীয় তথ্য ও লিঙ্ক।
                 </CardDescription>
             </CardHeader>
-            <CardContent>
-                <div className="border rounded-lg overflow-hidden">
-                    <iframe
-                        src="https://ducsu.du.ac.bd/voter.php"
-                        className="w-full h-[80vh]"
-                        title="DUCSU Voter Search"
-                    ></iframe>
-                </div>
-            </CardContent>
-        </Card>
-
-        <Card className="shadow-lg max-w-5xl mx-auto mt-12 bg-primary/5">
-            <CardHeader>
-                <CardTitle className="text-center font-headline text-3xl text-foreground">ভোট দেওয়ার নিয়ম জানেন তো?</CardTitle>
-                <CardDescription className="text-center font-body text-muted-foreground mt-2">
-                    আপনার মূল্যবান ভোট সঠিকভাবে প্রদান করতে আমাদের সহজ নির্দেশিকাটি দেখুন।
-                </CardDescription>
-            </CardHeader>
-            <CardContent className="text-center">
-                <Button asChild size="lg" className="font-headline">
-                    <Link href="/voting-guide">
+            <CardContent className="text-center space-y-6">
+                <p className="text-muted-foreground">জাতীয় পরিচয়পত্র এবং ভোটার তালিকা সংক্রান্ত তথ্যের জন্য বাংলাদেশ নির্বাচন কমিশনের ওয়েবসাইটে ভিজিট করুন।</p>
+                <Button asChild size="lg">
+                    <Link href="https://services.nidw.gov.bd/nid-portal/" target="_blank" rel="noopener noreferrer">
                         <Vote className="mr-2 h-5 w-5" />
-                        ভোট প্রদান নির্দেশিকা দেখুন
+                        ভোটার তথ্য দেখুন
                     </Link>
                 </Button>
             </CardContent>
         </Card>
+
       </div>
     </div>
   );

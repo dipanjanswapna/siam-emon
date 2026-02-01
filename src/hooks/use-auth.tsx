@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useToast } from './use-toast';
 
-const ADMIN_UID = "jY5SNkuZxbgadjdZzSe9Favqs7n1";
+const ADMIN_UID = "SoeZElRyJTPu7771IemAxNp8PtZ2";
 
 export function useAuth(Component: React.ComponentType<any>) {
 

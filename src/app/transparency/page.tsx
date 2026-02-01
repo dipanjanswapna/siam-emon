@@ -3,49 +3,27 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Scale, FileText, Users, CheckCircle, Clock, BookOpen, DollarSign, Laptop, Archive, Landmark, Goal } from "lucide-react";
+import { Scale, FileText, Users, Landmark, Goal, Banknote, Building } from "lucide-react";
 import FinancialSummaryForm from "@/components/transparency/financial-summary-form";
 import Link from "next/link";
 
 const manifestoPledges = [
   {
-    title: "গবেষণা তহবিল ও স্কলারশিপ",
-    status: "পরিকল্পনাধীন",
-    statusColor: "bg-blue-500 hover:bg-blue-600",
-    icon: DollarSign,
-    updates: [
-      "বিভাগভিত্তিক গবেষণা তহবিল সংগ্রহের জন্য নীতিমালা তৈরি করছি।",
-      "‘রিসার্চ হেল্প ডেস্ক’ চালুর জন্য প্রস্তুতি নিচ্ছি।"
-    ]
-  },
-  {
-    title: "স্টুডেন্ট জার্নাল প্রকাশ",
-    status: "পরিকল্পনাধীন",
-    statusColor: "bg-blue-500 hover:bg-blue-600",
-    icon: BookOpen,
-    updates: [
-      "জার্নালের সম্পাদকীয় বোর্ড গঠনের জন্য আলোচনা করছি।",
-      "প্রথম সংখ্যার জন্য গবেষণা প্রবন্ধ আহ্বানের প্রস্তুতি নিচ্ছি।"
-    ]
-  },
-  {
-    title: "ডিজিটাল আর্কাইভ ও ওপেন অ্যাকসেস",
-    status: "কাজ চলছে",
+    title: "শ্রমজীবী মানুষের অধিকার আদায়",
+    status: "চলমান",
     statusColor: "bg-yellow-500 hover:bg-yellow-600",
-    icon: Archive,
+    icon: Users,
     updates: [
-      "ডিজিটাল আর্কাইভের জন্য সফটওয়্যার নির্বাচন করেছি।",
-      "আন্তর্জাতিক জার্নাল অ্যাকসেসের জন্য বিভিন্ন সংস্থার সাথে আলোচনা করছি।"
+      "সংসদকে শ্রমজীবী মানুষের অধিকার আদায়ের প্রতিষ্ঠানে পরিণত করার লক্ষ্যে কাজ করা হচ্ছে।",
     ]
   },
-    {
-    title: "প্রশিক্ষণ ও কর্মশালা",
-    status: "সম্পন্ন",
-    statusColor: "bg-primary hover:bg-primary/90",
-    icon: Laptop,
+  {
+    title: "নারী অধিকার ও সাম্প্রদায়িক সম্প্রীতি",
+    status: "চলমান",
+    statusColor: "bg-yellow-500 hover:bg-yellow-600",
+    icon: Users,
     updates: [
-      "একাডেমিক রাইটিং-এর উপর প্রথম কর্মশালা সফলভাবে আয়োজন করেছি।",
-      "পরবর্তী SPSS ও R কর্মশালার জন্য রেজিস্ট্রেশন скоро শুরু হবে।"
+        "নারী বিদ্বেষী ও সাম্প্রদায়িক সকল অপশক্তির বিরুদ্ধে সোচ্চার থাকা এবং প্রতিরোধ গড়ে তোলার কাজ চলছে।"
     ]
   },
 ];
@@ -91,15 +69,17 @@ export default function TransparencyPage() {
                 <div className="lg:col-span-2">
                     <Card className="shadow-inner bg-card h-full">
                         <CardHeader>
-                            <CardTitle className="font-headline">আমার ব্যয়ের বিবরণ ও ফান্ডিং উৎস</CardTitle>
+                            <CardTitle className="font-headline">নির্বাচনী তহবিলে সহযোগিতা</CardTitle>
                         </CardHeader>
                         <CardContent className="font-body text-muted-foreground space-y-4">
-                           <p>আমার প্রচারণার সকল আয়-ব্যয়ের হিসাব শীঘ্রই এখানে প্রকাশ করা হবে। আমি স্বচ্ছতায় বিশ্বাসী।</p>
+                           <p>গণমানুষের অর্থায়নে নির্বাচন করছে বাসদ। আপনার সহযোগিতা আমাদের লক্ষ্য পূরণে সহায়তা করবে।</p>
                            <div className="space-y-2 text-sm">
-                               <div className="flex justify-between"><span>মোট অনুদান:</span> <strong>৳ ০.০০</strong></div>
-                               <div className="flex justify-between"><span>মোট ব্যয়:</span> <strong>৳ ০.০০</strong></div>
+                               <div className="flex justify-between items-center p-2 rounded-md bg-background"><span><Banknote className="inline-block mr-2"/> বিকাশ:</span> <span>01723709155</span></div>
+                               <div className="flex justify-between items-center p-2 rounded-md bg-background"><span><Building className="inline-block mr-2"/> নগদ:</span> <strong>01684509990</strong></div>
                            </div>
-                           <Button disabled>বিস্তারিত দেখুন (শীঘ্রই আসছে)</Button>
+                           <Button asChild>
+                            <Link href="/#pre-vote">আরও দেখুন</Link>
+                           </Button>
                         </CardContent>
                     </Card>
                 </div>

@@ -7,12 +7,13 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCzI7gZ057us7u0xaNaYgT1u-6n9BagVms",
-  authDomain: "sonar-bangla-vision.firebaseapp.com",
-  projectId: "sonar-bangla-vision",
-  storageBucket: "sonar-bangla-vision.firebasestorage.app",
-  messagingSenderId: "731465679461",
-  appId: "1:731465679461:web:76befd5d6af89c04ccfc8c"
+  apiKey: "AIzaSyCQwLHnTe5CxGuIOAjZZ8jdUi03rZLIoXc",
+  authDomain: "drmonishacr.firebaseapp.com",
+  projectId: "drmonishacr",
+  storageBucket: "drmonishacr.firebasestorage.app",
+  messagingSenderId: "727940272202",
+  appId: "1:727940272202:web:6d3145e3db58e27c2256b3",
+  measurementId: "G-3P0FPWX7EH"
 };
 
 // Initialize Firebase
