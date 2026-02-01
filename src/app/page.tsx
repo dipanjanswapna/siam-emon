@@ -79,7 +79,7 @@ function HeroSection() {
 
             <div className="container absolute inset-0 z-10 mx-auto px-4 flex flex-col justify-center items-center">
                 <div className="max-w-4xl mx-auto">
-                    <span className="text-6xl md:text-7xl drop-shadow-lg" role="img" aria-label="ladder">🪜</span>
+                    <Image src="https://i.postimg.cc/pX05kCjD/moi-logo.png" alt="মই প্রতীক" width={100} height={100} className="mx-auto drop-shadow-lg" />
                     <h1 className="text-4xl md:text-6xl font-bold font-headline drop-shadow-lg mt-4">ডাঃ মনীষা চক্রবর্ত্তী</h1>
                     <p className="mt-4 text-xl md:text-2xl font-semibold text-primary-foreground/90 drop-shadow-md">
                         বরিশাল-৫ আসনে গণতান্ত্রিক যুক্তফ্রন্ট সমর্থিত বাসদ মনোনীত প্রার্থী
@@ -441,7 +441,7 @@ function VoteBannerSection() {
         <div className="mt-8 bg-background/20 backdrop-blur-sm border-2 border-dashed border-primary rounded-lg p-6 max-w-md mx-auto shadow-xl">
             <h3 className="font-headline text-4xl font-extrabold text-primary">ডাঃ মনীষা চক্রবর্ত্তী</h3>
             <div className="flex justify-center items-center gap-4 mt-2">
-                 <span className="text-4xl" role="img" aria-label="ladder">🪜</span>
+                 <Image src="https://i.postimg.cc/pX05kCjD/moi-logo.png" alt="মই প্রতীক" width={50} height={50} />
                  <p className="font-body text-white text-2xl">মই মার্কা</p>
             </div>
         </div>
