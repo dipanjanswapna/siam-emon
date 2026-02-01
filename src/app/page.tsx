@@ -128,7 +128,7 @@ function VideoSection() {
     };
 
     return (
-        <section className="relative w-full aspect-video bg-black py-12 md:py-16">
+        <section className="relative w-full aspect-video bg-black py-8 md:py-12">
             <div id="youtube-player" className="absolute top-0 left-0 w-full h-full"></div>
              <Button 
                 variant="secondary"
@@ -145,7 +145,7 @@ function VideoSection() {
 
 function AboutSection() {
   return (
-    <section className="py-12 md:py-16 bg-background">
+    <section className="py-8 md:py-12 bg-background">
       <div className="container mx-auto px-4">
         <Card className="overflow-hidden shadow-lg border-border">
           <div className="grid md:grid-cols-2">
@@ -197,7 +197,7 @@ type Commitment = {
 
 function VoterSearchAdSection() {
     return (
-        <section className="py-12 md:py-16 bg-background">
+        <section className="py-8 md:py-12 bg-background">
             <div className="container mx-auto px-4">
                 <Card className="shadow-lg bg-card border-border">
                     <div className="grid md:grid-cols-3 items-center text-center md:text-left p-8 gap-8">
@@ -264,7 +264,7 @@ function CommitmentSection() {
     }, []);
 
     return (
-        <section className="py-12 md:py-16 bg-card">
+        <section className="py-8 md:py-12 bg-card">
             <div className="container mx-auto px-4">
                 <div className="text-center max-w-4xl mx-auto">
                     <h2 className="font-headline text-4xl md:text-5xl font-bold text-foreground">আমার <span className="text-destructive">অঙ্গীকার</span></h2>
@@ -341,7 +341,7 @@ function CampaignGallerySection() {
     const imagesToDisplay = galleryImages.length > 0 ? [...galleryImages, ...galleryImages] : [];
 
     return (
-        <section className="py-12 md:py-16 bg-card w-full overflow-x-hidden">
+        <section className="py-8 md:py-12 bg-card w-full overflow-x-hidden">
             <div className="container mx-auto px-4">
                 <div className="text-center max-w-4xl mx-auto">
                     <Camera className="mx-auto h-12 w-12 text-primary" />
@@ -436,7 +436,7 @@ function NoticeSection() {
 function VoteBannerSection() {
   return (
     <section 
-        className="py-12 md:py-16 bg-cover bg-center bg-no-repeat relative"
+        className="py-8 md:py-12 bg-cover bg-center bg-no-repeat relative"
         style={{backgroundImage: "url('https://i.postimg.cc/25Cmr4dk/SEAM-VAIAAAAA-Picsart-Ai-Image-Enhancer.jpg')"}}
     >
       <div className="absolute inset-0 bg-black/60"></div>
@@ -516,7 +516,7 @@ function ElectionCountdown() {
     
     if (!isClient) {
         return (
-            <section className="py-12 md:py-16 bg-background">
+            <section className="py-8 md:py-12 bg-background">
                  <div className="container mx-auto px-4 text-center">
                      <Skeleton className="h-10 w-3/4 mx-auto" />
                      <div className="mt-8 flex justify-center gap-4 md:gap-8">
@@ -531,7 +531,7 @@ function ElectionCountdown() {
     }
 
     return (
-        <section className="py-12 md:py-16 bg-background">
+        <section className="py-8 md:py-12 bg-background">
             <div className="container mx-auto px-4 text-center text-foreground">
                 <h2 className="text-3xl md:text-4xl font-bold font-headline flex justify-center items-center gap-3">
                     <Timer className="w-8 h-8 animate-bounce text-primary" />
@@ -549,7 +549,7 @@ function ElectionCountdown() {
 
 function VoteCallToActionSection() {
     return (
-        <section className="py-12 md:py-16 bg-background">
+        <section className="py-8 md:py-12 bg-background">
             <div className="container mx-auto px-4 text-center">
                 <h2 className="text-4xl md:text-5xl font-bold font-headline text-destructive">
                     ভোট দিন আমাকে!
@@ -589,7 +589,7 @@ const logicalMovementActivities = [
 function LogicalMovementSection() {
 
   return (
-    <section className="bg-card py-12 md:py-16">
+    <section className="bg-card py-8 md:py-12">
       <div className="container mx-auto px-4">
         <div className="text-center max-w-4xl mx-auto">
           <Flag className="mx-auto h-12 w-12 text-primary" />
@@ -662,7 +662,7 @@ function MediaSection() {
     const plugin = React.useRef(Autoplay({ delay: 8000, stopOnInteraction: true }));
 
     return (
-        <section className="bg-card py-12 md:py-16">
+        <section className="bg-card py-8 md:py-12">
             <div className="container mx-auto px-4">
                 <div className="text-center max-w-4xl mx-auto">
                     <Tv className="mx-auto h-12 w-12 text-primary" />
@@ -746,7 +746,7 @@ const skillsAndLeadershipActivities = [
 
 function SkillsLeadershipServiceSection() {
     return (
-        <section className="bg-card py-12 md:py-16">
+        <section className="bg-card py-8 md:py-12">
             <div className="container mx-auto px-4">
                 <div className="text-center max-w-4xl mx-auto">
                     <Combine className="mx-auto h-12 w-12 text-primary" />
@@ -831,7 +831,7 @@ function SocialWorkSection() {
     const imagesToDisplay = socialWorks.length > 0 ? [...socialWorks, ...socialWorks] : [];
 
     return (
-        <section className="py-12 md:py-16 bg-background w-full overflow-x-hidden">
+        <section className="py-8 md:py-12 bg-background w-full overflow-x-hidden">
             <div className="container mx-auto px-4">
                 <div className="text-center max-w-4xl mx-auto">
                     <HandHeart className="mx-auto h-12 w-12 text-primary" />
@@ -968,7 +968,7 @@ function TestimonialSection() {
     const displayData = isLoading ? Array.from({ length: 5 }).map((_, i) => ({id: `skel-${i}`})) : testimonials;
 
     return (
-        <section className="py-12 md:py-16 bg-background">
+        <section className="py-8 md:py-12 bg-background">
             <div className="container mx-auto px-4">
                 <div className="text-center max-w-4xl mx-auto">
                     <Quote className="mx-auto h-12 w-12 text-primary" />
@@ -1049,7 +1049,7 @@ const leadershipPoints = [
 
 function LeadershipSection() {
     return (
-        <section className="py-12 md:py-16 bg-card">
+        <section className="py-8 md:py-12 bg-card">
             <div className="container mx-auto px-4">
                 <div className="text-center max-w-4xl mx-auto">
                     <h1 className="font-headline text-4xl md:text-5xl font-bold text-foreground">
@@ -1101,7 +1101,7 @@ const faqItems = [
 
 function FAQSection() {
     return (
-        <section className="py-12 md:py-16 bg-background">
+        <section className="py-8 md:py-12 bg-background">
             <div className="container mx-auto px-4">
                 <div className="text-center max-w-4xl mx-auto">
                     <HelpCircle className="mx-auto h-12 w-12 text-primary" />
@@ -1207,7 +1207,7 @@ function FeedbackSection() {
     };
 
   return (
-    <section id="feedback-form" className="py-12 md:py-16 bg-background">
+    <section id="feedback-form" className="py-8 md:py-12 bg-background">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
           <Card className="shadow-lg">
@@ -1373,7 +1373,7 @@ function PreVoteSection() {
     };
 
     return (
-        <section id="pre-vote" className="py-12 md:py-16 bg-card">
+        <section id="pre-vote" className="py-8 md:py-12 bg-card">
             <div className="container mx-auto px-4">
                 <div className="max-w-4xl mx-auto text-center">
                     <Vote className="mx-auto h-16 w-16 text-primary animate-pulse" />
@@ -1427,7 +1427,7 @@ function PreVoteSection() {
 
 function SupportSection() {
     return (
-        <section className="py-12 md:py-16 bg-background">
+        <section className="py-8 md:py-12 bg-background">
             <div className="container mx-auto px-4">
                 <Card className="max-w-4xl mx-auto rounded-lg p-8 md:p-12 text-center text-white" style={{background: 'linear-gradient(to right, hsl(var(--primary)), hsl(var(--destructive)))'}}>
                     <div className="flex justify-center mb-4">
@@ -1450,4 +1450,5 @@ function SupportSection() {
         </section>
     );
 }
+
 
