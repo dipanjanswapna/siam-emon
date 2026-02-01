@@ -89,9 +89,6 @@ export default function RootLayout({
     <html lang="bn" suppressHydrationWarning>
       <head>
         <meta name="google-site-verification" content="GSWYRx1SJSZQ8-RBsRO33orlxaiVDcr6lgrR3cognH8" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;700&display=swap" rel="stylesheet" />
         <Script async src="https://www.googletagmanager.com/gtag/js?id=G-TS85T6ZB8Q"></Script>
         <Script id="google-analytics">
           {`

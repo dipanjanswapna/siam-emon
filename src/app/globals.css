@@ -1,3 +1,19 @@
+@font-face {
+  font-family: 'Codepotro Abu Sayed';
+  src: url('/Codepotro Abu Sayed.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Li Shadhinata';
+  src: url('/Li Shadhinata 2.0 Unicode.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
