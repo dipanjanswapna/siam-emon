@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useEffect } from "react";
@@ -105,7 +104,7 @@ export function PromotionalPopup() {
 
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
-            <DialogContent className="p-0 bg-card border-border shadow-2xl w-[90vw] max-w-xs rounded-xl overflow-hidden">
+            <DialogContent className="p-0 bg-card border-border shadow-2xl w-[80vw] max-w-[250px] rounded-xl overflow-hidden">
                  <DialogHeader className="sr-only">
                     <DialogTitle>{popupData.title || 'Promotional Offer'}</DialogTitle>
                     {popupData.description && <DialogDescription>{popupData.description}</DialogDescription>}
@@ -128,11 +127,11 @@ export function PromotionalPopup() {
                             className="object-cover"
                         />
                     </div>
-                    <div className="p-6 text-center">
-                        {popupData.title && <h2 className="text-2xl font-bold font-headline text-foreground">{popupData.title}</h2>}
-                        {popupData.description && <p className="text-muted-foreground mt-2 font-body">{popupData.description}</p>}
+                    <div className="p-4 text-center">
+                        {popupData.title && <h2 className="text-xl font-bold font-headline text-foreground">{popupData.title}</h2>}
+                        {popupData.description && <p className="text-muted-foreground mt-2 font-body text-sm">{popupData.description}</p>}
                         {popupData.buttonText && popupData.buttonLink && (
-                             <Button asChild className="mt-4 font-headline text-lg" size="lg">
+                             <Button asChild className="mt-4 font-headline" size="sm">
                                 <Link href={popupData.buttonLink}>{popupData.buttonText}</Link>
                             </Button>
                         )}
