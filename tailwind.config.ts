@@ -10,7 +10,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        body: ['var(--font-hind-siliguri)', 'sans-serif'],
+        body: ['"Codepotro Abu Sayed"', 'sans-serif'],
         headline: ['"Li Shadhinata"', 'sans-serif'],
         code: ['monospace'],
       },

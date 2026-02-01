@@ -1,28 +1,44 @@
+@font-face {
+  font-family: 'Codepotro Abu Sayed';
+  src: url('/Codepotro Abu Sayed.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Li Shadhinata';
+  src: url('/Li Shadhinata 2.0 Unicode.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 222 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 142.1 76.2% 36.3%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 0 72.2% 50.6%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 142.1 76.2% 36.3%;
+    --background: 120 60% 15%;
+    --foreground: 0 0% 98%;
+    --card: 120 60% 20%;
+    --card-foreground: 0 0% 98%;
+    --popover: 120 60% 10%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 120 65% 40%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 120 50% 25%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 120 50% 25%;
+    --muted-foreground: 120 30% 75%;
+    --accent: 0 72% 51%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 120 60% 25%;
+    --input: 120 60% 25%;
+    --ring: 120 65% 45%;
     --radius: 0.5rem;
 
     --chart-1: hsl(var(--primary));
@@ -33,25 +49,25 @@
   }
  
   .dark {
-    --background: 222 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 142.1 76.2% 36.3%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 0 72.2% 50.6%;
-    --accent-foreground: 210 40% 98%;
+    --background: 120 60% 15%;
+    --foreground: 0 0% 98%;
+    --card: 120 60% 20%;
+    --card-foreground: 0 0% 98%;
+    --popover: 120 60% 10%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 120 65% 40%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 120 50% 25%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 120 50% 25%;
+    --muted-foreground: 120 30% 75%;
+    --accent: 0 72% 51%;
+    --accent-foreground: 0 0% 98%;
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 142.1 76.2% 36.3%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 120 60% 25%;
+    --input: 120 60% 25%;
+    --ring: 120 65% 45%;
   }
 }
 

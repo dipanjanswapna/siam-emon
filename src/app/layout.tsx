@@ -1,6 +1,5 @@
 
 import type {Metadata} from 'next';
-import { Hind_Siliguri } from 'next/font/google';
 import './globals.css';
 import { cn } from "@/lib/utils";
 import { Header } from '@/components/layout/header';
@@ -9,12 +8,6 @@ import { Toaster } from '@/components/ui/toaster';
 import { FloatingFeedbackButton } from '@/components/layout/FloatingFeedbackButton';
 import { PromotionalPopup } from '@/components/layout/PromotionalPopup';
 import Script from 'next/script';
-
-const hindSiliguri = Hind_Siliguri({
-  subsets: ['bengali'],
-  weight: ['400', '700'],
-  variable: '--font-hind-siliguri',
-});
 
 
 export const metadata: Metadata = {
@@ -74,7 +67,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="bn" suppressHydrationWarning className={hindSiliguri.variable}>
+    <html lang="bn" suppressHydrationWarning>
       <head>
         <Script src="https://www.powr.io/powr.js?platform=html" strategy="lazyOnload"></Script>
       </head>
