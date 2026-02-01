@@ -1,4 +1,3 @@
-
 "use client";
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -7,9 +6,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Shield, PlusCircle, Edit, Trash2, BrainCircuit, BookOpenCheck, Library, Award, FileText, Mic, GraduationCap, ImagePlus, LogOut, MessageSquare, Users, Bell, Image as ImageIcon, Settings, Megaphone, Camera, Quote, Wallpaper } from "lucide-react";
+import { Shield, PlusCircle, Edit, Trash2, LogOut, MessageSquare, Users, Bell, Camera, Quote, Newspaper } from "lucide-react";
 import { useState, useEffect } from "react";
-import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc, orderBy, query, serverTimestamp, setDoc, getDoc } from "firebase/firestore";
+import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc, orderBy, query, serverTimestamp, setDoc } from "firebase/firestore";
 import { db, auth } from "@/lib/firebase";
 import {
   Dialog,
@@ -20,54 +19,21 @@ import {
   DialogFooter,
   DialogClose,
 } from "@/components/ui/dialog";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
 import Image from "next/image";
 import { useAuth } from "@/hooks/use-auth";
 import { useSignOut } from "react-firebase-hooks/auth";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Skeleton } from "@/components/ui/skeleton";
+import Skeleton from "react-loading-skeleton";
+import 'react-loading-skeleton/dist/skeleton.css'
 import { Switch } from "@/components/ui/switch";
 
-
-type Commitment = {
-    id: string;
-    icon: string;
-    title: string;
-    description: string;
-};
-
-type AcademicAchievement = {
-    id: string;
-    icon: string;
-    title: string;
-    description: string;
-    image: string;
-    imageHint: string;
-};
-
-type SocialWork = {
-    id: string;
-    image: string;
-    alt: string;
-    imageHint: string;
-};
 
 type Feedback = {
     id: string;
     name?: string;
     mobile?: string;
-    hall?: string;
-    department?: string;
-    email?: string;
-    session?: string;
     subject: string;
     message: string;
     isAnonymous: boolean;
@@ -87,13 +53,6 @@ type Notice = {
     text: string;
 };
 
-type PromotionalPopup = {
-    id: string;
-    enabled: boolean;
-    imageUrl: string;
-    displayFrequency: 'every-load' | 'once-per-session' | 'once-per-day';
-};
-
 type GalleryImage = {
     id: string;
     src: string;
@@ -110,54 +69,27 @@ type Testimonial = {
     testimonial: string;
 };
 
-type HeroImage = {
+type News = {
     id: string;
-    src: string;
-    alt: string;
-    hint: string;
+    category: string;
+    title: string;
+    date: string;
+    description: string;
+    content: string;
+    image: string;
+    imageHint: string;
 };
 
-type BrandingSettings = {
-    id: string;
-    logoUrl: string;
-};
-
-
-const iconMap = {
-    BrainCircuit: <BrainCircuit />,
-    BookOpenCheck: <BookOpenCheck />,
-    Library: <Library />,
-    Award: <Award />,
-    FileText: <FileText />,
-    Mic: <Mic />,
-    GraduationCap: <GraduationCap />,
-};
 
 function AdminPage() {
-    const [commitments, setCommitments] = useState<Commitment[]>([]);
-    const [academicAchievements, setAcademicAchievements] = useState<AcademicAchievement[]>([]);
-    const [socialWorks, setSocialWorks] = useState<SocialWork[]>([]);
     const [feedbacks, setFeedbacks] = useState<Feedback[]>([]);
     const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
     const [notice, setNotice] = useState<Notice>({ id: "live-notice", text: "" });
-    const [promotionalPopup, setPromotionalPopup] = useState<PromotionalPopup>({ id: "promotional-popup", enabled: true, imageUrl: "", displayFrequency: "once-per-session" });
     const [galleryImages, setGalleryImages] = useState<GalleryImage[]>([]);
     const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
-    const [heroImages, setHeroImages] = useState<HeroImage[]>([]);
-    const [brandingSettings, setBrandingSettings] = useState<BrandingSettings>({ id: "branding", logoUrl: "" });
+    const [news, setNews] = useState<News[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     
-    const [isCommitmentFormOpen, setIsCommitmentFormOpen] = useState(false);
-    const [currentCommitment, setCurrentCommitment] = useState<Partial<Commitment>>({});
-    const [isEditingCommitment, setIsEditingCommitment] = useState(false);
-
-    const [isAchievementFormOpen, setIsAchievementFormOpen] = useState(false);
-    const [currentAchievement, setCurrentAchievement] = useState<Partial<AcademicAchievement>>({});
-    const [isEditingAchievement, setIsEditingAchievement] = useState(false);
-    
-    const [isSocialWorkFormOpen, setIsSocialWorkFormOpen] = useState(false);
-    const [currentSocialWork, setCurrentSocialWork] = useState<Partial<SocialWork>>({});
-
     const [isTeamMemberFormOpen, setIsTeamMemberFormOpen] = useState(false);
     const [currentTeamMember, setCurrentTeamMember] = useState<Partial<TeamMember>>({});
     const [isEditingTeamMember, setIsEditingTeamMember] = useState(false);
@@ -169,33 +101,14 @@ function AdminPage() {
     const [currentTestimonial, setCurrentTestimonial] = useState<Partial<Testimonial>>({});
     const [isEditingTestimonial, setIsEditingTestimonial] = useState(false);
 
-    const [isHeroImageFormOpen, setIsHeroImageFormOpen] = useState(false);
-    const [currentHeroImage, setCurrentHeroImage] = useState<Partial<HeroImage>>({});
+    const [isNewsFormOpen, setIsNewsFormOpen] = useState(false);
+    const [currentNews, setCurrentNews] = useState<Partial<News>>({});
+    const [isEditingNews, setIsEditingNews] = useState(false);
 
     const [signOut] = useSignOut(auth);
     const router = useRouter();
     const {toast} = useToast();
 
-    const fetchCommitments = async () => {
-        const commitmentsCollection = collection(db, "commitments");
-        const commitmentsSnapshot = await getDocs(commitmentsCollection);
-        const commitmentsList = commitmentsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Commitment));
-        setCommitments(commitmentsList);
-    };
-    
-    const fetchAcademicAchievements = async () => {
-        const achievementsCollection = collection(db, "academicAchievements");
-        const achievementsSnapshot = await getDocs(achievementsCollection);
-        const achievementsList = achievementsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as AcademicAchievement));
-        setAcademicAchievements(achievementsList);
-    };
-
-    const fetchSocialWorks = async () => {
-        const socialWorksCollection = collection(db, "socialWorks");
-        const socialWorksSnapshot = await getDocs(socialWorksCollection);
-        const socialWorksList = socialWorksSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as SocialWork));
-        setSocialWorks(socialWorksList);
-    };
 
     const fetchFeedbacks = async () => {
         const feedbacksCollection = collection(db, "feedback");
@@ -219,13 +132,6 @@ function AdminPage() {
             setNotice({ id: noticeDoc.id, ...noticeDoc.data() } as Notice);
         }
     };
-    
-    const fetchPromotionalPopup = async () => {
-        const popupDoc = await getDoc(doc(db, "siteSettings", "promotional-popup"));
-        if (popupDoc.exists()) {
-            setPromotionalPopup({ id: popupDoc.id, ...popupDoc.data() } as PromotionalPopup);
-        }
-    };
 
     const fetchGalleryImages = async () => {
         const galleryCollection = collection(db, "gallery");
@@ -241,35 +147,24 @@ function AdminPage() {
         setTestimonials(testimonialsList);
     };
 
-    const fetchHeroImages = async () => {
-        const heroImagesCollection = collection(db, "heroImages");
-        const heroImagesSnapshot = await getDocs(heroImagesCollection);
-        const heroImagesList = heroImagesSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as HeroImage));
-        setHeroImages(heroImagesList);
+    const fetchNews = async () => {
+        const newsCollection = collection(db, "news");
+        const newsSnapshot = await getDocs(newsCollection);
+        const newsList = newsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as News));
+        setNews(newsList);
     };
 
-    const fetchBrandingSettings = async () => {
-        const docSnap = await getDoc(doc(db, "siteSettings", "branding"));
-        if (docSnap.exists()) {
-            setBrandingSettings({ id: "branding", ...docSnap.data() } as BrandingSettings);
-        }
-    };
 
     const loadAllData = async () => {
         setIsLoading(true);
         try {
             await Promise.all([
-                fetchCommitments(), 
-                fetchAcademicAchievements(), 
-                fetchSocialWorks(), 
                 fetchFeedbacks(), 
                 fetchTeamMembers(),
                 fetchNotice(),
-                fetchPromotionalPopup(),
                 fetchGalleryImages(),
                 fetchTestimonials(),
-                fetchHeroImages(),
-                fetchBrandingSettings(),
+                fetchNews(),
             ]);
         } catch (error) {
             console.error("Error loading data: ", error);
@@ -286,184 +181,6 @@ function AdminPage() {
     useEffect(() => {
         loadAllData();
     }, []);
-
-    const handleCommitmentFormSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        const action = isEditingCommitment ? 'আপডেট' : 'যোগ';
-        try {
-            if (isEditingCommitment && currentCommitment.id) {
-                const commitmentDoc = doc(db, "commitments", currentCommitment.id);
-                await updateDoc(commitmentDoc, {
-                    title: currentCommitment.title,
-                    description: currentCommitment.description,
-                    icon: currentCommitment.icon,
-                });
-            } else {
-                await addDoc(collection(db, "commitments"), {
-                    title: currentCommitment.title,
-                    description: currentCommitment.description,
-                    icon: currentCommitment.icon,
-                });
-            }
-            closeCommitmentForm();
-            fetchCommitments();
-            toast({
-                title: `প্রতিশ্রুতি সফলভাবে ${action} হয়েছে`,
-            });
-        } catch (error) {
-            toast({
-                variant: 'destructive',
-                title: `প্রতিশ্রুতি ${action} করতে সমস্যা হয়েছে`,
-                description: (error as Error).message,
-            });
-        }
-    };
-
-    const openCommitmentForm = (commitment?: Commitment) => {
-        if (commitment) {
-            setCurrentCommitment(commitment);
-            setIsEditingCommitment(true);
-        } else {
-            setCurrentCommitment({ title: "", description: "", icon: "BrainCircuit" });
-            setIsEditingCommitment(false);
-        }
-        setIsCommitmentFormOpen(true);
-    };
-
-    const closeCommitmentForm = () => {
-        setIsCommitmentFormOpen(false);
-        setCurrentCommitment({});
-        setIsEditingCommitment(false);
-    };
-
-    const handleDeleteCommitment = async (id: string) => {
-        try {
-            await deleteDoc(doc(db, "commitments", id));
-            fetchCommitments();
-             toast({
-                title: "প্রতিশ্রুতি সফলভাবে মুছে ফেলা হয়েছে",
-             });
-        } catch(error) {
-             toast({
-                variant: 'destructive',
-                title: "প্রতিশ্রুতি মুছে ফেলতে সমস্যা হয়েছে",
-                description: (error as Error).message,
-             });
-        }
-    };
-
-    const handleAchievementFormSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        const action = isEditingAchievement ? 'আপডেট' : 'যোগ';
-        try {
-            const achievementData = {
-                title: currentAchievement.title,
-                description: currentAchievement.description,
-                icon: "Award", // Default icon
-                image: currentAchievement.image,
-                imageHint: currentAchievement.imageHint,
-            };
-
-            if (isEditingAchievement && currentAchievement.id) {
-                const achievementDoc = doc(db, "academicAchievements", currentAchievement.id);
-                await updateDoc(achievementDoc, achievementData);
-            } else {
-                await addDoc(collection(db, "academicAchievements"), achievementData);
-            }
-            closeAchievementForm();
-            fetchAcademicAchievements();
-            toast({
-                title: `অর্জন সফলভাবে ${action} হয়েছে`,
-            });
-        } catch(error) {
-            toast({
-                variant: 'destructive',
-                title: `অর্জন ${action} করতে সমস্যা হয়েছে`,
-                description: (error as Error).message,
-            });
-        }
-    };
-
-    const openAchievementForm = (achievement?: AcademicAchievement) => {
-        if (achievement) {
-            setCurrentAchievement(achievement);
-            setIsEditingAchievement(true);
-        } else {
-            setCurrentAchievement({ title: "", description: "", icon: "Award", image: "https://placehold.co/600x400.png", imageHint: "" });
-            setIsEditingAchievement(false);
-        }
-        setIsAchievementFormOpen(true);
-    };
-
-    const closeAchievementForm = () => {
-        setIsAchievementFormOpen(false);
-        setCurrentAchievement({});
-        setIsEditingAchievement(false);
-    };
-
-    const handleDeleteAchievement = async (id: string) => {
-        try {
-            await deleteDoc(doc(db, "academicAchievements", id));
-            fetchAcademicAchievements();
-            toast({
-                title: "অর্জন সফলভাবে মুছে ফেলা হয়েছে",
-            });
-        } catch(error) {
-            toast({
-                variant: 'destructive',
-                title: "অর্জন মুছে ফেলতে সমস্যা হয়েছে",
-                description: (error as Error).message,
-            });
-        }
-    };
-
-    const handleSocialWorkFormSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        try {
-            await addDoc(collection(db, "socialWorks"), {
-                image: currentSocialWork.image,
-                alt: currentSocialWork.alt,
-                imageHint: currentSocialWork.imageHint,
-            });
-            closeSocialWorkForm();
-            fetchSocialWorks();
-            toast({
-                title: "সামাজিক কাজের ছবি সফলভাবে যোগ হয়েছে",
-            });
-        } catch(error) {
-            toast({
-                variant: 'destructive',
-                title: "ছবি যোগ করতে সমস্যা হয়েছে",
-                description: (error as Error).message,
-            });
-        }
-    };
-
-    const openSocialWorkForm = () => {
-        setCurrentSocialWork({ image: "https://placehold.co/600x800.png", alt: "", imageHint: "" });
-        setIsSocialWorkFormOpen(true);
-    };
-
-    const closeSocialWorkForm = () => {
-        setIsSocialWorkFormOpen(false);
-        setCurrentSocialWork({});
-    };
-
-    const handleDeleteSocialWork = async (id: string) => {
-        try {
-            await deleteDoc(doc(db, "socialWorks", id));
-            fetchSocialWorks();
-            toast({
-                title: "ছবি সফলভাবে মুছে ফেলা হয়েছে",
-            });
-        } catch(error) {
-            toast({
-                variant: 'destructive',
-                title: "ছবি মুছে ফেলতে সমস্যা হয়েছে",
-                description: (error as Error).message,
-            });
-        }
-    };
 
      const handleDeleteFeedback = async (id: string) => {
         try {
@@ -561,28 +278,6 @@ function AdminPage() {
             toast({
                 variant: 'destructive',
                 title: 'নোটিশ আপডেট করতে সমস্যা হয়েছে',
-                description: (error as Error).message,
-            });
-        }
-    };
-    
-    const handlePromotionalPopupFormSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        try {
-            const popupDoc = doc(db, "siteSettings", "promotional-popup");
-            await setDoc(popupDoc, { 
-                enabled: promotionalPopup.enabled, 
-                imageUrl: promotionalPopup.imageUrl,
-                displayFrequency: promotionalPopup.displayFrequency
-            });
-            fetchPromotionalPopup();
-            toast({
-                title: 'প্রমোশনাল পপআপ সফলভাবে আপডেট হয়েছে',
-            });
-        } catch (error) {
-            toast({
-                variant: 'destructive',
-                title: 'পপআপ আপডেট করতে সমস্যা হয়েছে',
                 description: (error as Error).message,
             });
         }
@@ -700,49 +395,82 @@ function AdminPage() {
             });
         }
     };
-
-    const handleHeroImageFormSubmit = async (e: React.FormEvent) => {
+    
+    const handleNewsFormSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        const action = isEditingNews ? 'আপডেট' : 'যোগ';
         try {
-            await addDoc(collection(db, "heroImages"), currentHeroImage);
-            closeHeroImageForm();
-            fetchHeroImages();
-            toast({ title: "হিরো ছবি সফলভাবে যোগ হয়েছে" });
+            const newsData = {
+                category: currentNews.category,
+                title: currentNews.title,
+                date: currentNews.date,
+                description: currentNews.description,
+                content: currentNews.content,
+                image: currentNews.image,
+                imageHint: currentNews.imageHint,
+            };
+
+            if (isEditingNews && currentNews.id) {
+                const newsDoc = doc(db, "news", currentNews.id);
+                await updateDoc(newsDoc, newsData);
+            } else {
+                await addDoc(collection(db, "news"), newsData);
+            }
+            closeNewsForm();
+            fetchNews();
+            toast({
+                title: `সংবাদ সফলভাবে ${action} হয়েছে`,
+            });
         } catch (error) {
-            toast({ variant: 'destructive', title: "ছবি যোগ করতে সমস্যা হয়েছে", description: (error as Error).message });
+            toast({
+                variant: 'destructive',
+                title: `সংবাদ ${action} করতে সমস্যা হয়েছে`,
+                description: (error as Error).message,
+            });
         }
     };
 
-    const openHeroImageForm = () => {
-        setCurrentHeroImage({ src: "https://placehold.co/1200x300.png", alt: "", hint: "" });
-        setIsHeroImageFormOpen(true);
+    const openNewsForm = (newsItem?: News) => {
+        if (newsItem) {
+            setCurrentNews(newsItem);
+            setIsEditingNews(true);
+        } else {
+            setCurrentNews({ 
+                category: "", 
+                title: "", 
+                date: new Date().toISOString().split('T')[0], 
+                description: "", 
+                content: "", 
+                image: "https://placehold.co/600x400.png", 
+                imageHint: "" 
+            });
+            setIsEditingNews(false);
+        }
+        setIsNewsFormOpen(true);
     };
 
-    const closeHeroImageForm = () => {
-        setIsHeroImageFormOpen(false);
-        setCurrentHeroImage({});
+    const closeNewsForm = () => {
+        setIsNewsFormOpen(false);
+        setCurrentNews({});
+        setIsEditingNews(false);
     };
-
-    const handleDeleteHeroImage = async (id: string) => {
+    
+    const handleDeleteNews = async (id: string) => {
         try {
-            await deleteDoc(doc(db, "heroImages", id));
-            fetchHeroImages();
-            toast({ title: "হিরো ছবি সফলভাবে মুছে ফেলা হয়েছে" });
+            await deleteDoc(doc(db, "news", id));
+            fetchNews();
+            toast({
+                title: "সংবাদ সফলভাবে মুছে ফেলা হয়েছে",
+            });
         } catch (error) {
-            toast({ variant: 'destructive', title: "ছবি মুছে ফেলতে সমস্যা হয়েছে", description: (error as Error).message });
+            toast({
+                variant: 'destructive',
+                title: "সংবাদ মুছে ফেলতে সমস্যা হয়েছে",
+                description: (error as Error).message,
+            });
         }
     };
 
-    const handleBrandingSettingsSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        try {
-            const settingsDoc = doc(db, "siteSettings", "branding");
-            await setDoc(settingsDoc, { logoUrl: brandingSettings.logoUrl }, { merge: true });
-            toast({ title: "ব্র্যান্ডিং সেটিংস আপডেট হয়েছে" });
-        } catch (error) {
-            toast({ variant: 'destructive', title: "সেটিংস আপডেট করতে সমস্যা হয়েছে", description: (error as Error).message });
-        }
-    };
 
     const handleSignOut = async () => {
         const success = await signOut();
@@ -774,116 +502,6 @@ function AdminPage() {
 
         <main className="mt-16">
             <Accordion type="multiple" className="w-full space-y-4">
-                <AccordionItem value="branding-settings">
-                    <Card>
-                        <AccordionTrigger className="p-6">
-                            <CardTitle>ব্র্যান্ডিং</CardTitle>
-                        </AccordionTrigger>
-                        <AccordionContent className="p-6 pt-0">
-                            <form onSubmit={handleBrandingSettingsSubmit} className="space-y-4">
-                                <div className="space-y-2">
-                                    <Label htmlFor="logo-url">লোগো URL</Label>
-                                    <Input
-                                        id="logo-url"
-                                        value={brandingSettings.logoUrl}
-                                        onChange={(e) => setBrandingSettings({ ...brandingSettings, logoUrl: e.target.value })}
-                                        placeholder="https://example.com/logo.png"
-                                    />
-                                    {brandingSettings.logoUrl && <Image src={brandingSettings.logoUrl} alt="logo preview" width={50} height={50} className="mt-2 bg-slate-200 p-1 rounded" />}
-                                </div>
-                                <Button type="submit">
-                                    <Settings className="mr-2 h-4 w-4" /> লোগো সেভ করুন
-                                </Button>
-                            </form>
-                        </AccordionContent>
-                    </Card>
-                </AccordionItem>
-                <AccordionItem value="hero-carousel">
-                    <Card>
-                        <AccordionTrigger className="p-6">
-                            <CardTitle>হিরো ক্যারোসেল ব্যবস্থাপনা</CardTitle>
-                        </AccordionTrigger>
-                        <AccordionContent className="p-6 pt-0">
-                            <div className="flex justify-end mb-4">
-                                <Button onClick={openHeroImageForm}>
-                                    <Wallpaper className="mr-2 h-4 w-4" /> নতুন ছবি যোগ করুন
-                                </Button>
-                            </div>
-                            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                                {isLoading ? (
-                                    <p>লোড হচ্ছে...</p>
-                                ) : (
-                                    heroImages.map(hi => (
-                                        <Card key={hi.id} className="relative group overflow-hidden">
-                                          <Image
-                                            src={hi.src}
-                                            alt={hi.alt}
-                                            width={300}
-                                            height={100}
-                                            className="object-cover w-full h-auto aspect-[3/1]"
-                                            data-ai-hint={hi.hint}
-                                          />
-                                            <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                                                <Button variant="destructive" size="icon" onClick={() => handleDeleteHeroImage(hi.id)}>
-                                                    <Trash2 className="h-4 w-4" />
-                                                </Button>
-                                            </div>
-                                        </Card>
-                                    ))
-                                )}
-                            </div>
-                        </AccordionContent>
-                    </Card>
-                </AccordionItem>
-                 <AccordionItem value="site-settings">
-                    <Card>
-                        <AccordionTrigger className="p-6">
-                            <CardTitle>সাইট সেটিংস</CardTitle>
-                        </AccordionTrigger>
-                        <AccordionContent className="p-6 pt-0">
-                            <form onSubmit={handlePromotionalPopupFormSubmit} className="space-y-4">
-                                <div className="space-y-2">
-                                     <div className="flex items-center space-x-2">
-                                        <Switch
-                                            id="popup-enabled"
-                                            checked={promotionalPopup.enabled}
-                                            onCheckedChange={(checked) => setPromotionalPopup({ ...promotionalPopup, enabled: checked })}
-                                        />
-                                        <Label htmlFor="popup-enabled">প্রমোশনাল পপআপ সক্রিয় করুন</Label>
-                                    </div>
-                                </div>
-                                <div className="space-y-2">
-                                    <Label htmlFor="popup-image-url">পপআপ ছবির URL</Label>
-                                    <Input
-                                        id="popup-image-url"
-                                        value={promotionalPopup.imageUrl}
-                                        onChange={(e) => setPromotionalPopup({ ...promotionalPopup, imageUrl: e.target.value })}
-                                        placeholder="https://example.com/image.jpg"
-                                    />
-                                </div>
-                                <div className="space-y-2">
-                                    <Label htmlFor="display-frequency">Display Frequency</Label>
-                                    <Select
-                                        value={promotionalPopup.displayFrequency}
-                                        onValueChange={(value: 'every-load' | 'once-per-session' | 'once-per-day') => setPromotionalPopup({ ...promotionalPopup, displayFrequency: value })}
-                                    >
-                                        <SelectTrigger id="display-frequency">
-                                            <SelectValue placeholder="Select frequency" />
-                                        </SelectTrigger>
-                                        <SelectContent>
-                                            <SelectItem value="every-load">Show on every page load</SelectItem>
-                                            <SelectItem value="once-per-session">Show once per session</SelectItem>
-                                            <SelectItem value="once-per-day">Show once per day</SelectItem>
-                                        </SelectContent>
-                                    </Select>
-                                </div>
-                                <Button type="submit">
-                                    <Settings className="mr-2 h-4 w-4" /> পপআপ সেভ করুন
-                                </Button>
-                            </form>
-                        </AccordionContent>
-                    </Card>
-                </AccordionItem>
                 <AccordionItem value="notice-bar">
                     <Card>
                         <AccordionTrigger className="p-6">
@@ -908,6 +526,42 @@ function AdminPage() {
                         </AccordionContent>
                     </Card>
                 </AccordionItem>
+                <AccordionItem value="news">
+                    <Card>
+                        <AccordionTrigger className="p-6">
+                            <CardTitle>সংবাদ ব্যবস্থাপনা</CardTitle>
+                        </AccordionTrigger>
+                        <AccordionContent className="p-6 pt-0">
+                            <div className="flex justify-end mb-4">
+                                <Button onClick={() => openNewsForm()}>
+                                    <Newspaper className="mr-2 h-4 w-4" /> নতুন সংবাদ যোগ করুন
+                                </Button>
+                            </div>
+                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                {isLoading ? (
+                                     Array.from({ length: 3 }).map((_, index) => <Skeleton key={index} height={200} />)
+                                ) : (
+                                    news.map(n => (
+                                        <Card key={n.id} className="p-4 bg-card flex flex-col justify-between">
+                                            <div>
+                                                <h3 className="font-bold text-lg">{n.title}</h3>
+                                                <p className="text-sm text-muted-foreground">{n.date}</p>
+                                            </div>
+                                            <div className="flex items-center gap-2 mt-4">
+                                                <Button variant="outline" size="sm" onClick={() => openNewsForm(n)}>
+                                                    <Edit className="h-4 w-4 mr-2" /> সম্পাদনা
+                                                </Button>
+                                                <Button variant="destructive" size="sm" onClick={() => handleDeleteNews(n.id)}>
+                                                    <Trash2 className="h-4 w-4 mr-2" /> মুছুন
+                                                </Button>
+                                            </div>
+                                        </Card>
+                                    ))
+                                )}
+                            </div>
+                        </AccordionContent>
+                    </Card>
+                </AccordionItem>
                  <AccordionItem value="gallery-images">
                     <Card>
                         <AccordionTrigger className="p-6">
@@ -921,7 +575,7 @@ function AdminPage() {
                             </div>
                             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
                                 {isLoading ? (
-                                    <p>লোড হচ্ছে...</p>
+                                    Array.from({ length: 6 }).map((_, index) => <Skeleton key={index} height={150} />)
                                 ) : (
                                     galleryImages.map(gi => (
                                         <Card key={gi.id} className="relative group overflow-hidden">
@@ -945,132 +599,23 @@ function AdminPage() {
                         </AccordionContent>
                     </Card>
                 </AccordionItem>
-                <AccordionItem value="commitments">
-                    <Card>
-                        <AccordionTrigger className="p-6">
-                            <CardTitle>প্রতিশ্রুতি ব্যবস্থাপনা</CardTitle>
-                        </AccordionTrigger>
-                        <AccordionContent className="p-6 pt-0">
-                            <div className="flex justify-end mb-4">
-                                <Button onClick={() => openCommitmentForm()}>
-                                    <PlusCircle className="mr-2 h-4 w-4" /> নতুন প্রতিশ্রুতি যোগ করুন
-                                </Button>
-                            </div>
-                            <div className="space-y-4">
-                                {isLoading ? (
-                                    <p>লোড হচ্ছে...</p>
-                                ) : (
-                                    commitments.map(c => (
-                                        <Card key={c.id} className="flex items-center justify-between p-4 bg-primary/5">
-                                            <div>
-                                                <h3 className="font-bold text-lg">{c.title}</h3>
-                                                <p className="text-sm text-muted-foreground">{c.description}</p>
-                                            </div>
-                                            <div className="flex items-center gap-2">
-                                                <Button variant="outline" size="icon" onClick={() => openCommitmentForm(c)}>
-                                                    <Edit className="h-4 w-4" />
-                                                </Button>
-                                                <Button variant="destructive" size="icon" onClick={() => handleDeleteCommitment(c.id)}>
-                                                    <Trash2 className="h-4 w-4" />
-                                                </Button>
-                                            </div>
-                                        </Card>
-                                    ))
-                                )}
-                            </div>
-                        </AccordionContent>
-                    </Card>
-                </AccordionItem>
-                <AccordionItem value="academic-achievements">
-                    <Card>
-                        <AccordionTrigger className="p-6">
-                            <CardTitle>একাডেমিক অর্জন ব্যবস্থাপনা</CardTitle>
-                        </AccordionTrigger>
-                        <AccordionContent className="p-6 pt-0">
-                            <div className="flex justify-end mb-4">
-                                <Button onClick={() => openAchievementForm()}>
-                                    <PlusCircle className="mr-2 h-4 w-4" /> নতুন অর্জন যোগ করুন
-                                </Button>
-                            </div>
-                            <div className="space-y-4">
-                                {isLoading ? (
-                                    <p>লোড হচ্ছে...</p>
-                                ) : (
-                                    academicAchievements.map(a => (
-                                        <Card key={a.id} className="flex items-center justify-between p-4 bg-primary/5">
-                                            <div>
-                                                <h3 className="font-bold text-lg">{a.title}</h3>
-                                                <p className="text-sm text-muted-foreground">{a.description}</p>
-                                            </div>
-                                            <div className="flex items-center gap-2">
-                                                <Button variant="outline" size="icon" onClick={() => openAchievementForm(a)}>
-                                                    <Edit className="h-4 w-4" />
-                                                </Button>
-                                                <Button variant="destructive" size="icon" onClick={() => handleDeleteAchievement(a.id)}>
-                                                    <Trash2 className="h-4 w-4" />
-                                                </Button>
-                                            </div>
-                                        </Card>
-                                    ))
-                                )}
-                            </div>
-                        </AccordionContent>
-                    </Card>
-                </AccordionItem>
-                <AccordionItem value="social-works">
-                    <Card>
-                        <AccordionTrigger className="p-6">
-                            <CardTitle>সামাজিক কাজ ব্যবস্থাপনা</CardTitle>
-                        </AccordionTrigger>
-                        <AccordionContent className="p-6 pt-0">
-                            <div className="flex justify-end mb-4">
-                                <Button onClick={() => openSocialWorkForm()}>
-                                    <ImagePlus className="mr-2 h-4 w-4" /> নতুন ছবি যোগ করুন
-                                </Button>
-                            </div>
-                            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                                {isLoading ? (
-                                    <p>লোড হচ্ছে...</p>
-                                ) : (
-                                    socialWorks.map(sw => (
-                                        <Card key={sw.id} className="relative group overflow-hidden">
-                                          <Image
-                                            src={sw.image}
-                                            alt={sw.alt}
-                                            width={200}
-                                            height={280}
-                                            className="object-cover w-full h-full"
-                                            data-ai-hint={sw.imageHint}
-                                          />
-                                            <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                                                <Button variant="destructive" size="icon" onClick={() => handleDeleteSocialWork(sw.id)}>
-                                                    <Trash2 className="h-4 w-4" />
-                                                </Button>
-                                            </div>
-                                        </Card>
-                                    ))
-                                )}
-                            </div>
-                        </AccordionContent>
-                    </Card>
-                </AccordionItem>
                 <AccordionItem value="testimonials">
                     <Card>
                         <AccordionTrigger className="p-6">
-                            <CardTitle>শিক্ষার্থীদের মতামত ব্যবস্থাপনা</CardTitle>
+                            <CardTitle>সহযোদ্ধাদের কথা ব্যবস্থাপনা</CardTitle>
                         </AccordionTrigger>
                         <AccordionContent className="p-6 pt-0">
                             <div className="flex justify-end mb-4">
                                 <Button onClick={() => openTestimonialForm()}>
-                                    <Quote className="mr-2 h-4 w-4" /> নতুন মতামত যোগ করুন
+                                    <Quote className="mr-2 h-4 w-4" /> নতুন বার্তা যোগ করুন
                                 </Button>
                             </div>
                             <div className="space-y-4">
                                 {isLoading ? (
-                                    <p>লোড হচ্ছে...</p>
+                                    <Skeleton height={80} count={2} />
                                 ) : (
                                     testimonials.map(t => (
-                                        <Card key={t.id} className="flex items-center justify-between p-4 bg-primary/5">
+                                        <Card key={t.id} className="flex items-center justify-between p-4 bg-card">
                                             <div className="flex items-center gap-4">
                                                 <Image src={t.image} alt={t.name} width={50} height={50} className="rounded-full object-cover" />
                                                 <div>
@@ -1102,10 +647,10 @@ function AdminPage() {
                              <ScrollArea className="h-96 pr-4">
                                 <div className="space-y-4">
                                     {isLoading ? (
-                                        <p>মতামত লোড হচ্ছে...</p>
+                                        <Skeleton height={100} count={3} />
                                     ) : feedbacks.length > 0 ? (
                                         feedbacks.map(f => (
-                                            <Card key={f.id} className="bg-primary/5 p-4">
+                                            <Card key={f.id} className="bg-card p-4">
                                                 <div className="flex justify-between items-start">
                                                     <div>
                                                         <p className="font-bold text-lg">{f.subject}</p>
@@ -1122,10 +667,6 @@ function AdminPage() {
                                                         <div className="grid grid-cols-2 gap-x-4 gap-y-1">
                                                             <p><strong>নাম:</strong> {f.name}</p>
                                                             <p><strong>মোবাইল:</strong> {f.mobile}</p>
-                                                            <p><strong>হল:</strong> {f.hall}</p>
-                                                            <p><strong>বিভাগ:</strong> {f.department}</p>
-                                                            <p><strong>ইমেইল:</strong> {f.email}</p>
-                                                            <p><strong>শিক্ষাবর্ষ:</strong> {f.session}</p>
                                                         </div>
                                                     )}
                                                 </div>
@@ -1152,24 +693,10 @@ function AdminPage() {
                             </div>
                              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                                 {isLoading ? (
-                                    Array.from({ length: 3 }).map((_, index) => (
-                                        <Card key={index} className="p-4 bg-primary/5 flex items-center justify-between">
-                                            <div className="flex items-center gap-4">
-                                                <Skeleton className="h-12 w-12 rounded-full" />
-                                                <div className="space-y-2">
-                                                    <Skeleton className="h-4 w-24" />
-                                                    <Skeleton className="h-3 w-16" />
-                                                </div>
-                                            </div>
-                                            <div className="flex items-center gap-2">
-                                                <Skeleton className="h-8 w-8" />
-                                                <Skeleton className="h-8 w-8" />
-                                            </div>
-                                        </Card>
-                                    ))
+                                    Array.from({ length: 3 }).map((_, index) => <Skeleton key={index} height={80}/>)
                                 ) : (
                                     teamMembers.map(tm => (
-                                        <Card key={tm.id} className="p-4 bg-primary/5 flex items-center justify-between">
+                                        <Card key={tm.id} className="p-4 bg-card flex items-center justify-between">
                                             <div className="flex items-center gap-4">
                                                 <Image src={tm.image} alt={tm.name} width={50} height={50} className="rounded-full object-cover" />
                                                 <div>
@@ -1195,173 +722,6 @@ function AdminPage() {
             </Accordion>
         </main>
       </div>
-
-      {/* Commitment Form Dialog */}
-      <Dialog open={isCommitmentFormOpen} onOpenChange={setIsCommitmentFormOpen}>
-            <DialogContent>
-                <DialogHeader>
-                    <DialogTitle>{isEditingCommitment ? 'প্রতিশ্রুতি সম্পাদনা করুন' : 'নতুন প্রতিশ্রুতি যোগ করুন'}</DialogTitle>
-                    <DialogDescription>
-                        এখানে প্রতিশ্রুতির শিরোনাম, বর্ণনা এবং আইকন যোগ বা পরিবর্তন করুন।
-                    </DialogDescription>
-                </DialogHeader>
-                <form onSubmit={handleCommitmentFormSubmit} className="space-y-4">
-                    <div className="space-y-2">
-                        <Label htmlFor="title">শিরোনাম</Label>
-                        <Input
-                            id="title"
-                            value={currentCommitment.title || ''}
-                            onChange={(e) => setCurrentCommitment({ ...currentCommitment, title: e.target.value })}
-                            required
-                        />
-                    </div>
-                    <div className="space-y-2">
-                        <Label htmlFor="description">বর্ণনা</Label>
-                        <Textarea
-                            id="description"
-                            value={currentCommitment.description || ''}
-                            onChange={(e) => setCurrentCommitment({ ...currentCommitment, description: e.target.value })}
-                            required
-                        />
-                    </div>
-                    <div className="space-y-2">
-                        <Label htmlFor="icon">আইকন</Label>
-                        <Select
-                            value={currentCommitment.icon}
-                            onValueChange={(value) => setCurrentCommitment({ ...currentCommitment, icon: value })}
-                        >
-                            <SelectTrigger>
-                                <SelectValue placeholder="আইকন নির্বাচন করুন" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectItem value="BrainCircuit">গবেষণা (BrainCircuit)</SelectItem>
-                                <SelectItem value="BookOpenCheck">প্রকাশনা (BookOpenCheck)</SelectItem>
-                                <SelectItem value="Library">লাইব্রেরি (Library)</SelectItem>
-                            </SelectContent>
-                        </Select>
-                    </div>
-                    <DialogFooter>
-                        <Button type="submit">{isEditingCommitment ? 'সংরক্ষণ করুন' : 'যোগ করুন'}</Button>
-                        <DialogClose asChild>
-                            <Button type="button" variant="secondary" onClick={closeCommitmentForm}>বাতিল</Button>
-                        </DialogClose>
-                    </DialogFooter>
-                </form>
-            </DialogContent>
-        </Dialog>
-        
-        {/* Academic Achievement Form Dialog */}
-        <Dialog open={isAchievementFormOpen} onOpenChange={setIsAchievementFormOpen}>
-            <DialogContent className="max-w-lg w-full flex flex-col max-h-[90vh]">
-                <form onSubmit={handleAchievementFormSubmit} className="flex flex-col flex-grow min-h-0">
-                    <DialogHeader className="flex-shrink-0">
-                        <DialogTitle>{isEditingAchievement ? 'অর্জন সম্পাদনা করুন' : 'নতুন অর্জন যোগ করুন'}</DialogTitle>
-                        <DialogDescription>
-                            এখানে একাডেমিক অর্জনের ছবি, শিরোনাম, এবং বর্ণনা যোগ বা পরিবর্তন করুন।
-                        </DialogDescription>
-                    </DialogHeader>
-                    <ScrollArea className="flex-grow my-4 pr-6 -mr-6">
-                        <div className="space-y-4">
-                             <div className="space-y-2">
-                                <Label htmlFor="ach-image">ছবির URL</Label>
-                                <Input
-                                    id="ach-image"
-                                    value={currentAchievement.image || ''}
-                                    onChange={(e) => setCurrentAchievement({ ...currentAchievement, image: e.target.value })}
-                                    placeholder="https://placehold.co/600x400.png"
-                                    required
-                                />
-                            </div>
-                            <div className="space-y-2">
-                                <Label htmlFor="ach-image-hint">ছবির Hint (for AI)</Label>
-                                <Input
-                                    id="ach-image-hint"
-                                    value={currentAchievement.imageHint || ''}
-                                    onChange={(e) => setCurrentAchievement({ ...currentAchievement, imageHint: e.target.value })}
-                                    placeholder="e.g. award ceremony"
-                                    required
-                                />
-                            </div>
-                            <div className="space-y-2">
-                                <Label htmlFor="ach-title">শিরোনাম</Label>
-                                <Input
-                                    id="ach-title"
-                                    value={currentAchievement.title || ''}
-                                    onChange={(e) => setCurrentAchievement({ ...currentAchievement, title: e.target.value })}
-                                    required
-                                />
-                            </div>
-                            <div className="space-y-2">
-                                <Label htmlFor="ach-description">বর্ণনা</Label>
-                                <Textarea
-                                    id="ach-description"
-                                    value={currentAchievement.description || ''}
-                                    onChange={(e) => setCurrentAchievement({ ...currentAchievement, description: e.target.value })}
-                                    required
-                                />
-                            </div>
-                        </div>
-                    </ScrollArea>
-                    <DialogFooter className="flex-shrink-0 pt-4">
-                        <Button type="submit">{isEditingAchievement ? 'সংরক্ষণ করুন' : 'যোগ করুন'}</Button>
-                        <DialogClose asChild>
-                            <Button type="button" variant="secondary" onClick={closeAchievementForm}>বাতিল</Button>
-                        </DialogClose>
-                    </DialogFooter>
-                </form>
-            </DialogContent>
-        </Dialog>
-
-
-        {/* Social Work Form Dialog */}
-        <Dialog open={isSocialWorkFormOpen} onOpenChange={setIsSocialWorkFormOpen}>
-            <DialogContent>
-                <DialogHeader>
-                    <DialogTitle>নতুন সামাজিক কাজের ছবি যোগ করুন</DialogTitle>
-                    <DialogDescription>
-                        এখানে সামাজিক কাজের ছবির URL, alt টেক্সট এবং AI hint যোগ করুন।
-                    </DialogDescription>
-                </DialogHeader>
-                <form onSubmit={handleSocialWorkFormSubmit} className="space-y-4">
-                    <div className="space-y-2">
-                        <Label htmlFor="sw-image">ছবির URL</Label>
-                        <Input
-                            id="sw-image"
-                            value={currentSocialWork.image || ''}
-                            onChange={(e) => setCurrentSocialWork({ ...currentSocialWork, image: e.target.value })}
-                             placeholder="https://placehold.co/600x800.png"
-                            required
-                        />
-                    </div>
-                    <div className="space-y-2">
-                        <Label htmlFor="sw-alt">ছবির বর্ণনা (Alt Text)</Label>
-                        <Input
-                            id="sw-alt"
-                            value={currentSocialWork.alt || ''}
-                            onChange={(e) => setCurrentSocialWork({ ...currentSocialWork, alt: e.target.value })}
-                             placeholder="e.g., রক্তদান কর্মসূচি"
-                            required
-                        />
-                    </div>
-                     <div className="space-y-2">
-                        <Label htmlFor="sw-image-hint">ছবির Hint (for AI)</Label>
-                        <Input
-                            id="sw-image-hint"
-                            value={currentSocialWork.imageHint || ''}
-                            onChange={(e) => setCurrentSocialWork({ ...currentSocialWork, imageHint: e.target.value })}
-                             placeholder="e.g. blood donation"
-                            required
-                        />
-                    </div>
-                    <DialogFooter>
-                        <Button type="submit">যোগ করুন</Button>
-                        <DialogClose asChild>
-                            <Button type="button" variant="secondary" onClick={closeSocialWorkForm}>বাতিল</Button>
-                        </DialogClose>
-                    </DialogFooter>
-                </form>
-            </DialogContent>
-        </Dialog>
 
         {/* Gallery Image Form Dialog */}
         <Dialog open={isGalleryImageFormOpen} onOpenChange={setIsGalleryImageFormOpen}>
@@ -1407,56 +767,6 @@ function AdminPage() {
                         <Button type="submit">যোগ করুন</Button>
                         <DialogClose asChild>
                             <Button type="button" variant="secondary" onClick={closeGalleryImageForm}>বাতিল</Button>
-                        </DialogClose>
-                    </DialogFooter>
-                </form>
-            </DialogContent>
-        </Dialog>
-
-        {/* Hero Image Form Dialog */}
-        <Dialog open={isHeroImageFormOpen} onOpenChange={setIsHeroImageFormOpen}>
-            <DialogContent>
-                <DialogHeader>
-                    <DialogTitle>নতুন হিরো ছবি যোগ করুন</DialogTitle>
-                    <DialogDescription>
-                        এখানে ক্যারোসেলের জন্য ছবির URL, alt টেক্সট এবং AI hint যোগ করুন।
-                    </DialogDescription>
-                </DialogHeader>
-                <form onSubmit={handleHeroImageFormSubmit} className="space-y-4">
-                    <div className="space-y-2">
-                        <Label htmlFor="hero-src">ছবির URL</Label>
-                        <Input
-                            id="hero-src"
-                            value={currentHeroImage.src || ''}
-                            onChange={(e) => setCurrentHeroImage({ ...currentHeroImage, src: e.target.value })}
-                             placeholder="https://placehold.co/1200x300.png"
-                            required
-                        />
-                    </div>
-                    <div className="space-y-2">
-                        <Label htmlFor="hero-alt">ছবির বর্ণনা (Alt Text)</Label>
-                        <Input
-                            id="hero-alt"
-                            value={currentHeroImage.alt || ''}
-                            onChange={(e) => setCurrentHeroImage({ ...currentHeroImage, alt: e.target.value })}
-                             placeholder="e.g., নির্বাচনী ব্যানার"
-                            required
-                        />
-                    </div>
-                     <div className="space-y-2">
-                        <Label htmlFor="hero-hint">ছবির Hint (for AI)</Label>
-                        <Input
-                            id="hero-hint"
-                            value={currentHeroImage.hint || ''}
-                            onChange={(e) => setCurrentHeroImage({ ...currentHeroImage, hint: e.target.value })}
-                             placeholder="e.g. political banner"
-                            required
-                        />
-                    </div>
-                    <DialogFooter>
-                        <Button type="submit">যোগ করুন</Button>
-                        <DialogClose asChild>
-                            <Button type="button" variant="secondary" onClick={closeHeroImageForm}>বাতিল</Button>
                         </DialogClose>
                     </DialogFooter>
                 </form>
@@ -1587,6 +897,55 @@ function AdminPage() {
                         <Button type="submit">{isEditingTestimonial ? 'সংরক্ষণ করুন' : 'যোগ করুন'}</Button>
                         <DialogClose asChild>
                             <Button type="button" variant="secondary" onClick={closeTestimonialForm}>বাতিল</Button>
+                        </DialogClose>
+                    </DialogFooter>
+                </form>
+            </DialogContent>
+        </Dialog>
+
+        {/* News Form Dialog */}
+        <Dialog open={isNewsFormOpen} onOpenChange={setIsNewsFormOpen}>
+            <DialogContent className="max-w-3xl w-full flex flex-col max-h-[90vh]">
+                 <form onSubmit={handleNewsFormSubmit} className="flex flex-col flex-grow min-h-0">
+                    <DialogHeader className="flex-shrink-0">
+                        <DialogTitle>{isEditingNews ? 'সংবাদ সম্পাদনা করুন' : 'নতুন সংবাদ যোগ করুন'}</DialogTitle>
+                    </DialogHeader>
+                    <ScrollArea className="flex-grow my-4 pr-6 -mr-6">
+                        <div className="space-y-4">
+                             <div className="space-y-2">
+                                <Label htmlFor="news-title">শিরোনাম</Label>
+                                <Input id="news-title" value={currentNews.title || ''} onChange={(e) => setCurrentNews({ ...currentNews, title: e.target.value })} required />
+                            </div>
+                             <div className="space-y-2">
+                                <Label htmlFor="news-category">ক্যাটাগরি</Label>
+                                <Input id="news-category" value={currentNews.category || ''} onChange={(e) => setCurrentNews({ ...currentNews, category: e.target.value })} required />
+                            </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="news-date">তারিখ</Label>
+                                <Input type="date" id="news-date" value={currentNews.date || ''} onChange={(e) => setCurrentNews({ ...currentNews, date: e.target.value })} required />
+                            </div>
+                             <div className="space-y-2">
+                                <Label htmlFor="news-image">ছবির URL</Label>
+                                <Input id="news-image" value={currentNews.image || ''} onChange={(e) => setCurrentNews({ ...currentNews, image: e.target.value })} required />
+                            </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="news-image-hint">ছবির Hint</Label>
+                                <Input id="news-image-hint" value={currentNews.imageHint || ''} onChange={(e) => setCurrentNews({ ...currentNews, imageHint: e.target.value })} />
+                            </div>
+                             <div className="space-y-2">
+                                <Label htmlFor="news-description">সংক্ষিপ্ত বিবরণ</Label>
+                                <Textarea id="news-description" value={currentNews.description || ''} onChange={(e) => setCurrentNews({ ...currentNews, description: e.target.value })} required />
+                            </div>
+                             <div className="space-y-2">
+                                <Label htmlFor="news-content">বিস্তারিত কন্টেন্ট</Label>
+                                <Textarea id="news-content" rows={10} value={currentNews.content || ''} onChange={(e) => setCurrentNews({ ...currentNews, content: e.target.value })} required />
+                            </div>
+                        </div>
+                    </ScrollArea>
+                    <DialogFooter className="flex-shrink-0 pt-4">
+                        <Button type="submit">{isEditingNews ? 'আপডেট করুন' : 'যোগ করুন'}</Button>
+                        <DialogClose asChild>
+                            <Button type="button" variant="secondary" onClick={closeNewsForm}>বাতিল</Button>
                         </DialogClose>
                     </DialogFooter>
                 </form>

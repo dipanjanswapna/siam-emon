@@ -15,8 +15,9 @@ import { collection, addDoc, serverTimestamp, doc, getDoc, getDocs, setDoc, upda
 import { db } from "@/lib/firebase";
 import { useToast } from "@/hooks/use-toast";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Skeleton } from "@/components/ui/skeleton";
-import useEmblaCarousel, { EmblaCarouselType, EmblaOptionsType } from "embla-carousel-react";
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 
 type DotButtonPropType = {
@@ -29,7 +30,7 @@ const DotButton: React.FC<DotButtonPropType> = (props) => {
 
   return (
     <button
-      className={`h-3 w-3 rounded-full mx-1 ${selected ? 'bg-primary' : 'bg-muted'}`}
+      className={`h-3 w-3 rounded-full mx-1 transition-colors duration-300 ${selected ? 'bg-primary' : 'bg-muted'}`}
       type="button"
       onClick={onClick}
     />
@@ -59,7 +60,6 @@ export default function Home() {
 }
 
 function HeroSection() {
-
     return (
         <section className="relative text-center text-white h-80 md:h-96">
             <div className="overflow-hidden h-full">
@@ -79,7 +79,7 @@ function HeroSection() {
 
             <div className="container absolute inset-0 z-10 mx-auto px-4 flex flex-col justify-center items-center">
                 <div className="max-w-4xl mx-auto">
-                    <Image src="https://i.postimg.cc/pX05kCjD/moi-logo.png" alt="মই প্রতীক" width={100} height={100} className="mx-auto drop-shadow-lg" />
+                    <div className="text-6xl mb-4">🪜</div>
                     <h1 className="text-4xl md:text-6xl font-bold font-headline drop-shadow-lg mt-4">ডাঃ মনীষা চক্রবর্ত্তী</h1>
                     <p className="mt-4 text-xl md:text-2xl font-semibold text-primary-foreground/90 drop-shadow-md">
                         বরিশাল-৫ আসনে গণতান্ত্রিক যুক্তফ্রন্ট সমর্থিত বাসদ মনোনীত প্রার্থী
@@ -87,7 +87,7 @@ function HeroSection() {
                     <p className="mt-6 text-lg md:text-xl max-w-3xl mx-auto font-body drop-shadow-md">
                         সংসদকে শ্রমজীবী মানুষের অধিকার আদায়ের প্রতিষ্ঠানে পরিণত করতে ডাঃ মনীষা চক্রবর্ত্তীকে মই মার্কায় আপনার সমর্থন দিন।
                     </p>
-                    <div className="mt-8 flex gap-4 justify-center">
+                    <div className="mt-8 flex flex-wrap justify-center gap-4">
                         <Button asChild size="lg" className="font-headline text-lg">
                             <Link href="/manifesto">আমাদের ইশতেহার</Link>
                         </Button>
@@ -103,7 +103,7 @@ function HeroSection() {
 
 
 function NoticeSection() {
-    const [noticeText, setNoticeText] = useState("বরিশালকে পাল্টাতে মই মার্কায় ভোট চাই!");
+    const [noticeText, setNoticeText] = useState("");
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
@@ -114,9 +114,12 @@ function NoticeSection() {
                 if (!noticeSnapshot.empty) {
                     const noticeDoc = noticeSnapshot.docs[0];
                     setNoticeText(noticeDoc.data().text);
+                } else {
+                    setNoticeText("বরিশালকে পাল্টাতে মই মার্কায় ভোট চাই!");
                 }
             } catch (error) {
                 console.error("Error fetching notice:", error);
+                setNoticeText("বরিশালকে পাল্টাতে মই মার্কায় ভোট চাই!");
             } finally {
                 setIsLoading(false);
             }
@@ -126,9 +129,9 @@ function NoticeSection() {
 
     if (isLoading) {
         return (
-            <section className="bg-destructive py-3 text-white w-full overflow-x-hidden">
-                <div className="relative flex items-center whitespace-nowrap">
-                    <p className="text-lg font-headline">নোটিশ লোড হচ্ছে...</p>
+             <section className="bg-destructive py-3 text-white w-full overflow-x-hidden">
+                <div className="container mx-auto px-4">
+                    <Skeleton baseColor="#A00" highlightColor="#C00" />
                 </div>
             </section>
         );
@@ -208,13 +211,17 @@ function ElectionCountdown() {
         return (
             <section className="py-8 md:py-12 bg-background">
                  <div className="container mx-auto px-4 text-center">
-                     <Skeleton className="h-10 w-3/4 mx-auto" />
-                     <div className="mt-8 flex justify-center gap-4 md:gap-8">
-                         <div className="flex flex-col items-center"><Skeleton className="h-24 w-24" /><Skeleton className="h-6 w-16 mt-2" /></div>
-                         <div className="flex flex-col items-center"><Skeleton className="h-24 w-24" /><Skeleton className="h-6 w-16 mt-2" /></div>
-                         <div className="flex flex-col items-center"><Skeleton className="h-24 w-24" /><Skeleton className="h-6 w-16 mt-2" /></div>
-                         <div className="flex flex-col items-center"><Skeleton className="h-24 w-24" /><Skeleton className="h-6 w-16 mt-2" /></div>
-                     </div>
+                    <SkeletonTheme baseColor="var(--background)" highlightColor="var(--card)">
+                         <Skeleton height={40} width="75%" style={{ margin: '0 auto' }} />
+                         <div className="mt-8 flex justify-center gap-4 md:gap-8">
+                             {[...Array(4)].map((_, i) => (
+                                <div key={i} className="flex flex-col items-center">
+                                    <Skeleton height={96} width={96} />
+                                    <Skeleton height={24} width={64} className="mt-2" />
+                                </div>
+                             ))}
+                         </div>
+                    </SkeletonTheme>
                  </div>
             </section>
         );
@@ -228,7 +235,7 @@ function ElectionCountdown() {
                     ঐতিহাসিক ১২ই ফেব্রুয়ারির অপেক্ষা
                 </h2>
                 <p className="mt-4 text-lg md:text-xl max-w-3xl mx-auto text-muted-foreground">শোষণমুক্তির নতুন দিগন্ত উন্মোচনের আর মাত্র...</p>
-                <div className="mt-8 flex flex-row flex-nowrap justify-center gap-2 md:gap-4">
+                <div className="mt-8 flex flex-row flex-wrap justify-center gap-2 md:gap-4">
                     {timerComponents}
                 </div>
                  <p className="mt-8 text-lg md:text-xl font-semibold animate-pulse text-destructive">প্রতিটি ভোট গুরুত্বপূর্ণ! আপনার ভোটেই আসবে পরিবর্তন।</p>
@@ -317,7 +324,7 @@ function NewsSection() {
                 <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                     {isLoading ? (
                          Array.from({ length: 3 }).map((_, index) => (
-                             <Card key={index}><Skeleton className="w-full h-80"/></Card>
+                             <Card key={index} className="bg-card"><SkeletonTheme baseColor="var(--card)" highlightColor="var(--background)"><Skeleton height={400}/></SkeletonTheme></Card>
                          ))
                     ) : (
                         news.map((item) => (
@@ -402,7 +409,7 @@ function SocialWorkSection() {
                 <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
                      {isLoading ? (
                          Array.from({ length: 4 }).map((_, index) => (
-                           <Skeleton key={index} className="w-full aspect-[3/4] rounded-lg" />
+                           <SkeletonTheme key={index} baseColor="var(--background)" highlightColor="var(--card)"><Skeleton className="w-full aspect-[3/4] rounded-lg" /></SkeletonTheme>
                          ))
                     ) : (
                         socialWorks.map(sw => (
@@ -441,7 +448,7 @@ function VoteBannerSection() {
         <div className="mt-8 bg-background/20 backdrop-blur-sm border-2 border-dashed border-primary rounded-lg p-6 max-w-md mx-auto shadow-xl">
             <h3 className="font-headline text-4xl font-extrabold text-primary">ডাঃ মনীষা চক্রবর্ত্তী</h3>
             <div className="flex justify-center items-center gap-4 mt-2">
-                 <Image src="https://i.postimg.cc/pX05kCjD/moi-logo.png" alt="মই প্রতীক" width={50} height={50} />
+                 <div className="text-5xl">🪜</div>
                  <p className="font-body text-white text-2xl">মই মার্কা</p>
             </div>
         </div>
@@ -530,8 +537,8 @@ function CampaignGallerySection() {
                      <div className="flex">
                         {isLoading ? (
                             Array.from({ length: 4 }).map((_, i) => (
-                                <div key={i} className="flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_25%] p-2">
-                                    <Skeleton className="w-full h-80 rounded-lg" />
+                                <div key={i} className="flex-[0_0_80%] sm:flex-[0_0_40%] lg:flex-[0_0_25%] p-2">
+                                    <SkeletonTheme baseColor="var(--background)" highlightColor="var(--card)"><Skeleton className="w-full h-80 rounded-lg" /></SkeletonTheme>
                                 </div>
                             ))
                         ) : (
@@ -607,64 +614,39 @@ function TestimonialSection() {
             try {
                 const testimonialsCollection = collection(db, "testimonials");
                 const testimonialsSnapshot = await getDocs(testimonialsCollection);
-                const dbTestimonials = testimonialsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Testimonial));
+                let dbTestimonials = testimonialsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Testimonial));
 
-                const fallbackTestimonials: Testimonial[] = [
-                    {
-                        id: "fallback-1",
-                        name: "কমরেড বজলুর রশিদ ফিরোজ",
-                        role: "সাধারণ সম্পাদক, বাসদ কেন্দ্রীয় কমিটি",
-                        image: "https://i.postimg.cc/t4G2wDk1/male-student-1.jpg",
-                        imageHint: "male leader",
-                        testimonial: "মহান মুক্তিযুদ্ধের চেতনায় একটি অসাম্প্রদায়িক বাংলাদেশ গড়তে মনীষার মতো নেত্রীর বিকল্প নেই।"
-                    },
-                    {
-                        id: "fallback-2",
-                        name: "ইমাম হোসেন খোকন",
-                        role: "সদস্য, বাসদ কেন্দ্রীয় কমিটি বর্ধিত ফোরাম",
-                        image: "https://i.postimg.cc/wxM1807v/male-student-2.jpg",
-                        imageHint: "political activist",
-                        testimonial: "ডাঃ মনীষা বরিশালের জনগণের কন্ঠস্বর। তার লড়াই-সংগ্রাম আমাদের সকলের জন্য অনুপ্রেরণা।"
-                    },
-                    {
-                        id: "fallback-3",
-                        name: "প্রশান্ত দাস হরি",
-                        role: "সাধারণ সম্পাদক, বাংলাদেশের কমিউনিস্ট পার্টি, ঝালকাঠি",
-                        image: "https://i.postimg.cc/sgg5G5wX/political-leader-3.jpg",
-                        imageHint: "senior man",
-                        testimonial: "নারী বিদ্বেষের বিরুদ্ধে এবং শ্রমজীবী মানুষের পক্ষে এমন সোচ্চার কণ্ঠ আমাদের সংসদে প্রয়োজন।"
-                    },
-                ];
-
-                setTestimonials(dbTestimonials.length > 0 ? dbTestimonials : fallbackTestimonials);
+                if(dbTestimonials.length === 0) {
+                     dbTestimonials = [
+                        {
+                            id: "fallback-1",
+                            name: "কমরেড বজলুর রশিদ ফিরোজ",
+                            role: "সাধারণ সম্পাদক, বাসদ কেন্দ্রীয় কমিটি",
+                            image: "https://i.postimg.cc/t4G2wDk1/male-student-1.jpg",
+                            imageHint: "male leader",
+                            testimonial: "মহান মুক্তিযুদ্ধের চেতনায় একটি অসাম্প্রদায়িক বাংলাদেশ গড়তে মনীষার মতো নেত্রীর বিকল্প নেই।"
+                        },
+                        {
+                            id: "fallback-2",
+                            name: "ইমাম হোসেন খোকন",
+                            role: "সদস্য, বাসদ কেন্দ্রীয় কমিটি বর্ধিত ফোরাম",
+                            image: "https://i.postimg.cc/wxM1807v/male-student-2.jpg",
+                            imageHint: "political activist",
+                            testimonial: "ডাঃ মনীষা বরিশালের জনগণের কন্ঠস্বর। তার লড়াই-সংগ্রাম আমাদের সকলের জন্য অনুপ্রেরণা।"
+                        },
+                        {
+                            id: "fallback-3",
+                            name: "প্রশান্ত দাস হরি",
+                            role: "সাধারণ সম্পাদক, বাংলাদেশের কমিউনিস্ট পার্টি, ঝালকাঠি",
+                            image: "https://i.postimg.cc/sgg5G5wX/political-leader-3.jpg",
+                            imageHint: "senior man",
+                            testimonial: "নারী বিদ্বেষের বিরুদ্ধে এবং শ্রমজীবী মানুষের পক্ষে এমন সোচ্চার কণ্ঠ আমাদের সংসদে প্রয়োজন।"
+                        },
+                    ];
+                }
+                setTestimonials(dbTestimonials);
             } catch (error) {
                 console.error("Error fetching testimonials, using fallback.", error);
-                 setTestimonials([
-                    {
-                        id: "fallback-1",
-                        name: "কমরেড বজলুর রশিদ ফিরোজ",
-                        role: "সাধারণ সম্পাদক, বাসদ কেন্দ্রীয় কমিটি",
-                        image: "https://i.postimg.cc/t4G2wDk1/male-student-1.jpg",
-                        imageHint: "male leader",
-                        testimonial: "মহান মুক্তিযুদ্ধের চেতনায় একটি অসাম্প্রদায়িক বাংলাদেশ গড়তে মনীষার মতো নেত্রীর বিকল্প নেই।"
-                    },
-                    {
-                        id: "fallback-2",
-                        name: "ইমাম হোসেন খোকন",
-                        role: "সদস্য, বাসদ কেন্দ্রীয় কমিটি বর্ধিত ফোরাম",
-                        image: "https://i.postimg.cc/wxM1807v/male-student-2.jpg",
-                        imageHint: "political activist",
-                        testimonial: "ডাঃ মনীষা বরিশালের জনগণের কন্ঠস্বর। তার লড়াই-সংগ্রাম আমাদের সকলের জন্য অনুপ্রেরণা।"
-                    },
-                    {
-                        id: "fallback-3",
-                        name: "প্রশান্ত দাস হরি",
-                        role: "সাধারণ সম্পাদক, বাংলাদেশের কমিউনিস্ট পার্টি, ঝালকাঠি",
-                        image: "https://i.postimg.cc/sgg5G5wX/political-leader-3.jpg",
-                        imageHint: "senior man",
-                        testimonial: "নারী বিদ্বেষের বিরুদ্ধে এবং শ্রমজীবী মানুষের পক্ষে এমন সোচ্চার কণ্ঠ আমাদের সংসদে প্রয়োজন।"
-                    },
-                ]);
             } finally {
                 setIsLoading(false);
             }
@@ -682,24 +664,23 @@ function TestimonialSection() {
                     </h2>
                 </div>
                 <div className="mt-12 overflow-hidden" ref={emblaRef}>
-                    <div className="flex">
+                    <div className="flex -ml-4">
                        {isLoading ? (
                            Array.from({ length: 3 }).map((_, i) => (
-                               <div className="flex-[0_0_100%] md:flex-[0_0_33.33%] p-4" key={i}>
-                                   <Card className="bg-card p-6 text-center h-full">
-                                       <Skeleton className="w-24 h-24 rounded-full mx-auto mb-4" />
-                                       <Skeleton className="h-6 w-32 mx-auto mb-2" />
-                                       <Skeleton className="h-4 w-40 mx-auto mb-4" />
-                                       <div className="space-y-2 w-full">
-                                           <Skeleton className="h-4 w-full" />
-                                           <Skeleton className="h-4 w-5/6 mx-auto" />
-                                       </div>
-                                   </Card>
+                               <div className="flex-[0_0_100%] md:flex-[0_0_33.33%] pl-4" key={i}>
+                                    <Card className="bg-card p-6 text-center h-full">
+                                        <SkeletonTheme baseColor="var(--card)" highlightColor="var(--background)">
+                                            <Skeleton circle height={96} width={96} style={{ margin: '0 auto 1rem' }} />
+                                            <Skeleton height={24} width={150} style={{ margin: '0 auto 0.5rem' }} />
+                                            <Skeleton height={20} width={200} style={{ margin: '0 auto 1rem' }} />
+                                            <Skeleton count={3} />
+                                        </SkeletonTheme>
+                                    </Card>
                                </div>
                            ))
                        ) : (
                            testimonials.map((testimonial) => (
-                               <div className="flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_33.33%] p-4" key={testimonial.id}>
+                               <div className="flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_33.33%] pl-4" key={testimonial.id}>
                                    <Card className="bg-card p-6 text-center shadow-lg h-full flex flex-col">
                                        <Image
                                            src={testimonial.image}
