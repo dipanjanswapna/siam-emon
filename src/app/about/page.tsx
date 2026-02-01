@@ -42,14 +42,15 @@ export default function AboutPage() {
         <section className="mb-16">
           <div className="max-w-4xl mx-auto grid md:grid-cols-3 gap-8 items-center">
             <div className="md:col-span-1">
-                <Image
-                  src="https://i.postimg.cc/L6Rk561p/manisha-portrait.jpg"
-                  alt="ডাঃ মনীষা চক্রবর্ত্তী"
-                  width={600}
-                  height={800}
-                  className="rounded-lg object-cover shadow-lg mx-auto"
-                  data-ai-hint="politician portrait"
-                />
+                <div className="relative aspect-square w-full max-w-[300px] mx-auto">
+                    <Image
+                      src="https://i.postimg.cc/T1VgWhkG/image.png"
+                      alt="ডাঃ মনীষা চক্রবর্ত্তী"
+                      fill
+                      className="rounded-lg object-cover shadow-lg"
+                      data-ai-hint="politician portrait"
+                    />
+                </div>
             </div>
             <div className="md:col-span-2 text-center md:text-left">
               <h1 className="font-headline text-5xl md:text-6xl font-bold text-foreground">ডাঃ মনীষা চক্রবর্ত্তী</h1>
