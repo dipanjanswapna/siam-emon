@@ -10,8 +10,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        body: ['"Hind Siliguri"', 'sans-serif'],
-        headline: ['"Hind Siliguri"', 'sans-serif'],
+        body: ['"Li Shadhinata"', 'sans-serif'],
+        headline: ['"Li Shadhinata"', 'sans-serif'],
         code: ['monospace'],
       },
       colors: {
