@@ -64,7 +64,7 @@ function HeroSection() {
         <section className="bg-card py-16 md:py-20 text-center">
             <div className="container mx-auto px-4">
                 <div className="max-w-4xl mx-auto">
-                    <Image src="https://i.postimg.cc/pX05kCjD/moi-logo.png" alt="মই প্রতীক" width={64} height={64} className="mx-auto mb-4" />
+                    <Image src="https://i.postimg.cc/pX41BjTS/image.png" alt="ডাঃ মনীষা চক্রবর্ত্তী লোগো" width={80} height={80} className="mx-auto mb-4 rounded-full" />
                     <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold font-headline text-foreground drop-shadow-lg mt-4">ডাঃ মনীষা চক্রবর্ত্তী</h1>
                     <p className="mt-4 text-lg sm:text-xl md:text-2xl font-semibold text-primary drop-shadow-md">
                         বরিশাল-৫ আসনে গণতান্ত্রিক যুক্তফ্রন্ট সমর্থিত বাসদ মনোনীত প্রার্থী
@@ -430,8 +430,7 @@ function VoteBannerSection() {
         <div className="mt-8 bg-card backdrop-blur-sm border-2 border-dashed border-primary rounded-lg p-6 max-w-md mx-auto shadow-xl">
             <h3 className="font-headline text-4xl font-extrabold text-primary">ডাঃ মনীষা চক্রবর্ত্তী</h3>
             <div className="flex justify-center items-center gap-4 mt-2">
-                 <Image src="https://i.postimg.cc/pX05kCjD/moi-logo.png" alt="মই প্রতীক" width={50} height={50} />
-                 <p className="font-body text-foreground text-2xl">মই মার্কা</p>
+                 <Image src="https://i.postimg.cc/pX41BjTS/image.png" alt="ডাঃ মনীষা চক্রবর্ত্তী লোগো" width={50} height={50} className="rounded-full"/>
             </div>
         </div>
       </div>
@@ -742,7 +741,7 @@ const faqItems = [
     },
     {
         question: "নির্বাচন কবে অনুষ্ঠিত হবে?",
-        answer: "আসন্ন ত্রয়োদש জাতীয় সংসদ নির্বাচন আগামী ১২ই ফেব্রুয়ারী অনুষ্ঠিত হবে।"
+        answer: "আসন্ন ত্রয়োদশ জাতীয় সংসদ নির্বাচন আগামী ১২ই ফেব্রুয়ারী অনুষ্ঠিত হবে।"
     }
 ];
 

@@ -1,4 +1,3 @@
-
 "use client";
 
 import Link from "next/link";
@@ -27,7 +26,7 @@ export function Header() {
       <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
         <div className="flex items-center">
            <Link href="/" className="flex items-center gap-2">
-              <Image src="https://i.postimg.cc/pX05kCjD/moi-logo.png" alt="মই প্রতীক" width={32} height={32} />
+              <Image src="https://i.postimg.cc/pX41BjTS/image.png" alt="ডাঃ মনীষা চক্রবর্ত্তী লোগো" width={40} height={40} className="rounded-full" />
               <span className="font-bold font-headline text-lg sm:text-xl">
                 ডাঃ মনীষা চক্রবর্ত্তী
               </span>
@@ -68,7 +67,7 @@ export function Header() {
                 <SheetContent side="left" className="bg-destructive text-destructive-foreground border-l-0">
                   <div className="flex flex-col gap-6 p-6">
                     <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-2 mb-4">
-                       <Image src="https://i.postimg.cc/pX05kCjD/moi-logo.png" alt="মই প্রতীক" width={32} height={32} />
+                       <Image src="https://i.postimg.cc/pX41BjTS/image.png" alt="ডাঃ মনীষা চক্রবর্ত্তী লোগো" width={40} height={40} className="rounded-full" />
                       <span className="text-xl font-headline font-bold">
                         ডাঃ মনীষা চক্রবর্ত্তী
                       </span>
