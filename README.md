@@ -42,3 +42,4 @@ To get started with the development environment, take a look at the main page co
 
 The project is configured to work with Firebase. The configuration can be found in `src/lib/firebase.ts`. Ensure you have the correct Firebase project credentials set up in your local environment.
 # manisha.ck
+# manisha.ck
