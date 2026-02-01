@@ -7,7 +7,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { ArrowRight, BookOpen, BookOpenCheck, BrainCircuit, Library, Users, Camera, X, Heart, Megaphone, Flag, Award, FileText, Mic, GraduationCap, HandHeart, BookText, ShieldCheck, MessageSquare, Mail, Icon, ImagePlus, Annoyed, HelpCircle, Vote, Share2, DollarSign, Archive, Laptop, Combine, Trophy, VolumeX, Volume2, FlaskConical, HandCoins, BadgePercent, Presentation, Database, Microscope, Quote, Tv, Timer, SearchCheck, Phone } from "lucide-react";
+import { ArrowRight, BookOpen, BookOpenCheck, BrainCircuit, Library, Users, Camera, X, Flag, GraduationCap, HandHeart, ShieldCheck, MessageSquare, Mail, HelpCircle, Vote, Share2, DollarSign, Archive, Laptop, Combine, Trophy, VolumeX, Volume2, FlaskConical, HandCoins, BadgePercent, Presentation, Database, Microscope, Quote, Tv, Timer, SearchCheck, Phone } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogClose } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -21,72 +21,6 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Skeleton } from "@/components/ui/skeleton";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
-
-const carouselItems = [
-  {
-    title: "শিক্ষার্থীদের জন্য গবেষণার সুযোগ",
-    subtitle: "গবেষণাগারে জ্ঞানের আলো",
-    description: "একটি গবেষণামুখী ছাত্র সংসদ গঠনের অঙ্গীকার নিয়ে আমি শিক্ষার্থীদের জন্য গবেষণাগারে প্রয়োজনীয় সুযোগ-সুবিধা নিশ্চিত করতে কাজ করব।",
-    image: "https://i.postimg.cc/9XZXtkTj/photo-2025-08-18-01-30-06.jpg",
-    imageHint: "research opportunity"
-  },
-  {
-    title: "Dean's Award 2025 , জীব বিজ্ঞান অনুষদ",
-    subtitle: "অ্যাকাডেমিক এক্সিলেন্সের জন্য সম্মাননা",
-    description: "ছাত্র-শিক্ষক সম্পর্ক উন্নয়ন, গবেষণা ও প্রকাশনায় অবদান এবং সার্বিক একাডেমিক উৎকর্ষতা সাধনের জন্য আমাকে এই সম্মাননায় ভূষিত করা হয়েছে।",
-    image: "https://i.postimg.cc/7LwWCm7D/Screenshot-2025-08-18-014212.png",
-    imageHint: "receiving award"
-  },
-  {
-    title: "গবেষণামূলক উপস্থাপনা",
-    subtitle: "নতুন ধারণা, নতুন পথ",
-    description: "একটি শিক্ষাবান্ধব পরিবেশ তৈরিতে আমি আমার গবেষণামূলক কাজগুলো শিক্ষার্থীদের সামনে তুলে ধরছি, যা তাদের মধ্যে নতুন ধারণা ও গবেষণার প্রতি আগ্রহ সৃষ্টি করবে।",
-    image: "https://i.postimg.cc/763HDBgz/Screenshot-2025-08-18-020259.png",
-    imageHint: "research presentation"
-  },
-  {
-    title: "গবেষণাগারে নিরলস কাজ",
-    subtitle: "গবেষণায় আধুনিক প্রযুক্তি",
-    description: "একটি উন্নত গবেষণামুখী ছাত্র সংসদ গঠনের অঙ্গীকার নিয়ে আমি শিক্ষার্থীদের জন্য গবেষণাগারে প্রয়োজনীয় আধুনিক সুযোগ-সুবিধা নিশ্চিত করতে কাজ করছি।",
-    image: "https://i.postimg.cc/vHRK5YwG/photo-2025-08-18-02-08-33.jpg",
-    imageHint: "working in lab"
-  },
-  {
-    title: "গবেষণাগারে আমি: জ্ঞানের সন্ধানে",
-    subtitle: "ল্যাবরেটরি থেকে নতুন উদ্ভাবন",
-    description: "একটি উন্নত গবেষণামূলক পরিবেশ নিশ্চিত করার মাধ্যমে শিক্ষার্থীদের মাঝে নতুন উদ্ভাবনী ধারণার জন্ম দিতে আমি নিরলসভাবে কাজ করে যাচ্ছি।",
-    image: "https://i.postimg.cc/wxPZWxXt/photo-2025-08-18-01-23-31.jpg",
-    imageHint: "siam in laboratory"
-  },
-  {
-    title: "জাতীয় সম্মেলনে আমার অংশগ্রহণ",
-    subtitle: "গবেষণা ও প্রকাশনার প্রতি প্রতিশ্রুতি",
-    description: "২৪তম জাতীয় সম্মেলন এবং বাংলাদেশ জুওলজিক্যাল সোসাইটির বার্ষিক সাধারণ সভায় উপস্থিত থেকে আমি দেশের সেরা গবেষক ও শিক্ষাবিদদের সাথে গবেষণা ও প্রকাশনা খাতের ভবিষ্যৎ নিয়ে আলোচনা করি।",
-    image: "https://i.postimg.cc/26MQRS7y/Screenshot-2025-08-18-015837.png",
-    imageHint: "national conference"
-  },
-  {
-    title: "পরিবেশ সুরক্ষা অভিযান",
-    subtitle: "সবুজ বাঁচাও",
-    description: "পরিবেশ রক্ষায় আমি বৃক্ষরোপণ এবং সচেতনতামূলক কার্যক্রম চলমান রেখেছি।",
-    image: "https://i.postimg.cc/7hPr1K0g/photo-2025-08-18-00-47-45.jpg",
-    imageHint: "environment protection campaign"
-  },
-  {
-    title: "শিক্ষায় অবদানের জন্য সম্মাননা",
-    subtitle: "অ্যানিমাল জেনেটিক্স এবং মলিকিউলার বায়োলজি",
-    description: "একটি শিক্ষাবান্ধব পরিবেশ তৈরিতে আমার অবদানের জন্য অ্যানিমাল জেনেটিক্স এবং মলিকিউলার বায়োলজি বিভাগ কর্তৃক আমাকে এই বিশেষ সম্মাননা প্রদান করা হয়।",
-    image: "https://i.postimg.cc/FRpK3W74/photo-2025-08-18-02-08-11.jpg",
-    imageHint: "receiving award biology"
-  },
-    {
-    title: "গবেষণায় আমার সক্রিয় অংশগ্রহণ",
-    subtitle: "ঢাকা বিশ্ববিদ্যালয় প্রাণিবিজ্ঞান বিভাগ কর্তৃক আয়োজিত",
-    description: "বাংলাদেশ জুওলজিক্যাল সোসাইটির বার্ষিক সাধারণ সভায় (২০২৪) উপস্থিত হয়ে আমি গবেষণা ও প্রকাশনা খাতে আমার অঙ্গীকার ব্যক্ত করেছি।",
-    image: "https://i.postimg.cc/PJqYGk1N/photo-2025-08-18-01-08-52.jpg",
-    imageHint: "research participation"
-  },
-];
 
 const icons: { [key: string]: React.ElementType } = {
     BadgePercent,
@@ -106,73 +40,10 @@ const icons: { [key: string]: React.ElementType } = {
     Users
 };
 
-const actionPlanImages = [
-    { src: "https://i.postimg.cc/59qqmzhY/Whats-App-Image-2025-09-05-at-02-12-22-9537f431.jpg", alt: "কর্মপরিকল্পনা ১", hint: "action plan" },
-    { src: "https://i.postimg.cc/Gm9Fr5HG/Whats-App-Image-2025-09-05-at-02-12-19-73b305df.jpg", alt: "কর্মপরিকল্পনা ২", hint: "action plan" },
-    { src: "https://i.postimg.cc/kgZx5vbZ/Whats-App-Image-2025-09-05-at-02-12-19-a4b2ad89.jpg", alt: "কর্মপরিকল্পনা ৩", hint: "action plan" },
-    { src: "https://i.postimg.cc/k5bWRRN5/Whats-App-Image-2025-09-05-at-02-12-20-6fcd5737.jpg", alt: "কর্মপরিকল্পনা ৪", hint: "action plan" },
-    { src: "https://i.postimg.cc/yxVRGfMJ/Whats-App-Image-2025-09-05-at-02-12-21-3e47bf26.jpg", alt: "কর্মপরিকল্পনা ৫", hint: "action plan" },
-    { src: "https://i.postimg.cc/wMVXTKXc/Whats-App-Image-2025-09-05-at-02-12-23-ac331255.jpg", alt: "কর্মপরিকল্পনা ৬", hint: "action plan" },
-    { src: "https://i.postimg.cc/vHY72ByP/Whats-App-Image-2025-09-05-at-02-12-25-78f78f2b.jpg", alt: "কর্মপরিকল্পনা ৭", hint: "action plan" },
-    { src: "https://i.postimg.cc/yxvRCmKL/Whats-App-Image-2025-09-05-at-02-12-22-33ef4f9c.jpg", alt: "কর্মপরিকল্পনা ৮", hint: "action plan" },
-    { src: "https://i.postimg.cc/3rBmGTG2/Whats-App-Image-2025-09-05-at-02-12-22-b88166e9.jpg", alt: "কর্মপরিকল্পনা ৯", hint: "action plan" },
-    { src: "https://i.postimg.cc/Z59dXvML/Whats-App-Image-2025-09-05-at-02-12-17-efb3723a.jpg", alt: "কর্মপরিকল্পনা ১০", hint: "action plan" },
-    { src: "https://i.postimg.cc/85gMRkwm/Whats-App-Image-2025-09-05-at-02-12-20-851d1226.jpg", alt: "কর্মপরিকল্পনা ১১", hint: "action plan" },
-    { src: "https://i.postimg.cc/kXg8FpNz/Whats-App-Image-2025-09-05-at-02-12-16-7b3644d3.jpg", alt: "কর্মপরিকল্পনা ১২", hint: "action plan" },
-    { src: "https://i.postimg.cc/J4YXT5Pn/Whats-App-Image-2025-09-05-at-02-12-18-04f147d5.jpg", alt: "কর্মপরিকল্পনা ১৩", hint: "action plan" },
-    { src: "https://i.postimg.cc/wv5J0KG8/Whats-App-Image-2025-09-05-at-02-12-21-2cb96834.jpg", alt: "কর্মপরিকল্পনা ১৪", hint: "action plan" },
-    { src: "https://i.postimg.cc/SRqLhQMx/Whats-App-Image-2025-09-05-at-02-12-24-2aafe777.jpg", alt: "কর্মপরিকল্পনা ১৫", hint: "action plan" },
-    { src: "https://i.postimg.cc/MK97CSKz/Whats-App-Image-2025-09-05-at-02-12-18-fcea5278.jpg", alt: "কর্মপরিকল্পনা ১৬", hint: "action plan" },
-];
-
-
-function ElectionResultSection() {
-    return (
-        <section className="py-12 md:py-16 bg-background">
-            <div className="container mx-auto px-4">
-                <Card className="shadow-lg max-w-4xl mx-auto bg-card">
-                    <CardHeader>
-                        <CardTitle className="font-headline text-3xl md:text-4xl text-center text-foreground">
-                            আমার সমর্থকদের প্রতি <span className="text-destructive">কৃতজ্ঞতা</span>
-                        </CardTitle>
-                    </CardHeader>
-                    <CardContent className="font-body text-muted-foreground space-y-4 text-lg">
-                        <p>
-                            ২৩৭১ ভোট পেয়ে মিডিয়া হাইপ ও রিজার্ভ ভোট ছাড়া ডাকসুর গবেষণা ও প্রকাশনা সম্পাদক পদে ৩য় হয়ে হেরেছি। আলহামদুলিল্লাহ❤️।
-                        </p>
-                        <p>
-                            আমি সন্তুষ্ট এবং কৃতজ্ঞ এই ২৩৭১ জন মানুষ আমার বিগত সময়ের কাজ ও আমাকে যোগ্য মনে করে আস্থা রেখেছেন।
-                            নির্বাচনের শুরু থেকে আমি গবেষণা ও প্রকাশনা সম্পাদক পদ এবং সেন্ট্রাল সদস্য পদ - ২ টার ফর্মই তুলেছিলাম।
-                            অনেকেই গবেষণা ও প্রকাশনায় লড়তে নিষেধ করেছেন যেহেতু এই পদে হার সুনিশ্চিত ( মিডিয়া হাইপ ও একজনকে সবাই ছেড়ে দিচ্ছে দেখে ) কিন্তু এইরকম ভাইরাল কোটা আমার কাছে সঠিক মনে হয়নি এবং আমি যেহেতু এই ফিল্ডে কাজ করেছি বিগত ২ বছর ধরে তাই স্রোতের বিপরীতে গিয়ে এই পদেই লড়াই করেছি।
-                        </p>
-                        <p>
-                            ডাকসু জিততেই হবে এটা আমার লক্ষ্য ছিলো না কখনও। কিন্তু সেন্ট্রালে মিডিয়া হাইপ ও ক্যাম্পাসের সকলকে নিজের কাজ বুঝানো ও নিজেকে পরিচিত করা এই অল্প সময়ে সম্ভব হয়নি + একদিকে রেগুলার ল্যাবের কাজ, অন্যদিকে নির্বাচনী প্রচারণা করা, সম্ভব হয়নি সবার রুমে/হলে গিয়ে কথা বলা/ পৌছানো। কিন্তু তারপরও এই অল্প কয়েকদিনে ঢাবির ২৩৭১ জন যারাই আমাকে ভোট দিয়েছে শুধুমাত্র আমার কাজ দেখে, যোগ্য মনে করেই ভোট দিয়েছে। আমাকে ব্যক্তি সিয়াম ফেরদৌস ইমন হিসেবে ভোট দিয়েছে। আমি আপনাদের সবার প্রতি কৃতজ্ঞ😇।
-                        </p>
-                        <p>
-                            আমি এই ফিল্ডে কাজ করার নতুন অনুপ্রেরণা পেয়েছি। ২৩৭১ জন যে আস্থা রেখেছেন এই আমানত রক্ষায় আমি মেরুদণ্ড সোজা রেখে, কারো সাথে আপোষ না করে কাজ করে যাবো সবার জন্য। এই যাত্রার প্রাণিবিদ্যা পরিবারের সবাই যেভাবে আমার জন্য চেষ্টা করছে, দোয়া করেছে এবং কাজ করেছে এতে আমার বিগত ৬ বছরের যাত্রা পূর্ণতা পেয়েছে। আমি সবার প্রতি কৃতজ্ঞ।
-                        </p>
-                        <p>
-                            এই পদে তন্নী জিতেছে, তাকে অভিনন্দন ও শুভেচ্ছা। তার ইশতেহার গুলো ভালো লেগেছে, এগুলো বাস্তবায়নে কখনও সহযোগিতা প্রয়োজন হলে আমি করবো। দোয়া থাকবে সে যেনো গবেষণামুখী ক্যাম্পাস বিনির্মানে কাজ করে যেমনটা প্রতিশ্রুতি দিয়েছে।
-                        </p>
-                        <p>
-                            শিবিরের প্যানেলের সাজ্জাদ ২য় হয়েছে। তার সাথে ২ টা বিতর্কে কথা হয়েছে, ভালো লেগেছে সাজ্জাদের ব্যবহার। শিবিরের প্যানেলের এই সম্পাদকীয় পদে শুধু বিজয় আসে নি। তাই রিজার্ভ ভোটের চেয়েও মিডিয়া হাইপড বেশি কাজ করে সেন্ট্রাল নির্বাচনে।
-                        </p>
-                        <p>
-                            ডাকসু প্রতিবছর আসুক, প্রতিবছর হোক। তবেই এই ক্যাম্পাস সুন্দর হবে❤️ 
-                            নির্বাচনী প্রচারণায় আমার বান্ধবী, স্টুডেন্ট, বন্ধু, জুনিয়র, সিনিয়র অনেকেই সহযোগিতা করেছেন। এই ২৩৭১ ভোট তোমাদের/তোদের/আপনাদের। চিরকৃতজ্ঞ সবার প্রতি।
-                        </p>
-                    </CardContent>
-                </Card>
-            </div>
-        </section>
-    );
-}
 
 export default function Home() {
   return (
     <div className="flex flex-col">
-      <NewHeroSection />
-      <ElectionResultSection />
       <VideoSection />
       <NoticeSection />
       <ElectionCountdown />
@@ -180,16 +51,11 @@ export default function Home() {
       <VoteBannerSection />
       <VoteCallToActionSection />
       <VoterSearchAdSection />
-      <ActionPlanSection />
       <CommitmentSection />
       <CampaignGallerySection />
-      <ResearchSection />
-      <PublicationSection />
       <LogicalMovementSection />
-      <AcademicAchievementSection />
       <MediaSection />
       <SkillsLeadershipServiceSection />
-      <OrganizerAndEditorSection />
       <SocialWorkSection />
       <TestimonialSection />
       <LeadershipSection />
@@ -275,89 +141,6 @@ function VideoSection() {
             </Button>
         </section>
     );
-}
-
-function NewHeroSection() {
-    const [api, setApi] = React.useState<CarouselApi>()
-    const [current, setCurrent] = React.useState(0)
-    const [count, setCount] = React.useState(0)
-
-    const plugin = React.useRef(
-        Autoplay({ delay: 5000, stopOnInteraction: true })
-    );
-
-    React.useEffect(() => {
-        if (!api) {
-            return
-        }
-
-        setCount(api.scrollSnapList().length)
-        setCurrent(api.selectedScrollSnap() + 1)
-
-        api.on("select", () => {
-            setCurrent(api.selectedScrollSnap() + 1)
-        })
-    }, [api])
-
-
-  return (
-    <section className="w-full bg-card py-8 md:py-12">
-      <div className="container mx-auto">
-        <Carousel
-          setApi={setApi}
-          plugins={[plugin.current]}
-          opts={{
-            align: "start",
-            loop: true,
-          }}
-          className="w-full"
-        >
-          <CarouselContent>
-            {carouselItems.map((item, index) => (
-              <CarouselItem key={index}>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                  <div className="flex flex-col justify-center text-left p-4 md:p-8">
-                    <h2 className="text-4xl md:text-5xl font-bold font-headline text-foreground">{item.title}</h2>
-                    <p className="text-3xl md:text-4xl font-headline text-primary mt-2">{item.subtitle}</p>
-                    <p className="mt-4 text-lg text-muted-foreground font-body">{item.description}</p>
-                    <div className="mt-6 flex gap-4">
-                       <Button asChild size="lg" className="font-headline text-lg">
-                         <Link href="/manifesto">আমার লক্ষ্য</Link>
-                       </Button>
-                       <Button asChild size="lg" variant="secondary" className="font-headline text-lg">
-                         <Link href="/get-involved">যুক্ত হোন</Link>
-                       </Button>
-                    </div>
-                  </div>
-                  <div className="relative h-64 md:h-[450px] rounded-lg overflow-hidden">
-                    <Image
-                      src={item.image}
-                      alt={item.title}
-                      fill
-                      className="object-contain"
-                      data-ai-hint={item.imageHint}
-                    />
-                  </div>
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none" />
-          <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none" />
-        </Carousel>
-         <div className="flex justify-center gap-2 mt-4">
-            {Array.from({ length: count }).map((_, i) => (
-              <button
-                key={i}
-                onClick={() => api?.scrollTo(i)}
-                className={`h-2 w-2 rounded-full ${current === i + 1 ? 'bg-primary' : 'bg-muted'}`}
-                aria-label={`Go to slide ${i + 1}`}
-              />
-            ))}
-          </div>
-      </div>
-    </section>
-  )
 }
 
 function AboutSection() {
@@ -446,36 +229,6 @@ function VoterSearchAdSection() {
                         </div>
                     </div>
                 </Card>
-            </div>
-        </section>
-    );
-}
-
-function ActionPlanSection() {
-    return (
-        <section id="action-plan" className="py-16 md:py-24 bg-card">
-            <div className="container mx-auto px-4">
-                <div className="text-center max-w-4xl mx-auto">
-                    <FileText className="mx-auto h-12 w-12 text-primary" />
-                    <h2 className="font-headline text-4xl font-bold text-foreground mt-4">আমাদের <span className="text-destructive">কর্মপরিকল্পনা</span></h2>
-                    <p className="font-body text-lg mt-2 text-muted-foreground">
-                        আমাদের লক্ষ্য এবং প্রতিশ্রুতিগুলো বাস্তবায়নের জন্য একটি বিস্তারিত কর্মপরিকল্পনা।
-                    </p>
-                </div>
-                <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    {actionPlanImages.map((image, index) => (
-                        <div key={index}>
-                            <Image
-                                src={image.src}
-                                alt={image.alt}
-                                width={900}
-                                height={1600}
-                                className="w-full h-auto rounded-lg"
-                                data-ai-hint={image.hint}
-                            />
-                        </div>
-                    ))}
-                </div>
             </div>
         </section>
     );
@@ -830,185 +583,6 @@ function VoteCallToActionSection() {
     );
 }
 
-const researchActivities = [
-  {
-    icon: Heart,
-    title: "আমার গবেষণা",
-    description: "আমি কেবল একজন প্রার্থী নই, বরং একজন সক্রিয় গবেষক। আমি বাংলাদেশ জুওলজিক্যাল সোসাইটির বার্ষিক সাধারণ সভায় নিয়মিত উপস্থিত থেকে দেশের সেরা গবেষক ও শিক্ষাবিদদের সাথে জ্ঞান আdan-প্রদান করি। আমার নিজস্ব গবেষণাগারে নিরলস কাজ করার অভিজ্ঞতা আমাকে শিক্ষার্থীদের বাস্তব সমস্যাগুলো বুঝতে সাহায্য করে।",
-    images: [
-      { src: "https://i.postimg.cc/vHRK5YwG/photo-2025-08-18-02-08-33.jpg", alt: "গবেষণাগারে কাজ করছি", hint: "working in lab" },
-      { src: "https://i.postimg.cc/9XZXtkTj/photo-2025-08-18-01-30-06.jpg", alt: "গবেষণার সরঞ্জাম", hint: "research equipment" },
-    ],
-  },
-  {
-    icon: Megaphone,
-    title: "আমার আয়োজিত সেমিনার ও আলোচনা সভা",
-    description: "শিক্ষার্থীদের গবেষণায় উৎসাহিত করতে এবং তাদের উচ্চশিক্ষার পথ দেখাতে আমি একটি সেমিনার আয়োজনের পরিকল্পনা করেছি। এই সেমিনারে গবেষণার গুরুত্ব, বিদেশে উচ্চশিক্ষার সুযোগ এবং অভিজ্ঞ গবেষকদের সাথে সরাসরি আলোচনার ব্যবস্থা থাকবে। আমার লক্ষ্য হলো শিক্ষার্থীদের ভবিষ্যতের জন্য প্রস্তুত করা এবং তাদের মধ্যে নতুন কিছু শেখার আগ্রহ তৈরি করা।",
-    images: [
-        { src: "https://i.postimg.cc/ZYNzxJDx/photo-2025-08-21-01-06-15.jpg", alt: "সেমিনারে অংশগ্রহণকারীদের একাংশ", hint: "seminar audience" },
-        { src: "https://i.postimg.cc/4ypCf1hS/photo-2025-08-21-01-06-17.jpg", alt: "আলোচনা সভায় বক্তব্য রাখছি", hint: "speaker presentation" },
-        { src: "https://i.postimg.cc/cJJNRYVv/photo-2025-08-21-01-06-22.jpg", alt: "শিক্ষার্থীদের সাথে মতবিনিময়", hint: "discussion students" },
-        { src: "https://i.postimg.cc/LXYK7S4R/photo-2025-08-21-01-06-24.jpg", alt: "সেমিনারে অতিথিদের একাংশ", hint: "seminar guests" },
-        { src: "https://i.postimg.cc/c4MqPXWK/photo-2025-08-21-01-06-05.jpg", alt: "বক্তব্য রাখার মুহূর্ত", hint: "giving speech" },
-        { src: "https://i.postimg.cc/DyKkCR9k/photo-2025-08-21-01-06-07.jpg", alt: "উপস্থিত শিক্ষার্থীদের একাংশ", hint: "student audience" },
-        { src: "https://i.postimg.cc/fRTPps5F/photo-2025-08-21-01-04-50.jpg", alt: "আলোচনা সভা", hint: "panel discussion" },
-        { src: "https://i.postimg.cc/SRhTrbJg/photo-2025-08-21-01-04-12.jpg", alt: "প্রশ্নোত্তর পর্ব", hint: "q&a session" },
-        { src: "https://i.postimg.cc/fyfHqqdD/photo-2025-08-21-01-04-17.jpg", alt: "শিক্ষার্থীদের সাথে গ্রুপ ছবি", hint: "group photo students" },
-        { src: "https://i.postimg.cc/d1dNrVt7/photo-2025-08-21-01-04-27.jpg", alt: "সেমিনারের একটি মুহূর্ত", hint: "seminar moment" },
-        { src: "https://i.postimg.cc/fbVrWvGf/photo-2025-08-21-01-04-05.jpg", alt: "অংশগ্রহণকারীদের সাথে আলোচনা", hint: "discussion participants" }
-    ],
-  },
-    {
-    icon: Users,
-    title: "আমার আয়োজিত ইয়ুথ কনফারেন্স",
-    description: "গবেষণা ও প্রকাশনা সম্পাদকের দায়িত্ব শুধু পদ অলংকৃত করা নয়, বরং শিক্ষার্থীদের জন্য কার্যকর সুযোগ তৈরি করা। আমি অতীতেও সেই কাজটিই করেছি।\n\nএই ছবিগুলো আমার আয়োজিত কয়েকটি সফল উদ্যোগের প্রমাণ। একটি বড় পরিসরের জাতীয় সম্মেলন থেকে শুরু করে শিক্ষার্থীদের জন্য বিশেষায়িত কর্মশালা—প্রতিটি ক্ষেত্রেই আমি নেতৃত্ব দিয়েছি এবং তরুণদের জন্য শেখার ও নিজেদের মেলে ধরার সুযোগ তৈরি করেছি। কথা দিয়ে নয়, আমি কাজের মাধ্যমে শিক্ষার্থীদের পাশে থাকতে চাই।",
-    images: [
-      { src: "https://i.postimg.cc/KYTxK34X/photo_2025-08-21_17-43_25.jpg", alt: "তরুণ অংশগ্রহণকারীরা কনফারেন্সে অংশ নিচ্ছেন", hint: "youth conference" },
-      { src: "https://i.postimg.cc/bwszhBhw/photo_2025-08-21_17-43_23.jpg", alt: "মঞ্চে বক্তা বক্তব্য রাখছেন", hint: "youth speaker" },
-      { src: "https://i.postimg.cc/ht6KP1Db/photo_2025-08-21_17-43_20.jpg", alt: "তরুণ অংশগ্রহণকারীরা কনফারেন্সে অংশ নিচ্ছেন", hint: "youth conference" },
-    ],
-  },
-];
-
-function ResearchSection() {
-  
-  return (
-    <section className="bg-card py-16 md:py-24">
-      <div className="container mx-auto px-4">
-        <div className="text-center max-w-4xl mx-auto">
-          <Camera className="mx-auto h-12 w-12 text-primary" />
-          <h1 className="font-headline text-5xl md:text-6xl font-bold mt-4 text-foreground">আমার <span className="text-destructive">গবেষণা ও কার্যক্রম</span></h1>
-          <p className="font-body text-lg mt-4 text-muted-foreground">
-            জ্ঞানভিত্তিক সমাজ গঠনে আমার গবেষণা, ওয়ার্কশপ এবং বিভিন্ন কার্যক্রমের ঝলক।
-          </p>
-        </div>
-        <div className="mt-16 space-y-8">
-          {researchActivities.map((activity, index) => (
-            <div key={index} className="grid md:grid-cols-2 gap-8 items-center bg-background p-6 rounded-lg shadow-md">
-              <div className="order-2 md:order-1">
-                <div className="flex items-center gap-3 mb-4">
-                  <activity.icon className="w-8 h-8 text-primary" />
-                  <h3 className="font-headline text-3xl font-bold text-foreground">{activity.title}</h3>
-                </div>
-                <p className="font-body text-muted-foreground whitespace-pre-line">{activity.description}</p>
-              </div>
-               <div className="relative w-full aspect-video rounded-lg overflow-hidden order-1 md:order-2">
-                 <Carousel className="w-full h-full">
-                    <CarouselContent>
-                        {activity.images.map((image, i) => (
-                        <CarouselItem key={i}>
-                            <div className="relative w-full h-full aspect-video">
-                            <Image
-                                src={image.src}
-                                alt={image.alt}
-                                fill
-                                className="object-cover"
-                                data-ai-hint={image.hint}
-                            />
-                            </div>
-                        </CarouselItem>
-                        ))}
-                    </CarouselContent>
-                    {activity.images.length > 1 && (
-                        <>
-                            <CarouselPrevious className="absolute left-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none" />
-                            <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none" />
-                        </>
-                    )}
-                </Carousel>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-
-const publicationActivities = [
-  {
-    icon: BookText,
-    title: "রাজপথ থেকে পড়ার টেবিল, আমি আছি তোমাদের পাশে।",
-    description: "শিক্ষার্থীদের অধিকার আদায়ের সংগ্রামের পাশাপাশি তাদের একাডেমিক স্বপ্নপূরণের পথ সহজ করে দেওয়াও আমার দায়িত্ব বলে মনে করি। আমার লেখা \"Royal Admission Biology\" বইটি সেই চেষ্টারই একটি প্রতিফলন। ভর্তিযুদ্ধে অংশ নেওয়া ছোট ভাই-বোনদের জন্য আমার এই ক্ষুদ্র প্রয়াস, তাদের স্বপ্নযাত্রায় সামান্য সাহায্য করতে পারলেই আমি সার্থক।",
-    images: [
-      { src: "https://i.postimg.cc/8CVbShVj/Screenshot-2025-08-21-170853.png", alt: "Royal Admission Biology বইয়ের কভার", hint: "book cover", link: "https://bdbooks.net/product/Royal-Admission-Biology-1st-&-2nd-Paper-Short-Syllabus---2024-25" },
-      { src: "https://i.postimg.cc/50Dr8XCv/photo-2025-08-21-17-23-48.jpg", alt: "সিয়াম ফেরদৌস ইমন", hint: "author portrait" },
-    ],
-  },
-];
-
-
-function PublicationSection() {
-
-  return (
-    <section className="bg-background py-16 md:py-24">
-      <div className="container mx-auto px-4">
-        <div className="text-center max-w-4xl mx-auto">
-          <BookOpenCheck className="mx-auto h-12 w-12 text-primary" />
-          <h1 className="font-headline text-5xl md:text-6xl font-bold mt-4 text-foreground"><span className="text-destructive">প্রকাশনায়</span> আমি</h1>
-          <p className="font-body text-lg mt-4 text-muted-foreground">
-            জ্ঞানচর্চা ও সৃজনশীলতার প্রসারে প্রকাশনা জগতে আমার উদ্যোগ ও কার্যক্রম।
-          </p>
-        </div>
-        <div className="mt-16 space-y-8">
-          {publicationActivities.map((activity, index) => (
-            <div key={index} className="grid md:grid-cols-2 gap-8 items-center bg-card p-6 rounded-lg shadow-md">
-              <div className="order-2 md:order-1">
-                <div className="flex items-center gap-3 mb-4">
-                   <activity.icon className="w-8 h-8 text-primary" />
-                   <h3 className="font-headline text-3xl font-bold text-foreground">{activity.title}</h3>
-                </div>
-                <p className="font-body text-muted-foreground whitespace-pre-line">{activity.description}</p>
-              </div>
-              <div className="relative w-full aspect-video rounded-lg overflow-hidden order-1 md:order-2">
-                 <Carousel className="w-full h-full">
-                    <CarouselContent>
-                        {activity.images.map((image, i) => (
-                        <CarouselItem key={i}>
-                            {image.link ? (
-                                <Link href={image.link} target="_blank" rel="noopener noreferrer">
-                                    <div className="relative w-full h-full aspect-video">
-                                    <Image
-                                        src={image.src}
-                                        alt={image.alt}
-                                        fill
-                                        className="object-cover"
-                                        data-ai-hint={image.hint}
-                                    />
-                                    </div>
-                                </Link>
-                            ) : (
-                                <div className="relative w-full h-full aspect-video">
-                                <Image
-                                    src={image.src}
-                                    alt={image.alt}
-                                    fill
-                                    className="object-cover"
-                                    data-ai-hint={image.hint}
-                                />
-                                </div>
-                            )}
-                        </CarouselItem>
-                        ))}
-                    </CarouselContent>
-                    {activity.images.length > 1 && (
-                        <>
-                            <CarouselPrevious className="absolute left-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none" />
-                            <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 border-none" />
-                        </>
-                    )}
-                </Carousel>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-
 const logicalMovementActivities = [
   {
     icon: Flag,
@@ -1076,87 +650,6 @@ function LogicalMovementSection() {
         </div>
       </div>
     </section>
-  );
-}
-
-type AcademicAchievement = {
-    id: string;
-    icon: string;
-    title: string;
-    description: string;
-    image: string;
-    imageHint: string;
-};
-
-
-function AcademicAchievementSection() {
-    const [achievements, setAchievements] = useState<AcademicAchievement[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
-
-     useEffect(() => {
-        const fetchAchievements = async () => {
-            setIsLoading(true);
-            const achievementsCollection = collection(db, "academicAchievements");
-            const achievementsSnapshot = await getDocs(achievementsCollection);
-            const achievementsList = achievementsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as AcademicAchievement));
-            setAchievements(achievementsList);
-            setIsLoading(false);
-        };
-
-        fetchAchievements();
-    }, []);
-
-  return (
-    <>
-      <section className="py-16 md:py-24 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="text-center max-w-4xl mx-auto">
-            <h2 className="font-headline text-4xl md:text-5xl font-bold text-foreground">আমার <span className="text-destructive">একাডেমিক</span> অর্জন</h2>
-            <p className="mt-4 font-body text-lg text-muted-foreground">
-              আমার শিক্ষাজীবনের কিছু উল্লেখযোগ্য সাফল্য এবং অর্জন নিচে তুলে ধরা হলো।
-            </p>
-          </div>
-          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {isLoading ? Array.from({length: 4}).map((_, i) => (
-                <Card key={i} className="flex flex-col shadow-lg bg-card overflow-hidden">
-                    <div className="relative w-full aspect-video bg-muted animate-pulse"></div>
-                    <CardHeader className="items-center text-center">
-                        <div className="bg-muted p-3 rounded-full -mt-10 mb-2 border-4 border-card z-10 w-16 h-16 animate-pulse"></div>
-                        <div className="h-6 w-3/4 bg-muted rounded animate-pulse"></div>
-                    </CardHeader>
-                    <CardContent className="text-center flex-grow">
-                        <div className="h-4 w-full bg-muted rounded animate-pulse"></div>
-                        <div className="h-4 w-5/6 bg-muted rounded mt-2 animate-pulse"></div>
-                    </CardContent>
-                </Card>
-            )) : achievements.map((achievement) => {
-               const IconComponent = icons[achievement.icon] || Award;
-               return (
-               <Card key={achievement.id} className="flex flex-col shadow-lg hover:shadow-primary/20 hover:-translate-y-2 transition-all duration-300 bg-card overflow-hidden">
-                 <div className="relative w-full aspect-video">
-                   <Image 
-                     src={achievement.image}
-                     alt={achievement.title}
-                     fill
-                     className="object-cover"
-                     data-ai-hint={achievement.imageHint}
-                   />
-                 </div>
-                <CardHeader className="items-center text-center">
-                  <div className="bg-primary/10 p-3 rounded-full -mt-10 mb-2 border-4 border-card z-10">
-                    <IconComponent className="h-8 w-8 text-primary" />
-                  </div>
-                  <CardTitle className="font-headline text-xl mt-2">{achievement.title}</CardTitle>
-                </CardHeader>
-                <CardContent className="text-center flex-grow">
-                  <p className="font-body text-muted-foreground">{achievement.description}</p>
-                </CardContent>
-              </Card>
-            )})}
-          </div>
-        </div>
-      </section>
-    </>
   );
 }
 
@@ -1313,83 +806,6 @@ function SkillsLeadershipServiceSection() {
                       </div>
                     </div>
                   ))}
-                </div>
-            </div>
-        </section>
-    );
-}
-
-const organizationExperience = [
-    {
-        title: "President",
-        description: "Animal Genetics & Molecular Biology Club- AGMBC, গবেষণা রিলেটেড ক্লাব",
-        image: "https://i.postimg.cc/6pgtWmgz/451374210-3661627947435304-7044717898982288749-n.jpg",
-        link: "https://www.facebook.com/profile.php?id=61556261231666"
-    },
-    {
-        title: "Co-Founder",
-        description: "স্টুডেন্ট এলায়েন্স অফ পিরোজপুর (বলেশ্বর), উচ্চশিক্ষা সহায়ক বিষয়ক অর্গানাইজেশনের",
-        image: "https://i.postimg.cc/pLn3ZXcY/image.png",
-        link: null
-    },
-    {
-        title: "Founder",
-        description: "The Hemoglobin, রক্তদান ও সচেতনতা সৃষ্টি",
-        image: "https://i.postimg.cc/j588TGkS/image.png",
-        link: "https://www.facebook.com/hemoglobinorg.du"
-    },
-    {
-        title: "Founding vice-president",
-        description: "Zoology Debating Club, University of Dhaka, বিভাগের বিতর্ক ক্লাব",
-        image: "https://i.postimg.cc/dQpbTy4t/image.png",
-        link: "https://www.facebook.com/profile.php?id=100090628602499"
-    },
-    {
-        title: "Secretary for Hospitality",
-        description: "F.H Hall Debating Club-FHDC, হলের বিতর্ক সংগঠন",
-        image: "https://i.postimg.cc/RF8Dfk1b/image.png",
-        link: "https://www.facebook.com/FHDC1999"
-    }
-];
-
-function OrganizerAndEditorSection() {
-    const renderCard = (item: typeof organizationExperience[0]) => (
-         <Card key={item.title} className="flex flex-col shadow-lg hover:shadow-primary/20 hover:-translate-y-2 transition-all duration-300 bg-background overflow-hidden h-full">
-             <div className="relative w-full aspect-square">
-                <Image 
-                    src={item.image}
-                    alt={item.title}
-                    fill
-                    className="object-cover"
-                    data-ai-hint="organization logo"
-                />
-            </div>
-            <div className="p-4 text-center flex flex-col flex-grow">
-                <h3 className="font-headline text-xl font-bold">{item.title}</h3>
-                <p className="font-body text-muted-foreground mt-1 flex-grow">{item.description}</p>
-            </div>
-        </Card>
-    );
-
-    return (
-        <section className="py-16 md:py-24 bg-card">
-            <div className="container mx-auto px-4">
-                <div className="text-center max-w-4xl mx-auto">
-                    <Users className="mx-auto h-12 w-12 text-primary" />
-                    <h2 className="font-headline text-4xl md:text-5xl font-bold mt-4 text-foreground">
-                        একজন সংগঠক ও সম্পাদক হিসেবে আমার অভিজ্ঞতা
-                    </h2>
-                </div>
-                <div className="mt-12 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-                    {organizationExperience.map((item) => (
-                        item.link ? (
-                            <Link key={item.title} href={item.link} target="_blank" rel="noopener noreferrer" className="flex flex-col h-full">
-                                {renderCard(item)}
-                            </Link>
-                        ) : (
-                           <div key={item.title} className="flex flex-col h-full">{renderCard(item)}</div>
-                        )
-                    ))}
                 </div>
             </div>
         </section>
@@ -1640,7 +1056,7 @@ const leadershipPoints = [
     { icon: ShieldCheck, text: "জাতির অগ্রগতি আর শিক্ষার্থীদের অধিকার—আমি আছি সবার পাশে, প্রতিটা পদক্ষেপে।" },
     { icon: Users, text: "মাঠে আছি, মাঠে থাকব—আপনাদের সুখ-দুঃখের সঙ্গী হব।" },
     { icon: GraduationCap, text: "কাজ করেছি, নেতৃত্ব দিয়েছি, সংগ্রাম করেছি—আপনাদের পাশে থেকে নিজেকে প্রমাণ করেছি।" },
-    { icon: Megaphone, text: "আপনাদের ভালোবাসা এবং বিশ্বাসই আমার মূলধন। আপনাদের ভোটে আমি আরও ভালো কিছু করে দেখাব।" },
+    { icon: MessageSquare, text: "আপনাদের ভালোবাসা এবং বিশ্বাসই আমার মূলধন। আপনাদের ভোটে আমি আরও ভালো কিছু করে দেখাব।" },
 ];
 
 function LeadershipSection() {
