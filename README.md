@@ -41,3 +41,4 @@ Built with Next.js and Firebase, this project was developed in **Firebase Studio
 To get started with the development environment, take a look at the main page component at `src/app/page.tsx` and the admin panel at `src/app/admin/(protected)/page.tsx`.
 
 The project is configured to work with Firebase. The configuration can be found in `src/lib/firebase.ts`. Ensure you have the correct Firebase project credentials set up in your local environment.
+# manisha.ck
