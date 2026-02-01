@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from 'next/link';
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -106,6 +106,10 @@ export function PromotionalPopup() {
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogContent className="p-0 bg-card border-border shadow-2xl w-[90vw] max-w-xs rounded-xl overflow-hidden">
+                 <DialogHeader className="sr-only">
+                    <DialogTitle>{popupData.title || 'Promotional Offer'}</DialogTitle>
+                    {popupData.description && <DialogDescription>{popupData.description}</DialogDescription>}
+                </DialogHeader>
                 <div className="relative">
                     <Button
                         variant="destructive"
