@@ -1,4 +1,3 @@
-
 "use client";
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -9,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Shield, PlusCircle, Edit, Trash2, LogOut, MessageSquare, Users, Bell, Camera, Quote, Newspaper, Megaphone, Settings } from "lucide-react";
 import { useState, useEffect } from "react";
-import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc, orderBy, query, serverTimestamp, setDoc } from "firebase/firestore";
+import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc, getDoc, orderBy, query, serverTimestamp, setDoc } from "firebase/firestore";
 import { db, auth } from "@/lib/firebase";
 import {
   Dialog,
