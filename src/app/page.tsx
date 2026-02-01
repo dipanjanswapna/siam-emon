@@ -147,54 +147,42 @@ function AboutSection() {
   return (
     <section className="py-12 md:py-16 bg-background">
       <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-5 gap-12 items-center">
-          <div className="md:col-span-2 flex flex-col items-center">
-            <div className="relative w-full max-w-xs mx-auto aspect-[4/5] rounded-lg overflow-hidden shadow-lg group">
-                <Image
+        <Card className="overflow-hidden shadow-lg border-border">
+          <div className="grid md:grid-cols-2">
+            <div className="relative min-h-[300px] md:min-h-0">
+              <Image
                 src="https://i.postimg.cc/tTcVFV1Q/539530889-122093783187002829-1661414873762122234-n-1-Picsart-Ai-Image-Enhancer.jpg"
                 alt="সিয়াম ফেরদৌস ইমন - গবেষণা ও প্রকাশনা সম্পাদক পদপ্রার্থী"
                 fill
-                className="object-contain transform group-hover:scale-105 transition-transform duration-300"
+                className="object-cover"
                 data-ai-hint="politician portrait"
-                />
+              />
             </div>
-             <div className="mt-6 text-center w-full max-w-xs">
-                <div className="bg-primary/20 text-primary font-bold py-1.5 px-3 rounded-md text-sm">
-                    গবেষণা ও প্রকাশনা সম্পাদক
-                </div>
-                <h3 className="font-headline text-3xl font-bold text-foreground my-2">
-                    সিয়াম ফেরদৌস ইমন
-                </h3>
-                <div className="rounded-lg overflow-hidden shadow-lg">
-                    <div className="bg-primary text-primary-foreground font-bold py-1.5 text-sm">
-                        ব্যালট নম্বর
-                    </div>
-                    <div className="bg-card text-destructive text-5xl font-bold py-2">
-                        ০৯
-                    </div>
-                </div>
+            <div className="p-8 md:p-12 flex flex-col justify-center bg-card">
+              <h2 className="font-headline text-4xl md:text-5xl font-bold text-foreground mb-6">আমার পরিচিতি</h2>
+              <div className="font-body text-lg space-y-4 text-muted-foreground">
+                <p>
+                  আমি <span className="text-primary font-bold">সিয়াম ফেরদৌস ইমন</span>, ঢাকা বিশ্ববিদ্যালয়ের ২০১৮-১৯ সেশনের প্রাণিবিদ্যা বিভাগের মাস্টার্সে (Genetics and Molecular Biology Branch) অধ্যয়নরত এবং ফজলুল হক মুসলিম হলের নিয়মিত আবাসিক শিক্ষার্থী। আমি বিগত ৬ বছর ধরে বিশ্ববিদ্যালয় জীবনে বিভিন্ন <span className="text-accent font-semibold">ছাত্রকল্যাণমূলক কার্যক্রম</span>, যোক্তিক ও ন্যায্য দাবি আদায়ের পাশাপাশি <span className="text-accent font-semibold">গবেষণা ও একাডেমিক কর্মকাণ্ডের</span> সাথে শুরু থেকে সক্রিয় আছি।
+                </p>
+                <p>
+                  আপনাদের ভালোবাসা, সহযোগিতা ও আস্থার জোরেই আমি আসন্ন ঢাকা বিশ্ববিদ্যালয়ের কেন্দ্রীয় ছাত্র সংসদ (ডাকসু) নির্বাচনে <span className="bg-destructive/20 text-destructive font-bold p-1 rounded">গবেষণা ও প্রকাশনা সম্পাদক পদে</span> প্রার্থী হওয়ার সিদ্ধান্ত নিয়েছি।
+                </p>
+              </div>
+
+              <div className="mt-8 bg-background/50 border-2 border-dashed border-primary rounded-lg p-6 max-w-xs text-center mx-auto md:mx-0 shadow-lg">
+                  <h3 className="font-headline text-3xl font-extrabold text-primary">সিয়াম ফেরদৌস ইমন</h3>
+                  <p className="font-body text-foreground text-xl mt-1">ব্যালট নং <span className="font-extrabold text-4xl text-destructive">০৯</span></p>
+                  <p className="font-body text-muted-foreground text-lg">গবেষণা ও প্রকাশনা সম্পাদক পদপ্রার্থী</p>
+              </div>
+
+              <Button asChild className="mt-8 font-headline text-lg w-fit mx-auto md:mx-0">
+                <Link href="/about">
+                  আমার সম্পর্কে আরও জানুন <ArrowRight className="ml-2 h-5 w-5" />
+                </Link>
+              </Button>
             </div>
           </div>
-          <div className="md:col-span-3 text-center md:text-left">
-            <h2 className="font-headline text-4xl md:text-5xl font-bold text-foreground mb-6">আমার পরিচিতি</h2>
-            <div className="font-body text-lg md:text-xl space-y-4 text-muted-foreground">
-              <p>
-                আমি <span className="text-primary font-bold">সিয়াম ফেরদৌস ইমন</span>, ঢাকা বিশ্ববিদ্যালয়ের ২০১৮-১৯ সেশনের প্রাণিবিদ্যা বিভাগের মাস্টার্সে (Genetics and Molecular Biology Branch) অধ্যয়নরত এবং ফজলুল হক মুসলিম হলের নিয়মিত আবাসিক শিক্ষার্থী। আমি বিগত ৬ বছর ধরে বিশ্ববিদ্যালয় জীবনে বিভিন্ন <span className="text-accent font-semibold">ছাত্রকল্যাণমূলক কার্যক্রম</span>, যোক্তিক ও ন্যায্য দাবি আদায়ের পাশাপাশি <span className="text-accent font-semibold">গবেষণা ও একাডেমিক কর্মকাণ্ডের</span> সাথে শুরু থেকে সক্রিয় আছি।
-              </p>
-              <p>
-                আপনাদের ভালোবাসা, সহযোগিতা ও আস্থার জোরেই আমি আসন্ন ঢাকা বিশ্ববিদ্যালয়ের কেন্দ্রীয় ছাত্র সংসদ (ডাকসু) নির্বাচনে <span className="bg-destructive/20 text-destructive font-bold p-1 rounded">গবেষণা ও প্রকাশনা সম্পাদক পদে</span> প্রার্থী হওয়ার সিদ্ধান্ত নিয়েছি।
-              </p>
-              <p>
-              আমি প্রতিশ্রুতি দিচ্ছি, যদি আপনারা আমাকে ডাকসু ২০২৫-এ গবেষণা ও প্রকাশনা সম্পাদক হিসেবে দায়িত্ব দেন, তবে আমি আপনাদের জন্য একটি কার্যকর এবং ছাত্রবান্ধব পরিবেশ তৈরি করতে কাজ করে যাবো।
-              </p>
-            </div>
-            <Button asChild className="mt-8 font-headline text-lg">
-              <Link href="/about">
-                আমার সম্পর্কে আরও জানুন <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
-            </Button>
-          </div>
-        </div>
+        </Card>
       </div>
     </section>
   );
@@ -1462,3 +1450,4 @@ function SupportSection() {
         </section>
     );
 }
+
