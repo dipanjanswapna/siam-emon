@@ -6,7 +6,7 @@ service cloud.firestore {
 
     function isAdmin() {
       // Admin UID from src/hooks/use-auth.tsx
-      return request.auth.uid == 'jY5SNkuZxbgadjdZzSe9Favqs7n1';
+      return request.auth.uid == 'SoeZElRyJTPu7771IemAxNp8PtZ2';
     }
 
     match /commitments/{commitmentId} {
@@ -38,6 +38,11 @@ service cloud.firestore {
       allow read: if true;
       allow write: if isAdmin();
     }
+    
+    match /news/{newsId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
 
     match /siteSettings/{settingId} {
       allow read: if true;
@@ -45,11 +50,6 @@ service cloud.firestore {
     }
 
     match /gallery/{imageId} {
-      allow read: if true;
-      allow write: if isAdmin();
-    }
-
-    match /heroImages/{imageId} {
       allow read: if true;
       allow write: if isAdmin();
     }

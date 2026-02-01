@@ -3,7 +3,7 @@
 
 import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { GraduationCap, Briefcase, Award, CheckCircle, HeartHandshake, Users, UserCheck } from "lucide-react";
+import { GraduationCap, Briefcase, HeartHandshake, Users, UserCheck } from "lucide-react";
 import { useState, useEffect } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/lib/firebase";
@@ -106,6 +106,46 @@ export default function AboutPage() {
                     <Card className="p-6 bg-card"><UserCheck className="w-8 h-8 text-primary mb-2" /> <p>লুটপাটের রাজনীতির বিপরীতে গণমানুষের অর্থায়নে রাজনীতিতে বিশ্বাসী।</p></Card>
                 </div>
               </section>
+
+               <section id="team" className="py-16 md:py-24">
+                <div className="text-center max-w-4xl mx-auto">
+                    <Users className="mx-auto h-12 w-12 text-primary" />
+                    <h1 className="font-headline text-5xl md:text-6xl font-bold mt-4 text-foreground">আমার পথচলার সঙ্গীরা</h1>
+                </div>
+                <div className="mt-16 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8">
+                    {isLoading ? (
+                        Array.from({ length: 6 }).map((_, index) => (
+                            <Card key={index} className="text-center shadow-lg">
+                                <Skeleton className="w-full aspect-square rounded-t-lg" />
+                                <div className="p-4">
+                                    <Skeleton className="h-6 w-3/4 mx-auto" />
+                                    <Skeleton className="h-4 w-1/2 mx-auto mt-2" />
+                                </div>
+                            </Card>
+                        ))
+                    ) : (
+                        teamMembers.map((member) => (
+                            <Card key={member.id} className="text-center shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
+                                <CardContent className="p-0">
+                                    <div className="relative w-full aspect-square rounded-t-lg overflow-hidden border-4 border-transparent group-hover:border-primary transition-all duration-300">
+                                        <Image
+                                            src={member.image}
+                                            alt={member.name}
+                                            fill
+                                            className="object-cover"
+                                            data-ai-hint={member.hint}
+                                        />
+                                    </div>
+                                    <div className="p-4">
+                                        <CardTitle className="font-headline text-xl">{member.name}</CardTitle>
+                                        <CardDescription className="font-body text-primary">{member.role}</CardDescription>
+                                    </div>
+                                </CardContent>
+                            </Card>
+                        ))
+                    )}
+                </div>
+            </section>
             </div>
         </section>
 

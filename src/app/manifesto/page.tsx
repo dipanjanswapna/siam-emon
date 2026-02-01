@@ -83,11 +83,6 @@ export default function ManifestoPage() {
             <h2 className="font-headline text-3xl font-bold text-foreground mt-6">
               আগামী ১২ই ফেব্রুয়ারী, মই মার্কায় ভোট দিন
             </h2>
-            <div className="mt-8 bg-card border-2 border-dashed border-primary rounded-lg p-6 max-w-md mx-auto">
-                <h3 className="font-headline text-3xl font-extrabold text-primary">ডাঃ মনীষা চক্রবর্ত্তী</h3>
-                <p className="font-body text-foreground text-xl mt-1">ব্যালট নং <span className="font-extrabold text-2xl text-destructive">XX</span></p>
-                <p className="font-body text-muted-foreground text-lg">সংসদ সদস্য পদপ্রার্থী, বরিশাল-৫</p>
-            </div>
             <p className="mt-8 font-body text-lg text-muted-foreground">
                 আপনার মূল্যবান ভোটটি দিয়ে আমাদের এই যাত্রায় সঙ্গী হোন। আসুন, আমরা সবাই মিলে একটি শোষণমুক্ত, বৈষম্যহীন, গণতান্ত্রিক ও অসাম্প্রদায়িক বাংলাদেশ গড়ে তুলি।
             </p>

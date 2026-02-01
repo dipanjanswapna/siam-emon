@@ -3,21 +3,38 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { ArrowRight, Users, Camera, Mail, ShieldCheck, MessageSquare, HelpCircle, Vote, Share2, Timer, Phone, Newspaper } from "lucide-react";
+import { ArrowRight, Users, Camera, Mail, ShieldCheck, MessageSquare, HelpCircle, Vote, Share2, Timer, Phone, Newspaper, HeartHandshake } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
-import { collection, addDoc, serverTimestamp, doc, getDoc, getDocs, setDoc, updateDoc, increment } from "firebase/firestore";
+import { collection, addDoc, serverTimestamp, doc, getDoc, getDocs, setDoc, updateDoc, increment, query, orderBy, limit } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { useToast } from "@/hooks/use-toast";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Skeleton } from "@/components/ui/skeleton";
-import useEmblaCarousel from "embla-carousel-react";
+import useEmblaCarousel, { EmblaCarouselType, EmblaOptionsType } from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
+
+type DotButtonPropType = {
+  selected: boolean;
+  onClick: () => void;
+};
+
+const DotButton: React.FC<DotButtonPropType> = (props) => {
+  const { selected, onClick } = props;
+
+  return (
+    <button
+      className={`h-3 w-3 rounded-full mx-1 ${selected ? 'bg-primary' : 'bg-muted'}`}
+      type="button"
+      onClick={onClick}
+    />
+  );
+};
 
 
 export default function Home() {
@@ -28,6 +45,7 @@ export default function Home() {
       <ElectionCountdown />
       <AboutSection />
       <NewsSection />
+      <SocialWorkSection />
       <VoteBannerSection />
       <CampaignGallerySection />
       <TestimonialSection />
@@ -41,83 +59,28 @@ export default function Home() {
 }
 
 function HeroSection() {
-    const [heroImages, setHeroImages] = useState<any[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [logoUrl, setLogoUrl] = useState<string | null>(null);
-
-    const [emblaRef] = useEmblaCarousel({ loop: true, align: 'start' }, [Autoplay({ delay: 5000 })]);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            setIsLoading(true);
-            try {
-                const heroImagesCollection = collection(db, "heroImages");
-                const heroImagesSnapshot = await getDocs(heroImagesCollection);
-                const heroImagesList = heroImagesSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-
-                const settingsDoc = await getDoc(doc(db, "siteSettings", "branding"));
-                if (settingsDoc.exists() && settingsDoc.data().logoUrl) {
-                    setLogoUrl(settingsDoc.data().logoUrl);
-                }
-
-                if (heroImagesList.length > 0) {
-                    setHeroImages(heroImagesList);
-                } else {
-                    setHeroImages([{
-                        id: '1',
-                        src: 'https://i.postimg.cc/DydxCq5b/manisha-banner.jpg',
-                        alt: 'ডাঃ মনীষা চক্রবর্ত্তী',
-                        hint: 'political candidate banner'
-                    }]);
-                }
-            } catch (error) {
-                console.error("Error fetching hero data: ", error);
-                setHeroImages([{
-                    id: '1',
-                    src: 'https://i.postimg.cc/DydxCq5b/manisha-banner.jpg',
-                    alt: 'ডাঃ মনীষা চক্রবর্ত্তী',
-                    hint: 'political candidate banner'
-                }]);
-            } finally {
-                setIsLoading(false);
-            }
-        };
-        fetchData();
-    }, []);
 
     return (
         <section className="relative text-center text-white h-80 md:h-96">
-            {isLoading ? (
-                <Skeleton className="w-full h-full" />
-            ) : (
-                <div className="overflow-hidden h-full" ref={emblaRef}>
-                    <div className="flex h-full">
-                        {heroImages.map((image, index) => (
-                            <div className="relative flex-[0_0_100%] h-full" key={image.id}>
-                                <Image
-                                    src={image.src}
-                                    alt={image.alt}
-                                    fill
-                                    className="object-cover"
-                                    priority={index === 0}
-                                    data-ai-hint={image.hint}
-                                />
-                            </div>
-                        ))}
-                    </div>
+            <div className="overflow-hidden h-full">
+                <div className="relative flex-[0_0_100%] h-full">
+                    <Image
+                        src={'https://i.postimg.cc/DydxCq5b/manisha-banner.jpg'}
+                        alt={'ডাঃ মনীষা চক্রবর্ত্তী'}
+                        fill
+                        className="object-cover"
+                        priority
+                        data-ai-hint={'political candidate banner'}
+                    />
                 </div>
-            )}
+            </div>
 
             <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-transparent" />
 
             <div className="container absolute inset-0 z-10 mx-auto px-4 flex flex-col justify-center items-center">
                 <div className="max-w-4xl mx-auto">
-                    {logoUrl ? (
-                         <Image src={logoUrl} alt="মই প্রতীক" width={100} height={100} className="mx-auto mb-4 drop-shadow-lg rounded-md" data-ai-hint="ladder logo" />
-                    ) : (
-                        <Image src="https://i.postimg.cc/pX05kCjD/moi-logo.png" alt="মই প্রতীক" width={100} height={100} className="mx-auto mb-4 drop-shadow-lg rounded-md" data-ai-hint="ladder logo" />
-                    )}
-                    <h1 className="text-4xl md:text-6xl font-bold font-headline drop-shadow-lg">ডাঃ মনীষা চক্রবর্ত্তী</h1>
+                    <span className="text-6xl md:text-7xl drop-shadow-lg" role="img" aria-label="ladder">🪜</span>
+                    <h1 className="text-4xl md:text-6xl font-bold font-headline drop-shadow-lg mt-4">ডাঃ মনীষা চক্রবর্ত্তী</h1>
                     <p className="mt-4 text-xl md:text-2xl font-semibold text-primary-foreground/90 drop-shadow-md">
                         বরিশাল-৫ আসনে গণতান্ত্রিক যুক্তফ্রন্ট সমর্থিত বাসদ মনোনীত প্রার্থী
                     </p>
@@ -300,12 +263,6 @@ function AboutSection() {
                 </p>
               </div>
 
-              <div className="mt-8 bg-card border-2 border-dashed border-destructive rounded-lg p-6 max-w-xs text-center mx-auto md:mx-0 shadow-lg">
-                  <h3 className="font-headline text-3xl font-extrabold text-destructive">মই মার্কায় ভোট দিন</h3>
-                  <p className="font-body text-foreground text-xl mt-1">ব্যালট নং <span className="font-extrabold text-4xl text-primary">XX</span></p>
-                  <p className="font-body text-muted-foreground text-lg">সংসদ সদস্য পদপ্রার্থী, বরিশাল-৫</p>
-              </div>
-
               <Button asChild className="mt-8 font-headline text-lg w-fit mx-auto md:mx-0">
                 <Link href="/about">
                   তার সম্পর্কে আরও জানুন <ArrowRight className="ml-2 h-5 w-5" />
@@ -319,31 +276,32 @@ function AboutSection() {
   );
 }
 
-const newsItems = [
-    {
-        title: "কাশীপুর বাজারে নির্বাচনী সমাবেশ অনুষ্ঠিত",
-        date: "১ ফেব্রুয়ারী",
-        description: "বাসদ মনোনীত এবং গণতান্ত্রিক যুক্তফ্রন্ট সমর্থিত প্রার্থী ডা. মনীষা চক্রবর্তীর নির্বাচনী সমাবেশ অনুষ্ঠিত হয়। এতে বক্তব্য রাখেন কমরেড বজলুর রশিদ ফিরোজ, আজিমুল জিহাদসহ অন্যান্য নেতৃবৃন্দ।",
-        image: "https://i.postimg.cc/Gpd2g0x3/news-1.jpg",
-        imageHint: "political rally market"
-    },
-    {
-        title: "রূপাতলি অঞ্চলে নির্বাচনী সমাবেশ",
-        date: "৩০ জানুয়ারী",
-        description: "ডা. মনীষা চক্রবর্তীর নির্বাচনী সমাবেশে নেতৃবৃন্দ নারী বিদ্বেষী আচরণের প্রতিবাদ জানান এবং ১২ই ফেব্রুয়ারী মই মার্কায় ভোট দিয়ে শোষণমুক্ত সমাজ গড়ার আহ্বান জানান।",
-        image: "https://i.postimg.cc/C5YgZpLz/news-2.jpg",
-        imageHint: "community meeting outdoors"
-    },
-    {
-        title: "বরিশাল জেলা বার লাইব্রেরিতে প্রচারণা",
-        date: "২৭ জানুয়ারী",
-        description: "ডা. মনীষা চক্রবর্তী বরিশাল জেলা বার লাইব্রেরিতে তার প্রচারণা শুরু করেন। নেতৃবৃন্দ নির্বাচনের সুষ্ঠু পরিবেশ ও লেভেল প্লেয়িং ফিল্ড নিশ্চিত করার দাবি জানান।",
-        image: "https://i.postimg.cc/Pq2Y5YVp/news-3.jpg",
-        imageHint: "candidate speaking indoors"
-    }
-]
+type News = {
+    id: string;
+    title: string;
+    date: string;
+    description: string;
+    image: string;
+    imageHint: string;
+}
 
 function NewsSection() {
+    const [news, setNews] = useState<News[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchNews = async () => {
+            setIsLoading(true);
+            const newsCollection = collection(db, "news");
+            const q = query(newsCollection, orderBy("date", "desc"), limit(3));
+            const newsSnapshot = await getDocs(q);
+            const newsList = newsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as News));
+            setNews(newsList);
+            setIsLoading(false);
+        };
+        fetchNews();
+    }, []);
+
     return (
         <section className="py-8 md:py-12 bg-background">
             <div className="container mx-auto px-4">
@@ -357,31 +315,37 @@ function NewsSection() {
                     </p>
                 </div>
                 <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {newsItems.map((item, index) => (
-                        <Card key={index} className="flex flex-col shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 bg-card">
-                            <div className="relative w-full aspect-video">
-                                <Image
-                                    src={item.image}
-                                    alt={item.title}
-                                    fill
-                                    className="object-cover rounded-t-lg"
-                                    data-ai-hint={item.imageHint}
-                                />
-                            </div>
-                            <CardHeader>
-                                <CardTitle className="font-headline text-2xl">{item.title}</CardTitle>
-                                <CardDescription>{item.date}</CardDescription>
-                            </CardHeader>
-                            <CardContent className="flex-grow">
-                                <p className="font-body text-muted-foreground">{item.description}</p>
-                            </CardContent>
-                            <div className="p-6 pt-0">
-                                <Button asChild variant="secondary">
-                                    <Link href="/news-updates">বিস্তারিত পড়ুন</Link>
-                                </Button>
-                            </div>
-                        </Card>
-                    ))}
+                    {isLoading ? (
+                         Array.from({ length: 3 }).map((_, index) => (
+                             <Card key={index}><Skeleton className="w-full h-80"/></Card>
+                         ))
+                    ) : (
+                        news.map((item) => (
+                            <Card key={item.id} className="flex flex-col shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 bg-card">
+                                <div className="relative w-full aspect-video">
+                                    <Image
+                                        src={item.image}
+                                        alt={item.title}
+                                        fill
+                                        className="object-cover rounded-t-lg"
+                                        data-ai-hint={item.imageHint}
+                                    />
+                                </div>
+                                <CardHeader>
+                                    <CardTitle className="font-headline text-2xl">{item.title}</CardTitle>
+                                    <CardDescription>{item.date}</CardDescription>
+                                </CardHeader>
+                                <CardContent className="flex-grow">
+                                    <p className="font-body text-muted-foreground">{item.description}</p>
+                                </CardContent>
+                                <div className="p-6 pt-0">
+                                    <Button asChild variant="secondary">
+                                        <Link href={`/news-updates/${item.id}`}>বিস্তারিত পড়ুন</Link>
+                                    </Button>
+                                </div>
+                            </Card>
+                        ))
+                    )}
                 </div>
                  <div className="text-center mt-8">
                     <Button asChild>
@@ -391,6 +355,72 @@ function NewsSection() {
             </div>
         </section>
     )
+}
+
+type SocialWork = {
+    id: string;
+    image: string;
+    alt: string;
+    imageHint: string;
+};
+
+function SocialWorkSection() {
+    const [socialWorks, setSocialWorks] = useState<SocialWork[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchSocialWorks = async () => {
+            setIsLoading(true);
+            try {
+                const socialWorksCollection = collection(db, "socialWorks");
+                const socialWorksSnapshot = await getDocs(socialWorksCollection);
+                const socialWorksList = socialWorksSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as SocialWork));
+                setSocialWorks(socialWorksList);
+            } catch (error) {
+                console.error("Error fetching social works:", error);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+        fetchSocialWorks();
+    }, []);
+
+    if (socialWorks.length === 0 && !isLoading) return null;
+
+    return (
+        <section className="py-8 md:py-12 bg-card">
+            <div className="container mx-auto px-4">
+                <div className="text-center max-w-4xl mx-auto">
+                    <HeartHandshake className="mx-auto h-12 w-12 text-primary" />
+                    <h2 className="font-headline text-4xl md:text-5xl font-bold mt-4 text-foreground">
+                        সামাজিক কার্যক্রম
+                    </h2>
+                    <p className="mt-4 font-body text-lg text-muted-foreground">
+                        ডাঃ মনীষা চক্রবর্ত্তীর বিভিন্ন সামাজিক ও সেবামূলক কার্যক্রমের একাংশ।
+                    </p>
+                </div>
+                <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
+                     {isLoading ? (
+                         Array.from({ length: 4 }).map((_, index) => (
+                           <Skeleton key={index} className="w-full aspect-[3/4] rounded-lg" />
+                         ))
+                    ) : (
+                        socialWorks.map(sw => (
+                             <Card key={sw.id} className="relative group overflow-hidden rounded-lg shadow-lg">
+                               <Image
+                                src={sw.image}
+                                alt={sw.alt}
+                                fill
+                                className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-300"
+                                data-ai-hint={sw.imageHint}
+                               />
+                             </Card>
+                        ))
+                    )}
+                </div>
+            </div>
+        </section>
+    );
 }
 
 function VoteBannerSection() {
@@ -411,7 +441,7 @@ function VoteBannerSection() {
         <div className="mt-8 bg-background/20 backdrop-blur-sm border-2 border-dashed border-primary rounded-lg p-6 max-w-md mx-auto shadow-xl">
             <h3 className="font-headline text-4xl font-extrabold text-primary">ডাঃ মনীষা চক্রবর্ত্তী</h3>
             <div className="flex justify-center items-center gap-4 mt-2">
-                 <Image src="https://i.postimg.cc/P5tTsbT9/moi-logo-white.png" alt="মই প্রতীক" width={50} height={50} data-ai-hint="ladder logo" />
+                 <span className="text-4xl" role="img" aria-label="ladder">🪜</span>
                  <p className="font-body text-white text-2xl">মই মার্কা</p>
             </div>
         </div>
@@ -430,6 +460,24 @@ type GalleryImage = {
 function CampaignGallerySection() {
     const [galleryImages, setGalleryImages] = useState<GalleryImage[]>([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: 'start' }, [Autoplay()]);
+    const [selectedIndex, setSelectedIndex] = useState(0);
+    const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
+
+    const scrollTo = useCallback((index: number) => emblaApi && emblaApi.scrollTo(index), [emblaApi]);
+
+    const onSelect = useCallback(() => {
+        if (!emblaApi) return;
+        setSelectedIndex(emblaApi.selectedScrollSnap());
+    }, [emblaApi, setSelectedIndex]);
+
+    useEffect(() => {
+        if (!emblaApi) return;
+        onSelect();
+        setScrollSnaps(emblaApi.scrollSnapList());
+        emblaApi.on('select', onSelect);
+        emblaApi.on('reInit', onSelect);
+    }, [emblaApi, setScrollSnaps, onSelect]);
 
     useEffect(() => {
         const fetchGalleryImages = async () => {
@@ -442,7 +490,6 @@ function CampaignGallerySection() {
                 if (galleryList.length > 0) {
                     setGalleryImages(galleryList);
                 } else {
-                    // Fallback images
                     setGalleryImages([
                         {id: "1", src: "https://i.postimg.cc/L6Rk561p/manisha-portrait.jpg", alt: "Manisha Chakrabarty", hint: "politician portrait"},
                         {id: "2", src: "https://i.postimg.cc/Gpd2g0x3/news-1.jpg", alt: "Campaign Rally", hint: "political rally"},
@@ -451,7 +498,7 @@ function CampaignGallerySection() {
                     ]);
                 }
             } catch (error) {
-                console.error("Error fetching gallery images:", error);
+                 console.error("Error fetching gallery images:", error);
                  setGalleryImages([
                     {id: "1", src: "https://i.postimg.cc/L6Rk561p/manisha-portrait.jpg", alt: "Manisha Chakrabarty", hint: "politician portrait"},
                     {id: "2", src: "https://i.postimg.cc/Gpd2g0x3/news-1.jpg", alt: "Campaign Rally", hint: "political rally"},
@@ -465,10 +512,8 @@ function CampaignGallerySection() {
         fetchGalleryImages();
     }, []);
 
-    const imagesToDisplay = galleryImages.length > 0 ? [...galleryImages, ...galleryImages] : [];
-
     return (
-        <section className="py-8 md:py-12 bg-card w-full overflow-x-hidden">
+        <section className="py-8 md:py-12 bg-card w-full overflow-hidden">
             <div className="container mx-auto px-4">
                 <div className="text-center max-w-4xl mx-auto">
                     <Camera className="mx-auto h-12 w-12 text-primary" />
@@ -480,33 +525,44 @@ function CampaignGallerySection() {
                     </p>
                 </div>
             </div>
-            <div className="mt-12 w-full overflow-x-hidden mask-image-lr group">
-                 <div className="animate-scroll group-hover:pause-animation flex gap-4">
-                    {isLoading ? (
-                        Array.from({ length: 12 }).map((_, i) => (
-                            <div key={i} className="flex-shrink-0">
-                                <Skeleton className="w-80 h-56 rounded-lg" />
-                            </div>
-                        ))
-                    ) : (
-                        imagesToDisplay.map((image, index) => (
-                            <Link href="/gallery" key={`${image.id}-${index}`} className="flex-shrink-0">
-                                <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 w-80">
-                                    <CardContent className="p-0">
-                                        <div className="relative h-56 w-full">
-                                            <Image
-                                                src={image.src}
-                                                alt={image.alt}
-                                                fill
-                                                className="object-cover rounded-md"
-                                                data-ai-hint={image.hint}
-                                            />
-                                        </div>
-                                    </CardContent>
-                                </Card>
-                            </Link>
-                        ))
-                    )}
+             <div className="mt-12">
+                <div className="overflow-hidden" ref={emblaRef}>
+                     <div className="flex">
+                        {isLoading ? (
+                            Array.from({ length: 4 }).map((_, i) => (
+                                <div key={i} className="flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_25%] p-2">
+                                    <Skeleton className="w-full h-80 rounded-lg" />
+                                </div>
+                            ))
+                        ) : (
+                            galleryImages.map((image, index) => (
+                                <Link href="/gallery" key={`${image.id}-${index}`} className="flex-[0_0_80%] sm:flex-[0_0_40%] lg:flex-[0_0_25%] p-2">
+                                    <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 h-80 w-full">
+                                        <CardContent className="p-0 h-full">
+                                            <div className="relative h-full w-full">
+                                                <Image
+                                                    src={image.src}
+                                                    alt={image.alt}
+                                                    fill
+                                                    className="object-cover rounded-md"
+                                                    data-ai-hint={image.hint}
+                                                />
+                                            </div>
+                                        </CardContent>
+                                    </Card>
+                                </Link>
+                            ))
+                        )}
+                    </div>
+                </div>
+                 <div className="flex justify-center mt-4">
+                    {scrollSnaps.map((_, index) => (
+                        <DotButton
+                            key={index}
+                            selected={index === selectedIndex}
+                            onClick={() => scrollTo(index)}
+                        />
+                    ))}
                 </div>
             </div>
         </section>
@@ -525,7 +581,25 @@ type Testimonial = {
 function TestimonialSection() {
     const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [emblaRef] = useEmblaCarousel({ loop: true, align: 'start' });
+    const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: 'start' });
+    const [selectedIndex, setSelectedIndex] = useState(0);
+    const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
+    
+    const scrollTo = useCallback((index: number) => emblaApi && emblaApi.scrollTo(index), [emblaApi]);
+
+    const onSelect = useCallback(() => {
+        if (!emblaApi) return;
+        setSelectedIndex(emblaApi.selectedScrollSnap());
+    }, [emblaApi, setSelectedIndex]);
+
+    useEffect(() => {
+        if (!emblaApi) return;
+        onSelect();
+        setScrollSnaps(emblaApi.scrollSnapList());
+        emblaApi.on('select', onSelect);
+        emblaApi.on('reInit', onSelect);
+    }, [emblaApi, setScrollSnaps, onSelect]);
+
 
     useEffect(() => {
         const fetchTestimonials = async () => {
@@ -625,7 +699,7 @@ function TestimonialSection() {
                            ))
                        ) : (
                            testimonials.map((testimonial) => (
-                               <div className="flex-[0_0_100%] md:flex-[0_0_33.33%] p-4" key={testimonial.id}>
+                               <div className="flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_33.33%] p-4" key={testimonial.id}>
                                    <Card className="bg-card p-6 text-center shadow-lg h-full flex flex-col">
                                        <Image
                                            src={testimonial.image}
@@ -645,6 +719,15 @@ function TestimonialSection() {
                            ))
                        )}
                     </div>
+                </div>
+                <div className="flex justify-center mt-4">
+                    {scrollSnaps.map((_, index) => (
+                        <DotButton
+                            key={index}
+                            selected={index === selectedIndex}
+                            onClick={() => scrollTo(index)}
+                        />
+                    ))}
                 </div>
             </div>
         </section>
@@ -855,96 +938,6 @@ function FeedbackSection() {
 
 
 function PreVoteSection() {
-    const [voteCount, setVoteCount] = useState(0);
-    const [hasVoted, setHasVoted] = useState(false);
-    const [isLoading, setIsLoading] = useState(true);
-    const { toast } = useToast();
-    const voteDocRef = doc(db, "pre-votes", "live-count");
-
-    useEffect(() => {
-        const checkVotedStatus = () => {
-            const voted = localStorage.getItem('hasVotedForManisha');
-            if (voted === 'true') {
-                setHasVoted(true);
-            }
-        };
-
-        const fetchVoteCount = async () => {
-            setIsLoading(true);
-            try {
-                const docSnap = await getDoc(voteDocRef);
-                if (docSnap.exists()) {
-                    setVoteCount(docSnap.data().count);
-                } else {
-                    await setDoc(voteDocRef, { count: 250 });
-                    setVoteCount(250);
-                }
-            } catch (error) {
-                console.error("Error fetching vote count:", error);
-                setVoteCount(250); // Fallback
-            } finally {
-                setIsLoading(false);
-            }
-        };
-        
-        checkVotedStatus();
-        fetchVoteCount();
-    }, []);
-
-    const handleVote = async () => {
-        if (!hasVoted) {
-            setIsLoading(true);
-            try {
-                await updateDoc(voteDocRef, {
-                    count: increment(1)
-                });
-                
-                const newVoteCount = voteCount + 1;
-                setVoteCount(newVoteCount);
-                setHasVoted(true);
-                localStorage.setItem('hasVotedForManisha', 'true');
-
-            } catch (error) {
-                console.error("Error updating vote count:", error);
-                 toast({
-                    variant: "destructive",
-                    title: "ভোট দেওয়া যায়নি",
-                    description: "ভোট দেওয়ার সময় একটি সমস্যা হয়েছে। অনুগ্রহ করে আবার চেষ্টা করুন।",
-                });
-            } finally {
-                setIsLoading(false);
-            }
-        }
-    };
-    
-    const handleShare = async () => {
-        const shareData = {
-            title: 'ডাঃ মনীষা চক্রবর্ত্তীকে আপনার সমর্থন জানান!',
-            text: 'আমি আসন্ন জাতীয় সংসদ নির্বাচনে বরিশাল-৫ আসনে ডাঃ মনীষা চক্রবর্ত্তীকে সমর্থন করছি। আপনিও আপনার সমর্থন জানান!',
-            url: window.location.origin + '#pre-vote',
-        };
-
-        try {
-            if (navigator.share) {
-                await navigator.share(shareData);
-            } else {
-                await navigator.clipboard.writeText(shareData.url);
-                toast({
-                    title: "লিঙ্ক কপি হয়েছে!",
-                    description: "লিঙ্কটি আপনার ক্লিপবোর্ডে কপি করা হয়েছে।",
-                });
-            }
-        } catch (error: any) {
-            if (error.name === 'AbortError') return;
-            console.error('Error sharing:', error);
-            toast({
-                variant: "destructive",
-                title: "শেয়ার করা যায়নি",
-                description: "এই মুহূর্তে শেয়ার করা যাচ্ছে না।",
-            });
-        }
-    };
-
     return (
         <section id="pre-vote" className="py-8 md:py-12 bg-card">
             <div className="container mx-auto px-4">

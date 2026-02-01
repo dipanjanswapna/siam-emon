@@ -8,9 +8,6 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import Image from "next/image";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "@/lib/firebase";
-import { Skeleton } from "../ui/skeleton";
 
 const navLinks = [
   { href: "/", label: "হোম" },
@@ -23,39 +20,13 @@ const navLinks = [
 export function Header() {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [logoUrl, setLogoUrl] = useState<string | null>(null);
-  const [isLoadingLogo, setIsLoadingLogo] = useState(true);
-
-  useEffect(() => {
-    const fetchLogo = async () => {
-        setIsLoadingLogo(true);
-        try {
-            const settingsDoc = await getDoc(doc(db, "siteSettings", "branding"));
-            if (settingsDoc.exists() && settingsDoc.data().logoUrl) {
-                setLogoUrl(settingsDoc.data().logoUrl);
-            } else {
-                 setLogoUrl("https://i.postimg.cc/pX05kCjD/moi-logo.png");
-            }
-        } catch (error) {
-            console.error("Failed to fetch logo, using fallback.", error);
-            setLogoUrl("https://i.postimg.cc/pX05kCjD/moi-logo.png");
-        } finally {
-            setIsLoadingLogo(false);
-        }
-    };
-    fetchLogo();
-  }, []);
 
   return (
     <header className="sticky top-0 z-50 w-full bg-destructive text-destructive-foreground shadow-md">
       <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
         <div className="flex items-center">
            <Link href="/" className="flex items-center gap-2">
-              {isLoadingLogo ? (
-                  <Skeleton className="h-8 w-8 rounded-md" />
-              ) : (
-                logoUrl && <Image src={logoUrl} alt="Campaign Logo" width={32} height={32} className="h-8 w-8 rounded-md" />
-              )}
+              <span className="text-2xl" role="img" aria-label="ladder">🪜</span>
               <span className="font-bold font-headline text-xl sm:inline-block">
                 ডাঃ মনীষা চক্রবর্ত্তী
               </span>
@@ -96,11 +67,7 @@ export function Header() {
                 <SheetContent side="left" className="bg-destructive text-destructive-foreground border-l-0">
                   <div className="flex flex-col gap-6 p-6">
                     <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-2 mb-4">
-                      {isLoadingLogo ? (
-                        <Skeleton className="h-8 w-8 rounded-md" />
-                      ) : (
-                        logoUrl && <Image src={logoUrl} alt="Campaign Logo" width={32} height={32} className="h-8 w-8 rounded-md" />
-                      )}
+                      <span className="text-3xl" role="img" aria-label="ladder">🪜</span>
                       <span className="text-xl font-headline font-bold">
                         ডাঃ মনীষা চক্রবর্ত্তী
                       </span>
