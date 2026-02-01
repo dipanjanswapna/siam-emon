@@ -1,4 +1,3 @@
-
 "use client";
 
 import Image from "next/image";
@@ -113,7 +112,6 @@ function HeroSection() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
                 >
-                    <Image src="https://i.postimg.cc/pX41BjTS/image.png" alt="ডাঃ মনীষা চক্রবর্ত্তী লোগো" width={80} height={80} className="mx-auto mb-4 rounded-full" />
                     <motion.h1 
                         className="text-4xl sm:text-5xl md:text-6xl font-bold font-headline drop-shadow-lg mt-4"
                         initial={{ opacity: 0, y: 20 }}
@@ -640,7 +638,7 @@ type Testimonial = {
 function TestimonialSection() {
     const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: 'start' });
+    const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: 'start' }, [Autoplay()]);
     const [selectedIndex, setSelectedIndex] = useState(0);
     const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
     
