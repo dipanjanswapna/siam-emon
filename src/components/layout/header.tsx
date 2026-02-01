@@ -25,23 +25,25 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full bg-destructive text-destructive-foreground shadow-md">
-      <div className="container flex h-16 items-center">
-        <div className="mr-4 flex items-center">
-          <Link href="/" className="mr-6 flex items-center space-x-2">
-            <Image
-                src="https://i.postimg.cc/C5FPWXhs/Screenshot_2025-08-30_121415-Picsart-Ai-Image-Enhancer-removebg-preview.png"
-                alt="সিয়াম ফেরদৌস ইমন Logo"
-                width={40}
-                height={40}
-                className="h-10 w-10"
-            />
-            <span className="font-bold font-headline text-xl sm:inline-block">
-              সিয়াম ফেরদৌস ইমন
-            </span>
+      <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center">
+          <Link href="/" className="flex items-center gap-2">
+              <Image
+                  src="https://i.postimg.cc/C5FPWXhs/Screenshot_2025-08-30_121415-Picsart-Ai-Image-Enhancer-removebg-preview.png"
+                  alt="সিয়াম ফেরদৌস ইমন Logo"
+                  width={40}
+                  height={40}
+                  className="h-10 w-10"
+              />
+              <span className="font-bold font-headline text-xl sm:inline-block">
+                সিয়াম ফেরদৌস ইমন
+              </span>
           </Link>
         </div>
-        <div className="flex flex-1 items-center justify-end space-x-2">
-            <nav className="hidden gap-1 md:flex">
+        
+        <div className="flex items-center">
+            {/* Desktop Navigation */}
+            <nav className="hidden md:flex items-center gap-1">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
@@ -60,6 +62,8 @@ export function Header() {
                     <Link href="/get-involved">যুক্ত হোন</Link>
                 </Button>
             </div>
+
+            {/* Mobile Navigation Trigger */}
             <div className="md:hidden">
               <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
                 <SheetTrigger asChild>
