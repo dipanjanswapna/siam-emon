@@ -105,7 +105,7 @@ export function PromotionalPopup() {
 
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
-            <DialogContent className="p-0 bg-card border-border shadow-2xl w-[90vw] max-w-md rounded-xl overflow-hidden">
+            <DialogContent className="p-0 bg-card border-border shadow-2xl w-[90vw] max-w-xs rounded-xl overflow-hidden">
                 <div className="relative">
                     <Button
                         variant="destructive"
