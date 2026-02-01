@@ -94,8 +94,19 @@ export default function Home() {
 
 function HeroSection() {
     return (
-        <section className="bg-card py-16 md:py-20 text-center">
-            <div className="container mx-auto px-4">
+        <section className="relative bg-card py-16 md:py-20 text-center text-white">
+            <div className="absolute inset-0 bg-black/50 z-0">
+                <Image
+                    src="https://i.postimg.cc/QxLV2X6r/image.png"
+                    alt="ডাঃ মনীষা চক্রবর্ত্তী"
+                    fill
+                    className="object-cover"
+                    priority
+                    data-ai-hint="political candidate banner"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent"></div>
+            </div>
+            <div className="container relative z-10 mx-auto px-4">
                 <motion.div 
                     className="max-w-4xl mx-auto"
                     initial={{ opacity: 0, y: -20 }}
@@ -104,7 +115,7 @@ function HeroSection() {
                 >
                     <Image src="https://i.postimg.cc/pX41BjTS/image.png" alt="ডাঃ মনীষা চক্রবর্ত্তী লোগো" width={80} height={80} className="mx-auto mb-4 rounded-full" />
                     <motion.h1 
-                        className="text-4xl sm:text-5xl md:text-6xl font-bold font-headline text-foreground drop-shadow-lg mt-4"
+                        className="text-4xl sm:text-5xl md:text-6xl font-bold font-headline drop-shadow-lg mt-4"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.2 }}
@@ -112,7 +123,7 @@ function HeroSection() {
                         ডাঃ মনীষা চক্রবর্ত্তী
                     </motion.h1>
                     <motion.p 
-                        className="mt-4 text-lg sm:text-xl md:text-2xl font-semibold text-primary drop-shadow-md"
+                        className="mt-4 text-lg sm:text-xl md:text-2xl font-semibold text-primary-foreground/90 drop-shadow-md"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.4 }}
@@ -120,7 +131,7 @@ function HeroSection() {
                         বরিশাল-৫ আসনে গণতান্ত্রিক যুক্তফ্রন্ট সমর্থিত বাসদ মনোনীত প্রার্থী
                     </motion.p>
                     <motion.p 
-                        className="mt-6 text-base sm:text-lg max-w-3xl mx-auto font-body text-muted-foreground"
+                        className="mt-6 text-base sm:text-lg max-w-3xl mx-auto font-body"
                          initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.6 }}
@@ -136,7 +147,7 @@ function HeroSection() {
                         <Button asChild size="lg" className="font-headline text-lg">
                             <Link href="/manifesto">আমাদের ইশতেহার</Link>
                         </Button>
-                        <Button asChild size="lg" variant="secondary">
+                        <Button asChild size="lg" variant="outline" className="text-white border-white hover:bg-white/10 hover:text-white">
                             <Link href="/get-involved">যুক্ত হোন</Link>
                         </Button>
                     </motion.div>
