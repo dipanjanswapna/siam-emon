@@ -64,8 +64,8 @@ export default function ManifestoPage() {
           </section>
 
            <section id="maatir-bank" className="grid md:grid-cols-2 gap-8 items-center">
-                <div>
-                    <Image src="https://i.postimg.cc/Pq2Y5YVp/news-3.jpg" alt="মাটির ব্যাংক" width={600} height={400} className="rounded-lg shadow-lg" data-ai-hint="clay piggy bank" />
+                <div className="flex justify-center">
+                    <Image src="https://i.postimg.cc/rwW53tf9/image.png" alt="মাটির ব্যাংক" width={400} height={400} className="rounded-lg shadow-lg object-contain w-full max-w-xs md:max-w-sm" data-ai-hint="clay piggy bank" />
                 </div>
                 <div>
                      <h2 className="font-headline text-4xl font-bold text-foreground">ভোট দিন, ভোটের খরচ জোগান</h2>
