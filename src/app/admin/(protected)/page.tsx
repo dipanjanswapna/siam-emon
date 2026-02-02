@@ -1,3 +1,4 @@
+
 "use client";
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -6,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Shield, PlusCircle, Edit, Trash2, LogOut, MessageSquare, Users, Bell, Camera, Quote, Newspaper, Megaphone, Settings } from "lucide-react";
+import { Shield, PlusCircle, Edit, Trash2, LogOut, MessageSquare, Users, Bell, Camera, Quote, Newspaper, Megaphone, Settings, CalendarDays } from "lucide-react";
 import { useState, useEffect } from "react";
 import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc, getDoc, orderBy, query, serverTimestamp, setDoc } from "firebase/firestore";
 import { db, auth } from "@/lib/firebase";
@@ -100,6 +101,14 @@ type News = {
     imageHint: string;
 };
 
+type ScheduleEvent = {
+    id: string;
+    date: string;
+    title: string;
+    time: string;
+    location: string;
+};
+
 
 function AdminPage() {
     const [feedbacks, setFeedbacks] = useState<Feedback[]>([]);
@@ -120,6 +129,7 @@ function AdminPage() {
     const [galleryImages, setGalleryImages] = useState<GalleryImage[]>([]);
     const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
     const [news, setNews] = useState<News[]>([]);
+    const [events, setEvents] = useState<ScheduleEvent[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     
     const [isTeamMemberFormOpen, setIsTeamMemberFormOpen] = useState(false);
@@ -136,6 +146,11 @@ function AdminPage() {
     const [isNewsFormOpen, setIsNewsFormOpen] = useState(false);
     const [currentNews, setCurrentNews] = useState<Partial<News>>({});
     const [isEditingNews, setIsEditingNews] = useState(false);
+
+    const [isEventFormOpen, setIsEventFormOpen] = useState(false);
+    const [currentEvent, setCurrentEvent] = useState<Partial<ScheduleEvent>>({});
+    const [isEditingEvent, setIsEditingEvent] = useState(false);
+
 
     const [signOut] = useSignOut(auth);
     const router = useRouter();
@@ -204,6 +219,14 @@ function AdminPage() {
         const newsList = newsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as News));
         setNews(newsList);
     };
+    
+    const fetchEvents = async () => {
+        const eventsCollection = collection(db, "events");
+        const q = query(eventsCollection, orderBy("date", "desc"));
+        const eventsSnapshot = await getDocs(q);
+        const eventsList = eventsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as ScheduleEvent));
+        setEvents(eventsList);
+    };
 
 
     const loadAllData = async () => {
@@ -217,6 +240,7 @@ function AdminPage() {
                 fetchGalleryImages(),
                 fetchTestimonials(),
                 fetchNews(),
+                fetchEvents(),
             ]);
         } catch (error) {
             console.error("Error loading data: ", error);
@@ -551,6 +575,70 @@ function AdminPage() {
         }
     };
 
+    const handleEventFormSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        const action = isEditingEvent ? 'আপডেট' : 'যোগ';
+        try {
+            const eventData = {
+                date: currentEvent.date,
+                title: currentEvent.title,
+                time: currentEvent.time,
+                location: currentEvent.location,
+            };
+
+            if (isEditingEvent && currentEvent.id) {
+                const eventDoc = doc(db, "events", currentEvent.id);
+                await updateDoc(eventDoc, eventData);
+            } else {
+                await addDoc(collection(db, "events"), eventData);
+            }
+            closeEventForm();
+            fetchEvents();
+            toast({
+                title: `সময়সূচী সফলভাবে ${action} হয়েছে`,
+            });
+        } catch (error) {
+            toast({
+                variant: 'destructive',
+                title: `সময়সূচী ${action} করতে সমস্যা হয়েছে`,
+                description: (error as Error).message,
+            });
+        }
+    };
+
+    const openEventForm = (event?: ScheduleEvent) => {
+        if (event) {
+            setCurrentEvent(event);
+            setIsEditingEvent(true);
+        } else {
+            setCurrentEvent({ date: new Date().toISOString().split('T')[0], title: "", time: "", location: "" });
+            setIsEditingEvent(false);
+        }
+        setIsEventFormOpen(true);
+    };
+
+    const closeEventForm = () => {
+        setIsEventFormOpen(false);
+        setCurrentEvent({});
+        setIsEditingEvent(false);
+    };
+
+    const handleDeleteEvent = async (id: string) => {
+        try {
+            await deleteDoc(doc(db, "events", id));
+            fetchEvents();
+            toast({
+                title: "সময়সূচী সফলভাবে মুছে ফেলা হয়েছে",
+            });
+        } catch (error) {
+            toast({
+                variant: 'destructive',
+                title: "সময়সূচী মুছে ফেলতে সমস্যা হয়েছে",
+                description: (error as Error).message,
+            });
+        }
+    };
+
 
     const handleSignOut = async () => {
         const success = await signOut();
@@ -683,6 +771,42 @@ function AdminPage() {
                                     <Bell className="mr-2 h-4 w-4" /> আপডেট করুন
                                 </Button>
                             </form>
+                        </AccordionContent>
+                    </Card>
+                </AccordionItem>
+                 <AccordionItem value="events">
+                    <Card>
+                        <AccordionTrigger className="p-6">
+                            <CardTitle className="flex items-center gap-2"><CalendarDays /> সময়সূচী ব্যবস্থাপনা</CardTitle>
+                        </AccordionTrigger>
+                        <AccordionContent className="p-6 pt-0">
+                            <div className="flex justify-end mb-4">
+                                <Button onClick={() => openEventForm()}>
+                                    <PlusCircle className="mr-2 h-4 w-4" /> নতুন সময়সূচী যোগ করুন
+                                </Button>
+                            </div>
+                            <div className="space-y-4">
+                                {isLoading ? (
+                                    <Skeleton height={80} count={2} />
+                                ) : (
+                                    events.map(e => (
+                                        <Card key={e.id} className="flex items-center justify-between p-4 bg-card">
+                                            <div>
+                                                <h3 className="font-bold text-lg">{new Date(e.date).toLocaleDateString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric'})} - {e.time}</h3>
+                                                <p className="text-sm text-muted-foreground">{e.title} at {e.location}</p>
+                                            </div>
+                                            <div className="flex items-center gap-2">
+                                                <Button variant="outline" size="icon" onClick={() => openEventForm(e)}>
+                                                    <Edit className="h-4 w-4" />
+                                                </Button>
+                                                <Button variant="destructive" size="icon" onClick={() => handleDeleteEvent(e.id)}>
+                                                    <Trash2 className="h-4 w-4" />
+                                                </Button>
+                                            </div>
+                                        </Card>
+                                    ))
+                                )}
+                            </div>
                         </AccordionContent>
                     </Card>
                 </AccordionItem>
@@ -1106,6 +1230,39 @@ function AdminPage() {
                         <Button type="submit">{isEditingNews ? 'আপডেট করুন' : 'যোগ করুন'}</Button>
                         <DialogClose asChild>
                             <Button type="button" variant="secondary" onClick={closeNewsForm}>বাতিল</Button>
+                        </DialogClose>
+                    </DialogFooter>
+                </form>
+            </DialogContent>
+        </Dialog>
+        
+        {/* Event Form Dialog */}
+        <Dialog open={isEventFormOpen} onOpenChange={setIsEventFormOpen}>
+            <DialogContent>
+                <DialogHeader>
+                    <DialogTitle>{isEditingEvent ? 'সময়সূচী সম্পাদনা করুন' : 'নতুন সময়সূচী যোগ করুন'}</DialogTitle>
+                </DialogHeader>
+                <form onSubmit={handleEventFormSubmit} className="space-y-4">
+                    <div className="space-y-2">
+                        <Label htmlFor="event-date">তারিখ</Label>
+                        <Input type="date" id="event-date" value={currentEvent.date || ''} onChange={(e) => setCurrentEvent({ ...currentEvent, date: e.target.value })} required />
+                    </div>
+                    <div className="space-y-2">
+                        <Label htmlFor="event-time">সময়</Label>
+                        <Input id="event-time" value={currentEvent.time || ''} onChange={(e) => setCurrentEvent({ ...currentEvent, time: e.target.value })} placeholder="যেমন: সকাল ০৯:৩০" required />
+                    </div>
+                    <div className="space-y-2">
+                        <Label htmlFor="event-title">শিরোনাম</Label>
+                        <Input id="event-title" value={currentEvent.title || ''} onChange={(e) => setCurrentEvent({ ...currentEvent, title: e.target.value })} placeholder="যেমন: গণসংযোগ" required />
+                    </div>
+                    <div className="space-y-2">
+                        <Label htmlFor="event-location">স্থান</Label>
+                        <Input id="event-location" value={currentEvent.location || ''} onChange={(e) => setCurrentEvent({ ...currentEvent, location: e.target.value })} placeholder="যেমন: মেডিকেল ক্যাম্পাস" required />
+                    </div>
+                    <DialogFooter>
+                        <Button type="submit">{isEditingEvent ? 'সংরক্ষণ করুন' : 'যোগ করুন'}</Button>
+                        <DialogClose asChild>
+                            <Button type="button" variant="secondary" onClick={closeEventForm}>বাতিল</Button>
                         </DialogClose>
                     </DialogFooter>
                 </form>

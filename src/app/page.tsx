@@ -6,7 +6,7 @@ import Link from "next/link";
 import React, { useState, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { ArrowRight, Users, Camera, Mail, ShieldCheck, MessageSquare, HelpCircle, Vote, Share2, Timer, Phone, Newspaper, HeartHandshake, Megaphone, Volume2, VolumeX } from "lucide-react";
+import { ArrowRight, Users, Camera, Mail, ShieldCheck, MessageSquare, HelpCircle, Vote, Share2, Timer, Phone, Newspaper, HeartHandshake, Megaphone, Volume2, VolumeX, CalendarDays, MapPin, Calendar } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -43,6 +43,9 @@ export default function Home() {
       </motion.div>
       <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={animationVariants}>
         <AboutSection />
+      </motion.div>
+      <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={animationVariants}>
+        <ScheduleSection />
       </motion.div>
       <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={animationVariants}>
         <NewsSection />
@@ -377,6 +380,116 @@ function AboutSection() {
   );
 }
 
+type ScheduleEvent = {
+    id: string;
+    date: string;
+    title: string;
+    time: string;
+    location: string;
+};
+
+function ScheduleSection() {
+    const [events, setEvents] = useState<ScheduleEvent[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchEvents = async () => {
+            setIsLoading(true);
+            try {
+                const eventsCollection = collection(db, "events");
+                const today = new Date().toISOString().split('T')[0];
+                const q = query(eventsCollection, orderBy("date", "asc"), limit(10));
+                const eventsSnapshot = await getDocs(q);
+                const eventsList = eventsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as ScheduleEvent));
+                setEvents(eventsList);
+            } catch (error) {
+                console.error("Error fetching events:", error);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+        fetchEvents();
+    }, []);
+
+    const groupedEvents = events.reduce((acc, event) => {
+        const date = new Date(event.date).toLocaleDateString('bn-BD', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+        if (!acc[date]) {
+            acc[date] = [];
+        }
+        acc[date].push(event);
+        return acc;
+    }, {} as Record<string, ScheduleEvent[]>);
+
+    if (isLoading) {
+        return (
+            <section className="py-8 md:py-12 bg-background">
+                <div className="container mx-auto px-4 max-w-4xl">
+                     <SkeletonTheme baseColor="var(--card)" highlightColor="var(--background)">
+                        <Skeleton height={40} width="60%" className="mx-auto" />
+                        <Skeleton height={20} width="80%" className="mx-auto mt-4" />
+                        <div className="mt-12 space-y-8">
+                            <Skeleton height={200} />
+                            <Skeleton height={200} />
+                        </div>
+                    </SkeletonTheme>
+                </div>
+            </section>
+        );
+    }
+    
+    if (events.length === 0) return null;
+    
+    return (
+        <section className="py-8 md:py-12 bg-background">
+            <div className="container mx-auto px-4">
+                <div className="text-center max-w-4xl mx-auto">
+                    <CalendarDays className="mx-auto h-12 w-12 text-primary" />
+                    <h2 className="font-headline text-4xl md:text-5xl font-bold mt-4 text-foreground">
+                        গণসংযোগ ও কার্যক্রম
+                    </h2>
+                    <p className="mt-4 font-body text-lg text-muted-foreground">
+                        আমাদের আসন্ন গণসংযোগ এবং অন্যান্য কার্যক্রমের সময়সূচী।
+                    </p>
+                </div>
+                <div className="mt-12 max-w-4xl mx-auto space-y-8">
+                    {Object.entries(groupedEvents).map(([date, dateEvents]) => (
+                        <Card key={date} className="bg-card shadow-lg">
+                            <CardHeader>
+                                <CardTitle className="flex items-center gap-3 font-headline text-2xl">
+                                    <Calendar className="w-6 h-6 text-primary" />
+                                    <span>{date}</span>
+                                </CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                                <div className="space-y-4">
+                                    {dateEvents.map(event => (
+                                        <div key={event.id} className="flex items-start gap-4 p-4 rounded-lg bg-background">
+                                            <div className="font-bold text-primary text-lg w-28 text-center flex-shrink-0">
+                                                {event.time}
+                                            </div>
+                                            <div className="border-l-2 border-primary pl-4">
+                                                <h3 className="font-headline font-bold text-foreground text-xl">{event.title}</h3>
+                                                <p className="text-muted-foreground flex items-center gap-2">
+                                                    <MapPin className="w-4 h-4" />
+                                                    {event.location}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </CardContent>
+                        </Card>
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+}
+
 type News = {
     id: string;
     title: string;
@@ -404,7 +517,7 @@ function NewsSection() {
     }, []);
 
     return (
-        <section className="py-8 md:py-12 bg-background">
+        <section className="py-8 md:py-12 bg-card">
             <div className="container mx-auto px-4">
                 <div className="text-center max-w-4xl mx-auto">
                     <Newspaper className="mx-auto h-12 w-12 text-primary" />
@@ -418,11 +531,11 @@ function NewsSection() {
                 <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                     {isLoading ? (
                          Array.from({ length: 3 }).map((_, index) => (
-                             <Card key={index} className="bg-card"><SkeletonTheme baseColor="var(--card)" highlightColor="var(--background)"><Skeleton height={400}/></SkeletonTheme></Card>
+                             <Card key={index} className="bg-background"><SkeletonTheme baseColor="var(--background)" highlightColor="var(--card)"><Skeleton height={400}/></SkeletonTheme></Card>
                          ))
                     ) : (
                         news.map((item) => (
-                            <Card key={item.id} className="flex flex-col shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 bg-card">
+                            <Card key={item.id} className="flex flex-col shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 bg-background">
                                 <div className="relative w-full aspect-video">
                                     <Image
                                         src={item.image}
@@ -489,7 +602,7 @@ function SocialWorkSection() {
     if (socialWorks.length === 0 && !isLoading) return null;
 
     return (
-        <section className="py-8 md:py-12 bg-card">
+        <section className="py-8 md:py-12 bg-background">
             <div className="container mx-auto px-4">
                 <div className="text-center max-w-4xl mx-auto">
                     <HeartHandshake className="mx-auto h-12 w-12 text-primary" />
@@ -503,7 +616,7 @@ function SocialWorkSection() {
                 <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
                      {isLoading ? (
                          Array.from({ length: 4 }).map((_, index) => (
-                           <SkeletonTheme key={index} baseColor="var(--background)" highlightColor="var(--card)"><Skeleton className="w-full aspect-[3/4] rounded-lg" /></SkeletonTheme>
+                           <SkeletonTheme key={index} baseColor="var(--card)" highlightColor="var(--background)"><Skeleton className="w-full aspect-[3/4] rounded-lg" /></SkeletonTheme>
                          ))
                     ) : (
                         socialWorks.map(sw => (
@@ -527,7 +640,7 @@ function SocialWorkSection() {
 function VoteBannerSection() {
   return (
     <section 
-        className="py-12 md:py-16 bg-primary/10"
+        className="py-12 md:py-16 bg-card"
     >
       <div className="container mx-auto px-4 text-center">
         <h2 className="text-3xl md:text-5xl font-bold font-headline text-foreground drop-shadow-md">
@@ -536,7 +649,7 @@ function VoteBannerSection() {
         <p className="mt-4 font-body text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">
           আগামী ১২ই ফেব্রুয়ারী, একটি শোষণ বৈষম্যহীন ও সাম্প্রদায়িক সম্প্রীতির বরিশাল গড়তে মই মার্কায় ভোট দিন।
         </p>
-        <div className="mt-8 bg-card backdrop-blur-sm border-2 border-dashed border-primary rounded-lg p-6 max-w-md mx-auto shadow-xl">
+        <div className="mt-8 bg-background backdrop-blur-sm border-2 border-dashed border-primary rounded-lg p-6 max-w-md mx-auto shadow-xl">
             <h3 className="font-headline text-4xl font-extrabold text-primary">ডাঃ মনীষা চক্রবর্ত্তী</h3>
             <div className="flex justify-center items-center gap-4 mt-2">
                  <Image src="https://i.postimg.cc/pX41BjTS/image.png" alt="ডাঃ মনীষা চক্রবর্ত্তী লোগো" width={50} height={50} className="rounded-full"/>
@@ -594,7 +707,7 @@ function CampaignGallerySection() {
     const imagesToDisplay = isLoading ? [] : [...galleryImages, ...galleryImages, ...galleryImages, ...galleryImages];
 
     return (
-        <section className="py-8 md:py-12 bg-card w-full overflow-hidden">
+        <section className="py-8 md:py-12 bg-background w-full overflow-hidden">
             <div className="container mx-auto px-4">
                 <div className="text-center max-w-4xl mx-auto">
                     <Camera className="mx-auto h-12 w-12 text-primary" />
@@ -611,7 +724,7 @@ function CampaignGallerySection() {
                     {isLoading ? (
                         Array.from({ length: 8 }).map((_, i) => (
                             <div key={i} className="w-80 flex-shrink-0">
-                                <SkeletonTheme baseColor="var(--background)" highlightColor="var(--card)"><Skeleton className="h-56 rounded-lg" /></SkeletonTheme>
+                                <SkeletonTheme baseColor="var(--card)" highlightColor="var(--background)"><Skeleton className="h-56 rounded-lg" /></SkeletonTheme>
                             </div>
                         ))
                     ) : (
@@ -699,7 +812,7 @@ function TestimonialSection() {
     }, []);
 
     return (
-        <section className="py-8 md:py-12 bg-background w-full">
+        <section className="py-8 md:py-12 bg-card w-full">
             <div className="container mx-auto px-4">
                 <div className="text-center max-w-4xl mx-auto">
                     <Users className="mx-auto h-12 w-12 text-primary" />
@@ -711,8 +824,8 @@ function TestimonialSection() {
                     {isLoading ? (
                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                            {Array.from({ length: 3 }).map((_, i) => (
-                               <Card key={i} className="bg-card p-6 text-center h-full">
-                                    <SkeletonTheme baseColor="var(--card)" highlightColor="var(--background)">
+                               <Card key={i} className="bg-background p-6 text-center h-full">
+                                    <SkeletonTheme baseColor="var(--background)" highlightColor="var(--card)">
                                         <Skeleton circle height={96} width={96} style={{ margin: '0 auto 1rem' }} />
                                         <Skeleton height={24} width={150} style={{ margin: '0 auto 0.5rem' }} />
                                         <Skeleton height={20} width={200} style={{ margin: '0 auto 1rem' }} />
@@ -734,7 +847,7 @@ function TestimonialSection() {
                                 {testimonials.map((testimonial) => (
                                    <CarouselItem key={testimonial.id} className="pl-8 md:basis-1/2 lg:basis-1/3">
                                        <div className="h-full">
-                                           <Card className="bg-card p-6 text-center shadow-lg h-full flex flex-col">
+                                           <Card className="bg-background p-6 text-center shadow-lg h-full flex flex-col">
                                                <Image
                                                    src={testimonial.image}
                                                    alt={testimonial.name}
@@ -770,7 +883,7 @@ const leadershipPoints = [
 
 function LeadershipSection() {
     return (
-        <section className="py-8 md:py-12 bg-card">
+        <section className="py-8 md:py-12 bg-background">
             <div className="container mx-auto px-4">
                 <div className="text-center max-w-4xl mx-auto">
                     <h1 className="font-headline text-4xl md:text-5xl font-bold text-foreground">
@@ -813,7 +926,7 @@ const faqItems = [
 
 function FAQSection() {
     return (
-        <section className="py-8 md:py-12 bg-background">
+        <section className="py-8 md:py-12 bg-card">
             <div className="container mx-auto px-4">
                 <div className="text-center max-w-4xl mx-auto">
                     <HelpCircle className="mx-auto h-12 w-12 text-primary" />
@@ -828,7 +941,7 @@ function FAQSection() {
                     <Accordion type="single" collapsible className="w-full space-y-4">
                         {faqItems.map((item, index) => (
                              <AccordionItem key={index} value={`item-${index}`} className="border-b-0">
-                                <Card className="shadow-md bg-card">
+                                <Card className="shadow-md bg-background">
                                      <AccordionTrigger className="p-6 text-left hover:no-underline font-headline text-lg">
                                         {item.question}
                                      </AccordionTrigger>
@@ -1026,3 +1139,4 @@ function SupportSection() {
         </section>
     );
 }
+

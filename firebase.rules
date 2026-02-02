@@ -56,5 +56,11 @@ service cloud.firestore {
       // Allow admin to create or delete the document if needed
       allow create, delete: if isAdmin();
     }
+
+    // Events can be read by anyone, but only managed by admin
+    match /events/{eventId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
   }
 }
