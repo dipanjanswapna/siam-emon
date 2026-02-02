@@ -6,7 +6,7 @@ import Link from "next/link";
 import React, { useState, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { ArrowRight, Users, Camera, Mail, ShieldCheck, MessageSquare, HelpCircle, Vote, Share2, Timer, Phone, Newspaper, HeartHandshake, Megaphone } from "lucide-react";
+import { ArrowRight, Users, Camera, Mail, ShieldCheck, MessageSquare, HelpCircle, Vote, Share2, Timer, Phone, Newspaper, HeartHandshake, Megaphone, Volume2, VolumeX } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -34,6 +34,9 @@ export default function Home() {
       </motion.div>
       <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={animationVariants}>
         <NoticeSection />
+      </motion.div>
+       <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={animationVariants}>
+        <VideoSection />
       </motion.div>
       <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={animationVariants}>
         <ElectionCountdown />
@@ -188,6 +191,57 @@ function NoticeSection() {
             </div>
         </section>
     );
+}
+
+
+function VideoSection() {
+  const [isMuted, setIsMuted] = useState(true);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) {
+    return (
+        <section className="bg-black">
+            <div className="container mx-auto px-4 w-full">
+                 <div className="aspect-video w-full">
+                    <SkeletonTheme baseColor="#222" highlightColor="#444">
+                        <Skeleton height="100%"/>
+                    </SkeletonTheme>
+                 </div>
+            </div>
+        </section>
+    )
+  }
+
+  const videoId = "mecUxvs0eEI";
+  const videoSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=${isMuted ? 1 : 0}&loop=1&playlist=${videoId}&controls=0&showinfo=0&rel=0&modestbranding=1`;
+
+  return (
+    <section className="relative w-full aspect-video bg-black">
+      <iframe
+        src={videoSrc}
+        title="Campaign Video"
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowFullScreen
+        className="absolute top-0 left-0 w-full h-full"
+      ></iframe>
+      <div className="absolute bottom-4 right-4 z-10">
+        <Button
+          onClick={() => setIsMuted(!isMuted)}
+          variant="secondary"
+          size="icon"
+          className="rounded-full bg-black/50 text-white hover:bg-black/70"
+          aria-label={isMuted ? "Unmute video" : "Mute video"}
+        >
+          {isMuted ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
+        </Button>
+      </div>
+    </section>
+  );
 }
 
 
