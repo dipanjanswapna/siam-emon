@@ -1,3 +1,4 @@
+
 "use client";
 
 import Image from "next/image";
@@ -16,26 +17,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
-import useEmblaCarousel from "embla-carousel-react";
-import Autoplay from "embla-carousel-autoplay";
 import { motion } from "framer-motion";
-
-type DotButtonPropType = {
-  selected: boolean;
-  onClick: () => void;
-};
-
-const DotButton: React.FC<DotButtonPropType> = (props) => {
-  const { selected, onClick } = props;
-
-  return (
-    <button
-      className={`h-3 w-3 rounded-full mx-1 transition-colors duration-300 ${selected ? 'bg-primary' : 'bg-muted'}`}
-      type="button"
-      onClick={onClick}
-    />
-  );
-};
 
 const animationVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -517,24 +499,6 @@ type GalleryImage = {
 function CampaignGallerySection() {
     const [galleryImages, setGalleryImages] = useState<GalleryImage[]>([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: 'start' }, [Autoplay()]);
-    const [selectedIndex, setSelectedIndex] = useState(0);
-    const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
-
-    const scrollTo = useCallback((index: number) => emblaApi && emblaApi.scrollTo(index), [emblaApi]);
-
-    const onSelect = useCallback(() => {
-        if (!emblaApi) return;
-        setSelectedIndex(emblaApi.selectedScrollSnap());
-    }, [emblaApi, setSelectedIndex]);
-
-    useEffect(() => {
-        if (!emblaApi) return;
-        onSelect();
-        setScrollSnaps(emblaApi.scrollSnapList());
-        emblaApi.on('select', onSelect);
-        emblaApi.on('reInit', onSelect);
-    }, [emblaApi, setScrollSnaps, onSelect]);
 
     useEffect(() => {
         const fetchGalleryImages = async () => {
@@ -569,6 +533,8 @@ function CampaignGallerySection() {
         fetchGalleryImages();
     }, []);
 
+    const imagesToDisplay = isLoading ? [] : [...galleryImages, ...galleryImages, ...galleryImages, ...galleryImages];
+
     return (
         <section className="py-8 md:py-12 bg-card w-full overflow-hidden">
             <div className="container mx-auto px-4">
@@ -582,44 +548,33 @@ function CampaignGallerySection() {
                     </p>
                 </div>
             </div>
-             <div className="mt-12">
-                <div className="overflow-hidden" ref={emblaRef}>
-                     <div className="flex">
-                        {isLoading ? (
-                            Array.from({ length: 4 }).map((_, i) => (
-                                <div key={i} className="flex-[0_0_80%] sm:flex-[0_0_40%] lg:flex-[0_0_25%] p-2">
-                                    <SkeletonTheme baseColor="var(--background)" highlightColor="var(--card)"><Skeleton className="w-full h-80 rounded-lg" /></SkeletonTheme>
-                                </div>
-                            ))
-                        ) : (
-                            galleryImages.map((image, index) => (
-                                <Link href="/gallery" key={`${image.id}-${index}`} className="flex-[0_0_80%] sm:flex-[0_0_40%] lg:flex-[0_0_25%] p-2">
-                                    <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 h-80 w-full">
-                                        <CardContent className="p-0 h-full">
-                                            <div className="relative h-full w-full">
-                                                <Image
-                                                    src={image.src}
-                                                    alt={image.alt}
-                                                    fill
-                                                    className="object-cover rounded-md"
-                                                    data-ai-hint={image.hint}
-                                                />
-                                            </div>
-                                        </CardContent>
-                                    </Card>
-                                </Link>
-                            ))
-                        )}
-                    </div>
-                </div>
-                 <div className="flex justify-center mt-4">
-                    {scrollSnaps.map((_, index) => (
-                        <DotButton
-                            key={index}
-                            selected={index === selectedIndex}
-                            onClick={() => scrollTo(index)}
-                        />
-                    ))}
+            <div className="mt-12 w-full overflow-x-hidden mask-image-lr group pause-on-hover">
+                <div className="animate-scroll flex gap-4">
+                    {isLoading ? (
+                        Array.from({ length: 8 }).map((_, i) => (
+                            <div key={i} className="w-80 flex-shrink-0">
+                                <SkeletonTheme baseColor="var(--background)" highlightColor="var(--card)"><Skeleton className="h-56 rounded-lg" /></SkeletonTheme>
+                            </div>
+                        ))
+                    ) : (
+                        imagesToDisplay.map((image, index) => (
+                            <Link href="/gallery" key={`${image.id}-${index}`} className="w-80 flex-shrink-0">
+                                <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 h-56">
+                                    <CardContent className="p-0 h-full">
+                                        <div className="relative h-full w-full">
+                                            <Image
+                                                src={image.src}
+                                                alt={image.alt}
+                                                fill
+                                                className="object-cover rounded-md"
+                                                data-ai-hint={image.hint}
+                                            />
+                                        </div>
+                                    </CardContent>
+                                </Card>
+                            </Link>
+                        ))
+                    )}
                 </div>
             </div>
         </section>
@@ -638,25 +593,6 @@ type Testimonial = {
 function TestimonialSection() {
     const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: 'start' }, [Autoplay()]);
-    const [selectedIndex, setSelectedIndex] = useState(0);
-    const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
-    
-    const scrollTo = useCallback((index: number) => emblaApi && emblaApi.scrollTo(index), [emblaApi]);
-
-    const onSelect = useCallback(() => {
-        if (!emblaApi) return;
-        setSelectedIndex(emblaApi.selectedScrollSnap());
-    }, [emblaApi, setSelectedIndex]);
-
-    useEffect(() => {
-        if (!emblaApi) return;
-        onSelect();
-        setScrollSnaps(emblaApi.scrollSnapList());
-        emblaApi.on('select', onSelect);
-        emblaApi.on('reInit', onSelect);
-    }, [emblaApi, setScrollSnaps, onSelect]);
-
 
     useEffect(() => {
         const fetchTestimonials = async () => {
@@ -703,9 +639,11 @@ function TestimonialSection() {
         };
         fetchTestimonials();
     }, []);
-    
+
+    const testimonialsToDisplay = isLoading ? [] : [...testimonials, ...testimonials];
+
     return (
-        <section className="py-8 md:py-12 bg-background">
+        <section className="py-8 md:py-12 bg-background w-full overflow-hidden">
             <div className="container mx-auto px-4">
                 <div className="text-center max-w-4xl mx-auto">
                     <Users className="mx-auto h-12 w-12 text-primary" />
@@ -713,57 +651,49 @@ function TestimonialSection() {
                        সহযোদ্ধাদের <span className="text-destructive">কিছু কথা</span>
                     </h2>
                 </div>
-                <div className="mt-12 overflow-hidden" ref={emblaRef}>
-                    <div className="flex -ml-4">
-                       {isLoading ? (
-                           Array.from({ length: 3 }).map((_, i) => (
-                               <div className="flex-[0_0_100%] md:flex-[0_0_33.33%] pl-4" key={i}>
-                                    <Card className="bg-card p-6 text-center h-full">
-                                        <SkeletonTheme baseColor="var(--card)" highlightColor="var(--background)">
-                                            <Skeleton circle height={96} width={96} style={{ margin: '0 auto 1rem' }} />
-                                            <Skeleton height={24} width={150} style={{ margin: '0 auto 0.5rem' }} />
-                                            <Skeleton height={20} width={200} style={{ margin: '0 auto 1rem' }} />
-                                            <Skeleton count={3} />
-                                        </SkeletonTheme>
-                                    </Card>
-                               </div>
-                           ))
-                       ) : (
-                           testimonials.map((testimonial) => (
-                               <div className="flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_33.33%] pl-4" key={testimonial.id}>
-                                   <Card className="bg-card p-6 text-center shadow-lg h-full flex flex-col">
-                                       <Image
-                                           src={testimonial.image}
-                                           alt={testimonial.name}
-                                           width={96}
-                                           height={96}
-                                           className="rounded-full mx-auto mb-4 border-4 border-primary/50 object-cover"
-                                           data-ai-hint={testimonial.imageHint}
-                                       />
-                                       <CardTitle className="font-headline text-2xl">{testimonial.name}</CardTitle>
-                                       <CardDescription className="font-body text-primary">{testimonial.role}</CardDescription>
-                                       <p className="font-body text-muted-foreground mt-4 text-sm flex-grow">
-                                           "{testimonial.testimonial}"
-                                       </p>
-                                   </Card>
-                               </div>
-                           ))
-                       )}
-                    </div>
-                </div>
-                <div className="flex justify-center mt-4">
-                    {scrollSnaps.map((_, index) => (
-                        <DotButton
-                            key={index}
-                            selected={index === selectedIndex}
-                            onClick={() => scrollTo(index)}
-                        />
-                    ))}
+            </div>
+            <div className="mt-12 w-full overflow-x-hidden mask-image-lr group pause-on-hover">
+                <div className="animate-scroll flex gap-8">
+                    {isLoading ? (
+                       Array.from({ length: 6 }).map((_, i) => (
+                           <div className="w-80 md:w-96 flex-shrink-0" key={i}>
+                                <Card className="bg-card p-6 text-center h-full">
+                                    <SkeletonTheme baseColor="var(--card)" highlightColor="var(--background)">
+                                        <Skeleton circle height={96} width={96} style={{ margin: '0 auto 1rem' }} />
+                                        <Skeleton height={24} width={150} style={{ margin: '0 auto 0.5rem' }} />
+                                        <Skeleton height={20} width={200} style={{ margin: '0 auto 1rem' }} />
+                                        <Skeleton count={3} />
+                                    </SkeletonTheme>
+                                </Card>
+                           </div>
+                       ))
+                    ) : (
+                        testimonialsToDisplay.map((testimonial, index) => (
+                           <div className="w-80 md:w-96 flex-shrink-0" key={`${testimonial.id}-${index}`}>
+                               <Card className="bg-card p-6 text-center shadow-lg h-full flex flex-col">
+                                   <Image
+                                       src={testimonial.image}
+                                       alt={testimonial.name}
+                                       width={96}
+                                       height={96}
+                                       className="rounded-full mx-auto mb-4 border-4 border-primary/50 object-cover"
+                                       data-ai-hint={testimonial.imageHint}
+                                   />
+                                   <CardTitle className="font-headline text-2xl">{testimonial.name}</CardTitle>
+                                   <CardDescription className="font-body text-primary">{testimonial.role}</CardDescription>
+                                   <p className="font-body text-muted-foreground mt-4 text-sm flex-grow">
+                                       "{testimonial.testimonial}"
+                                   </p>
+                               </Card>
+                           </div>
+                        ))
+                    )}
                 </div>
             </div>
         </section>
     );
 }
+
 
 const leadershipPoints = [
     { icon: ShieldCheck, text: "মুক্তিযুদ্ধ এবং গণঅভ্যুত্থানের চেতনায় একটি বৈষম্যহীন, গণতান্ত্রিক ও অসাম্প্রদায়িক দেশ গঠন।" },
