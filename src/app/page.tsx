@@ -18,6 +18,8 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { motion } from "framer-motion";
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel"
+import Autoplay from "embla-carousel-autoplay"
 
 const animationVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -178,6 +180,8 @@ function NoticeSection() {
         <section className="bg-destructive py-3 text-white w-full overflow-x-hidden">
             <div className="pause-on-hover flex whitespace-nowrap">
                 <div className="animate-scroll flex">
+                    {noticeElement}
+                    {noticeElement}
                     {noticeElement}
                     {noticeElement}
                 </div>
@@ -640,10 +644,8 @@ function TestimonialSection() {
         fetchTestimonials();
     }, []);
 
-    const testimonialsToDisplay = isLoading ? [] : [...testimonials, ...testimonials];
-
     return (
-        <section className="py-8 md:py-12 bg-background w-full overflow-hidden">
+        <section className="py-8 md:py-12 bg-background w-full">
             <div className="container mx-auto px-4">
                 <div className="text-center max-w-4xl mx-auto">
                     <Users className="mx-auto h-12 w-12 text-primary" />
@@ -651,13 +653,11 @@ function TestimonialSection() {
                        সহযোদ্ধাদের <span className="text-destructive">কিছু কথা</span>
                     </h2>
                 </div>
-            </div>
-            <div className="mt-12 w-full overflow-x-hidden mask-image-lr group pause-on-hover">
-                <div className="animate-scroll flex gap-8">
+                 <div className="mt-12">
                     {isLoading ? (
-                       Array.from({ length: 6 }).map((_, i) => (
-                           <div className="w-80 md:w-96 flex-shrink-0" key={i}>
-                                <Card className="bg-card p-6 text-center h-full">
+                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                           {Array.from({ length: 3 }).map((_, i) => (
+                               <Card key={i} className="bg-card p-6 text-center h-full">
                                     <SkeletonTheme baseColor="var(--card)" highlightColor="var(--background)">
                                         <Skeleton circle height={96} width={96} style={{ margin: '0 auto 1rem' }} />
                                         <Skeleton height={24} width={150} style={{ margin: '0 auto 0.5rem' }} />
@@ -665,28 +665,41 @@ function TestimonialSection() {
                                         <Skeleton count={3} />
                                     </SkeletonTheme>
                                 </Card>
-                           </div>
-                       ))
+                           ))}
+                        </div>
                     ) : (
-                        testimonialsToDisplay.map((testimonial, index) => (
-                           <div className="w-80 md:w-96 flex-shrink-0" key={`${testimonial.id}-${index}`}>
-                               <Card className="bg-card p-6 text-center shadow-lg h-full flex flex-col">
-                                   <Image
-                                       src={testimonial.image}
-                                       alt={testimonial.name}
-                                       width={96}
-                                       height={96}
-                                       className="rounded-full mx-auto mb-4 border-4 border-primary/50 object-cover"
-                                       data-ai-hint={testimonial.imageHint}
-                                   />
-                                   <CardTitle className="font-headline text-2xl">{testimonial.name}</CardTitle>
-                                   <CardDescription className="font-body text-primary">{testimonial.role}</CardDescription>
-                                   <p className="font-body text-muted-foreground mt-4 text-sm flex-grow">
-                                       "{testimonial.testimonial}"
-                                   </p>
-                               </Card>
-                           </div>
-                        ))
+                        <Carousel
+                            plugins={[Autoplay({ delay: 5000, stopOnInteraction: true })]}
+                            className="w-full"
+                            opts={{
+                                align: "start",
+                                loop: true,
+                            }}
+                        >
+                            <CarouselContent className="-ml-8">
+                                {testimonials.map((testimonial) => (
+                                   <CarouselItem key={testimonial.id} className="pl-8 md:basis-1/2 lg:basis-1/3">
+                                       <div className="h-full">
+                                           <Card className="bg-card p-6 text-center shadow-lg h-full flex flex-col">
+                                               <Image
+                                                   src={testimonial.image}
+                                                   alt={testimonial.name}
+                                                   width={96}
+                                                   height={96}
+                                                   className="rounded-full mx-auto mb-4 border-4 border-primary/50 object-cover"
+                                                   data-ai-hint={testimonial.imageHint}
+                                               />
+                                               <CardTitle className="font-headline text-2xl">{testimonial.name}</CardTitle>
+                                               <CardDescription className="font-body text-primary">{testimonial.role}</CardDescription>
+                                               <p className="font-body text-muted-foreground mt-4 text-sm flex-grow">
+                                                   "{testimonial.testimonial}"
+                                               </p>
+                                           </Card>
+                                       </div>
+                                   </CarouselItem>
+                                ))}
+                            </CarouselContent>
+                        </Carousel>
                     )}
                 </div>
             </div>
