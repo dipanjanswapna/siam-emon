@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -20,6 +20,12 @@ const navLinks = [
 export function Header() {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
 
   return (
     <header className="sticky top-0 z-50 w-full bg-destructive text-destructive-foreground shadow-md">
@@ -42,7 +48,7 @@ export function Header() {
                   href={link.href}
                   className={cn(
                     "rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-white/10",
-                    pathname === link.href ? "bg-white/20 font-semibold" : "text-destructive-foreground/80"
+                    mounted && pathname === link.href ? "bg-white/20 font-semibold" : "text-destructive-foreground/80"
                   )}
                 >
                   {link.label}
@@ -82,7 +88,7 @@ export function Header() {
                         onClick={() => setIsMobileMenuOpen(false)}
                         className={cn(
                           "font-headline text-2xl font-medium transition-colors hover:text-destructive-foreground",
-                           pathname === link.href ? "text-destructive-foreground" : "text-destructive-foreground/70"
+                           mounted && pathname === link.href ? "text-destructive-foreground" : "text-destructive-foreground/70"
                         )}
                       >
                         {link.label}
