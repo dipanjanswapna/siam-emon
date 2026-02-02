@@ -1128,7 +1128,7 @@ function SupportSection() {
                     <p className="font-body text-lg mt-2 opacity-90">যেকোনো সময় আমাদের ক্যাম্পেইন টিমের সাথে কথা বলুন।</p>
                     <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
                         <Button asChild size="lg" variant="secondary" className="bg-white text-primary-foreground hover:bg-gray-200 font-bold">
-                            <Link href="tel:+880123456789">এখনই কল করুন</Link>
+                            <Link href="tel:01797146469">এখনই কল করুন</Link>
                         </Button>
                         <Button asChild size="lg" variant="outline" className="bg-transparent border-white text-white hover:bg-white/10 font-bold">
                            <Link href="/#feedback-form">মতামত ফর্ম</Link>
@@ -1139,4 +1139,3 @@ function SupportSection() {
         </section>
     );
 }
-

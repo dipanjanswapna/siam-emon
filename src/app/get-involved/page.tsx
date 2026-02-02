@@ -16,7 +16,7 @@ export default function GetInvolvedPage() {
           <Handshake className="mx-auto h-12 w-12 text-primary" />
           <h1 className="font-headline text-5xl md:text-6xl font-bold mt-4 text-foreground">যুক্ত হোন: আমাদের সাথে যোগ দিন, পরিবর্তনের অংশ হন</h1>
           <p className="font-body text-lg mt-4 text-muted-foreground">
-            আমরা বিশ্বাস করি যে একটি উজ্জ্বল ভবিষ্যৎ কেবল একজন বা কয়েকজনের দ্বারা তৈরি হয় না, বরং এটি সবার সম্মিলিত প্রচেষ্টা ও অংশগ্রহণের ফল। সিয়াম ফেরদৌস ইমন-এর এই পথচলা কোনো একক যাত্রা নয়, এটি ঢাকা বিশ্ববিদ্যালয়ের প্রতিটি শিক্ষার্থীর আকাঙ্ক্ষার প্রতিফলন। 'যুক্ত হোন' পেজটি আপনাদেরকে আমাদের এই পরিবর্তনের যাত্রায় সরাসরি অংশ নেওয়ার জন্য একটি সুযোগ করে দেবে।
+            আমরা বিশ্বাস করি যে একটি উজ্জ্বল ভবিষ্যৎ কেবল একজন বা কয়েকজনের দ্বারা তৈরি হয় না, বরং এটি সবার সম্মিলিত প্রচেষ্টা ও অংশগ্রহণের ফল। ডাঃ মনীষা চক্রবর্ত্তীর এই পথচলা কোনো একক যাত্রা নয়, এটি বরিশাল এর প্রতিটি মানুষের আকাঙ্ক্ষার প্রতিফলন। 'যুক্ত হোন' পেজটি আপনাদেরকে আমাদের এই পরিবর্তনের যাত্রায় সরাসরি অংশ নেওয়ার জন্য একটি সুযোগ করে দেবে।
           </p>
         </div>
 
@@ -84,7 +84,7 @@ export default function GetInvolvedPage() {
                         <h3 className="font-headline text-xl font-bold mt-4">জরুরি যোগাযোগ</h3>
                         <p className="font-body text-muted-foreground mt-2 flex-grow">যেকোনো জরুরি বিষয়ে সরাসরি ফোন করুন</p>
                         <Button asChild className="mt-4 bg-primary hover:bg-primary/90 w-full">
-                          <Link href="tel:+8801623593673">এখনই কল করুন</Link>
+                          <Link href="tel:01797146469">এখনই কল করুন</Link>
                         </Button>
                     </Card>
                     {/* Email Contact */}
@@ -95,7 +95,7 @@ export default function GetInvolvedPage() {
                         <h3 className="font-headline text-xl font-bold mt-4">ইমেইল সাপোর্ট</h3>
                         <p className="font-body text-muted-foreground mt-2 flex-grow">বিস্তারিত জিজ্ঞাসার জন্য ইমেইল করুন</p>
                         <Button asChild variant="secondary" className="mt-4 w-full">
-                           <Link href="mailto:siam.emon.52@gmail.com">ইমেইল পাঠান</Link>
+                           <Link href="mailto:manisha.ck@gmail.com">ইমেইল পাঠান</Link>
                         </Button>
                     </Card>
                     {/* In-person */}
@@ -128,7 +128,7 @@ export default function GetInvolvedPage() {
                      <CardDescription className="font-body">আমাদের ফেসবুক, ইউটিউব এবং ইনস্টাগ্রাম পেজ ফলো করে সব আপডেট এবং কার্যক্রম সম্পর্কে জানতে পারবেন।</CardDescription>
                 </CardHeader>
                 <CardContent className="flex justify-center items-center gap-6">
-                    <Link href="https://www.facebook.com/siam.emon.52" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-accent transition-colors">
+                    <Link href="#" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-accent transition-colors">
                         <Facebook className="h-10 w-10" />
                         <span className="sr-only">ফেসবুক</span>
                     </Link>
