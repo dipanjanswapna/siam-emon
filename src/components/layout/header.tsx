@@ -49,7 +49,10 @@ export function Header() {
                 </Link>
               ))}
             </nav>
-            <div className="hidden md:flex items-center pl-4">
+            <div className="hidden md:flex items-center pl-4 gap-2">
+                 <Button asChild variant="default" className="font-headline">
+                    <Link href="/#pre-vote">তহবিল দিন</Link>
+                </Button>
                  <Button asChild variant="outline" className="font-headline border-white/50 text-white hover:bg-white/10 hover:text-white">
                     <Link href="/get-involved">যুক্ত হোন</Link>
                 </Button>
@@ -72,7 +75,7 @@ export function Header() {
                         ডাঃ মনীষা চক্রবর্ত্তী
                       </span>
                     </Link>
-                    {[...navLinks, { href: "/get-involved", label: "যুক্ত হোন" }].map((link) => (
+                    {[...navLinks, { href: "/get-involved", label: "যুক্ত হোন" }, { href: "/#pre-vote", label: "তহবিল দিন" }].map((link) => (
                       <Link
                         key={link.href}
                         href={link.href}
